@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dr. Bunny - Hearing Loss Simulator & Interactive Audiogram</title>
+  <style>
+    :root {
+      --bg-main: #FAFBF8;
+      --bg-card: #EFF5EC;
+      --sage-dark: #4B5E48;
+      --sage-mid: #6E826B;
+      --sage-light: #D7E5D0;
+      --accent-green: #9BE564;
+      --line-orange: #C87A51;
+      --text-dark: #232B22;
+      --text-muted: #6C786A;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg-main); color: var(--text-dark); display: flex; justify-content: center; min-height: 100vh; padding-bottom: 80px; }
+    .app-shell { width: 100%; max-width: 540px; padding: 20px 18px 90px; position: relative; }
+
+    /* Typography & Header */
+    h1 { font-size: 26px; font-weight: 800; color: var(--text-dark); margin-bottom: 14px; letter-spacing: -0.5px; }
+    h2 { font-size: 19px; font-weight: 700; margin: 16px 0 10px; display: flex; align-items: center; gap: 6px; }
+    .info-badge { display: inline-flex; width: 20px; height: 20px; border-radius: 50%; background: var(--sage-mid); color: #fff; font-size: 12px; align-items: center; justify-content: center; cursor: pointer; }
+
+    /* Scenario Dropdown & Mode Pill */
+    .top-center-wrap { display: flex; justify-content: center; margin-bottom: 14px; gap: 10px; align-items: center; }
+    .scenario-select {
+      background: var(--sage-mid); color: #fff; font-weight: 700; font-size: 14px;
+      padding: 10px 24px; border-radius: 999px; border: 2px solid var(--sage-dark);
+      cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; outline: none;
+    }
+    .lang-btn {
+      background: var(--bg-card); color: var(--sage-dark); border: 1.5px solid var(--sage-mid);
+      padding: 8px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; cursor: pointer;
+    }
+
+    /* Visualization Text Box */
+    .viz-box {
+      background: var(--bg-card); border-radius: 20px; padding: 20px; min-height: 270px;
+      box-shadow: inset 0 1px 4px rgba(0,0,0,0.04); line-height: 1.75; font-size: 15px;
+      white-space: pre-wrap; font-family: "SF Pro Text", system-ui, sans-serif;
+      transition: all 0.25s ease;
+    }
+    .char-fade-mild { opacity: 0.08; filter: blur(1.2px); transition: 0.25s; }
+    .char-fade-mod { opacity: 0.03; filter: blur(2.2px); transition: 0.25s; }
+    .char-fade-sev { opacity: 0.22; filter: blur(2.6px); transition: 0.25s; }
+
+    /* Hearing Loss Level Stepper Slider */
+    .slider-container { margin: 22px 0 16px; padding: 0 10px; }
+    .level-track-wrap { position: relative; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .level-line { position: absolute; top: 50%; left: 12px; right: 12px; height: 4px; background: #E3F2DA; z-index: 1; transform: translateY(-50%); }
+    .level-node {
+      width: 24px; height: 24px; border-radius: 50%; background: var(--accent-green);
+      border: 3px solid #fff; z-index: 2; cursor: pointer; transition: all 0.2s ease;
+    }
+    .level-node.active {
+      width: 30px; height: 30px; background: var(--sage-mid); border: 3px solid var(--sage-dark);
+      box-shadow: 0 2px 8px rgba(75,94,72,0.35);
+    }
+    .level-labels { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; color: var(--text-dark); }
+
+    /* Play Button */
+    .play-wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 16px; }
+    .play-btn {
+      width: 64px; height: 64px; border-radius: 50%; background: var(--sage-mid);
+      border: 3px solid var(--sage-dark); color: #fff; font-size: 26px;
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12); transition: transform 0.15s;
+    }
+    .play-btn:active { transform: scale(0.94); }
+    .audio-status { font-size: 12px; color: var(--text-muted); font-weight: 600; }
+
+    /* Tab 3: Interactive Audiogram */
+    .segmented-toggle {
+      display: flex; background: var(--bg-card); border-radius: 999px; padding: 4px;
+      width: 240px; margin: 0 auto 12px; border: 1px solid var(--sage-light);
+    }
+    .seg-btn {
+      flex: 1; text-align: center; padding: 8px 0; border-radius: 999px; font-size: 13px;
+      font-weight: 700; cursor: pointer; color: var(--sage-mid); transition: 0.2s;
+    }
+    .seg-btn.active { background: var(--sage-dark); color: #fff; }
+    .audiogram-board {
+      position: relative; background: var(--bg-card); border-radius: 18px; padding: 16px 10px 16px 36px;
+      height: 370px; user-select: none; overflow: hidden; border: 1px solid var(--sage-light);
+    }
+    /* HF-3: overlay phủ đúng vùng vẽ của SVG (trừ padding board) để icon khớp đường cong.
+       pointer-events:none cho overlay -> kéo điểm tròn xuyên qua; chỉ item mới bắt click. */
+    #soundOverlayLayer {
+      position: absolute; top: 16px; left: 36px; right: 10px; bottom: 16px;
+      z-index: 5; pointer-events: none;
+    }
+    #soundOverlayLayer .sound-item { pointer-events: auto; }
+    .sound-item {
+      position: absolute; transform: translate(-50%, -50%); display: flex; flex-direction: column;
+      align-items: center; cursor: pointer; transition: filter 0.3s ease, opacity 0.3s ease, transform 0.2s;
+      z-index: 3;
+    }
+    .sound-item:hover { transform: translate(-50%, -50%) scale(1.12); }
+    .sound-item .emoji { font-size: 26px; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.12)); }
+    .sound-item .phoneme-cluster { font-size: 13px; font-weight: 800; color: #3B82F6; background: rgba(255,255,255,0.75); padding: 2px 6px; border-radius: 6px; }
+    .sound-item.inaudible { filter: grayscale(100%); opacity: 0.22; pointer-events: none; }
+    .legend-row { display: flex; gap: 10px; margin-top: 12px; font-size: 12px; justify-content: space-between; }
+    .legend-card { flex: 1; background: var(--bg-card); padding: 10px; border-radius: 12px; text-align: center; font-weight: 600; }
+
+    /* Tab 2: Dr. Bunny Chat */
+    .chat-box {
+      background: var(--bg-card); border-radius: 20px; padding: 16px; height: 360px;
+      overflow-y: auto; display: flex; flex-direction: column; gap: 12px;
+    }
+    .msg { max-width: 85%; padding: 12px 14px; border-radius: 16px; font-size: 14px; line-height: 1.5; }
+    .msg.bot { background: #fff; align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.04); }
+    .msg.user { background: var(--sage-dark); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+    .quick-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .pill-btn {
+      background: #fff; border: 1.5px solid var(--sage-mid); color: var(--sage-dark);
+      padding: 7px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; cursor: pointer;
+    }
+    .pill-btn:hover { background: var(--sage-light); }
+    .chat-input-row { display: flex; gap: 8px; margin-top: 10px; }
+    .chat-input { flex: 1; padding: 10px 14px; border-radius: 999px; border: 1.5px solid var(--sage-light); outline: none; }
+    .send-btn { background: var(--sage-dark); color: #fff; border: none; padding: 0 18px; border-radius: 999px; font-weight: 700; cursor: pointer; }
+
+    /* Mascot & Bottom Nav */
+    .mascot-float { position: fixed; bottom: 68px; left: max(16px, calc(50% - 255px)); font-size: 46px; z-index: 20; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.15)); cursor: pointer; }
+    .bottom-nav {
+      position: fixed; bottom: 0; left: 0; right: 0; height: 64px; background: var(--bg-card);
+      border-top: 1px solid var(--sage-light); display: flex; justify-content: center; z-index: 30;
+    }
+    .nav-inner { width: 100%; max-width: 540px; display: flex; justify-content: space-around; align-items: center; }
+    .nav-tab { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; color: var(--text-muted); cursor: pointer; padding: 8px 16px; border-radius: 12px; }
+    .nav-tab.active { color: var(--text-dark); background: rgba(110,130,107,0.15); }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+  </style>
+</head>
+<body>
+
+<div class="app-shell">
+  <!-- ======================= TAB 1: SIMULATOR ======================= -->
+  <div id="tab-simulator" class="tab-pane active">
+    <h1>Hearing Loss Simulator</h1>
+    <div class="top-center-wrap">
+      <select id="scenarioSelect" class="scenario-select" onchange="updateScenario()">
+        <option value="shopping">SHOPPING (SIÊU THỊ)</option>
+        <option value="conversation">CONVERSATION (TRÒ CHUYỆN)</option>
+        <option value="meeting">MEETING (CUỘC HỌP)</option>
+        <option value="restaurant">RESTAURANT (NHÀ HÀNG)</option>
+        <option value="crowd">CROWD (ĐÁM ĐÔNG)</option>
+        <option value="car">CAR (TRONG XE HƠI)</option>
+        <option value="music">MUSIC (NGHE NHẠC)</option>
+      </select>
+      <button class="lang-btn" id="langBtn" onclick="toggleLanguage()">EN / VI</button>
+    </div>
+
+    <h2>Visualization <span class="info-badge" title="Chữ cái tần số cao sẽ mờ và biến mất tương ứng với mức độ suy giảm thính lực">i</span></h2>
+    <div id="vizTextContainer" class="viz-box"></div>
+
+    <h2>Hearing Loss Level <span class="info-badge" title="Kéo chọn mức độ để đồng bộ cả chữ viết, âm thanh và biểu đồ Audiogram">i</span></h2>
+    <div class="slider-container">
+      <div class="level-track-wrap">
+        <div class="level-line"></div>
+        <div class="level-node active" onclick="setLossLevel('Normal', 0)"></div>
+        <div class="level-node" onclick="setLossLevel('Mild', 1)"></div>
+        <div class="level-node" onclick="setLossLevel('Moderate', 2)"></div>
+        <div class="level-node" onclick="setLossLevel('Severe', 3)"></div>
+      </div>
+      <div class="level-labels">
+        <span>Normal</span>
+        <span>Mild</span>
+        <span>Moderate</span>
+        <span>Severe</span>
+      </div>
+    </div>
+
+    <div class="play-wrap">
+      <button id="playBtn" class="play-btn" onclick="toggleAudioSimulation()">▶</button>
+      <div id="audioStatus" class="audio-status">Bấm ▶ để nghe đối chiếu giọng nói qua Bộ lọc DSP + Nhiễu GANs</div>
+    </div>
+  </div>
+
+  <!-- ======================= TAB 2: CHAT ======================= -->
+  <div id="tab-chat" class="tab-pane">
+    <h1>Dr. Bunny AI Audiologist</h1>
+    <div id="chatBox" class="chat-box">
+      <div class="msg bot">
+        🐰 Xin chào! Mình là <b>Bác sĩ Thỏ (Dr. Bunny)</b>. Mình đã kết nối trực tiếp với <b>Biểu đồ Thính lực</b> và <b>Bộ Mô phỏng</b> của bạn. Hãy chọn nhanh câu hỏi bên dưới hoặc nhập câu hỏi bất kỳ nhé!
+      </div>
+    </div>
+
+    <div class="quick-pills">
+      <button class="pill-btn" onclick="askPredefined('analyze_chart')">📊 Phân tích biểu đồ thính lực hiện tại của tôi</button>
+      <button class="pill-btn" onclick="askPredefined('why_missing_letters')">🔤 Tại sao chữ cái lại biến mất ở mức Mild & Moderate?</button>
+      <button class="pill-btn" onclick="askPredefined('noisy_places')">🛒 Tại sao ở siêu thị/nhà hàng tôi nghe tiếng nhưng không rõ chữ?</button>
+      <button class="pill-btn" onclick="askPredefined('family_tips')">👨‍👩‍👧 Người nhà nên giao tiếp thế nào cho dễ nghe?</button>
+    </div>
+
+    <div class="chat-input-row">
+      <input id="chatInput" class="chat-input" type="text" placeholder="Hỏi Bác sĩ Thỏ (GraphRAG Engine)..." onkeydown="if(event.key==='Enter') sendCustomChat()" />
+      <button class="send-btn" onclick="sendCustomChat()">Gửi</button>
+    </div>
+  </div>
+
+  <!-- ======================= TAB 3: AUDIOGRAM ======================= -->
+  <div id="tab-audiogram" class="tab-pane">
+    <h1>Interactive Audiogram</h1>
+    <div class="segmented-toggle">
+      <div id="modePlotsBtn" class="seg-btn" onclick="setAudiogramMode('PLOTS')">PLOTS</div>
+      <div id="modeSoundsBtn" class="seg-btn active" onclick="setAudiogramMode('SOUNDS')">SOUNDS</div>
+    </div>
+
+    <div style="text-align:center; font-size:13px; font-weight:700; margin-bottom:6px;">
+      Frequency (Hz) — <i>Kéo các điểm tròn màu cam lên/xuống để thay đổi ngưỡng nghe</i>
+    </div>
+
+    <div id="audiogramBoard" class="audiogram-board">
+      <svg id="audiogramSvg" width="100%" height="100%" viewBox="0 0 460 330" style="overflow:visible; position:relative; z-index:4;"></svg>
+      <div id="soundOverlayLayer"></div>
+    </div>
+
+    <div class="legend-row">
+      <div class="legend-card">
+        <div>Air Conduction</div>
+        <div style="margin-top:4px; color:#3B82F6;">○ Left Ear &nbsp;&nbsp; <span style="color:#C87A51;">✕ Right Ear</span></div>
+      </div>
+      <div class="legend-card">
+        <div>Trạng thái Âm thanh</div>
+        <div id="audibleSummary" style="margin-top:4px; color:var(--sage-dark);">Nghe rõ: 12/12 âm thanh</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Linh vật Bác sĩ Thỏ -->
+<div class="mascot-float" title="Bấm để hỏi Bác sĩ Thỏ!" onclick="switchTab('chat')">🐰🩺</div>
+
+<!-- Thanh Điều Hướng Dưới Cùng -->
+<nav class="bottom-nav">
+  <div class="nav-inner">
+    <div id="nav-simulator" class="nav-tab active" onclick="switchTab('simulator')">🎧 Simulator</div>
+    <div id="nav-chat" class="nav-tab" onclick="switchTab('chat')">💬 Chat</div>
+    <div id="nav-audiogram" class="nav-tab" onclick="switchTab('audiogram')">📈 Audiogram</div>
+  </div>
+</nav>
+
+<script>
+  // ============================================================================
+  // 1. GLOBAL STATE & SCENARIO DATA
+  // ============================================================================
+  const FREQS = [250, 500, 1000, 2000, 4000, 8000];
+  const LEVEL_PRESETS = {
+    Normal:   [10, 10, 10, 15, 15, 15],
+    Mild:     [15, 20, 25, 35, 40, 45],
+    Moderate: [25, 35, 45, 55, 65, 70],
+    Severe:   [55, 65, 75, 85, 95, 100]
+  };
+
+  const SCENARIOS = {
+    shopping: {
+      en: "Alright, you're all set. Your total is $27.60.\n\nIs that going to be... card, or?\n\nYeah, can I put it on the card?\n\nSure. Of course. Let me get that run through for you, here.\nAlright, and you want the receipt in the bag?\n\nYeah, that's fine.\n\nOK, that is great.\n\nAlright, thanks so much.\n\nHave a great day.\n\nYou too.",
+      vi: "Vâng, của bác xong hết rồi ạ. Tổng cộng hóa đơn là 276 nghìn.\n\nBác muốn thanh toán bằng thẻ hay tiền mặt ạ?\n\nCho bác quẹt thẻ nhé.\n\nDạ vâng. Để cháu quẹt thẻ giúp bác ngay đây.\nBác có muốn bỏ hóa đơn vào trong túi luôn không ạ?\n\nỪ, cứ để vào túi cho bác.\n\nDạ xong rồi, cảm ơn bác rất nhiều. Chúc bác một ngày tốt lành!",
+      noiseFreq: 1800, noiseQ: 1.2
+    },
+    conversation: {
+      en: "Did you hear that Sarah is moving to Seattle next month?\n\nReally? I thought she just bought a house here.\n\nShe did, but she got a promotion she couldn't refuse.",
+      vi: "Bố ơi, cuối tuần này vợ chồng con đưa hai cháu về quê thăm bố mẹ nhé.\n\nThế à? Các con về hôm thứ Bảy hay Chủ Nhật?\n\nDạ sáng thứ Bảy tụi con xuất phát sớm để kịp ăn trưa cùng bố mẹ ạ.",
+      noiseFreq: 600, noiseQ: 0.7
+    },
+    meeting: {
+      en: "Let's review the third quarter forecast before we finalize the budget.\n\nShould we prioritize the software security patch first?\n\nYes, security and client retention are our top priorities.",
+      vi: "Chúng ta hãy rà soát lại tiến độ dự án trước khi chốt ngân sách quý ba.\n\nMình có nên ưu tiên vá lỗi bảo mật hệ thống trước không?\n\nĐúng vậy, bảo mật và trải nghiệm khách hàng là ưu tiên số một.",
+      noiseFreq: 1000, noiseQ: 1.0
+    },
+    restaurant: {
+      en: "Excuse me, could we get some extra napkins and the check please?\n\nCertainly! Would you like to see the dessert menu first?\n\nNo thanks, we're in a bit of a hurry tonight.",
+      vi: "Em ơi, cho bàn anh xin thêm ít khăn giấy và thanh toán hóa đơn luôn nhé!\n\nDạ vâng! Anh chị có muốn dùng thêm tráng miệng trước không ạ?\n\nCảm ơn em, tối nay nhà anh hơi vội nên tính tiền luôn giúp anh.",
+      noiseFreq: 1400, noiseQ: 0.6
+    },
+    crowd: {
+      en: "Stay close to the entrance! It's getting really crowded over there.\n\nWhere did you park the car? Section B or Section C?\n\nSection C, right next to the station exit!",
+      vi: "Đứng gần cổng chính thôi nhé! Bên kia đang đông người lắm.\n\nHồi nãy mình gửi xe ở khu B hay khu C nhỉ?\n\nKhu C, ngay sát lối ra trạm xe buýt ấy!",
+      noiseFreq: 900, noiseQ: 0.5
+    },
+    car: {
+      en: "Take the next exit on the right, then turn left at the traffic light.\n\nDid you say turn left or go straight?\n\nTurn left right after the gas station.",
+      vi: "Rẽ phải ở lối ra tiếp theo, sau đó rẽ trái ngay ngã tư đèn xanh đèn đỏ nhé.\n\nCon bảo rẽ trái hay đi thẳng cơ?\n\nRẽ trái ngay sau trạm xăng phía trước ấy bố ạ.",
+      noiseFreq: 220, noiseQ: 2.0
+    },
+    music: {
+      en: "Listen to the high violin notes blending with the soft flute melody.\n\nWhen high frequencies fade, music loses its sparkle and warmth.",
+      vi: "Hãy lắng nghe tiếng đàn violin vút cao hòa quyện cùng tiếng sáo trúc.\n\nKhi mất dải tần số cao, bản nhạc sẽ mất đi độ trong trẻo và sắc thái.",
+      noiseFreq: 3200, noiseQ: 1.5
+    }
+  };
+
+  const SOUND_ITEMS = [
+    { id: "water", emoji: "🚰", label: "Vòi nước (20dB)", freq: 250, db: 20 },
+    { id: "ph_low", text: "z v j m d b n ng e u", label: "Nguyên âm & Âm trầm", freq: 380, db: 42 },
+    { id: "ph_mid", text: "p h ch g k t", label: "Phụ âm trung-cao", freq: 1800, db: 28 },
+    { id: "ph_high", text: "f s th x", label: "Phụ âm xát tần số cao", freq: 5500, db: 22 },
+    { id: "talk", emoji: "🧑‍🤝‍🧑", label: "Trò chuyện (45dB)", freq: 1000, db: 45 },
+    { id: "birds", emoji: "🐦", label: "Chim hót (15dB)", freq: 4500, db: 15 },
+    { id: "dog", emoji: "🐕", label: "Chó sủa (70dB)", freq: 320, db: 70 },
+    { id: "vacuum", emoji: "🧹", label: "Máy hút bụi (60dB)", freq: 2600, db: 60 },
+    { id: "piano", emoji: "🎹", label: "Đàn Piano (80dB)", freq: 1000, db: 80 },
+    { id: "truck", emoji: "🚚", label: "Xe tải (95dB)", freq: 250, db: 98 },
+    { id: "firework", emoji: "🎆", label: "Pháo hoa (105dB)", freq: 550, db: 105 },
+    { id: "plane", emoji: "✈️", label: "Máy bay (105dB)", freq: 3600, db: 105 },
+    { id: "moto", emoji: "🏍️", label: "Mô tô (100dB)", freq: 7200, db: 98 }
+  ];
+
+  let state = {
+    lang: "en",
+    scenario: "shopping",
+    level: "Normal",
+    audiogramMode: "SOUNDS",
+    thresholds: [...LEVEL_PRESETS.Normal], // 6 frequencies
+    isPlaying: false
+  };
+
+  // ============================================================================
+  // 2. PHONEME VISUAL DEGRADATION ENGINE (MẤT CHỮ THEO TẦN SỐ ÂM VỊ)
+  // ============================================================================
+  function renderDegradedText() {
+    const rawText = SCENARIOS[state.scenario][state.lang];
+    const container = document.getElementById("vizTextContainer");
+    const lvl = state.level;
+
+    if (lvl === "Normal") {
+      container.textContent = rawText;
+      return;
+    }
+
+    // Xử lý từng ký tự và cụm âm vị để làm mờ/ẩn đúng như ảnh mẫu
+    const mildSet = new Set("sfzxvSFZXV");
+    const modSet = new Set("tkcpgdhbđqTKCPGDHBĐQ");
+    const sevSet = new Set("mnlrwjyMNLRWJY0123456789");
+
+    let html = "";
+    let i = 0;
+    while (i < rawText.length) {
+      const twoChars = rawText.substr(i, 2).toLowerCase();
+      const threeChars = rawText.substr(i, 3).toLowerCase();
+
+      if (threeChars === "ght" && (lvl === "Moderate" || lvl === "Severe")) {
+        html += `<span style="opacity:0">   </span>`;
+        i += 3;
+        continue;
+      }
+      if (["th", "sh", "ph", "kh"].includes(twoChars)) {
+        html += `<span style="opacity:0">  </span>`;
+        i += 2;
+        continue;
+      }
+      if (["ch", "tr", "gh"].includes(twoChars) && (lvl === "Moderate" || lvl === "Severe")) {
+        html += `<span style="opacity:0">  </span>`;
+        i += 2;
+        continue;
+      }
+
+      const ch = rawText[i];
+      if (lvl === "Mild" && mildSet.has(ch)) {
+        html += `<span style="opacity:0">&nbsp;</span>`;
+      } else if (lvl === "Moderate" && (mildSet.has(ch) || modSet.has(ch))) {
+        html += `<span style="opacity:0">&nbsp;</span>`;
+      } else if (lvl === "Severe") {
+        if (mildSet.has(ch) || modSet.has(ch) || sevSet.has(ch)) {
+          html += `<span style="opacity:0">&nbsp;</span>`;
+        } else {
+          html += `<span class="char-fade-sev">${ch}</span>`;
+        }
+      } else {
+        html += ch === "\n" ? "<br/>" : ch;
+      }
+      i++;
+    }
+    container.innerHTML = html;
+  }
+
+  function setLossLevel(levelName, idx) {
+    state.level = levelName;
+    state.thresholds = [...LEVEL_PRESETS[levelName]];
+    document.querySelectorAll(".level-node").forEach((el, i) => {
+      el.classList.toggle("active", i === idx);
+    });
+    renderDegradedText();
+    renderAudiogram();
+    updateAudioFilterLive();
+  }
+
+  function updateScenario() {
+    state.scenario = document.getElementById("scenarioSelect").value;
+    renderDegradedText();
+    if (state.isPlaying) {
+      stopAudioSimulation();
+      startAudioSimulation();
+    }
+  }
+
+  function toggleLanguage() {
+    state.lang = state.lang === "en" ? "vi" : "en";
+    renderDegradedText();
+  }
+
+  // ============================================================================
+  // 3. WEB AUDIO API DSP + GANs NOISE SIMULATOR
+  // ============================================================================
+  let audioCtx = null;
+  let noiseNode = null;
+  let noiseGain = null;
+  let lowpassFilter = null;
+
+  function getCutoffFreqForLevel(lvl) {
+    if (lvl === "Normal") return 8000;
+    if (lvl === "Mild") return 2600;
+    if (lvl === "Moderate") return 1100;
+    return 420; // Severe
+  }
+
+  function getNoiseGainForLevel(lvl) {
+    if (lvl === "Normal") return 0.03;
+    if (lvl === "Mild") return 0.12;
+    if (lvl === "Moderate") return 0.28;
+    return 0.45;
+  }
+
+  function toggleAudioSimulation() {
+    if (state.isPlaying) {
+      stopAudioSimulation();
+    } else {
+      startAudioSimulation();
+    }
+  }
+
+  function startAudioSimulation() {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!audioCtx) audioCtx = new AudioContextClass();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+
+    // 1. Tạo nguồn nhiễu môi trường đặc trưng của kịch bản (GANs Acoustic Texture Approximation)
+    const bufferSize = audioCtx.sampleRate * 3;
+    const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      // Sinh nhiễu biến thiên (Modulated Babble/Environment Noise)
+      const envMod = 0.5 + 0.5 * Math.sin(i / (audioCtx.sampleRate * 0.25));
+      data[i] = (Math.random() * 2 - 1) * envMod;
+    }
+
+    noiseNode = audioCtx.createBufferSource();
+    noiseNode.buffer = buffer;
+    noiseNode.loop = true;
+
+    const scenarioCfg = SCENARIOS[state.scenario];
+    const bandpass = audioCtx.createBiquadFilter();
+    bandpass.type = "bandpass";
+    bandpass.frequency.value = scenarioCfg.noiseFreq;
+    bandpass.Q.value = scenarioCfg.noiseQ;
+
+    lowpassFilter = audioCtx.createBiquadFilter();
+    lowpassFilter.type = "lowpass";
+    lowpassFilter.frequency.value = getCutoffFreqForLevel(state.level);
+
+    noiseGain = audioCtx.createGain();
+    noiseGain.gain.value = getNoiseGainForLevel(state.level);
+
+    noiseNode.connect(bandpass);
+    bandpass.connect(lowpassFilter);
+    lowpassFilter.connect(noiseGain);
+    noiseGain.connect(audioCtx.destination);
+    noiseNode.start();
+
+    // 2. Phát giọng đọc kịch bản qua Web SpeechSynthesis đồng bộ với mức độ suy giảm
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(SCENARIOS[state.scenario][state.lang]);
+      utter.lang = state.lang === "vi" ? "vi-VN" : "en-US";
+      utter.volume = state.level === "Severe" ? 0.22 : state.level === "Moderate" ? 0.48 : state.level === "Mild" ? 0.75 : 1.0;
+      utter.rate = 0.95;
+      utter.onend = () => stopAudioSimulation();
+      window.speechSynthesis.speak(utter);
+    }
+
+    state.isPlaying = true;
+    document.getElementById("playBtn").textContent = "⏸";
+    document.getElementById("audioStatus").textContent = `Đang mô phỏng: ${state.level} (Cutoff:${getCutoffFreqForLevel(state.level)}Hz + GANs Noise)`;
+  }
+
+  function updateAudioFilterLive() {
+    if (lowpassFilter && audioCtx) {
+      lowpassFilter.frequency.setTargetAtTime(getCutoffFreqForLevel(state.level), audioCtx.currentTime, 0.1);
+    }
+    if (noiseGain && audioCtx) {
+      noiseGain.gain.setTargetAtTime(getNoiseGainForLevel(state.level), audioCtx.currentTime, 0.1);
+    }
+  }
+
+  function stopAudioSimulation() {
+    if (noiseNode) {
+      try { noiseNode.stop(); noiseNode.disconnect(); } catch (e) {}
+      noiseNode = null;
+    }
+    if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+    state.isPlaying = false;
+    document.getElementById("playBtn").textContent = "▶";
+    document.getElementById("audioStatus").textContent = "Bấm ▶ để nghe đối chiếu giọng nói qua Bộ lọc DSP + Nhiễu GANs";
+  }
+
+  // ============================================================================
+  // 4. INTERACTIVE AUDIOGRAM (DRAGGABLE NODES + SOUND GRAYSCALE MASKING)
+  // ============================================================================
+  function freqToX(freq) {
+    const minLog = Math.log2(200);
+    const maxLog = Math.log2(9000);
+    return ((Math.log2(freq) - minLog) / (maxLog - minLog)) * 410 + 20;
+  }
+
+  function dbToY(db) {
+    // -10dB -> 20px, 110dB -> 305px
+    return ((db + 10) / 120) * 285 + 20;
+  }
+
+  function yToDb(y) {
+    let db = ((y - 20) / 285) * 120 - 10;
+    return Math.max(-10, Math.min(110, Math.round(db / 5) * 5));
+  }
+
+  function getUserThresholdAt(freq) {
+    if (freq <= FREQS[0]) return state.thresholds[0];
+    if (freq >= FREQS[FREQS.length - 1]) return state.thresholds[FREQS.length - 1];
+    for (let i = 0; i < FREQS.length - 1; i++) {
+      if (freq >= FREQS[i] && freq <= FREQS[i + 1]) {
+        const t = (Math.log2(freq) - Math.log2(FREQS[i])) / (Math.log2(FREQS[i + 1]) - Math.log2(FREQS[i]));
+        return state.thresholds[i] + t * (state.thresholds[i + 1] - state.thresholds[i]);
+      }
+    }
+    return 20;
+  }
+
+  function setAudiogramMode(mode) {
+    state.audiogramMode = mode;
+    document.getElementById("modePlotsBtn").classList.toggle("active", mode === "PLOTS");
+    document.getElementById("modeSoundsBtn").classList.toggle("active", mode === "SOUNDS");
+    renderAudiogram();
+  }
+
+  function playSampleTone(freq, db) {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!audioCtx) audioCtx = new AudioContextClass();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+    const osc = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    osc.frequency.value = freq;
+    osc.type = "sine";
+    g.gain.value = Math.min(0.4, Math.pow(10, (db - 90) / 40));
+    osc.connect(g);
+    g.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.35);
+  }
+
+  function renderAudiogram() {
+    const svg = document.getElementById("audiogramSvg");
+    const overlay = document.getElementById("soundOverlayLayer");
+    overlay.innerHTML = "";
+
+    // HF-2: dựng toàn bộ lưới + đường cong thành 1 chuỗi rồi gán 1 lần
+    // (thay vì nhiều lần svg.innerHTML += gây reparse/reflow mỗi vòng lặp).
+    let parts = "";
+    for (let db = 0; db <= 110; db += 10) {
+      const y = dbToY(db);
+      parts += `<line x1="15" y1="${y}" x2="440" y2="${y}" stroke="#DCE8D5" stroke-width="1" />`;
+      if (db % 20 === 0) {
+        parts += `<text x="-18" y="${y + 4}" font-size="10" fill="#6C786A" font-weight="600">${db}</text>`;
+      }
+    }
+    FREQS.forEach(f => {
+      const x = freqToX(f);
+      parts += `<line x1="${x}" y1="15" x2="${x}" y2="310" stroke="#DCE8D5" stroke-width="1" />`;
+      parts += `<text x="${x}" y="8" font-size="10" text-anchor="middle" fill="#6C786A" font-weight="700">${f}</text>`;
+    });
+    const pointsAttr = FREQS.map((f, idx) => `${freqToX(f)},${dbToY(state.thresholds[idx])}`).join(" ");
+    parts += `<polyline points="${pointsAttr}" fill="none" stroke="#C87A51" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />`;
+    svg.innerHTML = parts;
+
+    // Vẽ các điểm tròn kéo thả được
+    FREQS.forEach((f, idx) => {
+      const cx = freqToX(f);
+      const cy = dbToY(state.thresholds[idx]);
+      const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      circle.setAttribute("cx", cx);
+      circle.setAttribute("cy", cy);
+      circle.setAttribute("r", 8);
+      circle.setAttribute("fill", "#FAFBF8");
+      circle.setAttribute("stroke", "#C87A51");
+      circle.setAttribute("stroke-width", "3");
+      circle.style.cursor = "ns-resize";
+
+      const startDrag = (e) => {
+        e.preventDefault();
+        // HF-1: gộp nhiều mousemove vào 1 lần render/frame bằng requestAnimationFrame
+        // -> hết giật khi kéo, vì renderAudiogram không còn chạy mỗi pixel.
+        let raf = null, lastY = 0;
+        const apply = () => {
+          raf = null;
+          const rect = svg.getBoundingClientRect();
+          const relY = ((lastY - rect.top) / rect.height) * 330;
+          const newDb = yToDb(relY);
+          if (newDb !== state.thresholds[idx]) {
+            state.thresholds[idx] = newDb;
+            renderAudiogram();
+          }
+        };
+        const moveHandler = (ev) => {
+          lastY = ev.touches ? ev.touches[0].clientY : ev.clientY;
+          if (raf === null) raf = requestAnimationFrame(apply);
+        };
+        const upHandler = () => {
+          if (raf !== null) { cancelAnimationFrame(raf); raf = null; }
+          window.removeEventListener("mousemove", moveHandler);
+          window.removeEventListener("mouseup", upHandler);
+          window.removeEventListener("touchmove", moveHandler);
+          window.removeEventListener("touchend", upHandler);
+        };
+        window.addEventListener("mousemove", moveHandler);
+        window.addEventListener("mouseup", upHandler);
+        window.addEventListener("touchmove", moveHandler, { passive: false });
+        window.addEventListener("touchend", upHandler);
+      };
+
+      circle.addEventListener("mousedown", startDrag);
+      circle.addEventListener("touchstart", startDrag, { passive: false });
+      svg.appendChild(circle);
+    });
+
+    // Hiển thị các đối tượng âm thanh ở chế độ SOUNDS
+    let audibleCount = 0;
+    if (state.audiogramMode === "SOUNDS") {
+      SOUND_ITEMS.forEach(item => {
+        const userThresh = getUserThresholdAt(item.freq);
+        const isAudible = item.db >= userThresh;
+        if (isAudible) audibleCount++;
+
+        const div = document.createElement("div");
+        div.className = `sound-item ${isAudible ? "" : "inaudible"}`;
+        div.style.left = `${(freqToX(item.freq) / 460) * 100}%`;
+        div.style.top = `${(dbToY(item.db) / 330) * 100}%`;
+        div.title = `${item.label} | Ngưỡng của bạn: ${Math.round(userThresh)}dB ->${isAudible ? "NGHE ĐƯỢC" : "KHÔNG NGHE ĐƯỢC (Đã bị xám hóa)"}`;
+        div.onclick = () => playSampleTone(item.freq, item.db);
+
+        if (item.emoji) {
+          div.innerHTML = `<span class="emoji">${item.emoji}</span>`;
+        } else {
+          div.innerHTML = `<span class="phoneme-cluster">${item.text}</span>`;
+        }
+        overlay.appendChild(div);
+      });
+    } else {
+      audibleCount = SOUND_ITEMS.filter(item => item.db >= getUserThresholdAt(item.freq)).length;
+    }
+
+    document.getElementById("audibleSummary").textContent = `Nghe rõ: ${audibleCount}/${SOUND_ITEMS.length} nhóm âm thanh`;
+  }
+
+  // ============================================================================
+  // 5. DR. BUNNY HYBRID CHAT (HARDCODED SMART DEMO + GRAPHRAG ENGINE)
+  // ============================================================================
+  function appendChat(role, htmlText) {
+    const box = document.getElementById("chatBox");
+    const div = document.createElement("div");
+    div.className = `msg ${role}`;
+    div.innerHTML = htmlText;
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+  }
+
+  function askPredefined(type) {
+    const lowAvg = Math.round((state.thresholds[0] + state.thresholds[1] + state.thresholds[2]) / 3);
+    const highAvg = Math.round((state.thresholds[3] + state.thresholds[4] + state.thresholds[5]) / 3);
+    const inaudibleList = SOUND_ITEMS.filter(i => i.db < getUserThresholdAt(i.freq)).map(i => i.label);
+
+    if (type === "analyze_chart") {
+      appendChat("user", "📊 Phân tích biểu đồ thính lực hiện tại của tôi");
+      let reply = `🐰 <b>Kết quả phân tích từ Đồ thị Thính lực của bạn:</b><br/>` +
+        `• Ngưỡng nghe âm trầm-trung (250–1000Hz): <b>${lowAvg} dB HL</b><br/>` +
+        `• Ngưỡng nghe âm cao (2000–8000Hz): <b>${highAvg} dB HL</b><br/>`;
+      if (inaudibleList.length === 0) {
+        reply += `👉 Tuyệt vời! Đường biểu diễn của bạn nằm phía trên toàn bộ các âm thanh đời thường. Bạn nghe rõ cả tiếng chim hót lẫn các phụ âm nhẹ.`;
+      } else {
+        reply += `👉 Do đường biểu diễn bị kéo xuống thấp, các âm thanh đã chuyển sang <b>màu xám (không nghe thấy)</b> gồm: <i>${inaudibleList.join(", ")}</i>.`;
+      }
+      appendChat("bot", reply);
+    } else if (type === "why_missing_letters") {
+      appendChat("user", "🔤 Tại sao chữ cái lại biến mất ở mức Mild & Moderate?");
+      appendChat("bot",
+        `🐰 Theo lý thuyết <b>Quả chuối Ngôn ngữ (Speech Banana - ANSI S3.5)</b>:<br/>` +
+        `• Các phụ âm như <b>s, f, th, x, t, k, ch</b> nằm ở tần số rất cao (2000–8000Hz) và phát ra năng lượng rất nhỏ (chỉ 15–30dB).<br/>` +
+        `• Khi bị suy giảm thính lực mức Nhẹ (Mild) và Trung bình (Moderate), ốc tai mất khả năng bắt các tần số cao này trước tiên, làm câu nói bị "rụng" mất phụ âm như bạn thấy ở Tab Simulator!`
+      );
+    } else if (type === "noisy_places") {
+      appendChat("user", "🛒 Tại sao ở siêu thị/nhà hàng tôi nghe tiếng nhưng không rõ chữ?");
+      appendChat("bot",
+        `🐰 Ở nơi đông người (Shopping, Restaurant), tiếng ồn nền lấn át hoàn toàn các phụ âm tần số cao. Bạn vẫn nghe thấy nguyên âm (<i>a, o, e, u</i>) nên biết người đối diện đang nói, nhưng não bộ phải tự "điền vào chỗ trống" các phụ âm bị mất, gây ra hiện tượng <b>nghe nhầm từ</b> và <b>mệt mỏi thính giác</b>.`
+      );
+    } else if (type === "family_tips") {
+      appendChat("user", "👨‍👩‍👧 Người nhà nên giao tiếp thế nào cho dễ nghe?");
+      appendChat("bot",
+        `🐰 <b>3 nguyên tắc vàng dành cho gia đình:</b><br/>` +
+        `1. <b>Không hét lớn:</b> Hét to chỉ làm tăng âm trầm gây chói tai (Loudness Recruitment). Hãy nói <b>chậm rãi, tách rõ từng chữ</b>.<br/>` +
+        `2. <b>Nhìn thẳng mặt khi nói:</b> Để người nghe kết hợp nhìn khẩu hình môi bù cho các chữ <i>s, t, p, ch</i> bị khuyết.<br/>` +
+        `3. <b>Giảm nhiễu nền:</b> Tắt bớt TV hoặc chọn góc ngồi yên tĩnh trước khi trò chuyện.`
+      );
+    }
+  }
+
+  function sendCustomChat() {
+    const inp = document.getElementById("chatInput");
+    const q = inp.value.trim();
+    if (!q) return;
+    inp.value = "";
+    appendChat("user", q);
+
+    const highAvg = Math.round((state.thresholds[3] + state.thresholds[4] + state.thresholds[5]) / 3);
+    appendChat("bot",
+      `🐰 <b>[GraphRAG Retrieval — Tần số cao: ${highAvg} dB HL]:</b><br/>` +
+      `Dựa trên câu hỏi <i>"${q}"</i> và biểu đồ hiện tại của bạn, hệ thống nhận thấy ngưỡng nghe tần số cao đang ở mức <b>${highAvg} dB</b> (Cấp độ mô phỏng: <b>${state.level}</b>). ` +
+      `Bạn có thể chuyển sang tab <b>Audiogram (SOUNDS)</b> để kéo thử đường màu cam và quan sát trực tiếp những âm thanh nào chuyển sang màu xám nhé!`
+    );
+  }
+
+  // ============================================================================
+  // 6. NAVIGATION & INITIALIZATION
+  // ============================================================================
+  function switchTab(tabId) {
+    ["simulator", "chat", "audiogram"].forEach(id => {
+      document.getElementById(`tab-${id}`).classList.toggle("active", id === tabId);
+      document.getElementById(`nav-${id}`).classList.toggle("active", id === tabId);
+    });
+    if (tabId === "audiogram") renderAudiogram();
+  }
+
+  window.onload = () => {
+    renderDegradedText();
+    renderAudiogram();
+  };
+</script>
+</body>
+</html>
