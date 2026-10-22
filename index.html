@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Dr. Bunny v0.4 — Hearing Loss Simulator & Interactive Audiogram</title>
+  <style>
+    :root {
+      --bg-main: #FAFBF8;
+      --bg-card: #EFF5EC;
+      --sage-dark: #4B5E48;
+      --sage-mid: #6E826B;
+      --sage-light: #D7E5D0;
+      --accent-green: #9BE564;
+      --line-orange: #C87A51;
+      --text-dark: #232B22;
+      --text-muted: #6C786A;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg-main); color: var(--text-dark); display: flex; justify-content: center; min-height: 100vh; padding-bottom: 95px; }
+    .app-shell { width: 100%; max-width: 560px; padding: 16px 16px 95px; position: relative; }
+
+    h1 { font-size: clamp(22px, 4.5vw, 27px); font-weight: 800; color: var(--text-dark); margin-bottom: 12px; letter-spacing: -0.5px; }
+    h2 { font-size: 16px; font-weight: 700; margin: 14px 0 8px; display: flex; align-items: center; justify-content: space-between; }
+
+    .top-bar { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 12px; align-items: center; }
+    .scenario-select {
+      background: var(--sage-mid); color: #fff; font-weight: 700; font-size: 13px;
+      padding: 9px 18px; border-radius: 999px; border: 2px solid var(--sage-dark);
+      cursor: pointer; text-transform: uppercase; outline: none;
+    }
+    .pill-toggle {
+      background: var(--bg-card); color: var(--sage-dark); border: 1.5px solid var(--sage-mid);
+      padding: 7px 13px; border-radius: 999px; font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.2s;
+    }
+    .pill-toggle:hover { background: var(--sage-light); }
+    .pill-toggle.active { background: var(--sage-dark); color: #fff; border-color: var(--sage-dark); }
+
+    .eq-banner {
+      background: rgba(155, 229, 100, 0.28); color: var(--sage-dark); font-size: 12px; font-weight: 700;
+      padding: 8px 12px; border-radius: 12px; margin-bottom: 10px; display: none; justify-content: space-between; flex-wrap: wrap; gap: 6px;
+    }
+    .eq-banner.show { display: flex; }
+
+    .viz-box {
+      background: var(--bg-card); border-radius: 20px; padding: 18px; min-height: 230px;
+      line-height: 1.8; font-size: 15px; white-space: pre-wrap; transition: all 0.25s ease;
+    }
+    .ch-hide { opacity: 0; transition: opacity 0.3s; }
+    .char-fade-sev { opacity: 0.22; filter: blur(2.4px); transition: 0.3s; }
+
+    .slider-wrap { margin: 14px 0; padding: 0 4px; }
+    .level-range {
+      -webkit-appearance: none; appearance: none; width: 100%; height: 8px; border-radius: 99px;
+      background: var(--sage-light); outline: none; cursor: pointer;
+    }
+    .level-range::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 26px; height: 26px; border-radius: 50%;
+      background: var(--sage-mid); border: 3px solid var(--sage-dark); cursor: pointer;
+    }
+    .level-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 12px; font-weight: 700; color: var(--text-muted); }
+    .level-labels span { cursor: pointer; padding: 2px 6px; border-radius: 6px; }
+    .level-labels span.active { color: var(--sage-dark); font-weight: 800; background: var(--sage-light); }
+
+    .play-wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 14px; }
+    .play-btn {
+      width: 64px; height: 64px; border-radius: 50%; background: var(--sage-mid);
+      border: 3px solid var(--sage-dark); color: #fff; font-size: 25px;
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+    .audio-status { font-size: 12px; color: var(--sage-mid); font-weight: 600; text-align: center; }
+
+    /* Tab 3: Audiogram */
+    .ag-header-bar { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+    .segmented-toggle {
+      display: flex; background: var(--bg-card); border-radius: 999px; padding: 4px;
+      width: 210px; border: 1px solid var(--sage-light);
+    }
+    .seg-btn {
+      flex: 1; text-align: center; padding: 6px 0; border-radius: 999px; font-size: 12px;
+      font-weight: 700; cursor: pointer; color: var(--sage-mid);
+    }
+    .seg-btn.active { background: var(--sage-dark); color: #fff; }
+
+    .test-2afc-box {
+      background: var(--bg-card); border: 1.5px solid var(--sage-mid); border-radius: 16px;
+      padding: 10px 14px; margin-bottom: 10px; font-size: 12px; display: none;
+      align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;
+    }
+    .test-2afc-box.show { display: flex; }
+
+    .audiogram-board {
+      background: var(--bg-card); border-radius: 18px; padding: 10px;
+      border: 1px solid var(--sage-light); user-select: none;
+    }
+    .ag-aspect { position: relative; width: 100%; aspect-ratio: 460 / 330; }
+    #soundOverlayLayer { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
+    .sound-item {
+      position: absolute; transform: translate(-50%, -50%); pointer-events: auto;
+      cursor: pointer; transition: filter 0.3s, opacity 0.3s, transform 0.2s; background: none; border: 0;
+    }
+    .sound-item:hover { transform: translate(-50%, -50%) scale(1.15); }
+    .sound-item .emoji { font-size: clamp(18px, 5vw, 25px); filter: drop-shadow(0 2px 3px rgba(0,0,0,0.12)); }
+    .sound-item .phoneme-cluster { font-size: 11px; font-weight: 800; color: #2563EB; background: rgba(255,255,255,0.85); padding: 2px 6px; border-radius: 6px; white-space: nowrap; }
+    .sound-item.inaudible { filter: grayscale(100%); opacity: 0.22; pointer-events: none; }
+
+    .legend-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; font-size: 12px; }
+    .legend-card { background: var(--bg-card); padding: 10px; border-radius: 12px; text-align: center; font-weight: 600; }
+
+    /* Tab 2: Chat */
+    .chat-box {
+      background: var(--bg-card); border-radius: 20px; padding: 14px; height: 350px;
+      overflow-y: auto; display: flex; flex-direction: column; gap: 10px;
+    }
+    .msg { max-width: 88%; padding: 10px 14px; border-radius: 16px; font-size: 14px; line-height: 1.5; }
+    .msg.bot { background: #fff; align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+    .msg.user { background: var(--sage-dark); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+    .node-tag { display: inline-block; font-size: 10px; font-weight: 700; background: var(--sage-light); color: var(--sage-dark); padding: 2px 6px; border-radius: 6px; margin-right: 4px; margin-top: 6px; }
+    .quick-pills { display: flex; gap: 6px; margin-top: 10px; overflow-x: auto; padding-bottom: 4px; }
+    .pill-btn {
+      background: #fff; border: 1.5px solid var(--sage-mid); color: var(--sage-dark);
+      padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap;
+    }
+    .chat-input-row { display: flex; gap: 8px; margin-top: 8px; }
+    .chat-input { flex: 1; padding: 10px 14px; border-radius: 999px; border: 1.5px solid var(--sage-light); outline: none; }
+    .send-btn { background: var(--sage-dark); color: #fff; border: none; padding: 0 18px; border-radius: 999px; font-weight: 700; cursor: pointer; }
+
+    .mascot-float { position: fixed; bottom: 72px; right: 16px; font-size: 40px; z-index: 20; cursor: pointer; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.15)); }
+    .bottom-nav {
+      position: fixed; bottom: 0; left: 0; right: 0; height: 62px; background: var(--bg-card);
+      border-top: 1px solid var(--sage-light); display: flex; justify-content: center; z-index: 30;
+    }
+    .nav-inner { width: 100%; max-width: 560px; display: flex; justify-content: space-around; align-items: center; }
+    .nav-tab { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; color: var(--text-muted); cursor: pointer; padding: 8px 16px; border-radius: 12px; }
+    .nav-tab.active { color: var(--text-dark); background: rgba(110,130,107,0.18); }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+  </style>
+</head>
+<body>
+
+<div class="app-shell">
+  <!-- ======================= TAB 1: SIMULATOR ======================= -->
+  <div id="tab-simulator" class="tab-pane active">
+    <h1>Hearing Loss Simulator</h1>
+    <div class="top-bar">
+      <select id="scenarioSelect" class="scenario-select" onchange="updateScenario()">
+        <option value="shopping">SHOPPING (SIÊU THỊ)</option>
+        <option value="conversation">CONVERSATION (TRÒ CHUYỆN)</option>
+        <option value="meeting">MEETING (CUỘC HỌP)</option>
+        <option value="restaurant">RESTAURANT (NHÀ HÀNG)</option>
+        <option value="crowd">CROWD (ĐÁM ĐÔNG)</option>
+        <option value="car">CAR (TRONG XE HƠI)</option>
+        <option value="music">MUSIC (NGHE NHẠC)</option>
+      </select>
+      <button class="pill-toggle" id="langBtn" onclick="toggleLanguage()">VI</button>
+      <button class="pill-toggle" id="dialectBtn" onclick="toggleDialect()">Giọng Bắc</button>
+      <button class="pill-toggle" id="aidBtn" onclick="toggleHearingAid()">🦻 Trợ thính: TẮT</button>
+    </div>
+
+    <div id="eqBanner" class="eq-banner">
+      <span>Bù 3-Band EQ (0.4×Loss):</span>
+      <span id="eqBannerValues">EQ500: +0dB · EQ2k: +0dB · EQ4k: +0dB</span>
+    </div>
+
+    <h2>
+      <span>Visualization</span>
+      <span id="lostCounter" style="font-size:12px; color:var(--text-muted); font-weight:600;">Nghe đủ chữ</span>
+    </h2>
+    <div id="vizTextContainer" class="viz-box"></div>
+
+    <h2><span>Hearing Loss Level</span></h2>
+    <div class="slider-wrap">
+      <input id="levelRange" type="range" min="0" max="3" step="1" value="0" class="level-range" oninput="onSliderChange(this.value)" />
+      <div class="level-labels" id="levelLabels">
+        <span class="active" onclick="setLossLevel('Normal', 0)">Normal</span>
+        <span onclick="setLossLevel('Mild', 1)">Mild</span>
+        <span onclick="setLossLevel('Moderate', 2)">Moderate</span>
+        <span onclick="setLossLevel('Severe', 3)">Severe</span>
+      </div>
+    </div>
+
+    <div class="play-wrap">
+      <button id="playBtn" class="play-btn" onclick="toggleAudioSimulation()">▶</button>
+      <div id="audioStatus" class="audio-status">Bấm ▶ để nghe giọng qua bộ lọc DSP 6-Band + Nhiễu nền</div>
+    </div>
+  </div>
+
+  <!-- ======================= TAB 2: CHAT ======================= -->
+  <div id="tab-chat" class="tab-pane">
+    <h1>Dr. Bunny AI Audiologist</h1>
+    <div id="chatBox" class="chat-box">
+      <div class="msg bot">
+        🐰 Xin chào! Mình là <b>Bác sĩ Thỏ (Dr. Bunny)</b>. Mình đọc trực tiếp biểu đồ thính lực bạn đang mô phỏng. Hãy chọn câu hỏi nhanh hoặc gõ câu hỏi bất kỳ nhé!
+      </div>
+    </div>
+
+    <div class="quick-pills">
+      <button class="pill-btn" onclick="askPredefined('analyze_chart')">📊 Phân tích biểu đồ của tôi</button>
+      <button class="pill-btn" onclick="askPredefined('why_missing_letters')">🔤 Vì sao chữ cái biến mất?</button>
+      <button class="pill-btn" onclick="askPredefined('noisy_places')">🛒 Nghe tiếng nhưng không rõ chữ?</button>
+      <button class="pill-btn" onclick="askPredefined('family_tips')">👨‍👩‍👧 Người nhà nên nói thế nào?</button>
+    </div>
+
+    <div class="chat-input-row">
+      <input id="chatInput" class="chat-input" type="text" placeholder="Hỏi Bác sĩ Thỏ (GraphRAG)..." onkeydown="if(event.key==='Enter') sendCustomChat()" />
+      <button class="send-btn" onclick="sendCustomChat()">Gửi</button>
+    </div>
+  </div>
+
+  <!-- ======================= TAB 3: AUDIOGRAM ======================= -->
+  <div id="tab-audiogram" class="tab-pane">
+    <h1>Interactive Audiogram</h1>
+    <div class="ag-header-bar">
+      <div class="segmented-toggle">
+        <div id="modePlotsBtn" class="seg-btn" onclick="setAudiogramMode('PLOTS')">PLOTS</div>
+        <div id="modeSoundsBtn" class="seg-btn active" onclick="setAudiogramMode('SOUNDS')">SOUNDS</div>
+      </div>
+      <button id="btn2AFC" class="pill-toggle" onclick="toggle2AFCTest()">🎧 Đo 2AFC (A/B)</button>
+    </div>
+
+    <div id="box2AFC" class="test-2afc-box">
+      <span id="status2AFC">Đang đo 2AFC...</span>
+      <div>
+        <button class="pill-toggle" onclick="answer2AFC(1)">Khoảng A</button>
+        <button class="pill-toggle" onclick="answer2AFC(2)">Khoảng B</button>
+      </div>
+    </div>
+
+    <div id="agSubTitle" style="text-align:center; font-size:12px; color:var(--text-muted); margin-bottom:8px;">
+      <b style="color:var(--text-dark);">Mức: Normal</b> (PTA-4: <b>12.5 dB HL</b>) — kéo điểm cam lên/xuống để đổi ngưỡng nghe
+    </div>
+
+    <div class="audiogram-board">
+      <div class="ag-aspect">
+        <svg id="audiogramSvg" viewBox="0 0 460 330" style="position:absolute; inset:0; width:100%; height:100%; overflow:visible; z-index:4;"></svg>
+        <div id="soundOverlayLayer"></div>
+      </div>
+    </div>
+
+    <div class="legend-row">
+      <div class="legend-card">
+        <div>Bù trợ thính đề xuất (0.4×Loss)</div>
+        <div id="eqSummaryCard" style="margin-top:4px; color:var(--sage-dark);">500Hz: +0dB · 2k: +0dB · 4k: +0dB</div>
+      </div>
+      <div class="legend-card">
+        <div>Trạng thái âm thanh</div>
+        <div id="audibleSummary" style="margin-top:4px; color:var(--sage-dark);">Nghe rõ: 13/13 nhóm</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mascot-float" title="Hỏi Bác sĩ Thỏ!" onclick="switchTab('chat')">🐰🩺</div>
+
+<nav class="bottom-nav">
+  <div class="nav-inner">
+    <div id="nav-simulator" class="nav-tab active" onclick="switchTab('simulator')">🎧 Simulator</div>
+    <div id="nav-chat" class="nav-tab" onclick="switchTab('chat')">💬 Chat</div>
+    <div id="nav-audiogram" class="nav-tab" onclick="switchTab('audiogram')">📈 Audiogram</div>
+  </div>
+</nav>
+
+<script>
+  const LEVELS = ["Normal", "Mild", "Moderate", "Severe"];
+  const FREQS = [250, 500, 1000, 2000, 4000, 8000];
+  const LEVEL_PRESETS = {
+    Normal:   [10, 10, 10, 15, 15, 15],
+    Mild:     [15, 20, 25, 35, 40, 45],
+    Moderate: [25, 35, 45, 55, 65, 70],
+    Severe:   [55, 65, 75, 85, 95, 100]
+  };
+  const LEVEL_CUTOFF = { Normal: 8000, Mild: 2600, Moderate: 1100, Severe: 420 };
+  const LEVEL_NOISE_GAIN = { Normal: 0.03, Mild: 0.12, Moderate: 0.28, Severe: 0.45 };
+
+  const SCENARIOS = {
+    shopping: {
+      en: "Alright, you're all set. Your total is $27.60.\n\nIs that going to be... card, or?\n\nYeah, can I put it on the card?\n\nSure. Of course. Let me get that run through for you, here.",
+      vi: "Vâng, của bác xong hết rồi ạ. Tổng cộng hóa đơn là 276 nghìn.\nBác muốn thanh toán bằng thẻ hay tiền mặt ạ?\nCho bác quẹt thẻ nhé.\nDạ vâng, để cháu quẹt giúp bác ngay đây.",
+      noiseFreq: 1800, noiseQ: 1.2
+    },
+    conversation: {
+      en: "Did you hear that Sarah is moving to Seattle next month?\n\nReally? I thought she just bought a house here.\n\nShe did, but she got a promotion she couldn't refuse.",
+      vi: "Bố ơi, cuối tuần này vợ chồng con đưa hai cháu về quê thăm bố mẹ nhé.\nThế à? Các con về hôm thứ Bảy hay Chủ Nhật?\nDạ sáng thứ Bảy tụi con đi sớm cho kịp ăn trưa ạ.",
+      noiseFreq: 600, noiseQ: 0.7
+    },
+    meeting: {
+      en: "Let's review the third quarter forecast before we finalize the budget.\n\nShould we prioritize the software security patch first?\n\nYes, security and client retention are our top priorities.",
+      vi: "Chúng ta rà soát lại tiến độ dự án trước khi chốt ngân sách quý ba.\nMình có nên ưu tiên vá lỗi bảo mật hệ thống trước không?\nĐúng vậy, bảo mật và trải nghiệm khách hàng là ưu tiên số một.",
+      noiseFreq: 1000, noiseQ: 1.0
+    },
+    restaurant: {
+      en: "Excuse me, could we get some extra napkins and the check please?\n\nCertainly! Would you like to see the dessert menu first?\n\nNo thanks, we're in a bit of a hurry tonight.",
+      vi: "Em ơi, cho bàn anh xin thêm ít khăn giấy và thanh toán luôn nhé!\nDạ vâng! Anh chị có muốn dùng thêm tráng miệng trước không ạ?\nCảm ơn em, tối nay nhà anh hơi vội nên tính tiền luôn giúp anh.",
+      noiseFreq: 1400, noiseQ: 0.6
+    },
+    crowd: {
+      en: "Stay close to the entrance! It's getting really crowded over there.\n\nWhere did you park the car? Section B or Section C?\n\nSection C, right next to the station exit!",
+      vi: "Đứng gần cổng chính thôi nhé! Bên kia đang đông lắm.\nHồi nãy mình gửi xe ở khu B hay khu C nhỉ?\nKhu C, ngay sát lối ra trạm xe buýt ấy!",
+      noiseFreq: 900, noiseQ: 0.5
+    },
+    car: {
+      en: "Take the next exit on the right, then turn left at the traffic light.\n\nDid you say turn left or go straight?\n\nTurn left right after the gas station.",
+      vi: "Rẽ phải ở lối ra tiếp theo, rồi rẽ trái ngay ngã tư đèn đỏ nhé.\nCon bảo rẽ trái hay đi thẳng cơ?\nRẽ trái ngay sau trạm xăng phía trước ấy bố ạ.",
+      noiseFreq: 220, noiseQ: 2.0
+    },
+    music: {
+      en: "Listen to the high violin notes blending with the soft flute melody.\n\nWhen high frequencies fade, music loses its sparkle and warmth.",
+      vi: "Hãy lắng nghe tiếng violin vút cao hòa cùng tiếng sáo trúc.\nKhi mất dải tần số cao, bản nhạc sẽ mất đi độ trong trẻo và sắc thái.",
+      noiseFreq: 3200, noiseQ: 1.5
+    }
+  };
+
+  const SOUND_ITEMS = [
+    { id: "water", emoji: "🚰", label: "Vòi nước", freq: 250, db: 20 },
+    { id: "ph_low", text: "z v j m d b n ng e u", label: "Nguyên âm & âm trầm", freq: 380, db: 42 },
+    { id: "ph_mid", text: "p h ch g k t", label: "Phụ âm trung-cao", freq: 1800, db: 28 },
+    { id: "ph_high", text: "f s th x", label: "Phụ âm xát cao", freq: 5500, db: 22 },
+    { id: "talk", emoji: "🧑‍🤝‍🧑", label: "Trò chuyện", freq: 1000, db: 45 },
+    { id: "birds", emoji: "🐦", label: "Chim hót", freq: 4500, db: 15 },
+    { id: "dog", emoji: "🐕", label: "Chó sủa", freq: 320, db: 70 },
+    { id: "vacuum", emoji: "🧹", label: "Máy hút bụi", freq: 2600, db: 60 },
+    { id: "piano", emoji: "🎹", label: "Đàn piano", freq: 1000, db: 80 },
+    { id: "truck", emoji: "🚚", label: "Xe tải", freq: 250, db: 98 },
+    { id: "firework", emoji: "🎆", label: "Pháo hoa", freq: 550, db: 105 },
+    { id: "plane", emoji: "✈️", label: "Máy bay", freq: 3600, db: 105 },
+    { id: "moto", emoji: "🏍️", label: "Mô tô", freq: 7200, db: 98 }
+  ];
+
+  let state = {
+    lang: "vi",
+    dialect: "north",
+    scenario: "shopping",
+    level: "Normal",
+    customized: false,
+    hearingAidOn: false,
+    audiogramMode: "SOUNDS",
+    thresholds: [...LEVEL_PRESETS.Normal],
+    isPlaying: false,
+    test2AFC: null
+  };
+
+  // ==========================================================================
+  // 1. TOKENIZER ÂM TIẾT TIẾNG VIỆT & BÙ TRỢ THÍNH 3-BAND EQ
+  // ==========================================================================
+  const HIGH = "HIGH", MID = "MID", LOW = "LOW", VOWEL = "VOWEL", OTHER = "OTHER";
+  const ONSETS = ["ngh", "ng", "nh", "ph", "th", "kh", "tr", "ch", "gh", "gi", "qu", "b", "c", "d", "đ", "g", "h", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "x"];
+  const CODAS = ["ng", "nh", "ch", "c", "m", "n", "p", "t"];
+  const ONSET_HIGH = new Set(["ph", "th", "kh", "x", "s", "h", "v"]);
+  const ONSET_MID = new Set(["tr", "ch", "qu", "t", "c", "k", "q", "p"]);
+  const ONSET_LOW = new Set(["ng", "ngh", "nh", "gh", "g", "m", "n", "l", "b", "đ"]);
+  const CODA_MID = new Set(["p", "t", "c", "ch"]);
+  const FALLBACK = { f: HIGH, z: HIGH, j: MID, w: LOW };
+  const DROP_BANDS = {
+    Normal: new Set(),
+    Mild: new Set([HIGH]),
+    Moderate: new Set([HIGH, MID]),
+    Severe: new Set([HIGH, MID, LOW])
+  };
+
+  function computeHearingAidEQ(th) {
+    const ref = Math.min(...th, 15);
+    const losses = th.map(t => Math.max(0, t - ref));
+    const clip = g => Math.round(Math.max(0, Math.min(25, g)) * 10) / 10;
+    const eq500 = clip(0.4 * ((losses[0] + losses[1]) / 2));
+    const eq2000 = clip(0.4 * ((losses[2] + losses[3]) / 2));
+    const eq4000 = clip(0.4 * ((losses[4] + losses[5]) / 2));
+    const pta4 = Math.round(((th[1] + th[2] + th[3] + th[4]) / 4) * 10) / 10;
+    const compensated = th.map((t, i) => Math.max(10, Math.round(t - (i < 2 ? eq500 : i < 4 ? eq2000 : eq4000))));
+    return { eq500, eq2000, eq4000, pta4, compensated };
+  }
+
+  function isVowel(ch) {
+    return "aeiouy".includes(ch.normalize("NFD")[0].toLowerCase());
+  }
+
+  function segmentSyllable(syl, dialect) {
+    const low = syl.toLowerCase();
+    const segs = [];
+    let onset = "";
+    for (const cand of ONSETS) {
+      if (low.startsWith(cand)) {
+        if (cand === "gi" && syl.length <= 2) continue;
+        onset = syl.slice(0, cand.length);
+        break;
+      }
+    }
+    const rest = syl.slice(onset.length);
+    let coda = "";
+    for (const cand of CODAS) {
+      if (rest.toLowerCase().endsWith(cand) && rest.length > cand.length) {
+        coda = rest.slice(rest.length - cand.length);
+        break;
+      }
+    }
+    const nucleus = coda ? rest.slice(0, rest.length - coda.length) : rest;
+    if (onset) {
+      const nxt = nucleus[0] || "";
+      const nextIsI = Boolean(nxt) && nxt.normalize("NFD")[0].toLowerCase() === "i";
+      const o = onset.toLowerCase();
+      let band = FALLBACK[o] || OTHER;
+      if (o === "gi" || (o === "g" && nextIsI) || o === "d" || o === "r") band = dialect === "south" ? LOW : HIGH;
+      else if (ONSET_HIGH.has(o)) band = HIGH;
+      else if (ONSET_MID.has(o)) band = MID;
+      else if (ONSET_LOW.has(o)) band = LOW;
+      segs.push([onset, band]);
+    }
+    let run = "";
+    for (const ch of nucleus) {
+      if (isVowel(ch)) run += ch;
+      else {
+        if (run) { segs.push([run, VOWEL]); run = ""; }
+        segs.push([ch, FALLBACK[ch.toLowerCase()] || OTHER]);
+      }
+    }
+    if (run) segs.push([run, VOWEL]);
+    if (coda) segs.push([coda, CODA_MID.has(coda.toLowerCase()) ? MID : LOW]);
+    return segs;
+  }
+
+  function classifyVi(text, dialect) {
+    const norm = (text || "").normalize("NFC");
+    const tokens = norm.match(/\p{L}+|[^\p{L}]+/gu) || [];
+    const out = [];
+    for (const tok of tokens) {
+      if (/^\p{L}+$/u.test(tok)) out.push(...segmentSyllable(tok, dialect));
+      else out.push([tok, OTHER]);
+    }
+    return out;
+  }
+
+  function bandsFromThresholds(th) {
+    const lowPta = (th[0] + th[1]) / 2;
+    const midPta = (th[2] + th[3]) / 2;
+    const highPta = (th[4] + th[5]) / 2;
+    const drop = new Set();
+    if (highPta >= 35) drop.add(HIGH);
+    if (midPta >= 45) drop.add(MID);
+    if (lowPta >= 60) drop.add(LOW);
+    return { drop, fadeVowels: lowPta >= 55 && midPta >= 65 };
+  }
+
+  function renderDegradedText() {
+    const rawText = SCENARIOS[state.scenario][state.lang].normalize("NFC");
+    const container = document.getElementById("vizTextContainer");
+    const eqInfo = computeHearingAidEQ(state.thresholds);
+    document.getElementById("eqBannerValues").textContent = `EQ500: +${eqInfo.eq500}dB · EQ2k: +${eqInfo.eq2000}dB · EQ4k: +${eqInfo.eq4000}dB`;
+
+    const activeTh = state.hearingAidOn ? eqInfo.compensated : state.thresholds;
+    const { drop, fadeVowels } = (state.customized || state.hearingAidOn)
+      ? bandsFromThresholds(activeTh)
+      : { drop: DROP_BANDS[state.level], fadeVowels: state.level === "Severe" };
+
+    const totalLetters = (rawText.match(/\p{L}/gu) || []).length;
+    let lostLetters = 0;
+
+    if (drop.size === 0 && !fadeVowels) {
+      container.textContent = rawText;
+      document.getElementById("lostCounter").textContent = "Nghe đủ chữ";
+      return;
+    }
+
+    let html = "";
+    if (state.lang === "vi") {
+      for (const [seg, band] of classifyVi(rawText, state.dialect)) {
+        if (drop.has(band)) {
+          lostLetters += (seg.match(/\p{L}/gu) || []).length;
+          html += `<span class="ch-hide">${seg}</span>`;
+        } else if (fadeVowels && band === VOWEL) {
+          html += `<span class="char-fade-sev">${seg}</span>`;
+        } else {
+          html += seg;
+        }
+      }
+    } else {
+      const mildSet = new Set("sfzxvSFZXV");
+      const modSet = new Set("tkcpgdhbđqTKCPGDHBĐQ");
+      const sevSet = new Set("mnlrwjyMNLRWJY0123456789");
+      for (const ch of rawText) {
+        const hide = (drop.has(HIGH) && mildSet.has(ch)) || (drop.has(MID) && modSet.has(ch)) || (drop.has(LOW) && sevSet.has(ch));
+        if (hide) {
+          lostLetters++;
+          html += `<span class="ch-hide">${ch}</span>`;
+        } else if (fadeVowels && ch.trim()) {
+          html += `<span class="char-fade-sev">${ch}</span>`;
+        } else {
+          html += ch;
+        }
+      }
+    }
+    container.innerHTML = html;
+    document.getElementById("lostCounter").textContent =
+      `Mất ${lostLetters}/${totalLetters} chữ cái` + (state.hearingAidOn ? " (Đã bù trợ thính)" : state.customized ? " (Tuỳ chỉnh)" : "");
+  }
+
+  function onSliderChange(idx) {
+    setLossLevel(LEVELS[Number(idx)], Number(idx));
+  }
+
+  function setLossLevel(levelName, idx) {
+    state.level = levelName;
+    state.customized = false;
+    state.thresholds = [...LEVEL_PRESETS[levelName]];
+    document.getElementById("levelRange").value = idx;
+    document.querySelectorAll("#levelLabels span").forEach((el, i) => el.classList.toggle("active", i === idx));
+    renderDegradedText();
+    renderAudiogram();
+    updateAudioFilterLive();
+  }
+
+  function updateScenario() {
+    state.scenario = document.getElementById("scenarioSelect").value;
+    renderDegradedText();
+    if (state.isPlaying) { stopAudioSimulation(); startAudioSimulation(); }
+  }
+
+  function toggleLanguage() {
+    state.lang = state.lang === "vi" ? "en" : "vi";
+    document.getElementById("langBtn").textContent = state.lang.toUpperCase();
+    document.getElementById("dialectBtn").style.display = state.lang === "vi" ? "inline-block" : "none";
+    renderDegradedText();
+  }
+
+  function toggleDialect() {
+    state.dialect = state.dialect === "north" ? "south" : "north";
+    document.getElementById("dialectBtn").textContent = state.dialect === "north" ? "Giọng Bắc" : "Giọng Nam";
+    renderDegradedText();
+  }
+
+  function toggleHearingAid() {
+    state.hearingAidOn = !state.hearingAidOn;
+    const btn = document.getElementById("aidBtn");
+    btn.textContent = state.hearingAidOn ? "🦻 Trợ thính: BẬT" : "🦻 Trợ thính: TẮT";
+    btn.classList.toggle("active", state.hearingAidOn);
+    document.getElementById("eqBanner").classList.toggle("show", state.hearingAidOn);
+    renderDegradedText();
+    updateAudioFilterLive();
+  }
+
+  // ==========================================================================
+  // 2. WEB AUDIO API DSP + BÙ 3-BAND EQ + DYNAMICS COMPRESSOR
+  // ==========================================================================
+  let audioCtx = null;
+  let noiseNode = null;
+  let noiseGain = null;
+  let lowpassFilter = null;
+  let eqNodes = [];
+
+  function getCutoff() {
+    const eqInfo = computeHearingAidEQ(state.thresholds);
+    const th = state.hearingAidOn ? eqInfo.compensated : state.thresholds;
+    const highAvg = (th[3] + th[4] + th[5]) / 3;
+    if (highAvg <= 20) return 8000;
+    if (highAvg >= 90) return 420;
+    return Math.round(8000 * Math.pow(420 / 8000, (highAvg - 20) / 70));
+  }
+
+  function toggleAudioSimulation() {
+    state.isPlaying ? stopAudioSimulation() : startAudioSimulation();
+  }
+
+  function startAudioSimulation() {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!audioCtx) audioCtx = new AC();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+
+    const bufferSize = audioCtx.sampleRate * 3;
+    const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = (Math.random() * 2 - 1) * (0.55 + 0.45 * Math.sin(i / (audioCtx.sampleRate * 0.25)));
+    }
+
+    noiseNode = audioCtx.createBufferSource();
+    noiseNode.buffer = buffer;
+    noiseNode.loop = true;
+
+    const cfg = SCENARIOS[state.scenario];
+    const bandpass = audioCtx.createBiquadFilter();
+    bandpass.type = "bandpass";
+    bandpass.frequency.value = cfg.noiseFreq;
+    bandpass.Q.value = cfg.noiseQ;
+
+    const eqInfo = computeHearingAidEQ(state.thresholds);
+    eqNodes = [500, 2000, 4000].map((hz, idx) => {
+      const f = audioCtx.createBiquadFilter();
+      f.type = "peaking";
+      f.frequency.value = hz;
+      f.Q.value = 1.0;
+      const g = [eqInfo.eq500, eqInfo.eq2000, eqInfo.eq4000][idx];
+      f.gain.value = state.hearingAidOn ? g : 0;
+      return f;
+    });
+
+    lowpassFilter = audioCtx.createBiquadFilter();
+    lowpassFilter.type = "lowpass";
+    lowpassFilter.frequency.value = getCutoff();
+
+    const compressor = audioCtx.createDynamicsCompressor();
+    compressor.threshold.value = -24;
+    compressor.ratio.value = 4;
+
+    noiseGain = audioCtx.createGain();
+    const baseG = LEVEL_NOISE_GAIN[state.level];
+    noiseGain.gain.value = state.hearingAidOn ? baseG * 0.45 : baseG;
+
+    noiseNode.connect(bandpass);
+    bandpass.connect(eqNodes[0]);
+    eqNodes[0].connect(eqNodes[1]);
+    eqNodes[1].connect(eqNodes[2]);
+    eqNodes[2].connect(lowpassFilter);
+    lowpassFilter.connect(compressor);
+    compressor.connect(noiseGain);
+    noiseGain.connect(audioCtx.destination);
+    noiseNode.start();
+
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(SCENARIOS[state.scenario][state.lang]);
+      utter.lang = state.lang === "vi" ? "vi-VN" : "en-US";
+      const rawV = state.level === "Severe" ? 0.22 : state.level === "Moderate" ? 0.48 : state.level === "Mild" ? 0.75 : 1.0;
+      utter.volume = state.hearingAidOn ? Math.min(1.0, rawV + 0.35) : rawV;
+      utter.rate = 0.95;
+      utter.onend = () => stopAudioSimulation();
+      window.speechSynthesis.speak(utter);
+    }
+
+    state.isPlaying = true;
+    document.getElementById("playBtn").textContent = "⏸";
+    document.getElementById("audioStatus").textContent =
+      `Đang mô phỏng: ${state.level} (Cutoff: ${getCutoff()}Hz ${state.hearingAidOn ? "+ Bù EQ Trợ thính" : "+ Nhiễu nền"})`;
+  }
+
+  function updateAudioFilterLive() {
+    if (!lowpassFilter || !audioCtx) return;
+    const t = audioCtx.currentTime;
+    lowpassFilter.frequency.setTargetAtTime(getCutoff(), t, 0.08);
+    const eqInfo = computeHearingAidEQ(state.thresholds);
+    const gains = [eqInfo.eq500, eqInfo.eq2000, eqInfo.eq4000];
+    eqNodes.forEach((f, i) => f.gain.setTargetAtTime(state.hearingAidOn ? gains[i] : 0, t, 0.08));
+    if (noiseGain) {
+      const baseG = LEVEL_NOISE_GAIN[state.level];
+      noiseGain.gain.setTargetAtTime(state.hearingAidOn ? baseG * 0.45 : baseG, t, 0.08);
+    }
+  }
+
+  function stopAudioSimulation() {
+    if (noiseNode) {
+      try { noiseNode.stop(); noiseNode.disconnect(); } catch (e) {}
+      noiseNode = null;
+    }
+    if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+    state.isPlaying = false;
+    document.getElementById("playBtn").textContent = "▶";
+    document.getElementById("audioStatus").textContent = "Bấm ▶ để nghe giọng qua bộ lọc DSP 6-Band + Nhiễu nền";
+  }
+
+  // ==========================================================================
+  // 3. INTERACTIVE AUDIOGRAM & 2AFC STAIRCASE TEST
+  // ==========================================================================
+  const freqToX = f => ((Math.log2(f) - Math.log2(200)) / (Math.log2(9000) - Math.log2(200))) * 410 + 20;
+  const dbToY = db => ((db + 10) / 120) * 285 + 20;
+  const yToDb = y => Math.max(-10, Math.min(110, Math.round((((y - 20) / 285) * 120 - 10) / 5) * 5));
+
+  function getUserThresholdAt(freq) {
+    if (freq <= FREQS[0]) return state.thresholds[0];
+    if (freq >= FREQS[FREQS.length - 1]) return state.thresholds[FREQS.length - 1];
+    for (let i = 0; i < FREQS.length - 1; i++) {
+      if (freq >= FREQS[i] && freq <= FREQS[i + 1]) {
+        const t = (Math.log2(freq) - Math.log2(FREQS[i])) / (Math.log2(FREQS[i + 1]) - Math.log2(FREQS[i]));
+        return state.thresholds[i] + t * (state.thresholds[i + 1] - state.thresholds[i]);
+      }
+    }
+    return 20;
+  }
+
+  function setAudiogramMode(mode) {
+    state.audiogramMode = mode;
+    document.getElementById("modePlotsBtn").classList.toggle("active", mode === "PLOTS");
+    document.getElementById("modeSoundsBtn").classList.toggle("active", mode === "SOUNDS");
+    renderAudiogram();
+  }
+
+  function playSampleTone(freq, db, duration = 0.35) {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!audioCtx) audioCtx = new AC();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+    const osc = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    osc.frequency.value = freq;
+    osc.type = "sine";
+    g.gain.value = db <= -10 ? 0 : Math.min(0.4, Math.pow(10, (db - 90) / 40));
+    osc.connect(g);
+    g.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + duration);
+  }
+
+  function toggle2AFCTest() {
+    if (state.test2AFC) {
+      state.test2AFC = null;
+      document.getElementById("box2AFC").classList.remove("show");
+      document.getElementById("btn2AFC").textContent = "🎧 Đo 2AFC (A/B)";
+      return;
+    }
+    state.test2AFC = { freqIdx: 0, levelDb: 35, step: 10, reversals: [], lastDir: null, streak: 0, correctInterval: 1 };
+    document.getElementById("box2AFC").classList.add("show");
+    document.getElementById("btn2AFC").textContent = "⏹ Dừng đo 2AFC";
+    run2AFCTrial();
+  }
+
+  function run2AFCTrial() {
+    const t = state.test2AFC;
+    if (!t) return;
+    t.correctInterval = Math.random() < 0.5 ? 1 : 2;
+    const hz = FREQS[t.freqIdx];
+    document.getElementById("status2AFC").innerHTML = `<b>[${t.freqIdx + 1}/6] ${hz} Hz (${t.levelDb} dB):</b> Đang phát A rồi B...`;
+    if (t.correctInterval === 1) playSampleTone(hz, t.levelDb, 0.38);
+    setTimeout(() => {
+      if (!state.test2AFC) return;
+      if (t.correctInterval === 2) playSampleTone(hz, t.levelDb, 0.38);
+      setTimeout(() => {
+        if (!state.test2AFC) return;
+        document.getElementById("status2AFC").innerHTML = `<b>[${t.freqIdx + 1}/6] ${hz} Hz (${t.levelDb} dB):</b> Âm kêu ở A hay B?`;
+      }, 400);
+    }, 550);
+  }
+
+  function answer2AFC(choice) {
+    const t = state.test2AFC;
+    if (!t) return;
+    const correct = choice === t.correctInterval;
+    let newDir = t.lastDir;
+    if (correct) {
+      t.streak++;
+      if (t.streak >= 2) { t.streak = 0; newDir = "down"; t.levelDb -= t.step; }
+    } else {
+      t.streak = 0; newDir = "up"; t.levelDb += t.step;
+    }
+    if (t.lastDir && newDir && newDir !== t.lastDir) t.reversals.push(t.levelDb);
+    t.lastDir = newDir;
+    if (t.reversals.length >= 2) t.step = 5;
+    t.levelDb = Math.max(0, Math.min(100, Math.round(t.levelDb / 5) * 5));
+
+    if (t.reversals.length >= 3) {
+      const avg = Math.round(t.reversals.slice(-2).reduce((a, b) => a + b, 0) / 2 / 5) * 5;
+      state.thresholds[t.freqIdx] = avg;
+      state.customized = true;
+      renderAudiogram();
+      renderDegradedText();
+      if (t.freqIdx + 1 < FREQS.length) {
+        t.freqIdx++; t.reversals = []; t.lastDir = null; t.streak = 0; t.step = 10;
+        run2AFCTrial();
+      } else {
+        toggle2AFCTest();
+      }
+    } else {
+      run2AFCTrial();
+    }
+  }
+
+  function renderAudiogram() {
+    const svg = document.getElementById("audiogramSvg");
+    const overlay = document.getElementById("soundOverlayLayer");
+    overlay.innerHTML = "";
+
+    const eqInfo = computeHearingAidEQ(state.thresholds);
+    document.getElementById("agSubTitle").innerHTML =
+      `<b style="color:var(--text-dark);">Mức: ${state.customized ? "Tuỳ chỉnh" : state.level}</b> (PTA-4: <b>${eqInfo.pta4} dB HL</b>) — kéo điểm cam lên/xuống để đổi ngưỡng nghe`;
+    document.getElementById("eqSummaryCard").textContent =
+      `500Hz: +${eqInfo.eq500}dB · 2k: +${eqInfo.eq2000}dB · 4k: +${eqInfo.eq4000}dB`;
+
+    let parts = "";
+    const pointsAttr = FREQS.map((f, idx) => `${freqToX(f)},${dbToY(state.thresholds[idx])}`).join(" ");
+    const areaAttr = `${freqToX(FREQS[0])},${dbToY(110)} ${pointsAttr} ${freqToX(FREQS[5])},${dbToY(110)}`;
+    parts += `<polygon points="${areaAttr}" fill="#9BE564" opacity="0.10" />`;
+
+    for (let db = 0; db <= 110; db += 10) {
+      const y = dbToY(db);
+      parts += `<line x1="15" y1="${y}" x2="440" y2="${y}" stroke="#DCE8D5" stroke-width="1" />`;
+      if (db % 20 === 0) parts += `<text x="12" y="${y + 3}" font-size="9" fill="#6C786A" font-weight="600" text-anchor="end">${db}</text>`;
+    }
+    FREQS.forEach(f => {
+      const x = freqToX(f);
+      parts += `<line x1="${x}" y1="15" x2="${x}" y2="310" stroke="#DCE8D5" stroke-width="1" />`;
+      parts += `<text x="${x}" y="9" font-size="10" text-anchor="middle" fill="#6C786A" font-weight="700">${f >= 1000 ? f/1000 + 'k' : f}</text>`;
+    });
+    parts += `<polyline points="${pointsAttr}" fill="none" stroke="#C87A51" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />`;
+    svg.innerHTML = parts;
+
+    FREQS.forEach((f, idx) => {
+      const cx = freqToX(f);
+      const cy = dbToY(state.thresholds[idx]);
+      const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+      g.style.cursor = "ns-resize";
+
+      const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      circle.setAttribute("cx", cx);
+      circle.setAttribute("cy", cy);
+      circle.setAttribute("r", 8);
+      circle.setAttribute("fill", "#FAFBF8");
+      circle.setAttribute("stroke", "#C87A51");
+      circle.setAttribute("stroke-width", "3");
+      g.appendChild(circle);
+
+      if (state.audiogramMode === "PLOTS") {
+        const txt = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        txt.setAttribute("x", cx);
+        txt.setAttribute("y", cy - 13);
+        txt.setAttribute("font-size", "10");
+        txt.setAttribute("font-weight", "800");
+        txt.setAttribute("fill", "#4B5E48");
+        txt.setAttribute("text-anchor", "middle");
+        txt.textContent = `${state.thresholds[idx]} dB`;
+        g.appendChild(txt);
+      }
+
+      const startDrag = (e) => {
+        e.preventDefault();
+        let raf = null, lastY = 0;
+        const apply = () => {
+          raf = null;
+          const rect = svg.getBoundingClientRect();
+          const relY = ((lastY - rect.top) / rect.height) * 330;
+          const newDb = yToDb(relY);
+          if (newDb !== state.thresholds[idx]) {
+            state.thresholds[idx] = newDb;
+            state.customized = true;
+            renderAudiogram();
+            renderDegradedText();
+            updateAudioFilterLive();
+          }
+        };
+        const moveHandler = (ev) => {
+          lastY = ev.touches ? ev.touches[0].clientY : ev.clientY;
+          if (raf === null) raf = requestAnimationFrame(apply);
+        };
+        const upHandler = () => {
+          if (raf !== null) cancelAnimationFrame(raf);
+          window.removeEventListener("mousemove", moveHandler);
+          window.removeEventListener("mouseup", upHandler);
+          window.removeEventListener("touchmove", moveHandler);
+          window.removeEventListener("touchend", upHandler);
+        };
+        window.addEventListener("mousemove", moveHandler);
+        window.addEventListener("mouseup", upHandler);
+        window.addEventListener("touchmove", moveHandler, { passive: false });
+        window.addEventListener("touchend", upHandler);
+      };
+
+      g.addEventListener("mousedown", startDrag);
+      g.addEventListener("touchstart", startDrag, { passive: false });
+      svg.appendChild(g);
+    });
+
+    let audibleCount = 0;
+    SOUND_ITEMS.forEach(item => {
+      const userThresh = getUserThresholdAt(item.freq);
+      const isAudible = item.db >= userThresh;
+      if (isAudible) audibleCount++;
+      if (state.audiogramMode === "SOUNDS") {
+        const btn = document.createElement("button");
+        btn.className = `sound-item ${isAudible ? "" : "inaudible"}`;
+        btn.style.left = `${(freqToX(item.freq) / 460) * 100}%`;
+        btn.style.top = `${(dbToY(item.db) / 330) * 100}%`;
+        btn.title = `${item.label} | Ngưỡng: ${Math.round(userThresh)}dB -> ${isAudible ? "NGHE ĐƯỢC" : "ĐÃ XÁM HOÁ"}`;
+        btn.onclick = () => isAudible && playSampleTone(item.freq, item.db);
+        btn.innerHTML = item.emoji ? `<span class="emoji">${item.emoji}</span>` : `<span class="phoneme-cluster">${item.text}</span>`;
+        overlay.appendChild(btn);
+      }
+    });
+    document.getElementById("audibleSummary").textContent = `Nghe rõ: ${audibleCount}/${SOUND_ITEMS.length} nhóm`;
+  }
+
+  // ==========================================================================
+  // 4. DR. BUNNY HYBRID GRAPHRAG CHAT
+  // ==========================================================================
+  function appendChat(role, htmlText) {
+    const box = document.getElementById("chatBox");
+    const div = document.createElement("div");
+    div.className = `msg ${role}`;
+    div.innerHTML = htmlText;
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+  }
+
+  function askPredefined(type) {
+    const lowAvg = Math.round((state.thresholds[0] + state.thresholds[1] + state.thresholds[2]) / 3);
+    const highAvg = Math.round((state.thresholds[3] + state.thresholds[4] + state.thresholds[5]) / 3);
+    const eqInfo = computeHearingAidEQ(state.thresholds);
+    const inaudibleList = SOUND_ITEMS.filter(i => i.db < getUserThresholdAt(i.freq)).map(i => i.label);
+
+    if (type === "analyze_chart") {
+      appendChat("user", "📊 Phân tích biểu đồ của tôi");
+      let reply = `🐰 <b>Phân tích biểu đồ của bạn (PTA-4: ${eqInfo.pta4} dB HL):</b><br/>` +
+        `• Âm trầm-trung (250–1000Hz): <b>${lowAvg} dB HL</b> | Âm cao (2000–8000Hz): <b>${highAvg} dB HL</b><br/>`;
+      reply += inaudibleList.length === 0
+        ? `👉 Tuyệt vời! Bạn nghe rõ toàn bộ 13 nhóm âm thanh đời thường.`
+        : `👉 Các âm thanh đã bị <b>xám hoá (khó nghe)</b>: <i>${inaudibleList.join(", ")}</i>.<br/>💡 Độ lợi bù trợ thính đề xuất: <b>EQ500 +${eqInfo.eq500}dB, EQ2k +${eqInfo.eq2000}dB, EQ4k +${eqInfo.eq4000}dB</b>.`;
+      reply += `<div><span class="node-tag">PTA-4</span><span class="node-tag">3-Band EQ</span></div>`;
+      appendChat("bot", reply);
+    } else if (type === "why_missing_letters") {
+      appendChat("user", "🔤 Vì sao chữ cái biến mất?");
+      appendChat("bot",
+        `🐰 Theo lý thuyết <b>Speech Banana (ANSI S3.5)</b>: nguyên âm (a, o, e, i) mang năng lượng lớn ở tần số thấp nên vẫn còn, nhưng phụ âm xát/bật (<b>s, x, ph, th, kh, t, ch, k</b>) nằm ở tần số cao (2–8 kHz) và rất nhỏ (15–30 dB) nên bị rụng trước tiên!` +
+        `<div><span class="node-tag">Tần số cao</span><span class="node-tag">Speech Banana</span></div>`
+      );
+    } else if (type === "noisy_places") {
+      appendChat("user", "🛒 Nghe tiếng nhưng không rõ chữ?");
+      appendChat("bot",
+        `🐰 Ở siêu thị/nhà hàng, tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe nguyên âm nên biết có người nói, nhưng não phải tự đoán các phụ âm bị khuyết dẫn đến nghe nhầm từ và mệt mỏi thính giác.` +
+        `<div><span class="node-tag">Môi trường ồn</span><span class="node-tag">Tần số cao</span></div>`
+      );
+    } else if (type === "family_tips") {
+      appendChat("user", "👨‍👩‍👧 Người nhà nên nói thế nào?");
+      appendChat("bot",
+        `🐰 <b>3 nguyên tắc vàng:</b><br/>1. <b>Không hét to</b> (gây chói tai - Loudness Recruitment), hãy nói chậm và rõ từng chữ.<br/>2. <b>Nhìn thẳng mặt</b> để người nghe kết hợp đọc khẩu hình.<br/>3. <b>Giảm tiếng ồn nền</b> trước khi trò chuyện.` +
+        `<div><span class="node-tag">Giao tiếp gia đình</span><span class="node-tag">Chói tai</span></div>`
+      );
+    }
+  }
+
+  function sendCustomChat() {
+    const inp = document.getElementById("chatInput");
+    const q = inp.value.trim();
+    if (!q) return;
+    inp.value = "";
+    appendChat("user", q);
+    const highAvg = Math.round((state.thresholds[3] + state.thresholds[4] + state.thresholds[5]) / 3);
+    const eqInfo = computeHearingAidEQ(state.thresholds);
+    appendChat("bot",
+      `🐰 <b>[GraphRAG — PTA-4: ${eqInfo.pta4} dB HL | Cao tần: ${highAvg} dB HL]:</b><br/>` +
+      `Với câu hỏi <i>"${q}"</i>, bạn có thể bấm nút <b>🦻 Trợ thính: BẬT</b> ở Tab Simulator để xem bộ lọc bù 3-Band EQ (+${eqInfo.eq500}/${eqInfo.eq2000}/${eqInfo.eq4000} dB) khôi phục lại các chữ cái bị mất nhé! (Đây là công cụ mô phỏng tham khảo, không thay thế chẩn đoán y khoa).`
+    );
+  }
+
+  function switchTab(tabId) {
+    ["simulator", "chat", "audiogram"].forEach(id => {
+      document.getElementById(`tab-${id}`).classList.toggle("active", id === tabId);
+      document.getElementById(`nav-${id}`).classList.toggle("active", id === tabId);
+    });
+    if (tabId !== "simulator" && state.isPlaying) stopAudioSimulation();
+    if (tabId === "audiogram") renderAudiogram();
+  }
+
+  window.onload = () => {
+    renderDegradedText();
+    renderAudiogram();
+  };
+</script>
+</body>
+</html>
