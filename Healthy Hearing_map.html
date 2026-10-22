@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Healthy Hearing: bản đồ quy trình</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF2F6;--pn:#fff;--ink:#14213D;--mu:#566174;--ln:#D3DCE8;--gr:#E2E8F0;--ok:#16795F;--part:#2A66B0;--plan:#6B7589;--bad:#C93A3F}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1623;--pn:#172033;--ink:#E8EDF5;--mu:#9AA6BA;--ln:#2A3650;--gr:#1B263C;--ok:#3CC4A0;--part:#7FB2F5;--plan:#9AA3B5;--bad:#F2878B}}
+:root[data-theme="dark"]{--bg:#0F1623;--pn:#172033;--ink:#E8EDF5;--mu:#9AA6BA;--ln:#2A3650;--gr:#1B263C;--ok:#3CC4A0;--part:#7FB2F5;--plan:#9AA3B5;--bad:#F2878B}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;font:16px/1.55 "Be Vietnam Pro","Segoe UI",system-ui,sans-serif;color:var(--ink);background:linear-gradient(var(--gr) 1px,transparent 1px) 0 0/32px 32px,linear-gradient(90deg,var(--gr) 1px,transparent 1px) 0 0/32px 32px,var(--bg)}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--part);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+header.top{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between;padding:20px 0 12px}
+h1{margin:0;font-size:clamp(20px,3vw,26px);line-height:1.25}
+header p{margin:2px 0 0;color:var(--mu);font-size:14px}
+.acts{display:flex;gap:8px;flex-wrap:wrap}
+.btn,.pill{min-height:44px;padding:0 16px;border-radius:8px;border:1.5px solid var(--ln);background:var(--pn);font-weight:600}
+.pill{border-color:var(--c);color:var(--c)}
+.ok{--c:var(--ok)}.part{--c:var(--part)}.plan{--c:var(--plan)}.bad{--c:var(--bad)}
+.strip{display:grid;grid-template-columns:4fr 3fr 4fr 3fr;gap:16px;padding:8px 0 4px}
+.sg>span{display:block;font-size:13px;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px}
+.sg>div{display:flex;gap:4px}
+.bar{flex:1;min-width:0;min-height:44px;border:0;border-radius:4px;background:var(--c);color:var(--bg);font-weight:700}
+.bar.x{box-shadow:inset 0 -6px 0 var(--bad)}
+.bar.on{box-shadow:0 0 0 2px var(--bg),0 0 0 5px var(--ink)}
+.bar.x.on{box-shadow:inset 0 -6px 0 var(--bad),0 0 0 2px var(--bg),0 0 0 5px var(--ink)}
+.dim{opacity:.3}
+.tabs{display:flex;gap:4px;margin:16px 0 12px;border-bottom:2px solid var(--ln);overflow-x:auto}
+.tab{min-height:44px;padding:0 16px;border:0;background:none;font-weight:600;color:var(--mu);border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap}
+.tab[aria-selected=true]{color:var(--ink);border-color:var(--ink)}
+.roles{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.rc{min-height:44px;padding:0 14px;border-radius:22px;border:1.5px solid var(--ln);background:var(--pn);font-size:14px}
+.rc[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.two{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:16px;align-items:start;padding-bottom:40px}
+.card{background:var(--pn);border:1px solid var(--ln);border-radius:8px;padding:16px}
+.stg+.stg{margin-top:16px}
+.stg h3{margin:0;font-size:15px}.stg p{margin:0 0 4px;font-size:13px;color:var(--mu)}
+.row{display:flex;align-items:center;gap:10px;width:100%;min-height:44px;padding:6px 10px;border:0;border-top:1px solid var(--ln);background:none;text-align:left}
+.row.on{background:var(--gr);font-weight:600}
+.row span{flex:1;min-width:0}.row small{color:var(--mu)}
+.dot{width:12px;height:12px;border-radius:50%;background:var(--c);flex:none}
+.warn{font-style:normal;font-weight:700;color:var(--bad)}
+.hint{font-size:13px;color:var(--mu);margin:12px 0 0}
+.det h2{margin:0;font-size:22px;line-height:1.3}
+.det h4{margin:20px 0 6px;font-size:15px}
+.mu{color:var(--mu);font-size:14px}
+.segs{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.seg{min-height:44px;padding:0 14px;border-radius:8px;border:1.5px solid var(--ln);background:var(--pn)}
+.seg.on{background:var(--c);border-color:var(--c);color:var(--bg);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 12px;border-radius:8px;border:1.5px solid var(--ln);background:var(--pn)}
+.file{padding:4px 10px;border-radius:6px;background:var(--gr);font:14px ui-monospace,Consolas,monospace}
+.chk{display:flex;gap:10px;align-items:flex-start;min-height:44px;padding:8px 0;cursor:pointer}
+.chk input{width:22px;height:22px;margin:1px 0 0;flex:none;accent-color:var(--part)}
+.chk input:checked+span{color:var(--mu);text-decoration:line-through}
+.gate{margin:0;padding:10px 14px;border-left:4px solid var(--part);background:var(--gr);border-radius:0 6px 6px 0}
+.alert{margin:12px 0 0;padding:10px 14px;border:1.5px solid var(--bad);border-radius:8px;color:var(--bad);font-weight:500}
+.presets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.sl{display:grid;grid-template-columns:1fr auto;gap:0 8px;font-size:14px;padding:6px 0}
+.sl input{grid-column:1/3;width:100%;min-height:32px;accent-color:var(--part)}
+.big{margin:0 0 6px;font-size:22px;font-weight:700;color:var(--c)}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;padding-bottom:40px}
+.card h3{margin:0 0 4px;font-size:16px}.card h3 small{color:var(--mu);font-weight:400}
+.rg{fill:none;stroke:var(--ln)}.rl{fill:var(--mu);font-size:11px}
+.rv{fill:color-mix(in srgb,var(--part) 28%,transparent);stroke:var(--part);stroke-width:2}
+#toast{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);padding:10px 16px;border-radius:8px;background:var(--ink);color:var(--bg);opacity:0;pointer-events:none;transition:opacity .2s}
+#toast.show{opacity:1}
+@media(max-width:820px){.two{grid-template-columns:1fr}.det{order:-1}.sg .n{display:none}.strip{gap:8px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head>
+<body><div class="wrap">
+<header class="top"><div><h1>Healthy Hearing: bản đồ quy trình</h1><p>Từ project đến product, pitch và cơ hội. Kiểm chứng trước khi tuyên bố.</p></div>
+<div class="acts"><button class="pill" id="verdict"></button><button class="btn" id="copy">Sao chép báo cáo audit</button></div></header>
+<section class="strip" id="strip" aria-label="Bản đồ 14 phase"></section>
+<div class="tabs" role="tablist" id="tabs"></div>
+<main id="main"></main></div>
+<div id="toast" role="status"></div>
+<script>
+const D={"roles":[{"id":"product","name":"Product Strategist"},{"id":"ux","name":"UX Researcher"},{"id":"tech","name":"Technical Lead"},{"id":"brand","name":"Brand & Comm Designer"},{"id":"pitch","name":"Pitch Coach"},{"id":"market","name":"Market & Biz Analyst"},{"id":"qa","name":"QA / Release Engineer"},{"id":"opp","name":"Opportunity Strategist"}],"stages":[{"id":"A","k":"Khối A","n":"Audit & Nền tảng Bằng chứng","sub":"Phase 0 → Phase 3: Hiểu đúng hiện trạng & nỗi đau thật","phases":[0,1,2,3]},{"id":"B","k":"Khối B","n":"Sàng lọc & Kiến trúc Kỹ thuật","sub":"Phase 4 → Phase 6: Chọn hướng bền vững & xây dựng MVP","phases":[4,5,6]},{"id":"C","k":"Khối C","n":"Kiểm định, Pitch & Pre-Flight","sub":"Phase 7, 8, 11, 12: Chứng minh độ tin cậy & kể chuyện","phases":[7,8,11,12]},{"id":"D","k":"Khối D","n":"Bền vững, Phân phối & Bàn giao","sub":"Phase 9, 10, 13: Mở rộng tác động & đóng gói 17 tài liệu","phases":[9,10,13]}],"phases":[{"id":0,"name":"Audit Hiện trạng","title":"Audit Hiện trạng & Bảo toàn Dự án","st":"Verified","roles":["tech","qa"],"deps":[],"obj":"Xác định chính xác Healthy Hearing đang có gì chạy thật trong repo trước khi phát triển hoặc mang đi Pitch.","tasks":["Kiểm kê repo, branch, commit, source code, audio sample, test và deployment.","Phân biệt rõ feature chạy thật vs. stub, fallback hoặc ý tưởng tương lai.","Build/run thử từ README sạch; ghi lại command và kết quả test thực tế.","Rà soát secrets (.env, API keys) trước khi public repo."],"out":["PROJECT_STATUS.md","RELEASE_AUDIT.md"],"gate":"Tuyệt đối không dùng bất kỳ claim sản phẩm nào trong Pitch nếu chưa phân loại trạng thái (Verified / Partially / Planned)."},{"id":1,"name":"Tầm nhìn & Định vị","title":"Tầm nhìn, Sứ mệnh & Định vị (Positioning)","st":"Verified","roles":["product","brand"],"deps":[0],"obj":"Trả lời rõ vì sao Healthy Hearing cần tồn tại, phục vụ ai và khác biệt gì với công cụ đo y tế.","tasks":["Xác định rõ User (người nghe thử), Beneficiary (người khiếm thính/người già) và Buyer/Partner.","Viết tuyên bố Vision, Mission, Positioning và bản mô tả đúng 25 từ.","Thiết lập danh sách 'Các tuyên bố bị cấm' (không nhận là thiết bị chẩn đoán y khoa SaMD)."],"out":["VISION_MISSION_POSITIONING.md"],"gate":"Người ngoài dự án đọc xong trong 30 giây có thể nhắc lại đúng Healthy Hearing dành cho ai và giải quyết nỗi đau gì."},{"id":2,"name":"Pain Point Research","title":"Nghiên cứu Nỗi đau & Kiểm chứng Nhu cầu","st":"Partially verified","roles":["ux","product"],"deps":[1],"obj":"Tìm bằng chứng thực tế từ người suy giảm thính lực, người thân và giáo viên thay vì tự suy đoán.","tasks":["Viết giả thuyết theo mẫu: [Nhóm user] gặp [vấn đề] trong [bối cảnh], gây [hậu quả].","Thực hiện phỏng vấn không dẫn dắt (không hỏi 'Bạn thấy app này hay không?').","Lập nhật ký bằng chứng (Evidence Log) phân biệt nguồn y văn trực tiếp và suy luận."],"out":["RESEARCH_BRIEF.md","Pain-Point Matrix"],"gate":"Mọi tính năng lớn trong sản phẩm phải gắn trực tiếp với ít nhất 1 pain point có bằng chứng."},{"id":3,"name":"Landscape & Macro","title":"Giải pháp Hiện có, Benchmark & Macro Forces","st":"Verified","roles":["market","tech"],"deps":[2],"obj":"Không phát minh lại bánh xe; phân tích các simulator hiện có và quyết định Adopt / Adapt / Build / Reject.","tasks":["So sánh các bộ mô phỏng thính lực quốc tế (Clarity MSBG, Starkey, Web Audio demos).","Đánh giá 6 lực vĩ mô: Già hóa dân số, Web Audio/On-device AI, Pháp lý y tế, Hạ tầng trình duyệt.","Chỉ ra cơ hội ngách: Ngữ âm & thanh điệu tiếng Việt trong mô phỏng suy giảm thính lực."],"out":["SOLUTION_LANDSCAPE.md","Bảng Adopt/Adapt/Build/Reject"],"gate":"Xác định rõ điểm khác biệt thực chất thay vì sao chép nguyên xi giải pháp sẵn có."},{"id":4,"name":"Bộ lọc 12 Trục","title":"Sustainable Idea Filter (Lọc Ý tưởng Bền vững)","st":"Verified","roles":["product","market","tech"],"deps":[2,3],"obj":"Chấm điểm trên 12 trục để giữ lại tối đa 1–2 hướng cốt lõi, cắt bỏ các công nghệ hào nhoáng nhưng rủi ro cao.","tasks":["Đánh giá 12 trục: Pain, Evidence, Reach, Differentiation, Feasibility, Validation speed, Maintenance...","Loại bỏ hoặc hoãn các module tốn kém chưa giải quyết pain point trực tiếp.","Thiết lập tiêu chí Kill / Pivot để tránh bẫy chi phí chìm (sunk-cost bias)."],"out":["IDEA_SCORECARD.md","Bảng Now / Next / Later / Won't do"],"gate":"Chốt phạm vi MVP tinh gọn, có bài test rẻ nhất để kiểm chứng trong 1–2 tuần."},{"id":5,"name":"Thiết kế & Thuật toán","title":"Solution Design, Thuật toán & Sơ đồ Hệ thống","st":"Verified","roles":["tech"],"deps":[4],"obj":"Đặc tả rõ kiến trúc Current vs. Proposed và công thức xử lý DSP, Masking, Tokenizer âm tiết tiếng Việt.","tasks":["Vẽ luồng dữ liệu: User → UI → State → FastAPI → DSP/Phoneme/Retrieval → UI/Audio.","Viết đặc tả thuật toán: Input/Output, công thức dB/Hz, edge cases và giới hạn khoa học.","Không gọi hiệu ứng ẩn chữ cái là mô hình ốc tai sinh học hoàn chỉnh."],"out":["SYSTEM_ARCHITECTURE.md","ALGORITHM_SPEC.md","MVP_ROADMAP.md"],"gate":"Mọi thuật toán đều có test vectors, baseline và tuyên bố giới hạn minh bạch."},{"id":6,"name":"Build & Polish MVP","title":"Build, Validate, UX & Nhận diện Thương hiệu","st":"Partially verified","roles":["tech","ux","brand","qa"],"deps":[5],"obj":"Hoàn thiện MVP chạy mượt từ hướng dẫn sạch, có 'Aha Moment' rõ ràng và ngôn ngữ tôn trọng người khiếm thính.","tasks":["Viết Unit/API/E2E tests và kiểm tra chế độ chạy offline/fallback khi mất mạng.","Thiết kế nhận diện Bác sĩ Thỏ + sóng âm rõ nét ở kích thước nhỏ, không gây kỳ thị.","Rà soát toàn bộ copywriting trên UI, xóa bỏ mọi câu chữ dễ gây hiểu lầm thành khám bệnh."],"out":["MVP Hoạt động","Brand Mini-Guideline","UX Issue List"],"gate":"Demo tạo ra 'Aha Moment' ngay trong 30 giây đầu tiên mà không gặp lỗi console/network."},{"id":7,"name":"GitHub & Link Health","title":"Chuẩn hóa GitHub, Deployment & Link Health","st":"Partially verified","roles":["qa","tech"],"deps":[0,6],"obj":"Đảm bảo 100% đồng nhất 3 chiều: README nói gì ↔ Source code làm gì ↔ Bản Demo đang chạy gì.","tasks":["Kiểm tra toàn bộ URL trong README, slide, QR code, video description (không dính localhost).","Xác minh API endpoint phản hồi thật, cấu hình đúng CORS và biến môi trường.","Đóng gói bộ Demo Fallback: bản chạy local + video backup + sample data an toàn."],"out":["LINK_HEALTH_REPORT.md","Demo Backup Package"],"gate":"Mọi đường link mở được trên thiết bị lạ ở chế độ ẩn danh (Incognito) không cần quyền truy cập ẩn."},{"id":8,"name":"Pitch Engineering","title":"Thiết kế Pitch theo Rubric, Hook & Q&A Phản biện","st":"Planned","roles":["pitch","brand","product"],"deps":[2,6,7],"obj":"Xây dựng câu chuyện thuyết trình bám sát Rubric chấm điểm, có Hook 5 giây và ngân hàng Q&A kèm bằng chứng.","tasks":["Ánh xạ từng tiêu chí Rubric → Slide/Demo → Tuyên bố (Claim) → Bằng chứng kiểm chứng.","Soạn kịch bản 30s, 60s, 3 phút và lời dẫn Live Demo ăn khớp từng thao tác.","Thực hiện Claim Audit: Gắn nguồn và chuẩn bị câu trả lời cho các giới hạn kỹ thuật."],"out":["PITCH_DECK_OUTLINE.md","PITCH_SCRIPT.md","Q_AND_A.md"],"gate":"Không một câu khẳng định nào trên Slide thiếu nguồn trích dẫn hoặc bài test đối chứng."},{"id":9,"name":"Bền vững & Doanh thu","title":"Mô hình Bền vững, Tác động Xã hội & Tài chính","st":"Planned","roles":["market","product","opp"],"deps":[4,6],"obj":"Tách bạch rõ người dùng (User), người hưởng lợi (Beneficiary) và đơn vị chi trả/tài trợ (Payer/Grant).","tasks":["Đánh giá các hướng: B2B trường học/đào tạo điều dưỡng, CSR/Grant y tế cộng đồng, Open-source core.","Ước tính chi phí duy trì (Hosting, âm thanh tĩnh, bảo trì) để dự án sống khỏe sau cuộc thi.","Xây dựng lộ trình 30/60/90 ngày kèm điều kiện Go / Pivot / Stop."],"out":["SUSTAINABILITY_MODEL.md"],"gate":"Có phương án duy trì hệ thống với chi phí vận hành gần bằng 0 ngay cả khi chưa gọi vốn."},{"id":10,"name":"Phân phối & Cơ hội","title":"Phân phối Đa kênh, YouTube Demo & Săn Cơ hội","st":"Planned","roles":["opp","brand","pitch"],"deps":[7,8,9],"obj":"Đưa sản phẩm tiếp cận chuyên gia thính học, cộng đồng giáo dục, cuộc thi và các quỹ tài trợ.","tasks":["Quay video YouTube theo cấu trúc: Hook 5-10s → Vấn đề → Live Demo → Cơ chế & Giới hạn → CTA.","Soạn thư ngỏ (Outreach) cá nhân hóa gửi chuyên gia xin thẩm định và đối tác xin chạy thử (Pilot).","Lập bảng theo dõi các cuộc thi, học bổng, grant kèm hạn chót đã xác minh."],"out":["DISTRIBUTION_PLAN.md","Opportunity Tracker"],"gate":"Video và bài đăng trung thực tuyệt đối, có phụ đề chuẩn Accessibility."},{"id":11,"name":"Pre-Flight Checklist","title":"Kiểm tra Chi tiết Trước Giờ G (Pre-Flight Checklist)","st":"Partially verified","roles":["qa","pitch"],"deps":[7,8],"obj":"Rà soát 6 hạng mục sống còn (Product, Links, Docs, Brand, Pitch, Submission) trước khi bấm nút nộp bài.","tasks":["Mở thử toàn bộ link từ mạng ngoài và thiết bị khác không đăng nhập.","Diễn tập thuyết trình khớp thời lượng có dư buffer an toàn.","Lưu trữ bản sao gói nộp cuối cùng và sẵn sàng bật video backup trong 3 giây."],"out":["PRE_FLIGHT_CHECKLIST.md"],"gate":"Chỉ được tick những mục đã tự tay kiểm tra thực tế."},{"id":12,"name":"Internal Scorecard","title":"Chấm Điểm Nội Bộ 10 Trục & Kiểm toán Rủi ro","st":"Verified","roles":["product","qa","pitch"],"deps":[11],"obj":"Đánh giá khách quan 10 trụ cột chất lượng và phơi bày mọi điểm nghẽn còn tồn đọng.","tasks":["Chấm điểm 10 trục kèm bằng chứng xác thực và mức độ tự tin (Confidence Level).","Kiểm tra xem có trục nào dưới ngưỡng an toàn (đặc biệt là Technical Credibility).","Cập nhật trạng thái Definition of Ready (READY / PARTIALLY READY / NOT READY)."],"out":["Internal Scorecard Report"],"gate":"Không che giấu rủi ro nghiêm trọng đằng sau điểm trung bình cộng."},{"id":13,"name":"Bộ 17 Tài Liệu Cuối","title":"Đóng gói Bộ 17 Tài Liệu & Bàn giao Chuẩn hóa","st":"Partially verified","roles":["tech","product","qa"],"deps":[9,10,12],"obj":"Đồng bộ hóa toàn bộ 17 tài liệu cốt lõi của dự án, loại bỏ trùng lặp và mâu thuẫn thông tin.","tasks":["Cập nhật 17 tài liệu từ PROJECT_STATUS.md đến BUILD_LOG.md.","Đảm bảo số liệu và tuyên bố khớp 100% giữa Repo, Slide và Video.","Đánh dấu rõ tài liệu nào đã hoàn tất và tài liệu nào dành cho giai đoạn sau."],"out":["Trọn bộ 17 File Markdown Chuẩn hóa"],"gate":"CỔNG NGHIỆM THU CUỐI (DoR): Đạt trạng thái READY hoàn toàn để tự tin Pitch và gọi hợp tác."}],"axes":[{"n":"1. Pain Intensity (Độ gắt nỗi đau)","v":9},{"n":"2. Evidence Strength (Độ mạnh bằng chứng)","v":8},{"n":"3. Reach (Khả năng tiếp cận user)","v":8},{"n":"4. Differentiation (Khác biệt thực chất)","v":8},{"n":"5. Feasibility (Khả thi kỹ thuật/thời gian)","v":9},{"n":"6. Validation Speed (Kiểm chứng 1-2 tuần)","v":9},{"n":"7. Low Maintenance Cost (Chi phí duy trì thấp)","v":8},{"n":"8. Sustainability (Sống sau cuộc thi)","v":8},{"n":"9. Impact / Business Path (Lối đi tác động)","v":7},{"n":"10. Safety & Ethics (An toàn ranh giới y tế)","v":9},{"n":"11. Scalability (Mở rộng không đội chi phí)","v":8},{"n":"12. Team Fit (Phù hợp năng lực đội ngũ)","v":9}],"pf":[{"t":"1. Product & Demo","items":[["Demo mở và chạy mượt từ môi trường sạch",1],["Luồng chính End-to-End hoạt động không lỗi console",1],["Có chế độ Fallback an toàn khi API/mạng gặp sự cố",1],["Mọi tính năng trên Demo khớp 100% với lời tuyên bố",1]]},{"t":"2. Links & Deployment","items":[["GitHub URL và quyền truy cập Public đúng mục tiêu",1],["Demo URL mở được bằng HTTPS, không dính localhost",1],["API health endpoint và luồng chính phản hồi đúng",0],["Link trong README, Slide, QR và Video không bị 404",0]]},{"t":"3. Documentation Accuracy","items":[["Hướng dẫn cài đặt trong README chạy đúng với code",1],["Mô tả biến môi trường (.env.example) nhưng không lộ secret",1],["Phân biệt rõ tính năng Shipped (đã có) và Planned (dự kiến)",1],["Ảnh chụp màn hình khớp với giao diện hiện tại",0]]},{"t":"4. Brand & Copywriting","items":[["Logo Bác sĩ Thỏ / sóng âm rõ nét ở kích thước nhỏ",1],["Tên sản phẩm Healthy Hearing & thuật ngữ nhất quán",1],["Đã loại bỏ hoàn toàn các câu chữ dễ hiểu lầm là chẩn đoán y tế",1],["Ngôn từ tôn trọng người suy giảm thính lực",1]]},{"t":"5. Pitch & Presentation","items":[["Hook 5 giây đầu rõ ràng, đi từ nỗi đau trước công nghệ",1],["Mọi số liệu và bằng chứng trên slide đều có nguồn",0],["Đã diễn tập khớp thời lượng quy định và có Video Backup",0],["Ngân hàng Q&A bao phủ cả điểm yếu và giới hạn kỹ thuật",1]]},{"t":"6. Submission Readiness","items":[["Đúng định dạng file, thời lượng video và trước hạn chót",0],["Đã mở thử toàn bộ link từ tài khoản/thiết bị độc lập",0],["Tuân thủ quy định cuộc thi về sử dụng AI và bản quyền",1],["Đã lưu bản sao toàn bộ gói hồ sơ nộp cuối cùng",0]]}]};
+const PRE={'Web mô phỏng thấu cảm và âm vị Việt (khuyên dùng)':[9,8,8,8,9,9,8,8,7,9,8,9],'Nhồi GAN và LLM cloud nặng':[7,5,6,7,4,4,3,4,5,6,3,5],'App tự chẩn đoán y khoa':[9,3,6,4,3,2,4,3,4,2,4,4]};
+const P=D.phases,R=Object.fromEntries(D.roles.map(r=>[r.id,r])),ORDER=D.stages.flatMap(g=>g.phases);
+const ST=['Verified','Partially verified','Planned','Blocked'],SL={'Verified':'Đã xác minh','Partially verified':'Một phần','Planned':'Dự kiến','Blocked':'Bị chặn'},SC={'Verified':'ok','Partially verified':'part','Planned':'plan','Blocked':'bad'};
+const $=id=>document.getElementById(id);
+let S={tab:'flow',sel:0,role:'ALL',st:{},done:{},pf:{},idea:null};
+try{Object.assign(S,JSON.parse(localStorage.getItem('hh1')||'{}'))}catch(e){}
+P.forEach(p=>{if(!S.st[p.id])S.st[p.id]=p.st});
+if(!S.idea||S.idea.length!==12)S.idea=D.axes.map(a=>a.v);
+D.pf.forEach((c,i)=>c.items.forEach((t,j)=>{if(S.pf[i+'.'+j]===undefined)S.pf[i+'.'+j]=t[1]}));
+const save=()=>{try{localStorage.setItem('hh1',JSON.stringify(S))}catch(e){}};
+const bad=p=>S.st[p.id]==='Verified'&&p.deps.some(d=>S.st[d]!=='Verified');
+const wait=p=>p.deps.filter(d=>S.st[d]!=='Verified');
+const on=p=>S.role==='ALL'||p.roles.includes(S.role);
+const dot=s=>`<i class="dot ${SC[s]}"></i>`;
+const chip=id=>`<button class="chip" data-p="${id}">${dot(S.st[id])}Phase ${id}</button>`;
+const vc=v=>v==='READY'?'ok':v==='NOT READY'?'bad':'part';
+function ready(){
+ const pf=Object.values(S.pf),pd=pf.filter(Boolean).length,bl=[],nv=P.filter(p=>S.st[p.id]==='Verified').length;
+ P.forEach(p=>{if(S.st[p.id]==='Blocked')bl.push('Phase '+p.id+' đang bị chặn');if(bad(p))bl.push('Phase '+p.id+' đã Verified nhưng phase tiền đề chưa xong')});
+ if(nv<P.length)bl.push((P.length-nv)+' phase chưa Verified');
+ if(pd<pf.length)bl.push((pf.length-pd)+' mục Pre-flight chưa kiểm tra');
+ const hard=P.some(p=>S.st[p.id]==='Blocked'||bad(p))||pd/pf.length<.4;
+ return{v:!bl.length?'READY':hard?'NOT READY':'PARTIALLY READY',bl,pct:Math.round(nv/P.length*50+pd/pf.length*50)};
+}
+function strip(){$('strip').innerHTML=D.stages.map(g=>`<div class="sg"><span><b>${g.k}</b><span class="n"> ${g.n}</span></span><div>`+g.phases.map(id=>{const p=P[id];return `<button class="bar ${SC[S.st[id]]}${id===S.sel&&S.tab==='flow'?' on':''}${on(p)?'':' dim'}${bad(p)?' x':''}" data-p="${id}" aria-label="Phase ${id}: ${p.name}, ${SL[S.st[id]]}${bad(p)?', vi phạm cổng':''}">${id}</button>`}).join('')+'</div></div>').join('')}
+function flow(){
+ const p=P[S.sel],w=wait(p),down=P.filter(q=>q.deps.includes(p.id));
+ const roles=`<div class="roles" role="group" aria-label="Lọc theo vai trò cố vấn">`+[['ALL','Tất cả vai trò']].concat(D.roles.map(r=>[r.id,r.name])).map(([id,n])=>`<button class="rc" data-r="${id}" aria-pressed="${S.role===id}">${n}</button>`).join('')+'</div>';
+ const list=D.stages.map(g=>`<div class="stg"><h3>${g.k}: ${g.n}</h3><p>${g.sub}</p>`+g.phases.map(id=>{const q=P[id],n=q.tasks.filter((_,k)=>S.done[id+'.'+k]).length;return `<button class="row${id===S.sel?' on':''}${on(q)?'':' dim'}" data-p="${id}">${dot(S.st[id])}<span>Phase ${id}: ${q.name}</span>${bad(q)?'<em class="warn" title="Vi phạm cổng">!</em>':''}<small>${n}/${q.tasks.length}</small></button>`}).join('')+'</div>').join('')+'<p class="hint">Dùng phím ↑ ↓ để chuyển phase. Số bên phải là việc đã xong.</p>';
+ const det=`<h2>Phase ${p.id}: ${p.title}</h2><p class="mu">Vai trò phụ trách: ${p.roles.map(r=>R[r].name).join(', ')}</p>
+ <div class="segs" role="group" aria-label="Trạng thái phase">${ST.map(s=>`<button class="seg ${SC[s]}${S.st[p.id]===s?' on':''}" data-s="${s}" aria-pressed="${S.st[p.id]===s}">${SL[s]}</button>`).join('')}</div>
+ ${bad(p)?`<p class="alert">Phase này đang Verified nhưng còn chờ ${w.map(d=>'Phase '+d).join(', ')}. Xác minh phần tiền đề trước khi qua cổng.</p>`:''}
+ <p>${p.obj}</p>
+ <h4>Việc cần làm</h4>${p.tasks.map((t,k)=>`<label class="chk"><input type="checkbox" data-t="${p.id}.${k}" ${S.done[p.id+'.'+k]?'checked':''}><span>${t}</span></label>`).join('')}
+ <h4>Đầu ra</h4><div class="chips">${p.out.map(o=>`<span class="file">${o}</span>`).join('')}</div>
+ <h4>Cổng nghiệm thu</h4><p class="gate">${p.gate}</p>
+ <h4>Cần xong trước</h4><div class="chips">${p.deps.map(chip).join('')||'<span class="mu">Không có, bắt đầu được ngay</span>'}</div>
+ <h4>Mở khóa</h4><div class="chips">${down.map(q=>chip(q.id)).join('')||'<span class="mu">Chưa có phase nào phụ thuộc</span>'}</div>`;
+ return roles+`<div class="two"><div class="card">${list}</div><div class="card det">${det}</div></div>`;
+}
+function idea(){
+ return `<div class="two"><div class="card"><div class="presets" role="group" aria-label="Mẫu chấm điểm">`+Object.keys(PRE).map(k=>`<button class="rc" data-pre="${k}">${k}</button>`).join('')+'</div>'+D.axes.map((a,i)=>`<label class="sl"><span>${a.n}</span><output id="o${i}">${S.idea[i]}</output><input type="range" min="1" max="10" value="${S.idea[i]}" data-a="${i}"></label>`).join('')+`</div><div class="card"><svg id="radar" viewBox="0 0 320 300" role="img" aria-label="Biểu đồ radar 12 trục"></svg><div id="ideaOut" aria-live="polite"></div></div></div>`;
+}
+function ideaUpd(){
+ const cx=160,cy=150,r=105,pt=(i,k)=>{const a=-Math.PI/2+i*Math.PI/6;return[(cx+Math.cos(a)*r*k).toFixed(1),(cy+Math.sin(a)*r*k).toFixed(1)]};
+ let g='';[.25,.5,.75,1].forEach(k=>g+=`<polygon class="rg" points="${S.idea.map((_,i)=>pt(i,k).join(',')).join(' ')}"/>`);
+ S.idea.forEach((_,i)=>{const[x,y]=pt(i,1),[lx,ly]=pt(i,1.17);g+=`<line class="rg" x1="${cx}" y1="${cy}" x2="${x}" y2="${y}"/><text class="rl" x="${lx}" y="${ly}" text-anchor="middle" dominant-baseline="middle">${i+1}</text>`});
+ $('radar').innerHTML=g+`<polygon class="rv" points="${S.idea.map((v,i)=>pt(i,v/10).join(',')).join(' ')}"/>`;
+ const avg=S.idea.reduce((a,b)=>a+b,0)/12,fl=[];
+ if(S.idea[1]<5)fl.push('Evidence Strength dưới 5/10');if(S.idea[9]<5)fl.push('Safety & Ethics dưới 5/10');
+ const d=fl.length?['bad','Cờ đỏ: dừng hoặc đổi hướng']:avg>=7.5?['ok','Giữ (Keep)']:avg>=5.5?['part','Đổi hướng (Pivot)']:['bad','Dừng (Kill)'];
+ $('ideaOut').innerHTML=`<p class="big ${d[0]}">${d[1]}</p><p class="mu">Điểm trung bình ${avg.toFixed(1)}/10. ${fl.join('. ')}${fl.length?'. ':''}Quy tắc Phase 4: giữ tối đa 1–2 hướng; Evidence hoặc Safety &amp; Ethics dưới 5 luôn gắn cờ đỏ dù điểm tổng cao.</p>`;
+}
+function pre(){
+ const r=ready();
+ return `<div class="card" style="margin-bottom:16px"><p class="big ${vc(r.v)}">${r.v} (${r.pct}%)</p>${r.bl.length?'<p class="mu">Blocker còn lại:</p><ul>'+r.bl.map(b=>`<li>${b}</li>`).join('')+'</ul>':'<p>Không còn blocker.</p>'}</div><div class="grid3">`+D.pf.map((c,i)=>`<section class="card"><h3>${c.t} <small>${c.items.filter((_,j)=>S.pf[i+'.'+j]).length}/${c.items.length}</small></h3>`+c.items.map((t,j)=>`<label class="chk"><input type="checkbox" data-f="${i}.${j}" ${S.pf[i+'.'+j]?'checked':''}><span>${t[0]}</span></label>`).join('')+'</section>').join('')+'</div>';
+}
+function render(){
+ const r=ready();
+ $('verdict').className='pill '+vc(r.v);$('verdict').textContent=r.v+' '+r.pct+'%';$('verdict').title='Xem blocker trong tab Pre-flight';
+ strip();
+ $('tabs').innerHTML=[['flow','Quy trình 14 phase'],['idea','Lọc ý tưởng 12 trục'],['pre','Pre-flight']].map(([k,n])=>`<button class="tab" role="tab" data-tab="${k}" aria-selected="${S.tab===k}">${n}</button>`).join('');
+ $('main').innerHTML=S.tab==='flow'?flow():S.tab==='idea'?idea():pre();
+ if(S.tab==='idea')ideaUpd();
+ save();
+}
+function keep(q){render();const e=document.querySelector(q);if(e)e.focus()}
+function toast(t){const e=$('toast');e.textContent=t;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2200)}
+function md(){const r=ready();return['# Báo cáo audit Healthy Hearing','','Trạng thái: '+r.v+' ('+r.pct+'%)','','## Phase',...P.map(p=>'- Phase '+p.id+' '+p.name+': '+SL[S.st[p.id]]+(bad(p)?' (vi phạm cổng)':'')),'','## Blocker',...(r.bl.length?r.bl.map(b=>'- '+b):['- Không có'])].join('\n')}
+async function copy(){
+ const t=md();let ok=true;
+ try{await navigator.clipboard.writeText(t)}catch(e){ok=false;try{const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();ok=document.execCommand('copy');a.remove()}catch(_){}}
+ toast(ok?'Đã sao chép báo cáo audit':'Trình duyệt chặn sao chép. Hãy mở trang trong tab riêng.');
+}
+document.addEventListener('click',e=>{
+ const b=e.target.closest('button');if(!b)return;
+ if(b.id==='copy')return copy();
+ if(b.id==='verdict'){S.tab='pre';return render()}
+ if(b.dataset.tab){S.tab=b.dataset.tab;return keep('[data-tab="'+S.tab+'"]')}
+ if(b.dataset.p!==undefined){S.sel=+b.dataset.p;S.tab='flow';return keep('.row.on')}
+ if(b.dataset.s){S.st[S.sel]=b.dataset.s;return keep('.seg.on')}
+ if(b.dataset.r){S.role=b.dataset.r;return keep('.rc[aria-pressed="true"]')}
+ if(b.dataset.pre){S.idea=PRE[b.dataset.pre].slice();render();return $('main').querySelector('[data-pre]').focus()}
+});
+document.addEventListener('change',e=>{
+ const t=e.target;
+ if(t.dataset.t){S.done[t.dataset.t]=t.checked;keep('[data-t="'+t.dataset.t+'"]')}
+ if(t.dataset.f){S.pf[t.dataset.f]=t.checked;keep('[data-f="'+t.dataset.f+'"]')}
+});
+document.addEventListener('input',e=>{
+ const t=e.target;
+ if(t.dataset.a!==undefined){S.idea[+t.dataset.a]=+t.value;$('o'+t.dataset.a).textContent=t.value;ideaUpd();save()}
+});
+document.addEventListener('keydown',e=>{
+ if(S.tab!=='flow'||!['ArrowDown','ArrowUp'].includes(e.key)||/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))return;
+ e.preventDefault();
+ const i=ORDER.indexOf(S.sel),n=ORDER[Math.max(0,Math.min(ORDER.length-1,i+(e.key==='ArrowDown'?1:-1)))];
+ S.sel=n;keep('.row.on');
+});
+function fromHash(){const m=/^#p(\d+)$/.exec(location.hash);if(m&&P[+m[1]]){S.sel=+m[1];S.tab='flow'}}
+window.addEventListener('hashchange',()=>{fromHash();render()});
+fromHash();render();
+</script></body></html>
