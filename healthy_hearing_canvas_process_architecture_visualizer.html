@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Healthy Hearing — Master Process & Architecture Canvas</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            sage: {
+              50: '#f4f7f4',
+              100: '#e3ebe3',
+              200: '#c8d8c7',
+              300: '#a3bea2',
+              400: '#7a9e79',
+              500: '#5a8059',
+              600: '#466645',
+              700: '#395238',
+              800: '#2f422f',
+              900: '#273727',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom scrollbars & SVG flow animations */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.4); }
+    ::-webkit-scrollbar-thumb { background: rgba(100, 116, 139, 0.5); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(16, 185, 129, 0.7); }
+
+    @keyframes flowDash {
+      to { stroke-dashoffset: -24; }
+    }
+    .animate-flow {
+      stroke-dasharray: 6 6;
+      animation: flowDash 1.2s linear infinite;
+    }
+    .animate-flow-slow {
+      stroke-dasharray: 8 8;
+      animation: flowDash 2.2s linear infinite;
+    }
+    @keyframes pulseRing {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.08); opacity: 0.35; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+    .pulse-ring {
+      transform-origin: center;
+      animation: pulseRing 2.4s ease-in-out infinite;
+    }
+    .node-card {
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .node-card:hover {
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-emerald-500 selection:text-slate-950 min-h-screen flex flex-col">
+
+  <!-- ======================= TOP HEADER & GLOBAL READINESS BAR ======================= -->
+  <header class="sticky top-0 z-40 border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md">
+    <div class="max-w-[1600px] mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+      <!-- Brand Title & Principle Badge -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/20 text-slate-950 font-extrabold text-lg">
+          🐰
+        </div>
+        <div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <h1 class="text-base sm:text-lg font-extrabold tracking-tight text-white">Healthy Hearing — Master Process Canvas</h1>
+            <span class="px-2.5 py-0.5 text-[11px] font-mono font-semibold uppercase tracking-wider rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30">
+              Evidence Before Claims
+            </span>
+          </div>
+          <p class="text-xs text-slate-400">Hệ thống hóa quy trình: Từ Project kỹ thuật → Product thực tế → Pitch thuyết phục & Cơ hội phát triển</p>
+        </div>
+      </div>
+
+      <!-- Global Readiness Gate & Action Buttons -->
+      <div class="flex items-center gap-2.5 flex-wrap">
+        <!-- Live Definition of Ready Badge -->
+        <div id="globalDoRBadge" onclick="switchMainTab('preflight')" class="cursor-pointer px-3 py-1.5 rounded-xl border flex items-center gap-2 transition-all">
+          <span id="globalDoRDot" class="w-2.5 h-2.5 rounded-full"></span>
+          <div class="text-left">
+            <div class="text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Definition of Ready</div>
+            <div id="globalDoRText" class="text-xs font-bold">PARTIALLY READY</div>
+          </div>
+        </div>
+
+        <!-- Export Status Report -->
+        <button onclick="exportAuditMarkdown()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition">
+          <span>📋</span>
+          <span>Xuất Báo cáo Audit (.MD)</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Value Chain Interactive Bar (8-Step Core Flow) -->
+    <div class="border-t border-slate-800/60 bg-slate-900/60">
+      <div class="max-w-[1600px] mx-auto px-4 sm:px-6 py-2 flex items-center justify-between gap-2 overflow-x-auto">
+        <div class="flex items-center gap-1 text-xs whitespace-nowrap" id="valueChainBar">
+          <!-- Populated dynamically by JS -->
+        </div>
+        <!-- Main Navigation Tabs -->
+        <div class="flex items-center gap-1 bg-slate-950 p-1 rounded-xl border border-slate-800 shrink-0">
+          <button id="tabBtn-pipeline" onclick="switchMainTab('pipeline')" class="main-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold transition bg-emerald-500 text-slate-950">
+            1. Bản đồ 14 Phase & Gate
+          </button>
+          <button id="tabBtn-architecture" onclick="switchMainTab('architecture')" class="main-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold transition text-slate-400 hover:text-white">
+            2. Kiến trúc, Thuật toán & Pitch
+          </button>
+          <button id="tabBtn-radar" onclick="switchMainTab('radar')" class="main-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold transition text-slate-400 hover:text-white">
+            3. Bộ lọc 12 Trục & Scorecard
+          </button>
+          <button id="tabBtn-preflight" onclick="switchMainTab('preflight')" class="main-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold transition text-slate-400 hover:text-white">
+            4. Pre-Flight & 17 Tài liệu
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================= MAIN WORKSPACE ======================= -->
+  <main class="flex-1 max-w-[1600px] w-full mx-auto px-4 sm:px-6 py-5">
+
+    <!-- ===================================================================== -->
+    <!-- TAB 1: INTERACTIVE 14-PHASE PIPELINE & DEPENDENCY GATE EXPLORER       -->
+    <!-- ===================================================================== -->
+    <section id="tabView-pipeline" class="space-y-5">
+      <!-- Top Filter Bar: 8 Interdisciplinary Advisor Roles + Status Legend -->
+      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        <div class="space-y-1.5">
+          <div class="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-2">
+            <span>👥 Hội đồng 8 Vai trò Cố vấn Liên ngành (Click để lọc Phase phụ trách)</span>
+            <button onclick="filterByRole('ALL')" id="roleBtn-ALL" class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[11px] border border-emerald-500/40">Tất cả (8)</button>
+          </div>
+          <div id="rolesFilterBar" class="flex flex-wrap gap-1.5">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Status Summary Counters -->
+        <div class="flex flex-wrap items-center gap-2 shrink-0" id="statusSummaryPills">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Dependency Gate Alert Banner (Dynamic) -->
+      <div id="dependencyGateBanner" class="hidden rounded-2xl p-3.5 border flex items-center justify-between gap-3">
+        <!-- Populated dynamically if downstream phases violate gate rules -->
+      </div>
+
+      <!-- Main Grid: Left Interactive Visual Flowchart Canvas (8 cols) + Right Phase Inspector (4 cols) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+        
+        <!-- Left 8 Cols: Interactive SVG Dependency Graph + Macro Stage Cards -->
+        <div class="lg:col-span-8 space-y-4">
+          
+          <!-- Interactive SVG Pipeline Overview Canvas -->
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 overflow-hidden">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <div>
+                <h2 class="text-sm font-bold text-white flex items-center gap-2">
+                  <span>🗺️ Sơ đồ Mạng lưới Phụ thuộc & Cổng Nghiệm thu (Dependency Flow Canvas)</span>
+                </h2>
+                <p class="text-xs text-slate-400">Nhấp vào bất kỳ nút Phase nào trên sơ đồ để mổ xẻ chi tiết, cập nhật trạng thái và kiểm tra đường truyền phụ thuộc.</p>
+              </div>
+              <div class="flex items-center gap-2 text-[11px]">
+                <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-emerald-400 inline-block"></span> Verified</span>
+                <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-sky-400 inline-block"></span> Partially</span>
+                <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block"></span> Planned</span>
+                <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-rose-500 inline-block"></span> Blocked</span>
+              </div>
+            </div>
+
+            <!-- Responsive SVG Flowchart (Phase 0 -> Phase 13) -->
+            <div class="w-full overflow-x-auto bg-slate-950/80 rounded-xl border border-slate-800/80 p-2">
+              <svg id="pipelineSvgCanvas" viewBox="0 0 980 430" class="w-full min-w-[780px] h-auto select-none"></svg>
+            </div>
+          </div>
+
+          <!-- 4 Macro Stages Detailed Grid -->
+          <div id="macroStagesContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Right 4 Cols: Deep-Dive Phase Inspector Panel -->
+        <div class="lg:col-span-4 lg:sticky lg:top-28 bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4 shadow-xl">
+          <div id="phaseInspectorContent">
+            <!-- Populated dynamically when a phase is selected -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- TAB 2: SYSTEM ARCHITECTURE, ALGORITHM SPECS & 6-STEP EXECUTION LOOP   -->
+    <!-- ===================================================================== -->
+    <section id="tabView-architecture" class="hidden space-y-5">
+      <!-- Top Mode Switcher -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h2 class="text-base font-bold text-white">Kiến trúc Kỹ thuật, Đặc tả Thuật toán & Kịch bản Pitch (Phase 5 & Phase 8)</h2>
+          <p class="text-xs text-slate-400">Phân biệt rõ kiến trúc hiện có (Current Verified) và kiến trúc đề xuất (Proposed) — Tuyệt đối không phóng đại thành chẩn đoán y khoa.</p>
+        </div>
+        <div class="flex flex-wrap gap-1.5 bg-slate-950 p-1.5 rounded-xl border border-slate-800">
+          <button id="archModeBtn-system" onclick="setArchCanvasMode('system')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-500 text-slate-950 transition">
+            ⚙️ Luồng Kiến trúc & Thuật toán (Phase 5)
+          </button>
+          <button id="archModeBtn-session" onclick="setArchCanvasMode('session')" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition">
+            🔄 Vòng lặp 6 Bước Mỗi Phiên
+          </button>
+          <button id="archModeBtn-pitch" onclick="setArchCanvasMode('pitch')" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition">
+            🎤 Đường cong 11 Bước Pitch (Phase 8)
+          </button>
+        </div>
+      </div>
+
+      <!-- Architecture Sub-Toolbar (Only visible in 'system' mode) -->
+      <div id="archLayerFilterBar" class="flex flex-wrap items-center justify-between gap-3 bg-slate-900/60 border border-slate-800/80 rounded-xl px-4 py-2.5">
+        <div class="flex items-center gap-2 text-xs">
+          <span class="font-semibold text-slate-300">Chế độ đối chiếu Kiến trúc:</span>
+          <button onclick="setArchHighlight('ALL')" id="archFilter-ALL" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-semibold">Tất cả Module</button>
+          <button onclick="setArchHighlight('VERIFIED')" id="archFilter-VERIFIED" class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-semibold">✅ Current Architecture (Đã xác minh)</button>
+          <button onclick="setArchHighlight('PROPOSED')" id="archFilter-PROPOSED" class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-semibold">🧪 Proposed / Cần kiểm chứng thêm</button>
+        </div>
+        <div class="text-xs text-amber-300 font-mono">
+          ⚠️ Giới hạn SaMD: Mô phỏng giáo dục & thấu cảm ≠ Đo thính lực lâm sàng
+        </div>
+      </div>
+
+      <!-- Main Architecture Visual Canvas + Algorithm Spec Inspector -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+        <!-- SVG Diagram Area (8 cols) -->
+        <div class="lg:col-span-8 bg-slate-900 border border-slate-800 rounded-2xl p-4">
+          <div class="w-full overflow-x-auto bg-slate-950 rounded-xl border border-slate-800/90 p-3">
+            <svg id="architectureSvgCanvas" viewBox="0 0 920 470" class="w-full min-w-[740px] h-auto select-none"></svg>
+          </div>
+          <!-- Prohibited vs Allowed Claims Comparison Strip -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
+            <div class="p-3.5 rounded-xl bg-rose-950/30 border border-rose-500/30">
+              <div class="text-xs font-bold uppercase tracking-wider text-rose-300 mb-1.5">🚫 Claim Bị Cấm (Khi chưa thẩm định y khoa)</div>
+              <ul class="text-xs text-slate-300 space-y-1 list-disc list-inside">
+                <li>"Chẩn đoán chính xác mức độ điếc thay thế bác sĩ/bệnh viện."</li>
+                <li>"Xóa ký tự trên màn hình là mô hình ốc tai sinh học hoàn chỉnh."</li>
+                <li>"Đo đúng ngưỡng dB HL tuyệt đối trên mọi tai nghe không cần hiệu chuẩn."</li>
+              </ul>
+            </div>
+            <div class="p-3.5 rounded-xl bg-emerald-950/30 border border-emerald-500/30">
+              <div class="text-xs font-bold uppercase tracking-wider text-emerald-300 mb-1.5">✅ Claim Chuẩn Xác (Evidence-Backed)</div>
+              <ul class="text-xs text-slate-300 space-y-1 list-disc list-inside">
+                <li>"Mô phỏng trực quan trải nghiệm nghe khó và mất âm vị theo ngưỡng tần số."</li>
+                <li>"Giúp người thân & cộng đồng thấu cảm khó khăn giao tiếp trong tiếng ồn."</li>
+                <li>"Tích hợp bộ phân tách âm tiết/âm vị tiếng Việt kết hợp xử lý tín hiệu Web Audio."</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Spec Inspector (4 cols) -->
+        <div class="lg:col-span-4 bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
+          <div id="archInspectorPanel">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- TAB 3: 12-AXIS SUSTAINABLE IDEA FILTER, PRIORITY & SCORECARD          -->
+    <!-- ===================================================================== -->
+    <section id="tabView-radar" class="hidden space-y-5">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        
+        <!-- Left 6 Cols: 12-Axis Sustainable Idea Filter + Radar Chart -->
+        <div class="lg:col-span-7 bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <h2 class="text-base font-bold text-white">Bộ Lọc Ý Tưởng Bền Vững 12 Trục (Phase 4 — Sustainable Idea Filter)</h2>
+              <p class="text-xs text-slate-400">Chấm điểm các hướng phát triển dựa trên bằng chứng thực tế để quyết định Giữ (Keep), Đổi hướng (Pivot) hay Dừng (Kill).</p>
+            </div>
+            <!-- Preset Selector -->
+            <div class="flex flex-wrap gap-1.5">
+              <button onclick="loadIdeaPreset('mvp_empathy')" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-500/30">
+                Mẫu 1: Web Mô phỏng Thấu cảm + Âm vị Việt (Khuyên dùng)
+              </button>
+              <button onclick="loadIdeaPreset('overengineered_ai')" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700">
+                Mẫu 2: Nhồi GANs + Heavy Cloud LLM
+              </button>
+              <button onclick="loadIdeaPreset('clinical_diag')" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700">
+                Mẫu 3: App Tự Chẩn đoán Y khoa
+              </button>
+            </div>
+          </div>
+
+          <!-- Radar Chart SVG + Decision Box -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center bg-slate-950/70 rounded-xl p-4 border border-slate-800">
+            <div class="md:col-span-7 flex justify-center">
+              <svg id="ideaRadarSvg" viewBox="0 0 380 340" class="w-full max-w-[360px] h-auto"></svg>
+            </div>
+            <div class="md:col-span-5 space-y-3">
+              <div id="ideaDecisionCard" class="p-4 rounded-xl border">
+                <!-- Populated by JS -->
+              </div>
+              <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-xs space-y-1.5">
+                <div class="font-bold text-slate-200">Quy tắc Cổng Phase 4:</div>
+                <p class="text-slate-400">• Giữ tối đa 1–2 hướng chính.</p>
+                <p class="text-slate-400">• Nếu <b>Risk & Ethics</b> hoặc <b>Evidence Strength</b> dưới 5/10 → Tự động gắn cờ cảnh báo đỏ dù tổng điểm cao.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 12 Sliders Grid -->
+          <div id="ideaSlidersGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Right 5 Cols: Priority Heuristic Calculator + Phase 12 Internal Scorecard -->
+        <div class="lg:col-span-5 space-y-5">
+          
+          <!-- Priority Formula Calculator -->
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
+            <div>
+              <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <span>🧮 Công cụ Tính Điểm Ưu tiên Trong Phiên (Bước 2 Execution)</span>
+              </h3>
+              <p class="text-xs text-slate-400 mt-0.5">Công thức Heuristic: <code class="text-emerald-300 font-mono">Priority = (Impact × Evidence × Urgency) ÷ Cost_Risk</code></p>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs">
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800">
+                <div class="flex justify-between font-semibold text-slate-300 mb-1"><span>Impact</span><span id="prioVal-impact" class="text-emerald-400">8</span></div>
+                <input id="prioInp-impact" type="range" min="1" max="10" value="8" oninput="updatePriorityCalc()" class="w-full accent-emerald-500">
+              </div>
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800">
+                <div class="flex justify-between font-semibold text-slate-300 mb-1"><span>Evidence</span><span id="prioVal-evidence" class="text-emerald-400">7</span></div>
+                <input id="prioInp-evidence" type="range" min="1" max="10" value="7" oninput="updatePriorityCalc()" class="w-full accent-emerald-500">
+              </div>
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800">
+                <div class="flex justify-between font-semibold text-slate-300 mb-1"><span>Urgency</span><span id="prioVal-urgency" class="text-emerald-400">9</span></div>
+                <input id="prioInp-urgency" type="range" min="1" max="10" value="9" oninput="updatePriorityCalc()" class="w-full accent-emerald-500">
+              </div>
+              <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800">
+                <div class="flex justify-between font-semibold text-slate-300 mb-1"><span>Cost/Risk</span><span id="prioVal-cost" class="text-rose-400">3</span></div>
+                <input id="prioInp-cost" type="range" min="1" max="10" value="3" oninput="updatePriorityCalc()" class="w-full accent-rose-500">
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between bg-slate-950 px-4 py-3 rounded-xl border border-slate-800">
+              <div>
+                <div class="text-[11px] uppercase text-slate-400 font-semibold">Chỉ số Ưu tiên Thực thi</div>
+                <div id="prioFormulaDetail" class="text-xs text-slate-400 font-mono">(8 × 7 × 9) ÷ 3 = 168.0</div>
+              </div>
+              <div id="prioScoreBadge" class="px-3 py-1.5 rounded-xl font-mono font-extrabold text-base bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                168.0 — LÀM NGAY
+              </div>
+            </div>
+          </div>
+
+          <!-- Phase 12 Internal 10-Axis Scorecard -->
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="text-sm font-bold text-white">📊 Bảng Điểm Nội Bộ 10 Trục (Phase 12 Scorecard)</h3>
+                <p class="text-xs text-slate-400">Không dùng điểm tổng để che giấu một trục rủi ro nghiêm trọng.</p>
+              </div>
+              <div id="scorecardTotalBadge" class="px-3 py-1 rounded-lg bg-slate-950 border border-slate-800 font-mono text-xs font-bold text-emerald-400">
+                78 / 100
+              </div>
+            </div>
+            <div id="internalScorecardList" class="space-y-2.5 max-h-[360px] overflow-y-auto pr-1">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- TAB 4: PRE-FLIGHT CHECKLIST, 17 ARTIFACTS & DEFINITION OF READY GATE  -->
+    <!-- ===================================================================== -->
+    <section id="tabView-preflight" class="hidden space-y-5">
+      <!-- Top Readiness Dashboard Card -->
+      <div id="dorMasterBanner" class="rounded-2xl p-5 border flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        <!-- Populated dynamically by JS -->
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+        <!-- Left 7 Cols: Phase 11 Pre-Flight Detail Checklist -->
+        <div class="lg:col-span-7 bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <h2 class="text-base font-bold text-white">✈️ Pre-Flight Detail Checklist (Phase 11)</h2>
+              <p class="text-xs text-slate-400">Chỉ đánh dấu khi đã kiểm tra thực tế trên môi trường sạch — không tick vì "dự định sẽ làm".</p>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="toggleAllPreFlight(true)" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">Giả lập Đạt 100%</button>
+              <button onclick="toggleAllPreFlight(false)" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 border border-slate-700">Reset Thực tế</button>
+            </div>
+          </div>
+
+          <div id="preflightCategoriesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Right 5 Cols: Phase 13 — Bộ 17 Tài Liệu Cuối (Artifact Inventory) -->
+        <div class="lg:col-span-5 bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
+          <div>
+            <h2 class="text-base font-bold text-white">📁 Bộ 17 Tài Liệu Chuẩn Hóa (Phase 13 Artifacts)</h2>
+            <p class="text-xs text-slate-400">Nhấp vào trạng thái từng file để chuyển đổi (`Verified` → `Partially` → `Planned`) và xem cấu trúc mẫu.</p>
+          </div>
+          <div id="artifactsListContainer" class="space-y-2 max-h-[560px] overflow-y-auto pr-1">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Toast Notification (No alert() used) -->
+  <div id="toastNotification" class="fixed bottom-5 right-5 z-50 hidden px-4 py-3 rounded-xl bg-emerald-500 text-slate-950 font-bold text-xs shadow-2xl items-center gap-2">
+    <span>✅</span>
+    <span id="toastMessage">Đã sao chép báo cáo vào Clipboard!</span>
+  </div>
+
+  <!-- ======================= APPLICATION LOGIC & DATA ======================= -->
+  <script>
+    // =========================================================================
+    // 1. MASTER DATA: 8 ROLES, VALUE CHAIN & 14 PHASES (PHASE 0 -> PHASE 13)
+    // =========================================================================
+    const ADVISORY_ROLES = [
+      { id: "product", name: "Product Strategist", icon: "🧭", focus: "Vấn đề, người dùng, giá trị & phạm vi MVP" },
+      { id: "ux", name: "UX Researcher", icon: "🔍", focus: "Pain point, phỏng vấn không dẫn dắt & kiểm chứng" },
+      { id: "tech", name: "Technical Lead", icon: "⚙️", focus: "Code audit, kiến trúc, DSP/Phoneme & thuật toán" },
+      { id: "brand", name: "Brand & Comm Designer", icon: "🎨", focus: "Logo bác sĩ Thỏ/sóng âm, thông điệp tôn trọng" },
+      { id: "pitch", name: "Pitch Coach", icon: "🎤", focus: "Rubric mapping, hook 5s, nhịp kể chuyện & Q&A" },
+      { id: "market", name: "Market & Biz Analyst", icon: "📈", focus: "Benchmark, macro forces, tính bền vững" },
+      { id: "qa", name: "QA / Release Engineer", icon: "🛡️", focus: "Test thực tế, link health, deploy & fallback" },
+      { id: "opp", name: "Opportunity Strategist", icon: "🚀", focus: "Cuộc thi, grant, đối tác pilot & mentor" }
+    ];
+
+    const VALUE_CHAIN_STEPS = [
+      { label: "1. Vấn đề", phases: [0, 1] },
+      { label: "2. Bằng chứng", phases: [2, 3] },
+      { label: "3. Giải pháp", phases: [4, 5] },
+      { label: "4. Sản phẩm", phases: [6] },
+      { label: "5. Kiểm chứng", phases: [7, 11, 12] },
+      { label: "6. Kể chuyện", phases: [8] },
+      { label: "7. Phân phối", phases: [10, 13] },
+      { label: "8. Cơ hội bền vững", phases: [9] }
+    ];
+
+    const PHASES_DATA = [
+      {
+        id: 0,
+        code: "PHASE 0",
+        shortName: "Audit Hiện trạng",
+        title: "Audit Hiện trạng & Bảo toàn Dự án",
+        stage: "A",
+        x: 75, y: 95,
+        status: "Verified",
+        roles: ["tech", "qa"],
+        deps: [],
+        objective: "Xác định chính xác Healthy Hearing đang có gì chạy thật trong repo trước khi phát triển hoặc mang đi Pitch.",
+        tasks: [
+          "Kiểm kê repo, branch, commit, source code, audio sample, test và deployment.",
+          "Phân biệt rõ feature chạy thật vs. stub, fallback hoặc ý tưởng tương lai.",
+          "Build/run thử từ README sạch; ghi lại command và kết quả test thực tế.",
+          "Rà soát secrets (.env, API keys) trước khi public repo."
+        ],
+        outputs: ["PROJECT_STATUS.md", "RELEASE_AUDIT.md"],
+        gate: "CỔNG NGHIỆM THU 0: Tuyệt đối không dùng bất kỳ claim sản phẩm nào trong Pitch nếu chưa phân loại trạng thái (Verified / Partially / Planned)."
+      },
+      {
+        id: 1,
+        code: "PHASE 1",
+        shortName: "Tầm nhìn & Định vị",
+        title: "Tầm nhìn, Sứ mệnh & Định vị (Positioning)",
+        stage: "A",
+        x: 235, y: 95,
+        status: "Verified",
+        roles: ["product", "brand"],
+        deps: [0],
+        objective: "Trả lời rõ vì sao Healthy Hearing cần tồn tại, phục vụ ai và khác biệt gì với công cụ đo y tế.",
+        tasks: [
+          "Xác định rõ User (người nghe thử), Beneficiary (người khiếm thính/người già) và Buyer/Partner.",
+          "Viết tuyên bố Vision, Mission, Positioning và bản mô tả đúng 25 từ.",
+          "Thiết lập danh sách 'Các tuyên bố bị cấm' (không nhận là thiết bị chẩn đoán y khoa SaMD)."
+        ],
+        outputs: ["VISION_MISSION_POSITIONING.md"],
+        gate: "CỔNG NGHIỆM THU 1: Người ngoài dự án đọc xong trong 30 giây có thể nhắc lại đúng Healthy Hearing dành cho ai và giải quyết nỗi đau gì."
+      },
+      {
+        id: 2,
+        code: "PHASE 2",
+        shortName: "Pain Point Research",
+        title: "Nghiên cứu Nỗi đau & Kiểm chứng Nhu cầu",
+        stage: "A",
+        x: 395, y: 95,
+        status: "Partially verified",
+        roles: ["ux", "product"],
+        deps: [1],
+        objective: "Tìm bằng chứng thực tế từ người suy giảm thính lực, người thân và giáo viên thay vì tự suy đoán.",
+        tasks: [
+          "Viết giả thuyết theo mẫu: [Nhóm user] gặp [vấn đề] trong [bối cảnh], gây [hậu quả].",
+          "Thực hiện phỏng vấn không dẫn dắt (không hỏi 'Bạn thấy app này hay không?').",
+          "Lập nhật ký bằng chứng (Evidence Log) phân biệt nguồn y văn trực tiếp và suy luận."
+        ],
+        outputs: ["RESEARCH_BRIEF.md", "Pain-Point Matrix"],
+        gate: "CỔNG NGHIỆM THU 2: Mọi tính năng lớn trong sản phẩm phải gắn trực tiếp với ít nhất 1 pain point có bằng chứng."
+      },
+      {
+        id: 3,
+        code: "PHASE 3",
+        shortName: "Landscape & Macro",
+        title: "Giải pháp Hiện có, Benchmark & Macro Forces",
+        stage: "A",
+        x: 555, y: 95,
+        status: "Verified",
+        roles: ["market", "tech"],
+        deps: [2],
+        objective: "Không phát minh lại bánh xe; phân tích các simulator hiện có và quyết định Adopt / Adapt / Build / Reject.",
+        tasks: [
+          "So sánh các bộ mô phỏng thính lực quốc tế (Clarity MSBG, Starkey, Web Audio demos).",
+          "Đánh giá 6 lực vĩ mô: Già hóa dân số, Web Audio/On-device AI, Pháp lý y tế, Hạ tầng trình duyệt.",
+          "Chỉ ra cơ hội ngách: Ngữ âm & thanh điệu tiếng Việt trong mô phỏng suy giảm thính lực."
+        ],
+        outputs: ["SOLUTION_LANDSCAPE.md", "Bảng Adopt/Adapt/Build/Reject"],
+        gate: "CỔNG NGHIỆM THU 3: Xác định rõ điểm khác biệt thực chất thay vì sao chép nguyên xi giải pháp sẵn có."
+      },
+      {
+        id: 4,
+        code: "PHASE 4",
+        shortName: "Bộ lọc 12 Trục",
+        title: "Sustainable Idea Filter (Lọc Ý tưởng Bền vững)",
+        stage: "B",
+        x: 735, y: 95,
+        status: "Verified",
+        roles: ["product", "market", "tech"],
+        deps: [2, 3],
+        objective: "Chấm điểm trên 12 trục để giữ lại tối đa 1–2 hướng cốt lõi, cắt bỏ các công nghệ hào nhoáng nhưng rủi ro cao.",
+        tasks: [
+          "Đánh giá 12 trục: Pain, Evidence, Reach, Differentiation, Feasibility, Validation speed, Maintenance...",
+          "Loại bỏ hoặc hoãn các module tốn kém chưa giải quyết pain point trực tiếp.",
+          "Thiết lập tiêu chí Kill / Pivot để tránh bẫy chi phí chìm (sunk-cost bias)."
+        ],
+        outputs: ["IDEA_SCORECARD.md", "Bảng Now / Next / Later / Won't do"],
+        gate: "CỔNG NGHIỆM THU 4: Chốt phạm vi MVP tinh gọn, có bài test rẻ nhất để kiểm chứng trong 1–2 tuần."
+      },
+      {
+        id: 5,
+        code: "PHASE 5",
+        shortName: "Thiết kế & Thuật toán",
+        title: "Solution Design, Thuật toán & Sơ đồ Hệ thống",
+        stage: "B",
+        x: 735, y: 230,
+        status: "Verified",
+        roles: ["tech"],
+        deps: [4],
+        objective: "Đặc tả rõ kiến trúc Current vs. Proposed và công thức xử lý DSP, Masking, Tokenizer âm tiết tiếng Việt.",
+        tasks: [
+          "Vẽ luồng dữ liệu: User → UI → State → FastAPI → DSP/Phoneme/Retrieval → UI/Audio.",
+          "Viết đặc tả thuật toán: Input/Output, công thức dB/Hz, edge cases và giới hạn khoa học.",
+          "Không gọi hiệu ứng ẩn chữ cái là mô hình ốc tai sinh học hoàn chỉnh."
+        ],
+        outputs: ["SYSTEM_ARCHITECTURE.md", "ALGORITHM_SPEC.md", "MVP_ROADMAP.md"],
+        gate: "CỔNG NGHIỆM THU 5: Mọi thuật toán đều có test vectors, baseline và tuyên bố giới hạn minh bạch."
+      },
+      {
+        id: 6,
+        code: "PHASE 6",
+        shortName: "Build & Polish MVP",
+        title: "Build, Validate, UX & Nhận diện Thương hiệu",
+        stage: "B",
+        x: 555, y: 230,
+        status: "Partially verified",
+        roles: ["tech", "ux", "brand", "qa"],
+        deps: [5],
+        objective: "Hoàn thiện MVP chạy mượt từ hướng dẫn sạch, có 'Aha Moment' rõ ràng và ngôn ngữ tôn trọng người khiếm thính.",
+        tasks: [
+          "Viết Unit/API/E2E tests và kiểm tra chế độ chạy offline/fallback khi mất mạng.",
+          "Thiết kế nhận diện Bác sĩ Thỏ + sóng âm rõ nét ở kích thước nhỏ, không gây kỳ thị.",
+          "Rà soát toàn bộ copywriting trên UI, xóa bỏ mọi câu chữ dễ gây hiểu lầm thành khám bệnh."
+        ],
+        outputs: ["MVP Hoạt động", "Brand Mini-Guideline", "UX Issue List"],
+        gate: "CỔNG NGHIỆM THU 6: Demo tạo ra 'Aha Moment' ngay trong 30 giây đầu tiên mà không gặp lỗi console/network."
+      },
+      {
+        id: 7,
+        code: "PHASE 7",
+        shortName: "GitHub & Link Health",
+        title: "Chuẩn hóa GitHub, Deployment & Link Health",
+        stage: "C",
+        x: 395, y: 230,
+        status: "Partially verified",
+        roles: ["qa", "tech"],
+        deps: [0, 6],
+        objective: "Đảm bảo 100% đồng nhất 3 chiều: README nói gì ↔ Source code làm gì ↔ Bản Demo đang chạy gì.",
+        tasks: [
+          "Kiểm tra toàn bộ URL trong README, slide, QR code, video description (không dính localhost).",
+          "Xác minh API endpoint phản hồi thật, cấu hình đúng CORS và biến môi trường.",
+          "Đóng gói bộ Demo Fallback: bản chạy local + video backup + sample data an toàn."
+        ],
+        outputs: ["LINK_HEALTH_REPORT.md", "Demo Backup Package"],
+        gate: "CỔNG NGHIỆM THU 7: Mọi đường link mở được trên thiết bị lạ ở chế độ ẩn danh (Incognito) không cần quyền truy cập ẩn."
+      },
+      {
+        id: 8,
+        code: "PHASE 8",
+        shortName: "Pitch Engineering",
+        title: "Thiết kế Pitch theo Rubric, Hook & Q&A Phản biện",
+        stage: "C",
+        x: 235, y: 230,
+        status: "Planned",
+        roles: ["pitch", "brand", "product"],
+        deps: [2, 6, 7],
+        objective: "Xây dựng câu chuyện thuyết trình bám sát Rubric chấm điểm, có Hook 5 giây và ngân hàng Q&A kèm bằng chứng.",
+        tasks: [
+          "Ánh xạ từng tiêu chí Rubric → Slide/Demo → Tuyên bố (Claim) → Bằng chứng kiểm chứng.",
+          "Soạn kịch bản 30s, 60s, 3 phút và lời dẫn Live Demo ăn khớp từng thao tác.",
+          "Thực hiện Claim Audit: Gắn nguồn và chuẩn bị câu trả lời cho các giới hạn kỹ thuật."
+        ],
+        outputs: ["PITCH_DECK_OUTLINE.md", "PITCH_SCRIPT.md", "Q_AND_A.md"],
+        gate: "CỔNG NGHIỆM THU 8: Không một câu khẳng định nào trên Slide thiếu nguồn trích dẫn hoặc bài test đối chứng."
+      },
+      {
+        id: 9,
+        code: "PHASE 9",
+        shortName: "Bền vững & Doanh thu",
+        title: "Mô hình Bền vững, Tác động Xã hội & Tài chính",
+        stage: "D",
+        x: 75, y: 230,
+        status: "Planned",
+        roles: ["market", "product", "opp"],
+        deps: [4, 6],
+        objective: "Tách bạch rõ người dùng (User), người hưởng lợi (Beneficiary) và đơn vị chi trả/tài trợ (Payer/Grant).",
+        tasks: [
+          "Đánh giá các hướng: B2B trường học/đào tạo điều dưỡng, CSR/Grant y tế cộng đồng, Open-source core.",
+          "Ước tính chi phí duy trì (Hosting, âm thanh tĩnh, bảo trì) để dự án sống khỏe sau cuộc thi.",
+          "Xây dựng lộ trình 30/60/90 ngày kèm điều kiện Go / Pivot / Stop."
+        ],
+        outputs: ["SUSTAINABILITY_MODEL.md"],
+        gate: "CỔNG NGHIỆM THU 9: Có phương án duy trì hệ thống với chi phí vận hành gần bằng 0 ngay cả khi chưa gọi vốn."
+      },
+      {
+        id: 10,
+        code: "PHASE 10",
+        shortName: "Phân phối & Cơ hội",
+        title: "Phân phối Đa kênh, YouTube Demo & Săn Cơ hội",
+        stage: "D",
+        x: 75, y: 360,
+        status: "Planned",
+        roles: ["opp", "brand", "pitch"],
+        deps: [7, 8, 9],
+        objective: "Đưa sản phẩm tiếp cận chuyên gia thính học, cộng đồng giáo dục, cuộc thi và các quỹ tài trợ.",
+        tasks: [
+          "Quay video YouTube theo cấu trúc: Hook 5-10s → Vấn đề → Live Demo → Cơ chế & Giới hạn → CTA.",
+          "Soạn thư ngỏ (Outreach) cá nhân hóa gửi chuyên gia xin thẩm định và đối tác xin chạy thử (Pilot).",
+          "Lập bảng theo dõi các cuộc thi, học bổng, grant kèm hạn chót đã xác minh."
+        ],
+        outputs: ["DISTRIBUTION_PLAN.md", "Opportunity Tracker"],
+        gate: "CỔNG NGHIỆM THU 10: Video và bài đăng trung thực tuyệt đối, có phụ đề chuẩn Accessibility."
+      },
+      {
+        id: 11,
+        code: "PHASE 11",
+        shortName: "Pre-Flight Checklist",
+        title: "Kiểm tra Chi tiết Trước Giờ G (Pre-Flight Checklist)",
+        stage: "C",
+        x: 315, y: 360,
+        status: "Partially verified",
+        roles: ["qa", "pitch"],
+        deps: [7, 8],
+        objective: "Rà soát 6 hạng mục sống còn (Product, Links, Docs, Brand, Pitch, Submission) trước khi bấm nút nộp bài.",
+        tasks: [
+          "Mở thử toàn bộ link từ mạng ngoài và thiết bị khác không đăng nhập.",
+          "Diễn tập thuyết trình khớp thời lượng có dư buffer an toàn.",
+          "Lưu trữ bản sao gói nộp cuối cùng và sẵn sàng bật video backup trong 3 giây."
+        ],
+        outputs: ["PRE_FLIGHT_CHECKLIST.md"],
+        gate: "CỔNG NGHIỆM THU 11: Chỉ được tick những mục đã tự tay kiểm tra thực tế."
+      },
+      {
+        id: 12,
+        code: "PHASE 12",
+        shortName: "Internal Scorecard",
+        title: "Chấm Điểm Nội Bộ 10 Trục & Kiểm toán Rủi ro",
+        stage: "C",
+        x: 555, y: 360,
+        status: "Verified",
+        roles: ["product", "qa", "pitch"],
+        deps: [11],
+        objective: "Đánh giá khách quan 10 trụ cột chất lượng và phơi bày mọi điểm nghẽn còn tồn đọng.",
+        tasks: [
+          "Chấm điểm 10 trục kèm bằng chứng xác thực và mức độ tự tin (Confidence Level).",
+          "Kiểm tra xem có trục nào dưới ngưỡng an toàn (đặc biệt là Technical Credibility).",
+          "Cập nhật trạng thái Definition of Ready (READY / PARTIALLY READY / NOT READY)."
+        ],
+        outputs: ["Internal Scorecard Report"],
+        gate: "CỔNG NGHIỆM THU 12: Không che giấu rủi ro nghiêm trọng đằng sau điểm trung bình cộng."
+      },
+      {
+        id: 13,
+        code: "PHASE 13",
+        shortName: "Bộ 17 Tài Liệu Cuối",
+        title: "Đóng gói Bộ 17 Tài Liệu & Bàn giao Chuẩn hóa",
+        stage: "D",
+        x: 795, y: 360,
+        status: "Partially verified",
+        roles: ["tech", "product", "qa"],
+        deps: [9, 10, 12],
+        objective: "Đồng bộ hóa toàn bộ 17 tài liệu cốt lõi của dự án, loại bỏ trùng lặp và mâu thuẫn thông tin.",
+        tasks: [
+          "Cập nhật 17 tài liệu từ PROJECT_STATUS.md đến BUILD_LOG.md.",
+          "Đảm bảo số liệu và tuyên bố khớp 100% giữa Repo, Slide và Video.",
+          "Đánh dấu rõ tài liệu nào đã hoàn tất và tài liệu nào dành cho giai đoạn sau."
+        ],
+        outputs: ["Trọn bộ 17 File Markdown Chuẩn hóa"],
+        gate: "CỔNG NGHIỆM THU CUỐI (DoR): Đạt trạng thái READY hoàn toàn để tự tin Pitch và gọi hợp tác."
+      }
+    ];
+
+    const MACRO_STAGES = [
+      { id: "A", name: "Khối A: Audit & Nền tảng Bằng chứng", subtitle: "Phase 0 → Phase 3: Hiểu đúng hiện trạng & nỗi đau thật", color: "emerald", phases: [0, 1, 2, 3] },
+      { id: "B", name: "Khối B: Sàng lọc & Kiến trúc Kỹ thuật", subtitle: "Phase 4 → Phase 6: Chọn hướng bền vững & xây dựng MVP", color: "teal", phases: [4, 5, 6] },
+      { id: "C", name: "Khối C: Kiểm định, Pitch & Pre-Flight", subtitle: "Phase 7, 8, 11, 12: Chứng minh độ tin cậy & kể chuyện", color: "sky", phases: [7, 8, 11, 12] },
+      { id: "D", name: "Khối D: Bền vững, Phân phối & Bàn giao", subtitle: "Phase 9, 10, 13: Mở rộng tác động & đóng gói 17 tài liệu", color: "amber", phases: [9, 10, 13] }
+    ];
+
+    // =========================================================================
+    // 2. ARCHITECTURE & ALGORITHM SPECIFICATION DATA (PHASE 5 & PHASE 8)
+    // =========================================================================
+    const ARCH_NODES = [
+      {
+        id: "user_entry",
+        title: "1. Người dùng / Người thân",
+        sub: "Entry Point & Kịch bản",
+        x: 85, y: 120,
+        tier: "VERIFIED",
+        purpose: "Điểm bắt đầu trải nghiệm: Chọn kịch bản giao tiếp đời thường (Siêu thị, Lớp học, Bữa cơm gia đình) và mức độ suy giảm thính lực.",
+        io: "Input: Thao tác chọn kịch bản, kéo ngưỡng dB trên Audiogram.\nOutput: Sự kiện tương tác gửi xuống UI State.",
+        formula: "Tần số chuẩn f ∈ {250, 500, 1000, 2000, 4000, 8000} Hz; Ngưỡng nghe T(f) ∈ [-10, 110] dB HL.",
+        edgeCases: "Người dùng bật chế độ im lặng trên điện thoại hoặc chưa cắm tai nghe.",
+        criteria: "Hiển thị rõ thông báo giới hạn: Công cụ mô phỏng giáo dục, không phải thiết bị đo y tế."
+      },
+      {
+        id: "frontend_ui",
+        title: "2. React / Vite UI & State",
+        sub: "Audiogram & Visual Text",
+        x: 285, y: 120,
+        tier: "VERIFIED",
+        purpose: "Đồng bộ hóa trạng thái giữa Đồ thị Thính lực (Audiogram), Hộp hiển thị chữ khuyết (Visual Text) và Trình phát âm thanh.",
+        io: "Input: State {thresholds, scenario, level}.\nOutput: DOM văn bản làm mờ theo âm vị + Đồ thị SVG tương tác.",
+        formula: "Nội suy ngưỡng nghe trên trục tần số Log2: T(f) = dB1 + [log2(f)-log2(f1)]/[log2(f2)-log2(f1)] * (dB2 - dB1).",
+        edgeCases: "Kéo điểm đồ thị vượt biên (-10dB hoặc 110dB); đổi kịch bản khi âm thanh đang phát.",
+        criteria: "60fps khi kéo thả đồ thị; giữ nguyên khoảng trắng cố định để chữ không bị nhảy dòng."
+      },
+      {
+        id: "fastapi_gateway",
+        title: "3. Python / FastAPI Service",
+        sub: "API Contract & Fallback",
+        x: 495, y: 120,
+        tier: "VERIFIED",
+        purpose: "Cung cấp REST API xử lý phân tách âm vị tiếng Việt, trả về cấu hình mô phỏng và hỗ trợ truy xuất thông tin.",
+        io: "Input: JSON {text, audiogram_db, scenario}.\nOutput: JSON {tokens, phoneme_weights, audio_filter_params}.",
+        formula: "Thời gian phản hồi mục tiêu: Latency p95 < 150ms; Tự động kích hoạt Client Offline Fallback nếu API lỗi.",
+        edgeCases: "Mất kết nối mạng hoặc server ngủ (cold start trên free hosting).",
+        criteria: "Có endpoint /health trả về HTTP 200; tài liệu OpenAPI khớp 100% với code."
+      },
+      {
+        id: "dsp_engine",
+        title: "4. DSP Degradation & Masking",
+        sub: "Lọc Tần số & Trộn Nhiễu SNR",
+        x: 745, y: 70,
+        tier: "VERIFIED",
+        purpose: "Mô phỏng sự suy giảm độ nhạy tần số cao (Low-pass / Multi-band Attenuation) kết hợp nhiễu nền theo tỷ lệ SNR.",
+        io: "Input: Audio Buffer gốc S(t) + Ngưỡng T(f) + Nhãn kịch bản.\nOutput: Luồng âm thanh đã lọc Y(t).",
+        formula: "Gain tuyến tính: G(f) = 10^(-T(f)/20) | Tỷ lệ trộn nhiễu: SNR_dB = 10 * log10(P_speech / P_noise).",
+        edgeCases: "Hiện tượng clipping khi cộng nhiễu nền; khác biệt đáp tuyến tần số giữa các loại tai nghe.",
+        criteria: "Không gây tiếng nổ (pop/click) khi chuyển đổi tức thì giữa Normal → Mild → Moderate → Severe."
+      },
+      {
+        id: "vn_tokenizer",
+        title: "5. Tokenizer Âm tiết Tiếng Việt",
+        sub: "Âm đầu + Vần + Thanh điệu",
+        x: 745, y: 205,
+        tier: "VERIFIED",
+        purpose: "Tách âm tiết tiếng Việt thành Âm đầu (Onset), Âm đệm, Âm chính (Nucleus), Âm cuối (Coda) và Thanh điệu để ánh xạ dải tần số.",
+        io: "Input: Chuỗi câu tiếng Việt (VD: 'Sáng thứ sáu đi siêu thị').\nOutput: Mảng âm vị kèm dải tần (Hz) và cường độ đặc trưng (dB).",
+        formula: "Phụ âm xát vô thanh (s, x, ph, th, kh) ∈ [3000, 8000] Hz (~20-28 dB) → Mất trước tiên so với nguyên âm (a, o, e) ∈ [250, 1000] Hz (~50 dB).",
+        edgeCases: "Từ mượn tiếng nước ngoài, chữ viết tắt, số tiền hoặc dấu câu phức tạp.",
+        criteria: "Phân tách đúng các phụ âm ghép tiếng Việt (ch, tr, th, ph, nh, ng, kh, gh, gi, qu)."
+      },
+      {
+        id: "qa_retrieval",
+        title: "6. Hỏi đáp & Truy xuất Tri thức",
+        sub: "Verified FAQ + Contextual RAG",
+        x: 745, y: 340,
+        tier: "PROPOSED",
+        purpose: "Giải thích kết quả biểu đồ và gợi ý mẹo giao tiếp gia đình dựa trên nguồn tài liệu thính học đã kiểm chứng (WHO / ASHA).",
+        io: "Input: Câu hỏi người dùng + Ngưỡng Audiogram hiện tại.\nOutput: Câu trả lời có trích dẫn nguồn + Tuyên bố miễn trừ y tế.",
+        formula: "Ưu tiên Hardcoded Verified Templates (0ms, 0 rủi ro ảo giác) trước khi gọi LLM/Retrieval mở rộng.",
+        edgeCases: "Người dùng hỏi xin đơn thuốc hoặc chẩn đoán bệnh lý tai mũi họng cụ thể.",
+        criteria: "100% câu trả lời phải từ chối chẩn đoán lâm sàng và khuyên gặp bác sĩ chuyên khoa khi cần."
+      },
+      {
+        id: "output_aha",
+        title: "7. Kết quả Đa giác quan (Aha!)",
+        sub: "Audio + Chữ khuyết + Đồ thị",
+        x: 390, y: 340,
+        tier: "VERIFIED",
+        purpose: "Tạo khoảnh khắc thấu cảm tức thì ('Aha Moment'): Người nghe vừa nghe âm thanh bị đục/nhiễu, vừa thấy các phụ âm biến mất trên màn hình.",
+        io: "Input: Luồng Audio đã lọc + Văn bản đã che mờ âm vị.\nOutput: Trải nghiệm đồng bộ thính giác & thị giác.",
+        formula: "Chỉ số SII ước lượng (0..100%) đồng bộ với số lượng nhóm âm thanh còn sáng màu trên biểu đồ.",
+        edgeCases: "Trình duyệt chặn Autoplay âm thanh nếu chưa có tương tác click.",
+        criteria: "Người dùng hiểu ngay tại sao người suy giảm thính lực 'nghe thấy tiếng nhưng không rõ chữ'."
+      }
+    ];
+
+    const SESSION_LOOP_STEPS = [
+      { step: "BƯỚC 1", title: "Tóm tắt Trạng thái", desc: "Kiểm tra file/nguồn thực tế, phân biệt điều đã xác minh với log cũ và chỉ ra điểm nghẽn.", x: 150, y: 120 },
+      { step: "BƯỚC 2", title: "Chọn Tối đa 3 Ưu tiên", desc: "Áp dụng công thức (Impact × Evidence × Urgency) ÷ Cost/Risk kèm giải thích giả định.", x: 460, y: 120 },
+      { step: "BƯỚC 3", title: "Làm theo Dependency", desc: "Không viết Pitch trước khi xác minh Demo; không đưa số liệu thị trường nếu thiếu nguồn.", x: 770, y: 120 },
+      { step: "BƯỚC 4", title: "Tạo Artifact Cụ thể", desc: "Sinh code, sơ đồ, bảng kiểm, bản vá hoặc tài liệu đồng bộ giữa README - Slide - Demo.", x: 770, y: 320 },
+      { step: "BƯỚC 5", title: "QA & Kiểm chứng Thực tế", desc: "Chạy test, mở từng link, chụp màn hình, kiểm tra fallback và ghi nhận phần chưa test được.", x: 460, y: 320 },
+      { step: "BƯỚC 6", title: "Báo cáo Cuối Phiên", desc: "Tổng kết việc đã xong, bằng chứng, rủi ro còn lại và bước tiếp theo có giá trị cao nhất.", x: 150, y: 320 }
+    ];
+
+    const PITCH_ARC_STEPS = [
+      { idx: 1, name: "1. Hook (5s)", desc: "Câu hỏi/tình huống thật hoặc thao tác nghe thử tạo tò mò tức thì.", x: 75, y: 350 },
+      { idx: 2, name: "2. Pain Point", desc: "Ai gặp khó khăn, trong bối cảnh nào, hậu quả giao tiếp ra sao.", x: 155, y: 295 },
+      { idx: 3, name: "3. Evidence", desc: "Số liệu WHO, khảo sát và phỏng vấn không dẫn dắt có nguồn.", x: 235, y: 240 },
+      { idx: 4, name: "4. Alternatives", desc: "Giải pháp hiện tại và khoảng trống về ngữ âm tiếng Việt.", x: 315, y: 210 },
+      { idx: 5, name: "5. Solution", desc: "Healthy Hearing thay đổi trải nghiệm thấu cảm thế nào.", x: 395, y: 155 },
+      { idx: 6, name: "6. LIVE DEMO", desc: "Đỉnh cao Aha Moment: Nghe & nhìn chữ biến mất theo ngưỡng dB.", x: 485, y: 85 },
+      { idx: 7, name: "7. Khác biệt", desc: "DSP + Tokenizer âm vị tiếng Việt + An toàn ranh giới y tế.", x: 575, y: 135 },
+      { idx: 8, name: "8. Validation", desc: "Kết quả kiểm thử kỹ thuật & phản hồi người dùng thực tế.", x: 655, y: 185 },
+      { idx: 9, name: "9. Bền vững", desc: "Mô hình duy trì chi phí thấp, tách bạch User & Payer/Grant.", x: 735, y: 225 },
+      { idx: 10, name: "10. Roadmap", desc: "Lộ trình 30/60/90 ngày kèm điều kiện kiểm chứng rõ ràng.", x: 805, y: 165 },
+      { idx: 11, name: "11. The Ask", desc: "Lời kêu gọi cụ thể: Chuyên gia thẩm định, Pilot partner, Mentor.", x: 870, y: 105 }
+    ];
+
+    // =========================================================================
+    // 3. PHASE 4 (12-AXIS FILTER) & PHASE 12 (10-AXIS SCORECARD) DATA
+    // =========================================================================
+    const IDEA_FILTER_AXES = [
+      { id: "pain", name: "1. Pain Intensity (Độ gắt nỗi đau)", val: 9 },
+      { id: "evidence", name: "2. Evidence Strength (Độ mạnh bằng chứng)", val: 8 },
+      { id: "reach", name: "3. Reach (Khả năng tiếp cận user)", val: 8 },
+      { id: "diff", name: "4. Differentiation (Khác biệt thực chất)", val: 8 },
+      { id: "feasibility", name: "5. Feasibility (Khả thi kỹ thuật/thời gian)", val: 9 },
+      { id: "speed", name: "6. Validation Speed (Kiểm chứng 1-2 tuần)", val: 9 },
+      { id: "maint", name: "7. Low Maintenance Cost (Chi phí duy trì thấp)", val: 8 },
+      { id: "sustain", name: "8. Sustainability (Sống sau cuộc thi)", val: 8 },
+      { id: "biz", name: "9. Impact / Business Path (Lối đi tác động)", val: 7 },
+      { id: "ethics", name: "10. Safety & Ethics (An toàn ranh giới y tế)", val: 9 },
+      { id: "scale", name: "11. Scalability (Mở rộng không đội chi phí)", val: 8 },
+      { id: "fit", name: "12. Team Fit (Phù hợp năng lực đội ngũ)", val: 9 }
+    ];
+
+    const INTERNAL_SCORECARD_AXES = [
+      { id: "sc1", name: "1. Problem Clarity (Vấn đề cụ thể, có bằng chứng)", score: 9, note: "Rõ nỗi đau 'nghe thấy âm thanh nhưng mất phụ âm' ở người suy giảm thính lực." },
+      { id: "sc2", name: "2. User Insight (Hiểu cách xử lý hiện tại của user)", score: 8, note: "Đã phân tích mâu thuẫn khi người thân nói to/hét lớn thay vì nói rõ khẩu hình." },
+      { id: "sc3", name: "3. Solution Fit (Giải quyết trực tiếp pain point)", score: 9, note: "Kết hợp đồng thời Audio DSP + Visual Text + Đồ thị tương tác." },
+      { id: "sc4", name: "4. Differentiation (Khác biệt so với công cụ sẵn có)", score: 8, note: "Tích hợp phân tách âm tiết, phụ âm đầu/cuối và thanh điệu tiếng Việt." },
+      { id: "sc5", name: "5. Technical Credibility (Code khớp lời tuyên bố)", score: 8, note: "Cần luôn đối chiếu README, source code và bản demo thực tế." },
+      { id: "sc6", name: "6. Validation (Có kiểm thử và phản hồi đáng tin)", score: 6, note: "Đang bổ sung thêm nhật ký phỏng vấn người dùng thực tế (Phase 2)." },
+      { id: "sc7", name: "7. Product Experience (Demo mượt, có Aha Moment)", score: 9, note: "Kéo thanh trượt thấy chữ cái biến mất và nghe âm thanh đổi ngay lập tức." },
+      { id: "sc8", name: "8. Sustainability (Có lộ trình duy trì chi phí thấp)", score: 7, note: "Chạy Web Audio client-side + fallback tĩnh giúp chi phí server tối thiểu." },
+      { id: "sc9", name: "9. Storytelling (Hook, nhịp điệu, Q&A & CTA rõ)", score: 7, note: "Cần hoàn thiện Claim Audit và luyện tập bấm giờ cho buổi Pitch." },
+      { id: "sc10", name: "10. Execution Quality (GitHub, Link, Docs sẵn sàng)", score: 7, note: "Cần hoàn tất kiểm tra Link Health trên thiết bị độc lập trước khi nộp." }
+    ];
+
+    // =========================================================================
+    // 4. PHASE 11 PRE-FLIGHT CHECKLIST & PHASE 13 (17 ARTIFACTS) DATA
+    // =========================================================================
+    const PREFLIGHT_CATEGORIES = [
+      {
+        id: "pf_product",
+        title: "1. Product & Demo",
+        items: [
+          { text: "Demo mở và chạy mượt từ môi trường sạch", checked: true },
+          { text: "Luồng chính End-to-End hoạt động không lỗi console", checked: true },
+          { text: "Có chế độ Fallback an toàn khi API/mạng gặp sự cố", checked: true },
+          { text: "Mọi tính năng trên Demo khớp 100% với lời tuyên bố", checked: true }
+        ]
+      },
+      {
+        id: "pf_links",
+        title: "2. Links & Deployment",
+        items: [
+          { text: "GitHub URL và quyền truy cập Public đúng mục tiêu", checked: true },
+          { text: "Demo URL mở được bằng HTTPS, không dính localhost", checked: true },
+          { text: "API health endpoint và luồng chính phản hồi đúng", checked: false },
+          { text: "Link trong README, Slide, QR và Video không bị 404", checked: false }
+        ]
+      },
+      {
+        id: "pf_docs",
+        title: "3. Documentation Accuracy",
+        items: [
+          { text: "Hướng dẫn cài đặt trong README chạy đúng với code", checked: true },
+          { text: "Mô tả biến môi trường (.env.example) nhưng không lộ secret", checked: true },
+          { text: "Phân biệt rõ tính năng Shipped (đã có) và Planned (dự kiến)", checked: true },
+          { text: "Ảnh chụp màn hình khớp với giao diện hiện tại", checked: false }
+        ]
+      },
+      {
+        id: "pf_brand",
+        title: "4. Brand & Copywriting",
+        items: [
+          { text: "Logo Bác sĩ Thỏ / sóng âm rõ nét ở kích thước nhỏ", checked: true },
+          { text: "Tên sản phẩm Healthy Hearing & thuật ngữ nhất quán", checked: true },
+          { text: "Đã loại bỏ hoàn toàn các câu chữ dễ hiểu lầm là chẩn đoán y tế", checked: true },
+          { text: "Ngôn từ tôn trọng người suy giảm thính lực", checked: true }
+        ]
+      },
+      {
+        id: "pf_pitch",
+        title: "5. Pitch & Presentation",
+        items: [
+          { text: "Hook 5 giây đầu rõ ràng, đi từ nỗi đau trước công nghệ", checked: true },
+          { text: "Mọi số liệu và bằng chứng trên slide đều có nguồn", checked: false },
+          { text: "Đã diễn tập khớp thời lượng quy định và có Video Backup", checked: false },
+          { text: "Ngân hàng Q&A bao phủ cả điểm yếu và giới hạn kỹ thuật", checked: true }
+        ]
+      },
+      {
+        id: "pf_submit",
+        title: "6. Submission Readiness",
+        items: [
+          { text: "Đúng định dạng file, thời lượng video và trước hạn chót", checked: false },
+          { text: "Đã mở thử toàn bộ link từ tài khoản/thiết bị độc lập", checked: false },
+          { text: "Tuân thủ quy định cuộc thi về sử dụng AI và bản quyền", checked: true },
+          { text: "Đã lưu bản sao toàn bộ gói hồ sơ nộp cuối cùng", checked: false }
+        ]
+      }
+    ];
+
+    const SEVENTEEN_ARTIFACTS = [
+      { id: 1, file: "PROJECT_STATUS.md", phase: "Phase 0", desc: "Kiểm kê trạng thái thật (Verified / Partially / Planned / Blocked).", status: "Verified" },
+      { id: 2, file: "VISION_MISSION_POSITIONING.md", phase: "Phase 1", desc: "Tầm nhìn, sứ mệnh, định vị 25 từ và danh sách claim bị cấm.", status: "Verified" },
+      { id: 3, file: "RESEARCH_BRIEF.md", phase: "Phase 2", desc: "Ma trận pain point, kịch bản phỏng vấn và nhật ký bằng chứng.", status: "Partially verified" },
+      { id: 4, file: "SOLUTION_LANDSCAPE.md", phase: "Phase 3", desc: "So sánh giải pháp hiện có, macro forces và bảng Adopt/Adapt/Build.", status: "Verified" },
+      { id: 5, file: "IDEA_SCORECARD.md", phase: "Phase 4", desc: "Bảng chấm 12 trục lọc ý tưởng bền vững và phạm vi MVP.", status: "Verified" },
+      { id: 6, file: "SYSTEM_ARCHITECTURE.md", phase: "Phase 5", desc: "Sơ đồ kiến trúc Current vs. Proposed và luồng dữ liệu.", status: "Verified" },
+      { id: 7, file: "ALGORITHM_SPEC.md", phase: "Phase 5", desc: "Công thức DSP, Masking, Tokenizer âm vị tiếng Việt & giới hạn.", status: "Verified" },
+      { id: 8, file: "MVP_ROADMAP.md", phase: "Phase 5", desc: "Các cột mốc kỹ thuật, tiêu chí nghiệm thu và Definition of Done.", status: "Verified" },
+      { id: 9, file: "RELEASE_AUDIT.md", phase: "Phase 0/6", desc: "Kết quả chạy build/test thực tế và kiểm tra an toàn bảo mật.", status: "Partially verified" },
+      { id: 10, file: "LINK_HEALTH_REPORT.md", phase: "Phase 7", desc: "Bảng kiểm tra tình trạng sống của toàn bộ URL, API và Demo.", status: "Partially verified" },
+      { id: 11, file: "PITCH_DECK_OUTLINE.md", phase: "Phase 8", desc: "Cấu trúc từng slide ánh xạ trực tiếp với Rubric chấm điểm.", status: "Planned" },
+      { id: 12, file: "PITCH_SCRIPT.md", phase: "Phase 8", desc: "Lời thoại 30s, 60s, 3 phút, câu chuyển slide và dẫn chuyện Demo.", status: "Planned" },
+      { id: 13, file: "Q_AND_A.md", phase: "Phase 8", desc: "Ngân hàng câu hỏi phản biện hóc búa kèm câu trả lời có bằng chứng.", status: "Verified" },
+      { id: 14, file: "SUSTAINABILITY_MODEL.md", phase: "Phase 9", desc: "Phân tách User/Payer, chi phí vận hành và lộ trình 30/60/90 ngày.", status: "Planned" },
+      { id: 15, file: "DISTRIBUTION_PLAN.md", phase: "Phase 10", desc: "Kịch bản YouTube, bài đăng cộng đồng và danh sách cơ hội/Grant.", status: "Planned" },
+      { id: 16, file: "PRE_FLIGHT_CHECKLIST.md", phase: "Phase 11", desc: "Bảng kiểm chi tiết lần cuối trước khi thuyết trình hoặc nộp bài.", status: "Partially verified" },
+      { id: 17, file: "BUILD_LOG.md", phase: "Phase 13", desc: "Nhật ký kỹ thuật ghi lại lịch sử quyết định và thay đổi kiến trúc.", status: "Verified" }
+    ];
+
+    // =========================================================================
+    // 5. STATE MANAGEMENT
+    // =========================================================================
+    let appState = {
+      activeTab: "pipeline",
+      selectedPhaseId: 0,
+      selectedRoleFilter: "ALL",
+      archCanvasMode: "system", // 'system' | 'session' | 'pitch'
+      archHighlightFilter: "ALL", // 'ALL' | 'VERIFIED' | 'PROPOSED'
+      selectedArchNodeId: "vn_tokenizer"
+    };
+
+    const STATUS_STYLES = {
+      "Verified": { bg: "bg-emerald-500/20", text: "text-emerald-300", border: "border-emerald-500/40", hex: "#10b981", label: "Verified (Đã xác minh)" },
+      "Partially verified": { bg: "bg-sky-500/20", text: "text-sky-300", border: "border-sky-500/40", hex: "#38bdf8", label: "Partially (Một phần)" },
+      "Planned": { bg: "bg-amber-500/20", text: "text-amber-300", border: "border-amber-500/40", hex: "#fbbf24", label: "Planned (Kế hoạch)" },
+      "Historical": { bg: "bg-slate-500/20", text: "text-slate-300", border: "border-slate-500/40", hex: "#94a3b8", label: "Historical (Lịch sử)" },
+      "Blocked": { bg: "bg-rose-500/20", text: "text-rose-300", border: "border-rose-500/40", hex: "#f43f5e", label: "Blocked (Đang chặn)" }
+    };
+
+    // =========================================================================
+    // 6. INITIALIZATION & RENDER FUNCTIONS
+    // =========================================================================
+    function initApp() {
+      renderValueChainBar();
+      renderRolesFilterBar();
+      renderPipelineTab();
+      renderArchitectureTab();
+      renderRadarAndScorecardTab();
+      renderPreFlightAndArtifactsTab();
+      updateGlobalReadinessIndicator();
+    }
+
+    function switchMainTab(tabId) {
+      appState.activeTab = tabId;
+      ["pipeline", "architecture", "radar", "preflight"].forEach(id => {
+        document.getElementById(`tabView-${id}`).classList.toggle("hidden", id !== tabId);
+        const btn = document.getElementById(`tabBtn-${id}`);
+        if (id === tabId) {
+          btn.className = "main-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold transition bg-emerald-500 text-slate-950";
+        } else {
+          btn.className = "main-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold transition text-slate-400 hover:text-white";
+        }
+      });
+    }
+
+    function renderValueChainBar() {
+      const container = document.getElementById("valueChainBar");
+      container.innerHTML = VALUE_CHAIN_STEPS.map((step, idx) => `
+        <button onclick="jumpToPhase(${step.phases[0]})" class="px-2.5 py-1 rounded-lg bg-slate-950/90 hover:bg-emerald-500/20 border border-slate-800 hover:border-emerald-500/40 text-slate-300 hover:text-emerald-300 font-semibold transition flex items-center gap-1.5">
+          <span>${step.label}</span>
+          <span class="text-[10px] font-mono text-slate-500">(P${step.phases.join(",")})</span>
+        </button>
+        ${idx < VALUE_CHAIN_STEPS.length - 1 ? `<span class="text-slate-600 px-0.5">→</span>` : ""}
+      `).join("");
+    }
+
+    function jumpToPhase(phaseId) {
+      switchMainTab("pipeline");
+      selectPhaseNode(phaseId);
+    }
+
+    function renderRolesFilterBar() {
+      const bar = document.getElementById("rolesFilterBar");
+      bar.innerHTML = ADVISORY_ROLES.map(role => {
+        const isActive = appState.selectedRoleFilter === role.id;
+        return `
+          <button onclick="filterByRole('${role.id}')" title="${role.focus}"
+            class="px-2.5 py-1 rounded-lg text-xs font-medium border transition flex items-center gap-1.5 ${
+              isActive
+                ? "bg-emerald-500 text-slate-950 border-emerald-400 font-bold"
+                : "bg-slate-950 text-slate-300 border-slate-800 hover:border-slate-700"
+            }">
+            <span>${role.icon}</span>
+            <span>${role.name}</span>
+          </button>
+        `;
+      }).join("");
+
+      const allBtn = document.getElementById("roleBtn-ALL");
+      if (appState.selectedRoleFilter === "ALL") {
+        allBtn.className = "px-2 py-0.5 rounded bg-emerald-500 text-slate-950 font-bold text-[11px] border border-emerald-400";
+      } else {
+        allBtn.className = "px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[11px] border border-slate-700";
+      }
+    }
+
+    function filterByRole(roleId) {
+      appState.selectedRoleFilter = roleId;
+      renderRolesFilterBar();
+      renderPipelineTab();
+    }
+
+    // =========================================================================
+    // 7. TAB 1: PIPELINE SVG CANVAS, MACRO STAGES & PHASE INSPECTOR
+    // =========================================================================
+    function isPhaseBlockedByUpstream(phase) {
+      return phase.deps.some(depId => {
+        const depPhase = PHASES_DATA.find(p => p.id === depId);
+        return depPhase && (depPhase.status === "Blocked" || depPhase.status === "Planned");
+      });
+    }
+
+    function renderPipelineTab() {
+      renderStatusSummaryPills();
+      renderDependencyGateBanner();
+      renderPipelineSvgCanvas();
+      renderMacroStagesGrid();
+      renderPhaseInspector();
+    }
+
+    function renderStatusSummaryPills() {
+      const counts = { "Verified": 0, "Partially verified": 0, "Planned": 0, "Historical": 0, "Blocked": 0 };
+      PHASES_DATA.forEach(p => { counts[p.status] = (counts[p.status] || 0) + 1; });
+
+      document.getElementById("statusSummaryPills").innerHTML = Object.keys(counts).map(st => {
+        const style = STATUS_STYLES[st];
+        return `
+          <div class="px-2.5 py-1 rounded-xl border ${style.bg} ${style.border} ${style.text} text-xs font-mono font-semibold flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full" style="background:${style.hex}"></span>
+            <span>${st}: ${counts[st]}</span>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderDependencyGateBanner() {
+      const banner = document.getElementById("dependencyGateBanner");
+      const p0 = PHASES_DATA[0];
+      const p6 = PHASES_DATA[6];
+      const p8 = PHASES_DATA[8];
+
+      if ((p0.status === "Planned" || p0.status === "Blocked" || p6.status === "Blocked") && p8.status === "Verified") {
+        banner.className = "rounded-2xl p-3.5 border bg-rose-950/50 border-rose-500/50 text-rose-200 flex items-center justify-between gap-3";
+        banner.innerHTML = `
+          <div class="flex items-center gap-2.5 text-xs">
+            <span class="text-lg">🚨</span>
+            <div>
+              <span class="font-bold uppercase">Vi phạm Cổng Nghiệm thu (Gate Violation):</span>
+              <span>Bạn đã đánh dấu <b>Phase 8 (Pitch)</b> là hoàn tất trong khi <b>Phase 0 (Audit)</b> hoặc <b>Phase 6 (MVP Build)</b> đang bị chặn/chưa làm. Nguyên tắc: <i>Evidence before claims!</i></span>
+            </div>
+          </div>
+          <button onclick="selectPhaseNode(0)" class="px-3 py-1 rounded-lg bg-rose-500 text-slate-950 font-bold text-xs shrink-0">Kiểm tra Phase 0</button>
+        `;
+      } else {
+        banner.className = "hidden";
+      }
+    }
+
+    function renderPipelineSvgCanvas() {
+      const svg = document.getElementById("pipelineSvgCanvas");
+      let html = `
+        <defs>
+          <marker id="arrowEmerald" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981" />
+          </marker>
+          <marker id="arrowAmber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b" />
+          </marker>
+          <marker id="arrowSlate" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#475569" />
+          </marker>
+        </defs>
+      `;
+
+      // Background Stage Lanes
+      html += `
+        <rect x="15" y="20" width="630" height="125" rx="14" fill="#064e3b" fill-opacity="0.14" stroke="#059669" stroke-opacity="0.3" stroke-dasharray="4 4"/>
+        <text x="28" y="40" fill="#6ee7b7" font-size="11" font-weight="700">KHỐI A: AUDIT HIỆN TRẠNG & NGHIÊN CỨU BẰNG CHỨNG (PHASE 0 → 3)</text>
+
+        <rect x="480" y="155" width="480" height="125" rx="14" fill="#134e4a" fill-opacity="0.16" stroke="#14b8a6" stroke-opacity="0.3" stroke-dasharray="4 4"/>
+        <text x="495" y="175" fill="#5eead4" font-size="11" font-weight="700">KHỐI B: BỘ LỌC BỀN VỮNG, KIẾN TRÚC & BUILD MVP (PHASE 4 → 6)</text>
+
+        <rect x="160" y="155" width="305" height="125" rx="14" fill="#0c4a6e" fill-opacity="0.16" stroke="#38bdf8" stroke-opacity="0.3" stroke-dasharray="4 4"/>
+        <text x="172" y="175" fill="#7dd3fc" font-size="11" font-weight="700">KHỐI C: DEPLOY, PITCH & CHECKLIST</text>
+
+        <rect x="15" y="295" width="945" height="120" rx="14" fill="#78350f" fill-opacity="0.12" stroke="#f59e0b" stroke-opacity="0.3" stroke-dasharray="4 4"/>
+        <text x="28" y="315" fill="#fcd34d" font-size="11" font-weight="700">KHỐI C & D: BỀN VỮNG, PHÂN PHỐI, PRE-FLIGHT, SCORECARD & BỘ 17 TÀI LIỆU CUỐI (PHASE 9 → 13)</text>
+      `;
+
+      // Draw Dependency Edges between Phases
+      PHASES_DATA.forEach(target => {
+        target.deps.forEach(sourceId => {
+          const source = PHASES_DATA.find(p => p.id === sourceId);
+          if (!source) return;
+          const isReadyFlow = source.status === "Verified" || source.status === "Partially verified";
+          const strokeColor = isReadyFlow ? "#10b981" : "#64748b";
+          const marker = isReadyFlow ? "url(#arrowEmerald)" : "url(#arrowSlate)";
+          const animClass = isReadyFlow ? "animate-flow" : "";
+
+          // Curved Bezier path between (source.x, source.y) and (target.x, target.y)
+          const dx = target.x - source.x;
+          const dy = target.y - source.y;
+          const cx1 = source.x + dx * 0.45;
+          const cy1 = source.y;
+          const cx2 = source.x + dx * 0.55;
+          const cy2 = target.y;
+
+          html += `
+            <path d="M ${source.x} ${source.y} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${target.x} ${target.y}"
+              fill="none" stroke="${strokeColor}" stroke-width="2.2" stroke-opacity="0.7"
+              class="${animClass}" marker-end="${marker}" />
+          `;
+        });
+      });
+
+      // Draw Phase Nodes
+      PHASES_DATA.forEach(phase => {
+        const stStyle = STATUS_STYLES[phase.status];
+        const isSelected = appState.selectedPhaseId === phase.id;
+        const matchesRole = appState.selectedRoleFilter === "ALL" || phase.roles.includes(appState.selectedRoleFilter);
+        const opacity = matchesRole ? "1" : "0.25";
+        const upstreamWarn = isPhaseBlockedByUpstream(phase);
+
+        html += `
+          <g transform="translate(${phase.x - 66}, ${phase.y - 28})" style="cursor:pointer; opacity:${opacity}" onclick="selectPhaseNode(${phase.id})">
+            ${isSelected ? `<rect x="-5" y="-5" width="142" height="66" rx="15" fill="none" stroke="${stStyle.hex}" stroke-width="2.5" class="pulse-ring"/>` : ""}
+            <rect x="0" y="0" width="132" height="56" rx="12" fill="#0f172a" stroke="${isSelected ? '#ffffff' : stStyle.hex}" stroke-width="${isSelected ? '2.5' : '1.8'}"/>
+            <circle cx="16" cy="17" r="5" fill="${stStyle.hex}" />
+            <text x="27" y="21" fill="#e2e8f0" font-size="10.5" font-family="JetBrains Mono" font-weight="700">${phase.code}</text>
+            ${upstreamWarn ? `<text x="112" y="20" font-size="11" title="Chờ Phase trước">⚠️</text>` : ""}
+            <text x="12" y="41" fill="#cbd5e1" font-size="11" font-weight="600">${phase.shortName}</text>
+          </g>
+        `;
+      });
+
+      svg.innerHTML = html;
+    }
+
+    function renderMacroStagesGrid() {
+      const container = document.getElementById("macroStagesContainer");
+      container.innerHTML = MACRO_STAGES.map(stage => {
+        const stagePhases = PHASES_DATA.filter(p => stage.phases.includes(p.id));
+        return `
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3">
+            <div>
+              <h3 class="text-sm font-bold text-white">${stage.name}</h3>
+              <p class="text-xs text-slate-400">${stage.subtitle}</p>
+            </div>
+            <div class="space-y-2">
+              ${stagePhases.map(p => {
+                const st = STATUS_STYLES[p.status];
+                const isSelected = appState.selectedPhaseId === p.id;
+                const matchesRole = appState.selectedRoleFilter === "ALL" || p.roles.includes(appState.selectedRoleFilter);
+                return `
+                  <div onclick="selectPhaseNode(${p.id})"
+                    class="node-card cursor-pointer p-3 rounded-xl border flex items-center justify-between gap-2 ${
+                      isSelected ? "bg-slate-800/90 border-emerald-400 shadow-md" : "bg-slate-950/70 border-slate-800/90 hover:border-slate-700"
+                    } ${matchesRole ? "" : "opacity-35"}">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                      <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background:${st.hex}"></span>
+                      <div class="truncate">
+                        <div class="text-xs font-bold text-white truncate">${p.code}: ${p.title}</div>
+                        <div class="text-[11px] text-slate-400 truncate">Đầu ra: ${p.outputs.join(", ")}</div>
+                      </div>
+                    </div>
+                    <span class="px-2 py-0.5 rounded text-[10px] font-mono font-semibold border shrink-0 ${st.bg} ${st.text} ${st.border}">
+                      ${p.status}
+                    </span>
+                  </div>
+                `;
+              }).join("")}
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function selectPhaseNode(phaseId) {
+      appState.selectedPhaseId = phaseId;
+      renderPipelineTab();
+    }
+
+    function updatePhaseStatus(phaseId, newStatus) {
+      const phase = PHASES_DATA.find(p => p.id === phaseId);
+      if (phase) {
+        phase.status = newStatus;
+        renderPipelineTab();
+        updateGlobalReadinessIndicator();
+      }
+    }
+
+    function renderPhaseInspector() {
+      const phase = PHASES_DATA.find(p => p.id === appState.selectedPhaseId) || PHASES_DATA[0];
+      const st = STATUS_STYLES[phase.status];
+      const upstreamWarn = isPhaseBlockedByUpstream(phase);
+      const assignedRoles = ADVISORY_ROLES.filter(r => phase.roles.includes(r.id));
+
+      document.getElementById("phaseInspectorContent").innerHTML = `
+        <div class="flex items-start justify-between gap-2 border-b border-slate-800 pb-3">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded text-xs font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">${phase.code}</span>
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-mono font-semibold border ${st.bg} ${st.text} ${st.border}">${phase.status}</span>
+            </div>
+            <h3 class="text-base font-extrabold text-white mt-1.5">${phase.title}</h3>
+          </div>
+        </div>
+
+        ${upstreamWarn ? `
+          <div class="p-3 rounded-xl bg-amber-950/40 border border-amber-500/40 text-amber-200 text-xs">
+            ⚠️ <b>Cảnh báo Dependency:</b> Phase này phụ thuộc vào Phase trước (${phase.deps.map(d => 'Phase ' + d).join(', ')}) hiện chưa được xác minh (Planned/Blocked).
+          </div>
+        ` : ""}
+
+        <!-- Status Switcher -->
+        <div class="space-y-1.5">
+          <label class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Cập nhật Trạng thái Kiểm chứng:</label>
+          <div class="grid grid-cols-3 gap-1.5">
+            ${Object.keys(STATUS_STYLES).map(sKey => `
+              <button onclick="updatePhaseStatus(${phase.id}, '${sKey}')"
+                class="px-2 py-1.5 rounded-lg text-[11px] font-mono font-semibold border transition ${
+                  phase.status === sKey
+                    ? `${STATUS_STYLES[sKey].bg} ${STATUS_STYLES[sKey].text} ${STATUS_STYLES[sKey].border} ring-1 ring-white/40`
+                    : "bg-slate-950 text-slate-400 border-slate-800 hover:border-slate-700"
+                }">
+                ${sKey}
+              </button>
+            `).join("")}
+          </div>
+        </div>
+
+        <!-- Objective -->
+        <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
+          <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-400">🎯 Mục tiêu Cốt lõi</div>
+          <p class="text-xs text-slate-200 leading-relaxed">${phase.objective}</p>
+        </div>
+
+        <!-- Lead Roles -->
+        <div class="space-y-1.5">
+          <div class="text-[11px] font-bold uppercase tracking-wider text-slate-400">👥 Vai trò Cố vấn Phụ trách</div>
+          <div class="flex flex-wrap gap-1.5">
+            ${assignedRoles.map(r => `
+              <span class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800 text-xs text-slate-200 flex items-center gap-1">
+                <span>${r.icon}</span><span>${r.name}</span>
+              </span>
+            `).join("")}
+          </div>
+        </div>
+
+        <!-- Action Items -->
+        <div class="space-y-1.5">
+          <div class="text-[11px] font-bold uppercase tracking-wider text-slate-400">✅ Việc Cần Thực Hiện</div>
+          <div class="space-y-1.5">
+            ${phase.tasks.map(t => `
+              <label class="flex items-start gap-2 p-2.5 rounded-xl bg-slate-950/70 border border-slate-800/80 text-xs text-slate-200 cursor-pointer hover:border-slate-700">
+                <input type="checkbox" checked class="mt-0.5 accent-emerald-500 rounded">
+                <span>${t}</span>
+              </label>
+            `).join("")}
+          </div>
+        </div>
+
+        <!-- Outputs & Quality Gate -->
+        <div class="space-y-2 pt-1">
+          <div class="text-[11px] font-bold uppercase tracking-wider text-slate-400">📦 Artifact Đầu ra</div>
+          <div class="flex flex-wrap gap-1.5">
+            ${phase.outputs.map(out => `
+              <span class="px-2.5 py-1 rounded-lg bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 font-mono text-xs">${out}</span>
+            `).join("")}
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-xs text-amber-200 leading-relaxed">
+          <div class="font-bold uppercase tracking-wider text-amber-300 mb-1">🛡️ Cổng Nghiệm thu (Quality Gate)</div>
+          <div>${phase.gate}</div>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 8. TAB 2: ARCHITECTURE CANVAS, 6-STEP SESSION LOOP & PITCH ARC
+    // =========================================================================
+    function setArchCanvasMode(mode) {
+      appState.archCanvasMode = mode;
+      ["system", "session", "pitch"].forEach(m => {
+        const btn = document.getElementById(`archModeBtn-${m}`);
+        btn.className = m === mode
+          ? "px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-500 text-slate-950 transition"
+          : "px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition";
+      });
+      document.getElementById("archLayerFilterBar").classList.toggle("hidden", mode !== "system");
+      renderArchitectureTab();
+    }
+
+    function setArchHighlight(filter) {
+      appState.archHighlightFilter = filter;
+      ["ALL", "VERIFIED", "PROPOSED"].forEach(f => {
+        const btn = document.getElementById(`archFilter-${f}`);
+        if (f === filter) {
+          btn.className = "px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-semibold";
+        } else {
+          btn.className = "px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-semibold";
+        }
+      });
+      renderArchitectureTab();
+    }
+
+    function selectArchNode(nodeId) {
+      appState.selectedArchNodeId = nodeId;
+      renderArchitectureTab();
+    }
+
+    function renderArchitectureTab() {
+      const svg = document.getElementById("architectureSvgCanvas");
+      const inspector = document.getElementById("archInspectorPanel");
+
+      if (appState.archCanvasMode === "system") {
+        // Draw System Architecture & Algorithm Pipeline
+        const edges = [
+          { from: "user_entry", to: "frontend_ui", label: "Kịch bản + dB" },
+          { from: "frontend_ui", to: "fastapi_gateway", label: "REST / JSON" },
+          { from: "fastapi_gateway", to: "dsp_engine", label: "Audio Config" },
+          { from: "fastapi_gateway", to: "vn_tokenizer", label: "Văn bản Việt" },
+          { from: "fastapi_gateway", to: "qa_retrieval", label: "Context Hỏi đáp" },
+          { from: "dsp_engine", to: "output_aha", label: "Filtered Audio" },
+          { from: "vn_tokenizer", to: "output_aha", label: "Phoneme Mask" },
+          { from: "qa_retrieval", to: "output_aha", label: "Lời khuyên" },
+          { from: "output_aha", to: "user_entry", label: "Aha Moment!" }
+        ];
+
+        let svgHtml = `
+          <defs>
+            <marker id="archArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981" />
+            </marker>
+          </defs>
+          <text x="20" y="28" fill="#94a3b8" font-size="11" font-weight="700">SƠ ĐỒ LUỒNG DỮ LIỆU THẬT (USER → UI → STATE → API → DSP / PHONEME / RETRIEVAL → RESULT)</text>
+        `;
+
+        edges.forEach(e => {
+          const n1 = ARCH_NODES.find(n => n.id === e.from);
+          const n2 = ARCH_NODES.find(n => n.id === e.to);
+          if (!n1 || !n2) return;
+          const midX = (n1.x + n2.x) / 2;
+          const midY = (n1.y + n2.y) / 2;
+          svgHtml += `
+            <line x1="${n1.x}" y1="${n1.y}" x2="${n2.x}" y2="${n2.y}" stroke="#10b981" stroke-width="2.2" stroke-opacity="0.65" class="animate-flow" marker-end="url(#archArrow)" />
+            <rect x="${midX - 42}" y="${midY - 10}" width="84" height="18" rx="5" fill="#020617" stroke="#1e293b" />
+            <text x="${midX}" y="${midY + 3}" text-anchor="middle" fill="#6ee7b7" font-size="9.5" font-family="JetBrains Mono">${e.label}</text>
+          `;
+        });
+
+        ARCH_NODES.forEach(node => {
+          const isSelected = appState.selectedArchNodeId === node.id;
+          const isVerified = node.tier === "VERIFIED";
+          const matchesFilter = appState.archHighlightFilter === "ALL" || appState.archHighlightFilter === node.tier;
+          const opacity = matchesFilter ? "1" : "0.22";
+          const strokeColor = isVerified ? "#10b981" : "#f59e0b";
+
+          svgHtml += `
+            <g transform="translate(${node.x - 85}, ${node.y - 36})" style="cursor:pointer; opacity:${opacity}" onclick="selectArchNode('${node.id}')">
+              <rect x="0" y="0" width="170" height="72" rx="14" fill="#0f172a" stroke="${isSelected ? '#ffffff' : strokeColor}" stroke-width="${isSelected ? '3' : '2'}" />
+              <rect x="10" y="9" width="68" height="16" rx="5" fill="${isVerified ? '#064e3b' : '#78350f'}" />
+              <text x="44" y="20" text-anchor="middle" fill="${isVerified ? '#6ee7b7' : '#fcd34d'}" font-size="9" font-family="JetBrains Mono" font-weight="700">${node.tier}</text>
+              <text x="12" y="42" fill="#ffffff" font-size="11.5" font-weight="700">${node.title}</text>
+              <text x="12" y="58" fill="#94a3b8" font-size="10">${node.sub}</text>
+            </g>
+          `;
+        });
+
+        svg.innerHTML = svgHtml;
+
+        const activeNode = ARCH_NODES.find(n => n.id === appState.selectedArchNodeId) || ARCH_NODES[0];
+        inspector.innerHTML = `
+          <div class="border-b border-slate-800 pb-3">
+            <span class="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold ${activeNode.tier === 'VERIFIED' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/20 text-amber-300'}">
+              ${activeNode.tier === 'VERIFIED' ? '✅ CURRENT ARCHITECTURE' : '🧪 PROPOSED MODULE'}
+            </span>
+            <h3 class="text-base font-extrabold text-white mt-1.5">${activeNode.title}</h3>
+            <p class="text-xs text-slate-400">${activeNode.sub}</p>
+          </div>
+          <div class="space-y-3 text-xs">
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+              <div class="font-bold text-emerald-400 uppercase mb-1">1. Mục đích (Purpose)</div>
+              <p class="text-slate-200 leading-relaxed">${activeNode.purpose}</p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+              <div class="font-bold text-sky-400 uppercase mb-1">2. Input / Output Contract</div>
+              <p class="text-slate-200 font-mono whitespace-pre-line text-[11px]">${activeNode.io}</p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+              <div class="font-bold text-purple-400 uppercase mb-1">3. Công thức & Đơn vị (Algorithm Spec)</div>
+              <p class="text-slate-200 font-mono text-[11px] leading-relaxed">${activeNode.formula}</p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+              <div class="font-bold text-amber-400 uppercase mb-1">4. Edge Cases & Failure Modes</div>
+              <p class="text-slate-200">${activeNode.edgeCases}</p>
+            </div>
+            <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30">
+              <div class="font-bold text-emerald-300 uppercase mb-1">5. Acceptance Criteria & Giới hạn</div>
+              <p class="text-slate-200">${activeNode.criteria}</p>
+            </div>
+          </div>
+        `;
+      } else if (appState.archCanvasMode === "session") {
+        // Draw 6-Step Session Execution Loop
+        let svgHtml = `
+          <text x="20" y="30" fill="#6ee7b7" font-size="12" font-weight="700">CHU TRÌNH 6 BƯỚC THỰC THI TRONG MỖI PHIÊN LÀM VIỆC (SESSION EXECUTION PROTOCOL)</text>
+        `;
+        for (let i = 0; i < SESSION_LOOP_STEPS.length; i++) {
+          const curr = SESSION_LOOP_STEPS[i];
+          const next = SESSION_LOOP_STEPS[(i + 1) % SESSION_LOOP_STEPS.length];
+          svgHtml += `
+            <line x1="${curr.x}" y1="${curr.y}" x2="${next.x}" y2="${next.y}" stroke="#38bdf8" stroke-width="2.5" class="animate-flow" />
+          `;
+        }
+        SESSION_LOOP_STEPS.forEach((s, idx) => {
+          svgHtml += `
+            <g transform="translate(${s.x - 115}, ${s.y - 52})">
+              <rect x="0" y="0" width="230" height="104" rx="16" fill="#0f172a" stroke="#38bdf8" stroke-width="2" />
+              <text x="16" y="26" fill="#38bdf8" font-size="11" font-family="JetBrains Mono" font-weight="800">${s.step}</text>
+              <text x="16" y="48" fill="#ffffff" font-size="13" font-weight="700">${s.title}</text>
+              <foreignObject x="14" y="54" width="202" height="46">
+                <div xmlns="http://www.w3.org/1999/xhtml" style="color:#94a3b8; font-size:10.5px; line-height:1.35;">${s.desc}</div>
+              </foreignObject>
+            </g>
+          `;
+        });
+        svg.innerHTML = svgHtml;
+
+        inspector.innerHTML = `
+          <h3 class="text-base font-extrabold text-white">🔄 Quy tắc Vận hành Mỗi Phiên</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">Mọi phiên làm việc với Healthy Hearing đều tuân thủ nghiêm ngặt vòng lặp 6 bước để không bao giờ tạo ra tài liệu rời rạc hoặc claim vượt quá sản phẩm thực tế.</p>
+          <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 text-xs space-y-2">
+            <div class="font-bold text-emerald-400">Mẫu Báo cáo Cuối Phiên (Bước 6):</div>
+            <ul class="list-disc list-inside text-slate-300 space-y-1">
+              <li><b>Đã hoàn thành:</b> Nêu rõ tính năng/tài liệu.</li>
+              <li><b>Bằng chứng xác thực:</b> Lệnh test, log, screenshot.</li>
+              <li><b>Artifact tạo/sửa:</b> Đường dẫn file cụ thể.</li>
+              <li><b>Điều chưa chắc chắn & Rủi ro:</b> Nêu thẳng không giấu.</li>
+              <li><b>Bước tiếp theo giá trị nhất:</b> 1 hành động ưu tiên.</li>
+            </ul>
+          </div>
+        `;
+      } else {
+        // Draw 11-Step Narrative Pitch Arc (Phase 8)
+        let points = PITCH_ARC_STEPS.map(p => `${p.x},${p.y}`).join(" ");
+        let svgHtml = `
+          <text x="20" y="30" fill="#fcd34d" font-size="12" font-weight="700">ĐƯỜNG CONG CẢM XÚC & BẰNG CHỨNG 11 BƯỚC PITCH (PHASE 8 NARRATIVE ARC)</text>
+          <polyline points="${points}" fill="none" stroke="#10b981" stroke-width="3.5" />
+        `;
+        PITCH_ARC_STEPS.forEach(p => {
+          const isDemo = p.idx === 6;
+          svgHtml += `
+            <g transform="translate(${p.x}, ${p.y})">
+              <circle r="${isDemo ? 14 : 9}" fill="${isDemo ? '#f59e0b' : '#10b981'}" stroke="#020617" stroke-width="2.5" />
+              <text x="0" y="${isDemo ? -20 : 24}" text-anchor="middle" fill="${isDemo ? '#fcd34d' : '#e2e8f0'}" font-size="${isDemo ? '11.5' : '10'}" font-weight="700">${p.name}</text>
+            </g>
+          `;
+        });
+        svg.innerHTML = svgHtml;
+
+        inspector.innerHTML = `
+          <h3 class="text-base font-extrabold text-white">🎤 Ma trận Ánh xạ Rubric & Pitch (Phase 8)</h3>
+          <div class="space-y-2 text-xs">
+            ${PITCH_ARC_STEPS.map(p => `
+              <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 flex items-start gap-2">
+                <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono font-bold shrink-0">${p.idx}</span>
+                <div>
+                  <div class="font-bold text-white">${p.name}</div>
+                  <div class="text-slate-400 text-[11px]">${p.desc}</div>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+        `;
+      }
+    }
+
+    // =========================================================================
+    // 9. TAB 3: 12-AXIS SUSTAINABLE IDEA FILTER RADAR & 10-AXIS SCORECARD
+    // =========================================================================
+    function renderRadarAndScorecardTab() {
+      renderIdeaSliders();
+      renderIdeaRadarChart();
+      updatePriorityCalc();
+      renderInternalScorecard();
+    }
+
+    function loadIdeaPreset(presetKey) {
+      const presets = {
+        mvp_empathy: [9, 8, 8, 8, 9, 9, 8, 8, 7, 9, 8, 9],
+        overengineered_ai: [7, 5, 6, 7, 4, 4, 3, 4, 5, 6, 3, 5],
+        clinical_diag: [9, 3, 6, 4, 3, 2, 4, 3, 4, 2, 4, 4]
+      };
+      const vals = presets[presetKey] || presets.mvp_empathy;
+      IDEA_FILTER_AXES.forEach((ax, i) => { ax.val = vals[i]; });
+      renderIdeaSliders();
+      renderIdeaRadarChart();
+    }
+
+    function renderIdeaSliders() {
+      const grid = document.getElementById("ideaSlidersGrid");
+      grid.innerHTML = IDEA_FILTER_AXES.map((ax, idx) => `
+        <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs">
+          <div class="flex justify-between font-semibold mb-1">
+            <span class="text-slate-200 truncate pr-2">${ax.name}</span>
+            <span class="font-mono font-bold ${ax.val >= 7 ? 'text-emerald-400' : ax.val >= 5 ? 'text-amber-400' : 'text-rose-400'}">${ax.val}/10</span>
+          </div>
+          <input type="range" min="1" max="10" value="${ax.val}"
+            oninput="updateIdeaAxis(${idx}, this.value)"
+            class="w-full accent-emerald-500 cursor-pointer">
+        </div>
+      `).join("");
+    }
+
+    function updateIdeaAxis(idx, newVal) {
+      IDEA_FILTER_AXES[idx].val = parseInt(newVal, 10);
+      renderIdeaSliders();
+      renderIdeaRadarChart();
+    }
+
+    function renderIdeaRadarChart() {
+      const svg = document.getElementById("ideaRadarSvg");
+      const cx = 190, cy = 170, maxR = 120;
+      const N = IDEA_FILTER_AXES.length;
+
+      let html = "";
+      // Concentric rings
+      [0.25, 0.5, 0.75, 1.0].forEach(level => {
+        const r = maxR * level;
+        html += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#1e293b" stroke-width="1" />`;
+      });
+
+      // Spokes and Labels
+      let polyPoints = [];
+      IDEA_FILTER_AXES.forEach((ax, i) => {
+        const angle = (Math.PI * 2 * i) / N - Math.PI / 2;
+        const xEnd = cx + Math.cos(angle) * maxR;
+        const yEnd = cy + Math.sin(angle) * maxR;
+        const lx = cx + Math.cos(angle) * (maxR + 24);
+        const ly = cy + Math.sin(angle) * (maxR + 18);
+
+        html += `<line x1="${cx}" y1="${cy}" x2="${xEnd}" y2="${yEnd}" stroke="#334155" stroke-width="1" />`;
+        html += `<text x="${lx}" y="${ly + 3}" text-anchor="middle" fill="#94a3b8" font-size="9.5" font-family="JetBrains Mono">T${i + 1}(${ax.val})</text>`;
+
+        const valR = (ax.val / 10) * maxR;
+        const px = cx + Math.cos(angle) * valR;
+        const py = cy + Math.sin(angle) * valR;
+        polyPoints.push(`${px},${py}`);
+      });
+
+      const avgScore = IDEA_FILTER_AXES.reduce((acc, a) => acc + a.val, 0) / N;
+      const ethicsVal = IDEA_FILTER_AXES[9].val;
+      const evidenceVal = IDEA_FILTER_AXES[1].val;
+      const isSafe = ethicsVal >= 5 && evidenceVal >= 5;
+      const fillHex = !isSafe ? "#f43f5e" : avgScore >= 7.2 ? "#10b981" : "#f59e0b";
+
+      html += `
+        <polygon points="${polyPoints.join(" ")}" fill="${fillHex}" fill-opacity="0.28" stroke="${fillHex}" stroke-width="2.5" />
+      `;
+      svg.innerHTML = html;
+
+      // Decision card
+      const card = document.getElementById("ideaDecisionCard");
+      if (!isSafe) {
+        card.className = "p-4 rounded-xl border bg-rose-950/40 border-rose-500/50 text-rose-200";
+        card.innerHTML = `
+          <div class="text-xs font-mono uppercase text-rose-300 font-bold">🚨 QUYẾT ĐỊNH: DỪNG / KILL HOẶC ĐỔI HƯỚNG</div>
+          <div class="text-lg font-extrabold text-white mt-1">Điểm TB: ${avgScore.toFixed(1)} / 10</div>
+          <p class="text-xs mt-1.5 text-rose-200">Cảnh báo: Trục <b>An toàn Đạo đức/Y tế (${ethicsVal}/10)</b> hoặc <b>Bằng chứng (${evidenceVal}/10)</b> quá thấp, có nguy cơ gây hiểu nhầm thành chẩn đoán y khoa!</p>
+        `;
+      } else if (avgScore >= 7.2) {
+        card.className = "p-4 rounded-xl border bg-emerald-950/40 border-emerald-500/50 text-emerald-200";
+        card.innerHTML = `
+          <div class="text-xs font-mono uppercase text-emerald-300 font-bold">✅ QUYẾT ĐỊNH: GIỮ HƯỚNG CHÍNH (KEEP FOR MVP)</div>
+          <div class="text-lg font-extrabold text-white mt-1">Điểm TB: ${avgScore.toFixed(1)} / 10</div>
+          <p class="text-xs mt-1.5 text-emerald-200">Hướng đi cân bằng tốt giữa Nỗi đau thực tế, Khả năng kiểm chứng nhanh, An toàn pháp lý và Chi phí duy trì thấp.</p>
+        `;
+      } else {
+        card.className = "p-4 rounded-xl border bg-amber-950/40 border-amber-500/50 text-amber-200";
+        card.innerHTML = `
+          <div class="text-xs font-mono uppercase text-amber-300 font-bold">⚠️ QUYẾT ĐỊNH: CẦN THU HẸP / PIVOT</div>
+          <div class="text-lg font-extrabold text-white mt-1">Điểm TB: ${avgScore.toFixed(1)} / 10</div>
+          <p class="text-xs mt-1.5 text-amber-200">Nên cắt giảm các module tốn chi phí bảo trì (như mô hình AI nặng) và tập trung vào luồng tạo giá trị cốt lõi.</p>
+        `;
+      }
+    }
+
+    function updatePriorityCalc() {
+      const imp = parseInt(document.getElementById("prioInp-impact").value, 10);
+      const evi = parseInt(document.getElementById("prioInp-evidence").value, 10);
+      const urg = parseInt(document.getElementById("prioInp-urgency").value, 10);
+      const cost = parseInt(document.getElementById("prioInp-cost").value, 10);
+
+      document.getElementById("prioVal-impact").textContent = imp;
+      document.getElementById("prioVal-evidence").textContent = evi;
+      document.getElementById("prioVal-urgency").textContent = urg;
+      document.getElementById("prioVal-cost").textContent = cost;
+
+      const score = ((imp * evi * urg) / cost).toFixed(1);
+      document.getElementById("prioFormulaDetail").textContent = `(${imp} × ${evi} × ${urg}) ÷ ${cost} = ${score}`;
+
+      const badge = document.getElementById("prioScoreBadge");
+      if (score >= 120) {
+        badge.className = "px-3 py-1.5 rounded-xl font-mono font-extrabold text-sm bg-emerald-500/20 text-emerald-300 border border-emerald-500/40";
+        badge.textContent = `${score} — ƯU TIÊN SỐ 1 (NOW)`;
+      } else if (score >= 55) {
+        badge.className = "px-3 py-1.5 rounded-xl font-mono font-extrabold text-sm bg-amber-500/20 text-amber-300 border border-amber-500/40";
+        badge.textContent = `${score} — LÀM TIẾP THEO (NEXT)`;
+      } else {
+        badge.className = "px-3 py-1.5 rounded-xl font-mono font-extrabold text-sm bg-rose-500/20 text-rose-300 border border-rose-500/40";
+        badge.textContent = `${score} — HOÃN / CẮT BỎ (LATER)`;
+      }
+    }
+
+    function renderInternalScorecard() {
+      const list = document.getElementById("internalScorecardList");
+      const total = INTERNAL_SCORECARD_AXES.reduce((acc, item) => acc + item.score, 0);
+      document.getElementById("scorecardTotalBadge").textContent = `${total} / 100`;
+
+      list.innerHTML = INTERNAL_SCORECARD_AXES.map((item, idx) => `
+        <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5">
+          <div class="flex items-center justify-between text-xs">
+            <span class="font-bold text-slate-200">${item.name}</span>
+            <span class="font-mono font-bold ${item.score >= 8 ? 'text-emerald-400' : item.score >= 6 ? 'text-amber-400' : 'text-rose-400'}">${item.score}/10</span>
+          </div>
+          <input type="range" min="1" max="10" value="${item.score}"
+            oninput="updateScorecardAxis(${idx}, this.value)"
+            class="w-full accent-emerald-500 cursor-pointer">
+          <div class="text-[11px] text-slate-400">${item.note}</div>
+        </div>
+      `).join("");
+    }
+
+    function updateScorecardAxis(idx, val) {
+      INTERNAL_SCORECARD_AXES[idx].score = parseInt(val, 10);
+      renderInternalScorecard();
+      updateGlobalReadinessIndicator();
+    }
+
+    // =========================================================================
+    // 10. TAB 4: PRE-FLIGHT CHECKLIST, 17 ARTIFACTS & DEFINITION OF READY GATE
+    // =========================================================================
+    function renderPreFlightAndArtifactsTab() {
+      const grid = document.getElementById("preflightCategoriesGrid");
+      grid.innerHTML = PREFLIGHT_CATEGORIES.map((cat, cIdx) => {
+        const doneCount = cat.items.filter(i => i.checked).length;
+        return `
+          <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2.5">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+              <span class="text-xs font-bold text-white">${cat.title}</span>
+              <span class="text-[11px] font-mono font-semibold ${doneCount === cat.items.length ? 'text-emerald-400' : 'text-amber-400'}">${doneCount}/${cat.items.length}</span>
+            </div>
+            <div class="space-y-2">
+              ${cat.items.map((item, iIdx) => `
+                <label class="flex items-start gap-2 text-xs text-slate-300 cursor-pointer select-none">
+                  <input type="checkbox" ${item.checked ? "checked" : ""}
+                    onchange="togglePreFlightItem(${cIdx}, ${iIdx}, this.checked)"
+                    class="mt-0.5 accent-emerald-500 rounded">
+                  <span class="${item.checked ? 'line-through text-slate-500' : ''}">${item.text}</span>
+                </label>
+              `).join("")}
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      const artList = document.getElementById("artifactsListContainer");
+      artList.innerHTML = SEVENTEEN_ARTIFACTS.map((art, idx) => {
+        const st = STATUS_STYLES[art.status];
+        return `
+          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between gap-2">
+            <div class="min-w-0">
+              <div class="flex items-center gap-2">
+                <span class="text-[11px] font-mono text-slate-500">#${art.id}</span>
+                <span class="text-xs font-mono font-bold text-emerald-300 truncate">${art.file}</span>
+                <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-900 text-slate-400 font-mono">${art.phase}</span>
+              </div>
+              <p class="text-[11px] text-slate-400 truncate mt-0.5">${art.desc}</p>
+            </div>
+            <button onclick="cycleArtifactStatus(${idx})"
+              class="px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold border shrink-0 transition ${st.bg} ${st.text} ${st.border}">
+              ${art.status}
+            </button>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function togglePreFlightItem(cIdx, iIdx, checked) {
+      PREFLIGHT_CATEGORIES[cIdx].items[iIdx].checked = checked;
+      renderPreFlightAndArtifactsTab();
+      updateGlobalReadinessIndicator();
+    }
+
+    function toggleAllPreFlight(stateBool) {
+      PREFLIGHT_CATEGORIES.forEach(c => c.items.forEach(i => { i.checked = stateBool; }));
+      if (stateBool) {
+        SEVENTEEN_ARTIFACTS.forEach(a => { a.status = "Verified"; });
+        PHASES_DATA.forEach(p => { p.status = "Verified"; });
+      }
+      renderPipelineTab();
+      renderPreFlightAndArtifactsTab();
+      updateGlobalReadinessIndicator();
+    }
+
+    function cycleArtifactStatus(idx) {
+      const order = ["Verified", "Partially verified", "Planned"];
+      const curr = SEVENTEEN_ARTIFACTS[idx].status;
+      const next = order[(order.indexOf(curr) + 1) % order.length];
+      SEVENTEEN_ARTIFACTS[idx].status = next;
+      renderPreFlightAndArtifactsTab();
+      updateGlobalReadinessIndicator();
+    }
+
+    function updateGlobalReadinessIndicator() {
+      const totalChecks = PREFLIGHT_CATEGORIES.reduce((acc, c) => acc + c.items.length, 0);
+      const checkedCount = PREFLIGHT_CATEGORIES.reduce((acc, c) => acc + c.items.filter(i => i.checked).length, 0);
+      const blockedPhases = PHASES_DATA.filter(p => p.status === "Blocked");
+      const lowScorecardAxes = INTERNAL_SCORECARD_AXES.filter(a => a.score < 5);
+
+      const badge = document.getElementById("globalDoRBadge");
+      const dot = document.getElementById("globalDoRDot");
+      const text = document.getElementById("globalDoRText");
+      const banner = document.getElementById("dorMasterBanner");
+
+      let blockers = [];
+      if (blockedPhases.length > 0) blockers.push(`${blockedPhases.length} Phase đang bị Blocked`);
+      if (checkedCount < totalChecks) blockers.push(`Còn ${totalChecks - checkedCount}/${totalChecks} mục Pre-Flight chưa tick kiểm tra thực tế`);
+      if (lowScorecardAxes.length > 0) blockers.push(`${lowScorecardAxes.length} trục Scorecard dưới ngưỡng an toàn (<5/10)`);
+
+      if (blockers.length === 0) {
+        badge.className = "cursor-pointer px-3 py-1.5 rounded-xl border bg-emerald-500/15 border-emerald-500/40 flex items-center gap-2";
+        dot.className = "w-2.5 h-2.5 rounded-full bg-emerald-400";
+        text.className = "text-xs font-bold text-emerald-300";
+        text.textContent = "READY FOR PITCH";
+
+        if (banner) {
+          banner.className = "rounded-2xl p-5 border bg-emerald-950/30 border-emerald-500/40 flex flex-col lg:flex-row lg:items-center justify-between gap-4";
+          banner.innerHTML = `
+            <div class="space-y-1">
+              <div class="text-xs font-mono font-bold uppercase text-emerald-300">✅ DEFINITION OF READY: SẴN SÀNG THUYẾT TRÌNH & NỘP BÀI</div>
+              <h3 class="text-lg font-extrabold text-white">Toàn bộ ${totalChecks}/${totalChecks} mục Pre-Flight và các Cổng Nghiệm thu đã được xác minh!</h3>
+              <p class="text-xs text-slate-300">Healthy Hearing đã đáp ứng tiêu chuẩn "Evidence before claims" — sản phẩm, tài liệu, link và kịch bản Pitch hoàn toàn đồng nhất.</p>
+            </div>
+          `;
+        }
+      } else if (blockedPhases.length > 0 || lowScorecardAxes.length > 0) {
+        badge.className = "cursor-pointer px-3 py-1.5 rounded-xl border bg-rose-500/15 border-rose-500/40 flex items-center gap-2";
+        dot.className = "w-2.5 h-2.5 rounded-full bg-rose-500";
+        text.className = "text-xs font-bold text-rose-300";
+        text.textContent = "NOT READY";
+
+        if (banner) {
+          banner.className = "rounded-2xl p-5 border bg-rose-950/30 border-rose-500/40 flex flex-col lg:flex-row lg:items-center justify-between gap-4";
+          banner.innerHTML = `
+            <div class="space-y-1">
+              <div class="text-xs font-mono font-bold uppercase text-rose-300">🛑 DEFINITION OF READY: NOT READY (CÓ ĐIỂM NGHẼN NGHIÊM TRỌNG)</div>
+              <h3 class="text-base font-extrabold text-white">Danh sách Blocker cần xử lý ngay trước khi Pitch:</h3>
+              <ul class="text-xs text-rose-200 list-disc list-inside space-y-0.5">${blockers.map(b => `<li>${b}</li>`).join("")}</ul>
+            </div>
+          `;
+        }
+      } else {
+        badge.className = "cursor-pointer px-3 py-1.5 rounded-xl border bg-amber-500/15 border-amber-500/40 flex items-center gap-2";
+        dot.className = "w-2.5 h-2.5 rounded-full bg-amber-400";
+        text.className = "text-xs font-bold text-amber-300";
+        text.textContent = `PARTIALLY READY (${checkedCount}/${totalChecks})`;
+
+        if (banner) {
+          banner.className = "rounded-2xl p-5 border bg-amber-950/30 border-amber-500/40 flex flex-col lg:flex-row lg:items-center justify-between gap-4";
+          banner.innerHTML = `
+            <div class="space-y-1">
+              <div class="text-xs font-mono font-bold uppercase text-amber-300">⚠️ DEFINITION OF READY: PARTIALLY READY (${checkedCount}/${totalChecks} PRE-FLIGHT)</div>
+              <h3 class="text-base font-extrabold text-white">Các hạng mục cần kiểm tra nốt trước khi gửi hồ sơ hoặc lên sân khấu:</h3>
+              <ul class="text-xs text-amber-200 list-disc list-inside space-y-0.5">${blockers.map(b => `<li>${b}</li>`).join("")}</ul>
+            </div>
+          `;
+        }
+      }
+    }
+
+    // =========================================================================
+    // 11. EXPORT MARKDOWN REPORT (CLIPBOARD WITHOUT ALERT)
+    // =========================================================================
+    function exportAuditMarkdown() {
+      const lines = [
+        "# HEALTHY HEARING — BÁO CÁO TRẠNG THÁI & KIỂM ĐỊNH QUY TRÌNH",
+        `> Nguyên tắc: Evidence before claims | Trạng thái DoR: ${document.getElementById("globalDoRText").textContent}`,
+        "",
+        "## 1. Bảng Trạng thái 14 Phase",
+        ...PHASES_DATA.map(p => `- **${p.code} (${p.title})**: \`${p.status}\` — Đầu ra: ${p.outputs.join(", ")}`),
+        "",
+        "## 2. Trạng thái Bộ 17 Tài Liệu Cuối (Phase 13)",
+        ...SEVENTEEN_ARTIFACTS.map(a => `- [${a.status === 'Verified' ? 'x' : ' '}] \`${a.file}\` (${a.phase}): **${a.status}**`)
+      ];
+
+      const tempArea = document.createElement("textarea");
+      tempArea.value = lines.join("\n");
+      document.body.appendChild(tempArea);
+      tempArea.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempArea);
+
+      const toast = document.getElementById("toastNotification");
+      toast.classList.remove("hidden");
+      toast.classList.add("flex");
+      setTimeout(() => {
+        toast.classList.add("hidden");
+        toast.classList.remove("flex");
+      }, 3000);
+    }
+
+    window.onload = initApp;
+  </script>
+</body>
+</html>
