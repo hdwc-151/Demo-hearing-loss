@@ -4,6 +4,7 @@ import { onBackground } from "../native";
 import { getAudioCtx } from "../util/audio";
 import { attenuationDbAt, processHearingLoss } from "../util/hearingLoss";
 import { processAuditoryErb } from "../util/auditoryErb";
+import { processAdvancedAudio } from "../util/auditoryAdvanced";
 import { analyzeAudio } from "../util/audioFeatures";
 
 const LIMIT_BYTES = 12 * 1024 * 1024;
@@ -97,7 +98,8 @@ export default function AudioLab() {
     setStatus("Đã tạo tín hiệu kiểm thử ngay trên thiết bị");
   }
 
-  async function play(filtered) {
+  async function play(route) {
+    const filtered = route !== "original";
     stop(); setBusy(true); setError("");
     const request = token.current;
     try {
@@ -107,20 +109,26 @@ export default function AudioLab() {
       validateAudio(original);
       // The experimental ERB model executes on the UI thread; cap large inputs
       // until an AudioWorklet/worker implementation is available.
-      if (filtered && auditoryModel === "erb" && (original.duration > 4 || original.sampleRate > 48000)) {
-        throw new Error("ERB thử nghiệm chỉ hỗ trợ tối đa 4 giây, sample rate không quá 48 kHz. Hãy dùng STFT cho file lớn hơn.");
+      if (route !== "original" && (auditoryModel === "erb" || auditoryModel === "dcgc" || route === "aid") && (original.duration > 4 || original.sampleRate > 48000)) {
+        throw new Error("Các mô hình thử nghiệm ERB/dcGC/WDRC chỉ hỗ trợ tối đa 4 giây, 48 kHz. Hãy dùng STFT cho file dài hơn.");
       }
       let buffer = original;
       if (filtered) {
-        const key = auditoryModel + "|" + String(original.sampleRate) + "|" + freqs.join(",") + "|" + thresholds.join(",");
+        const key = route + "|" + auditoryModel + "|" + String(original.sampleRate) + "|" + freqs.join(",") + "|" + thresholds.join(",");
         if (cache.current?.input === original && cache.current?.key === key) {
           buffer = cache.current.output;
         } else {
           buffer = ctx.createBuffer(original.numberOfChannels, original.length, original.sampleRate);
           for (let c = 0; c < original.numberOfChannels; c++) {
-            buffer.copyToChannel(auditoryModel === "erb"
-              ? processAuditoryErb(original.getChannelData(c), original.sampleRate, freqs, thresholds)
-              : processHearingLoss(original.getChannelData(c), original.sampleRate, freqs, thresholds), c);
+            const originalChannel = original.getChannelData(c);
+            const processed = route === "aid"
+              ? processAdvancedAudio(originalChannel, original.sampleRate, freqs, thresholds, "aid")
+              : auditoryModel === "dcgc"
+                ? processAdvancedAudio(originalChannel, original.sampleRate, freqs, thresholds, "dcgc")
+                : auditoryModel === "erb"
+                  ? processAuditoryErb(originalChannel, original.sampleRate, freqs, thresholds)
+                  : processHearingLoss(originalChannel, original.sampleRate, freqs, thresholds);
+            buffer.copyToChannel(processed, c);
           }
           cache.current = { input: original, key, output: buffer };
         }
@@ -142,7 +150,7 @@ export default function AudioLab() {
       };
       current.current = { src, gain };
       src.start();
-      setStatus(filtered ? "Đang phát: mô phỏng suy giảm theo audiogram" : "Đang phát: tín hiệu gốc");
+      setStatus(route === "aid" ? "Đang phát: EQ/WDRC bù nghe minh hoạ" : filtered ? "Đang phát: mô phỏng suy giảm theo audiogram" : "Đang phát: tín hiệu gốc");
     } catch (e) {
       if (request === token.current) setError("Không phát được: " + e.message);
       setBusy(false);
@@ -164,11 +172,13 @@ export default function AudioLab() {
           className="w-full rounded-xl border border-sage-light bg-white p-2 text-sm">
           <option value="stft">STFT — lọc tần số tuyến tính (ổn định)</option>
           <option value="erb">ERB — mô hình dải thính giác thử nghiệm</option>
+          <option value="dcgc">dcGC — Gammachirp bất đối xứng phụ thuộc mức (thử nghiệm)</option>
         </select>
-        <p className="text-xs text-muted">ERB thử nghiệm thêm suy giảm phụ thuộc cường độ, không phải thuật toán Gammachirp hoặc kết quả thính học đã được xác nhận.</p>
-        <div className="grid grid-cols-2 gap-2">
-          <button className="btn-primary" disabled={busy} onClick={() => play(false)} aria-label="Phát âm thanh gốc">A · Nghe gốc</button>
-          <button className="btn-primary" disabled={busy} onClick={() => play(true)} aria-label="Phát mô phỏng theo audiogram">B · Nghe mô phỏng</button>
+        <p className="text-xs text-muted">dcGC sử dụng xấp xỉ biên độ Gammachirp và HP bất đối xứng điều khiển theo mức; chưa phải bộ lọc causal dcGC đã kiểm chứng. WDRC là bù nghe minh hoạ độc lập, xử lý audio GỐC, không đảo bộ lọc suy giảm.</p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+          <button className="btn-primary" disabled={busy} onClick={() => play("original")} aria-label="Phát âm thanh gốc">A · Nghe gốc</button>
+          <button className="btn-primary" disabled={busy} onClick={() => play("loss")} aria-label="Phát mô phỏng theo audiogram">B · Nghe mô phỏng</button>
+          <button className="btn-primary" disabled={busy} onClick={() => play("aid")} aria-label="Phát EQ WDRC bù nghe minh họa">C · EQ/WDRC</button>
         </div>
         <button className="btn-ghost w-full" onClick={stop} aria-label="Dừng Audio Lab">■ Dừng</button>
         <p className="text-xs text-muted" role="status">{status}</p>
@@ -186,12 +196,12 @@ export default function AudioLab() {
           <text x="300" y="87" fontSize="10" fill="#59685B" textAnchor="end">8 kHz</text>
           <text x="150" y="102" fontSize="10" fill="#59685B" textAnchor="middle">Suy giảm số (dB), không phải dB HL</text>
         </svg>
-        <p className="text-xs text-muted">Đổi ngưỡng ở tab Audiogram rồi quay lại Audio Lab. Chọn Moderate/Severe để quan sát sự khác biệt. STFT là tuyến tính; ERB có điều biến theo mức tín hiệu. Cả hai chưa phải Gammachirp đã thẩm định.</p>
+        <p className="text-xs text-muted">Đổi ngưỡng ở tab Audiogram rồi quay lại Audio Lab. Chọn Moderate/Severe để quan sát sự khác biệt. STFT là baseline, ERB là mô hình thực nghiệm, dcGC là xấp xỉ phổ bất đối xứng theo mức. C là EQ/WDRC độc lập; chưa phương pháp nào là phép đo hoặc hướng dẫn kê đơn.</p>
       </div>
       {metrics && (
         <div className="rounded-2xl bg-bgcard border border-sage-light p-4" role="region" aria-label="Đặc trưng tín hiệu">
           <h2 className="h2">Phân tích tín hiệu A/B</h2>
-          <p className="text-xs text-muted">Đo trên kênh audio thứ nhất sau lần phát B gần nhất; không phải phép đo thính lực.</p>
+          <p className="text-xs text-muted">Đo trên kênh audio thứ nhất sau lần phát B/C gần nhất; không phải phép đo thính lực.</p>
           <table className="w-full text-xs sm:text-sm mt-2">
             <thead><tr><th scope="col" className="text-left">Đặc trưng</th><th scope="col">Gốc</th><th scope="col">Mô phỏng</th></tr></thead>
             <tbody>
@@ -203,7 +213,7 @@ export default function AudioLab() {
           <p className="text-xs text-muted">RMS: biên độ hiệu dụng trong miền số. Trọng tâm phổ: trung bình tần số có trọng số năng lượng. Không suy diễn thành mức nghe dB HL hoặc dB SPL.</p>
         </div>
       )}
-      <p className="text-xs text-muted">Công cụ giáo dục, chưa hiệu chuẩn tai nghe và không dùng để đo thính lực. Gain phát số là 0,5; vẫn phải đặt âm lượng loa/tai nghe ở mức thấp để nghe an toàn.</p>
+      <p className="text-xs text-muted">Công cụ giáo dục, không dùng để đo thính lực, chẩn đoán hoặc thay máy trợ thính thật. WDRC có thể tăng biên độ số nhưng bộ giới hạn phần mềm KHÔNG giới hạn được dB SPL vật lý. Đặt âm lượng loa/tai nghe ở mức thấp trước khi phát.</p>
     </section>
   );
 }
