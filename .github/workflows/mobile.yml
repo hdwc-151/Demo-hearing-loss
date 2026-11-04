@@ -33,7 +33,7 @@ jobs:
       - run: npm run build && npx cap sync android
       - run: bash ./gradlew assembleDebug
         working-directory: frontend/android
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with: { name: hearatlas-android-debug, path: frontend/android/app/build/outputs/apk/debug/app-debug.apk, if-no-files-found: error }
 
   ios:
