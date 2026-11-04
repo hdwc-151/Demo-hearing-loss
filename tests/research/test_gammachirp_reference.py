@@ -15,6 +15,7 @@ import sys
 
 import numpy as np
 import pytest
+scipy = pytest.importorskip('scipy', reason='SciPy installed in auditory-reference CI job')
 from scipy.signal import gammatone
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2] / "backend"))
