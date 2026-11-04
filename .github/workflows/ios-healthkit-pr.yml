@@ -1,7 +1,16 @@
 name: iOS HealthKit native compile (PR)
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'frontend/ios/**'
+      - 'frontend/package*.json'
+      - 'frontend/src/util/healthkitAudiogram.js'
+      - 'frontend/src/components/HealthImport.jsx'
+      - '.github/workflows/ios-healthkit-pr.yml'
   pull_request:
     paths:
+      - 'frontend/package*.json'
       - 'frontend/ios/**'
       - 'frontend/src/util/healthkitAudiogram.js'
       - 'frontend/src/components/HealthImport.jsx'

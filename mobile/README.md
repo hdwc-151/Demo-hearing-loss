@@ -1,5 +1,7 @@
 # Mobile (iOS / Android)
 
+Trạng thái build, cách kiểm tra backend và các gate phát hành còn thiếu: [Deployment readiness](../docs/product/DEPLOYMENT_READINESS.md). Chưa có tài khoản developer vẫn chạy được CI Android debug và iOS Simulator; chưa đủ để phát hành lên cửa hàng.
+
 Ứng dụng mobile là **chính ứng dụng web** (`frontend/`) được bọc bằng [Capacitor 8](https://capacitorjs.com/). Thư mục này chứa thiết kế, tài nguyên và hồ sơ cửa hàng; dự án native nằm ở `frontend/android/` và `frontend/ios/`. Thiết kế đầy đủ: [docs/mobile-app-design.md](../docs/mobile-app-design.md).
 
 ```

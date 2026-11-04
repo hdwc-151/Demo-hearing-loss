@@ -84,7 +84,8 @@ public class HealthAudiogramPlugin: CAPPlugin, CAPBridgedPlugin {
             if let error = error { call.reject("Không thể hỏi quyền HealthKit: \(error.localizedDescription)"); return }
             guard completed else { call.reject("Không thể hoàn thành yêu cầu quyền HealthKit."); return }
             let order = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
-            let query = HKSampleQuery(sampleType: kind, predicate: nil, limit: 1,
+            let predicate = HKQuery.predicateForSamples(withStart: nil, end: Date(), options: .strictEndDate)
+            let query = HKSampleQuery(sampleType: kind, predicate: predicate, limit: 1,
                                       sortDescriptors: [order]) { _, samples, queryError in
                 if let queryError = queryError {
                     call.reject("Không đọc được audiogram từ Apple Health: \(queryError.localizedDescription)")
@@ -117,14 +118,14 @@ public class HealthAudiogramPlugin: CAPPlugin, CAPBridgedPlugin {
                     }
                     if left == nil && right == nil { return nil }
                     var output: [String: Any] = ["frequencyHz": f]
-                    if let l = left, l.isFinite { output["leftDbHL"] = l }
-                    if let r = right, r.isFinite { output["rightDbHL"] = r }
+                    if let l = left, l.isFinite, l >= -20, l <= 130 { output["leftDbHL"] = l }
+                    if let r = right, r.isFinite, r >= -20, r <= 130 { output["rightDbHL"] = r }
+                    guard output["leftDbHL"] != nil || output["rightDbHL"] != nil else { return nil }
                     return output
                 }
                 call.resolve([
                     "found": !points.isEmpty,
                     "source": "apple_healthkit",
-                    "sampleId": sample.uuid.uuidString,
                     "measuredAt": ISO8601DateFormatter().string(from: sample.endDate),
                     "unit": "dB HL",
                     "points": points,
