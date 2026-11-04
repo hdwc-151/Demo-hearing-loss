@@ -1,0 +1,17 @@
+# Chạy bản đóng gói: docker compose up --build  ->  http://localhost:8080
+services:
+  api:
+    build: ./backend
+    environment:
+      ALLOWED_ORIGINS: "http://localhost:8080"
+      LLM_API_KEY: "${LLM_API_KEY:-}"
+      LLM_BASE_URL: "${LLM_BASE_URL:-https://open.bigmodel.cn/api/paas/v4}"
+      LLM_MODEL: "${LLM_MODEL:-glm-4-flash}"
+      LLM_TIMEOUT: "${LLM_TIMEOUT:-15}"
+    restart: unless-stopped
+  web:
+    build: ./frontend
+    ports: ["8080:80"]
+    depends_on:
+      api: { condition: service_healthy }
+    restart: unless-stopped

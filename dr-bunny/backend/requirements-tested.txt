@@ -1,0 +1,12 @@
+# Bộ phiên bản ĐÃ chạy toàn bộ test trong đợt rà soát 2026-10-22 (Python 3.12.3).
+# requirements.txt chỉ ghi cận dưới (>=) nên một lần cài mới có thể kéo phiên bản khác;
+# dùng file này khi cần tái lập đúng môi trường đã kiểm chứng:
+#   pip install -r backend/requirements-tested.txt
+fastapi==0.151.0
+starlette==1.9.0
+pydantic==2.14.1
+uvicorn[standard]==0.54.0
+numpy==2.4.4
+httpx==0.28.1
+pytest==9.1.1
+playwright==1.56.0

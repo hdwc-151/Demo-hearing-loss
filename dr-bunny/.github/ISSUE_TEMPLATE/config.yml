@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Câu hỏi và thảo luận
+    url: https://github.com/OWNER/dr-bunny/discussions
+    about: Hỏi cách dùng hoặc đề xuất ý tưởng trước khi mở issue.
+  - name: Báo lỗ hổng bảo mật
+    url: https://github.com/OWNER/dr-bunny/security/advisories/new
+    about: Vui lòng báo riêng tư, không mở issue công khai (xem SECURITY.md).

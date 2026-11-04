@@ -1,0 +1,27 @@
+{
+  "appId": "app.drbunny.simulator",
+  "appName": "Dr. Bunny",
+  "webDir": "dist",
+  "backgroundColor": "#EFF5EC",
+  "ios": {
+    "contentInset": "always",
+    "backgroundColor": "#EFF5EC"
+  },
+  "android": {
+    "backgroundColor": "#EFF5EC",
+    "allowMixedContent": false
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": true,
+      "launchShowDuration": 800,
+      "backgroundColor": "#EFF5EC",
+      "showSpinner": false
+    },
+    "StatusBar": {
+      "style": "LIGHT",
+      "backgroundColor": "#EFF5EC",
+      "overlaysWebView": false
+    }
+  }
+}

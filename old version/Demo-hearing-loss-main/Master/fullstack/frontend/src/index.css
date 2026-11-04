@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============ nền tảng ============ */
+:root { color-scheme: light; -webkit-text-size-adjust: 100%; }
+html { font-size: clamp(14px, 0.35vw + 13px, 17px); }   /* chữ co giãn mượt theo bề rộng/zoom */
+body {
+  background: #FAFBF8; color: #232B22; margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+}
+button { -webkit-tap-highlight-color: transparent; }
+:focus-visible { outline: 3px solid #9BE564; outline-offset: 2px; border-radius: 8px; }
+
+@layer components {
+  .app-shell { @apply w-full max-w-[560px] mx-auto px-4; padding-bottom: calc(8.5rem + env(safe-area-inset-bottom)); }
+  .h1 { font-size: clamp(1.35rem, 4.5vw, 1.75rem); @apply font-extrabold mb-3 tracking-tight; }
+  .h2 { @apply text-base font-bold mb-2; }
+  .pill { @apply bg-bgcard text-sage-dark border border-sage-mid px-3 py-1.5 rounded-full text-xs font-bold
+                  transition-colors hover:bg-sage-light disabled:opacity-40 whitespace-nowrap; }
+
+  /* Simulator */
+  .viz-box { @apply bg-bgcard rounded-2xl p-4 sm:p-5 whitespace-pre-wrap break-words;
+             min-height: clamp(180px, 34vh, 280px); font-size: clamp(14px, 3.6vw, 16px); line-height: 1.8; }
+  .ch, .ch-hide, .char-fade-sev { transition: opacity .35s ease, filter .35s ease; }
+  .ch-hide { opacity: 0; }
+  .char-fade-sev { opacity: .22; filter: blur(2.4px); }
+
+  .level-range { -webkit-appearance: none; appearance: none; width: 100%; height: 36px; background: transparent; cursor: pointer; }
+  .level-range::-webkit-slider-runnable-track {
+    height: 6px; border-radius: 99px;
+    background: linear-gradient(90deg, #6E826B var(--p), #D7E5D0 var(--p));
+  }
+  .level-range::-moz-range-track { height: 6px; border-radius: 99px; background: #D7E5D0; }
+  .level-range::-moz-range-progress { height: 6px; border-radius: 99px; background: #6E826B; }
+  .level-range::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 28px; height: 28px; margin-top: -11px; border-radius: 50%;
+    background: #6E826B; border: 3px solid #4B5E48; box-shadow: 0 2px 8px rgba(75,94,72,.35); transition: transform .15s;
+  }
+  .level-range::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; background: #6E826B; border: 3px solid #4B5E48; }
+  .level-range:active::-webkit-slider-thumb { transform: scale(1.15); }
+
+  .play-btn { @apply w-16 h-16 rounded-full bg-sage-mid text-white text-2xl flex items-center justify-center
+                     disabled:opacity-60; border: 3px solid #4B5E48; box-shadow: 0 4px 12px rgba(0,0,0,.12);
+              transition: transform .12s ease, background-color .2s; }
+  .play-btn:active { transform: scale(.93); }
+  .spinner { width: 22px; height: 22px; border-radius: 50%; border: 3px solid rgba(255,255,255,.35); border-top-color: #fff;
+             animation: spin .8s linear infinite; }
+
+  /* Audiogram */
+  .ag-dot { transition: r .15s ease; }
+  .ag-node:focus { outline: none; }
+  .ag-node:focus-visible .ag-dot { stroke: #4B5E48; stroke-width: 4; }
+  .sound-item { position: absolute; transform: translate(-50%, -50%); pointer-events: auto; background: none; border: 0; padding: 0;
+                cursor: pointer; line-height: 1; transition: filter .3s ease, opacity .3s ease, transform .2s ease; }
+  .sound-item:hover { transform: translate(-50%, -50%) scale(1.15); }
+  .sound-item.inaudible { filter: grayscale(100%); opacity: .22; pointer-events: none; }
+  .sound-emoji { font-size: clamp(16px, 5.2vw, 26px); filter: drop-shadow(0 2px 3px rgba(0,0,0,.12)); }
+  .sound-text { font-size: clamp(9px, 2.6vw, 13px); @apply font-extrabold text-blue-600 bg-white/80 px-1.5 py-0.5 rounded whitespace-nowrap; }
+
+  /* Chat */
+  .chat-box { @apply bg-bgcard rounded-2xl p-3 sm:p-4 overflow-y-auto flex flex-col gap-3;
+              height: clamp(260px, 52vh, 460px); overscroll-behavior: contain; }
+  .msg { @apply max-w-[88%] px-3.5 py-2.5 rounded-2xl text-sm leading-normal; animation: pop .22s ease-out; }
+  .msg-bot { @apply bg-white self-start rounded-bl-sm shadow-sm; }
+  .msg-user { @apply bg-sage-dark text-white self-end rounded-br-sm; }
+  .node-tag { @apply text-[10px] font-semibold bg-sage-light/70 text-sage-dark px-1.5 py-0.5 rounded; }
+  .typing { display: flex; gap: 4px; }
+  .typing i { width: 6px; height: 6px; border-radius: 50%; background: #6E826B; animation: blink 1s infinite; }
+  .typing i:nth-child(2) { animation-delay: .15s; } .typing i:nth-child(3) { animation-delay: .3s; }
+  .no-scrollbar { scrollbar-width: none; } .no-scrollbar::-webkit-scrollbar { display: none; }
+
+  /* Khung app */
+  .status-dot { @apply text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide; }
+  .status-dot.online { @apply bg-accent/40 text-sage-dark; }
+  .status-dot.offline { @apply bg-orange-100 text-orange-700; }
+  .status-dot.checking { @apply bg-sage-light text-muted; }
+  .tab-enter { animation: fadeUp .22s ease-out; }
+  .mascot { position: fixed; z-index: 20; font-size: clamp(30px, 8vw, 44px); background: none; border: 0;
+            bottom: calc(4.6rem + env(safe-area-inset-bottom)); right: 12px;
+            filter: drop-shadow(0 3px 6px rgba(0,0,0,.15)); transition: transform .2s; }
+  .mascot:hover { transform: translateY(-3px) rotate(-4deg); }
+  .bottom-nav { position: fixed; inset-inline: 0; bottom: 0; z-index: 30; @apply bg-bgcard border-t border-sage-light;
+                padding-bottom: env(safe-area-inset-bottom); }
+  .nav-inner { @apply w-full max-w-[560px] mx-auto flex justify-around items-center h-16; }
+  .nav-tab { @apply flex items-center gap-1.5 text-sm font-bold px-3 sm:px-4 py-2 rounded-xl text-muted transition-colors; }
+  .nav-tab.active { @apply text-ink bg-sage-mid/15; }
+}
+
+/* màn rất hẹp: chỉ còn icon trên thanh điều hướng, mascot ẩn bớt để không che nội dung */
+@media (max-width: 359px) { .nav-label { display: none; } .nav-tab { font-size: 1.25rem; } }
+@media (max-height: 560px) { .mascot { display: none; } }
+/* màn rộng: linh vật nằm ngoài cột nội dung 560px -> không bao giờ che chữ */
+@media (min-width: 820px) { .mascot { right: auto; left: calc(50% + 296px); } }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes pop { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: none; } }
+@keyframes blink { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* tôn trọng người dùng tắt hiệu ứng chuyển động */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}

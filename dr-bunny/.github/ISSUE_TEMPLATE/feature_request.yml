@@ -1,0 +1,15 @@
+name: Đề xuất tính năng
+description: Ý tưởng cải tiến
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes: { label: Vấn đề cần giải quyết, description: "Người dùng nào gặp khó khăn gì?" }
+    validations: { required: true }
+  - type: textarea
+    id: proposal
+    attributes: { label: Đề xuất }
+    validations: { required: true }
+  - type: dropdown
+    id: area
+    attributes: { label: Phần liên quan, options: [Mô hình thính học / DSP, Giao diện, Bác sĩ Thỏ (GraphRAG/LLM), App mobile, Hạ tầng / CI, Tài liệu] }

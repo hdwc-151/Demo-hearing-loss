@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+# Node / web
+node_modules/
+frontend/dist/
+frontend/dist-demo/
+*.log
+# Secrets & môi trường
+.env
+.env.local
+*.pem
+*.p12
+*.keystore
+*.jks
+# Mô hình / dữ liệu lớn
+*.pt
+*.pth
+# Hệ điều hành & trình soạn thảo
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+# Playwright
+test-results/
+playwright-report/
+# Sản phẩm build của app mobile (dự án native được GIỮ trong git; chỉ bỏ file sinh ra)
+frontend/android/app/build/
+frontend/android/.gradle/
+frontend/android/local.properties
+frontend/android/app/src/main/assets/public/
+frontend/android/app/src/main/assets/capacitor.config.json
+frontend/android/app/src/main/assets/capacitor.plugins.json
+frontend/android/capacitor-cordova-android-plugins/
+frontend/ios/App/App/public/
+frontend/ios/App/App/capacitor.config.json
+frontend/ios/App/build/
+frontend/ios/DerivedData/

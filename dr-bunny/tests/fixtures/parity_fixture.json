@@ -1,0 +1,3398 @@
+{
+ "version": 3,
+ "cases": [
+  {
+   "lang": "vi",
+   "text": "Vâng, của bác xong hết rồi ạ. Tổng cộng hóa đơn là 276 nghìn.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": " âng, của bác  ong  ết  ồi ạ. Tổng cộng  óa đơn là 276 nghìn."
+  },
+  {
+   "lang": "vi",
+   "text": "Vâng, của bác xong hết rồi ạ. Tổng cộng hóa đơn là 276 nghìn.",
+   "level": "Mild",
+   "dialect": "south",
+   "expected": " âng, của bác  ong  ết rồi ạ. Tổng cộng  óa đơn là 276 nghìn."
+  },
+  {
+   "lang": "vi",
+   "text": "Vâng, của bác xong hết rồi ạ. Tổng cộng hóa đơn là 276 nghìn.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": " âng,  ủa bá   ong  ế   ồi ạ.  ổng  ộng  óa đơn là 276 nghìn."
+  },
+  {
+   "lang": "vi",
+   "text": "Vâng, của bác xong hết rồi ạ. Tổng cộng hóa đơn là 276 nghìn.",
+   "level": "Moderate",
+   "dialect": "south",
+   "expected": " âng,  ủa bá   ong  ế  rồi ạ.  ổng  ộng  óa đơn là 276 nghìn."
+  },
+  {
+   "lang": "vi",
+   "text": "Vâng, của bác xong hết rồi ạ. Tổng cộng hóa đơn là 276 nghìn.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": " â  ,  ủa  á   o    ế   ồi ạ.  ổ    ộ    óa  ơ   à 276    ì ."
+  },
+  {
+   "lang": "vi",
+   "text": "Vâng, của bác xong hết rồi ạ. Tổng cộng hóa đơn là 276 nghìn.",
+   "level": "Severe",
+   "dialect": "south",
+   "expected": " â  ,  ủa  á   o    ế   ồi ạ.  ổ    ộ    óa  ơ   à 276    ì ."
+  },
+  {
+   "lang": "vi",
+   "text": "Bố ơi, cuối tuần này vợ chồng con đưa hai cháu về quê thăm bố mẹ nhé.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": "Bố ơi, cuối tuần này  ợ chồng con đưa  ai cháu  ề quê   ăm bố mẹ nhé."
+  },
+  {
+   "lang": "vi",
+   "text": "Bố ơi, cuối tuần này vợ chồng con đưa hai cháu về quê thăm bố mẹ nhé.",
+   "level": "Mild",
+   "dialect": "south",
+   "expected": "Bố ơi, cuối tuần này  ợ chồng con đưa  ai cháu  ề quê   ăm bố mẹ nhé."
+  },
+  {
+   "lang": "vi",
+   "text": "Bố ơi, cuối tuần này vợ chồng con đưa hai cháu về quê thăm bố mẹ nhé.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": "Bố ơi,  uối  uần này  ợ   ồng  on đưa  ai   áu  ề   ê   ăm bố mẹ nhé."
+  },
+  {
+   "lang": "vi",
+   "text": "Bố ơi, cuối tuần này vợ chồng con đưa hai cháu về quê thăm bố mẹ nhé.",
+   "level": "Moderate",
+   "dialect": "south",
+   "expected": "Bố ơi,  uối  uần này  ợ   ồng  on đưa  ai   áu  ề   ê   ăm bố mẹ nhé."
+  },
+  {
+   "lang": "vi",
+   "text": "Bố ơi, cuối tuần này vợ chồng con đưa hai cháu về quê thăm bố mẹ nhé.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": " ố ơi,  uối  uầ   ày  ợ   ồ    o   ưa  ai   áu  ề   ê   ă   ố  ẹ   é."
+  },
+  {
+   "lang": "vi",
+   "text": "Bố ơi, cuối tuần này vợ chồng con đưa hai cháu về quê thăm bố mẹ nhé.",
+   "level": "Severe",
+   "dialect": "south",
+   "expected": " ố ơi,  uối  uầ   ày  ợ   ồ    o   ưa  ai   áu  ề   ê   ă   ố  ẹ   é."
+  },
+  {
+   "lang": "vi",
+   "text": "Chúng ta rà soát lại tiến độ dự án trước khi chốt ngân sách quý ba.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": "Chúng ta  à  oát lại tiến độ  ự án trước   i chốt ngân  ách quý ba."
+  },
+  {
+   "lang": "vi",
+   "text": "Chúng ta rà soát lại tiến độ dự án trước khi chốt ngân sách quý ba.",
+   "level": "Mild",
+   "dialect": "south",
+   "expected": "Chúng ta rà  oát lại tiến độ dự án trước   i chốt ngân  ách quý ba."
+  },
+  {
+   "lang": "vi",
+   "text": "Chúng ta rà soát lại tiến độ dự án trước khi chốt ngân sách quý ba.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": "  úng  a  à  oá  lại  iến độ  ự án   ướ    i   ố  ngân  á     ý ba."
+  },
+  {
+   "lang": "vi",
+   "text": "Chúng ta rà soát lại tiến độ dự án trước khi chốt ngân sách quý ba.",
+   "level": "Moderate",
+   "dialect": "south",
+   "expected": "  úng  a rà  oá  lại  iến độ dự án   ướ    i   ố  ngân  á     ý ba."
+  },
+  {
+   "lang": "vi",
+   "text": "Chúng ta rà soát lại tiến độ dự án trước khi chốt ngân sách quý ba.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": "  ú    a  à  oá   ại  iế   ộ  ự á    ướ    i   ố    â   á     ý  a."
+  },
+  {
+   "lang": "vi",
+   "text": "Chúng ta rà soát lại tiến độ dự án trước khi chốt ngân sách quý ba.",
+   "level": "Severe",
+   "dialect": "south",
+   "expected": "  ú    a  à  oá   ại  iế   ộ  ự á    ướ    i   ố    â   á     ý  a."
+  },
+  {
+   "lang": "vi",
+   "text": "Em ơi, cho bàn anh xin thêm ít khăn giấy và thanh toán luôn nhé!",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": "Em ơi, cho bàn anh  in   êm ít   ăn   ấy  à   anh toán luôn nhé!"
+  },
+  {
+   "lang": "vi",
+   "text": "Em ơi, cho bàn anh xin thêm ít khăn giấy và thanh toán luôn nhé!",
+   "level": "Mild",
+   "dialect": "south",
+   "expected": "Em ơi, cho bàn anh  in   êm ít   ăn giấy  à   anh toán luôn nhé!"
+  },
+  {
+   "lang": "vi",
+   "text": "Em ơi, cho bàn anh xin thêm ít khăn giấy và thanh toán luôn nhé!",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": "Em ơi,   o bàn anh  in   êm í    ăn   ấy  à   anh  oán luôn nhé!"
+  },
+  {
+   "lang": "vi",
+   "text": "Em ơi, cho bàn anh xin thêm ít khăn giấy và thanh toán luôn nhé!",
+   "level": "Moderate",
+   "dialect": "south",
+   "expected": "Em ơi,   o bàn anh  in   êm í    ăn giấy  à   anh  oán luôn nhé!"
+  },
+  {
+   "lang": "vi",
+   "text": "Em ơi, cho bàn anh xin thêm ít khăn giấy và thanh toán luôn nhé!",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": "E  ơi,   o  à  a    i    ê  í    ă    ấy  à   a    oá   uô    é!"
+  },
+  {
+   "lang": "vi",
+   "text": "Em ơi, cho bàn anh xin thêm ít khăn giấy và thanh toán luôn nhé!",
+   "level": "Severe",
+   "dialect": "south",
+   "expected": "E  ơi,   o  à  a    i    ê  í    ă    ấy  à   a    oá   uô    é!"
+  },
+  {
+   "lang": "vi",
+   "text": "Đứng gần cổng chính thôi nhé! Bên kia đang đông lắm.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": "Đứng gần cổng chính   ôi nhé! Bên kia đang đông lắm."
+  },
+  {
+   "lang": "vi",
+   "text": "Đứng gần cổng chính thôi nhé! Bên kia đang đông lắm.",
+   "level": "Mild",
+   "dialect": "south",
+   "expected": "Đứng gần cổng chính   ôi nhé! Bên kia đang đông lắm."
+  },
+  {
+   "lang": "vi",
+   "text": "Đứng gần cổng chính thôi nhé! Bên kia đang đông lắm.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": "Đứng gần  ổng   ính   ôi nhé! Bên  ia đang đông lắm."
+  },
+  {
+   "lang": "vi",
+   "text": "Đứng gần cổng chính thôi nhé! Bên kia đang đông lắm.",
+   "level": "Moderate",
+   "dialect": "south",
+   "expected": "Đứng gần  ổng   ính   ôi nhé! Bên  ia đang đông lắm."
+  },
+  {
+   "lang": "vi",
+   "text": "Đứng gần cổng chính thôi nhé! Bên kia đang đông lắm.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": " ứ    ầ   ổ     í     ôi   é!  ê   ia  a    ô    ắ ."
+  },
+  {
+   "lang": "vi",
+   "text": "Đứng gần cổng chính thôi nhé! Bên kia đang đông lắm.",
+   "level": "Severe",
+   "dialect": "south",
+   "expected": " ứ    ầ   ổ     í     ôi   é!  ê   ia  a    ô    ắ ."
+  },
+  {
+   "lang": "vi",
+   "text": "Rẽ phải ở lối ra tiếp theo, rồi rẽ trái ngay ngã tư đèn đỏ nhé.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": " ẽ   ải ở lối  a tiếp   eo,  ồi  ẽ trái ngay ngã tư đèn đỏ nhé."
+  },
+  {
+   "lang": "vi",
+   "text": "Rẽ phải ở lối ra tiếp theo, rồi rẽ trái ngay ngã tư đèn đỏ nhé.",
+   "level": "Mild",
+   "dialect": "south",
+   "expected": "Rẽ   ải ở lối ra tiếp   eo, rồi rẽ trái ngay ngã tư đèn đỏ nhé."
+  },
+  {
+   "lang": "vi",
+   "text": "Rẽ phải ở lối ra tiếp theo, rồi rẽ trái ngay ngã tư đèn đỏ nhé.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": " ẽ   ải ở lối  a  iế    eo,  ồi  ẽ   ái ngay ngã  ư đèn đỏ nhé."
+  },
+  {
+   "lang": "vi",
+   "text": "Rẽ phải ở lối ra tiếp theo, rồi rẽ trái ngay ngã tư đèn đỏ nhé.",
+   "level": "Moderate",
+   "dialect": "south",
+   "expected": "Rẽ   ải ở lối ra  iế    eo, rồi rẽ   ái ngay ngã  ư đèn đỏ nhé."
+  },
+  {
+   "lang": "vi",
+   "text": "Rẽ phải ở lối ra tiếp theo, rồi rẽ trái ngay ngã tư đèn đỏ nhé.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": " ẽ   ải ở  ối  a  iế    eo,  ồi  ẽ   ái   ay   ã  ư  è   ỏ   é."
+  },
+  {
+   "lang": "vi",
+   "text": "Rẽ phải ở lối ra tiếp theo, rồi rẽ trái ngay ngã tư đèn đỏ nhé.",
+   "level": "Severe",
+   "dialect": "south",
+   "expected": " ẽ   ải ở  ối  a  iế    eo,  ồi  ẽ   ái   ay   ã  ư  è   ỏ   é."
+  },
+  {
+   "lang": "vi",
+   "text": "Hãy lắng nghe tiếng violin vút cao hòa cùng tiếng sáo trúc.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": " ãy lắng nghe tiếng  iolin  út cao  òa cùng tiếng  áo trúc."
+  },
+  {
+   "lang": "vi",
+   "text": "Hãy lắng nghe tiếng violin vút cao hòa cùng tiếng sáo trúc.",
+   "level": "Mild",
+   "dialect": "south",
+   "expected": " ãy lắng nghe tiếng  iolin  út cao  òa cùng tiếng  áo trúc."
+  },
+  {
+   "lang": "vi",
+   "text": "Hãy lắng nghe tiếng violin vút cao hòa cùng tiếng sáo trúc.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": " ãy lắng nghe  iếng  iolin  ú   ao  òa  ùng  iếng  áo   ú ."
+  },
+  {
+   "lang": "vi",
+   "text": "Hãy lắng nghe tiếng violin vút cao hòa cùng tiếng sáo trúc.",
+   "level": "Moderate",
+   "dialect": "south",
+   "expected": " ãy lắng nghe  iếng  iolin  ú   ao  òa  ùng  iếng  áo   ú ."
+  },
+  {
+   "lang": "vi",
+   "text": "Hãy lắng nghe tiếng violin vút cao hòa cùng tiếng sáo trúc.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": " ãy  ắ      e  iế    ioli   ú   ao  òa  ù    iế    áo   ú ."
+  },
+  {
+   "lang": "vi",
+   "text": "Hãy lắng nghe tiếng violin vút cao hòa cùng tiếng sáo trúc.",
+   "level": "Severe",
+   "dialect": "south",
+   "expected": " ãy  ắ      e  iế    ioli   ú   ao  òa  ù    iế    áo   ú ."
+  },
+  {
+   "lang": "vi",
+   "text": "Dạ sáng thứ Bảy tụi con đi sớm cho kịp ăn trưa ạ.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": " ạ  áng   ứ Bảy tụi con đi  ớm cho kịp ăn trưa ạ."
+  },
+  {
+   "lang": "vi",
+   "text": "Dạ sáng thứ Bảy tụi con đi sớm cho kịp ăn trưa ạ.",
+   "level": "Mild",
+   "dialect": "south",
+   "expected": "Dạ  áng   ứ Bảy tụi con đi  ớm cho kịp ăn trưa ạ."
+  },
+  {
+   "lang": "vi",
+   "text": "Dạ sáng thứ Bảy tụi con đi sớm cho kịp ăn trưa ạ.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": " ạ  áng   ứ Bảy  ụi  on đi  ớm   o  ị  ăn   ưa ạ."
+  },
+  {
+   "lang": "vi",
+   "text": "Dạ sáng thứ Bảy tụi con đi sớm cho kịp ăn trưa ạ.",
+   "level": "Moderate",
+   "dialect": "south",
+   "expected": "Dạ  áng   ứ Bảy  ụi  on đi  ớm   o  ị  ăn   ưa ạ."
+  },
+  {
+   "lang": "vi",
+   "text": "Dạ sáng thứ Bảy tụi con đi sớm cho kịp ăn trưa ạ.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": " ạ  á     ứ  ảy  ụi  o   i  ớ    o  ị  ă    ưa ạ."
+  },
+  {
+   "lang": "vi",
+   "text": "Dạ sáng thứ Bảy tụi con đi sớm cho kịp ăn trưa ạ.",
+   "level": "Severe",
+   "dialect": "south",
+   "expected": " ạ  á     ứ  ảy  ụi  o   i  ớ    o  ị  ă    ưa ạ."
+  },
+  {
+   "lang": "vi",
+   "text": "gì gia giêng gà nghe nhanh sáng kịp con mắt măng ông quà xin chào",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": " ì   a   êng gà nghe nhanh  áng kịp con mắt măng ông quà  in chào"
+  },
+  {
+   "lang": "vi",
+   "text": "gì gia giêng gà nghe nhanh sáng kịp con mắt măng ông quà xin chào",
+   "level": "Mild",
+   "dialect": "south",
+   "expected": "gì gia giêng gà nghe nhanh  áng kịp con mắt măng ông quà  in chào"
+  },
+  {
+   "lang": "vi",
+   "text": "gì gia giêng gà nghe nhanh sáng kịp con mắt măng ông quà xin chào",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": " ì   a   êng gà nghe nhanh  áng  ị   on mắ  măng ông   à  in   ào"
+  },
+  {
+   "lang": "vi",
+   "text": "gì gia giêng gà nghe nhanh sáng kịp con mắt măng ông quà xin chào",
+   "level": "Moderate",
+   "dialect": "south",
+   "expected": "gì gia giêng gà nghe nhanh  áng  ị   on mắ  măng ông   à  in   ào"
+  },
+  {
+   "lang": "vi",
+   "text": "gì gia giêng gà nghe nhanh sáng kịp con mắt măng ông quà xin chào",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": " ì   a   ê    à    e   a    á    ị   o   ắ   ă   ô     à  i    ào"
+  },
+  {
+   "lang": "vi",
+   "text": "gì gia giêng gà nghe nhanh sáng kịp con mắt măng ông quà xin chào",
+   "level": "Severe",
+   "dialect": "south",
+   "expected": " ì   a   ê    à    e   a    á    ị   o   ắ   ă   ô     à  i    ào"
+  },
+  {
+   "lang": "vi",
+   "text": "ngh nh ng gh ph th kh tr ch qu",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": "ngh nh ng gh          tr ch qu"
+  },
+  {
+   "lang": "vi",
+   "text": "ngh nh ng gh ph th kh tr ch qu",
+   "level": "Mild",
+   "dialect": "south",
+   "expected": "ngh nh ng gh          tr ch qu"
+  },
+  {
+   "lang": "vi",
+   "text": "ngh nh ng gh ph th kh tr ch qu",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": "ngh nh ng gh                  "
+  },
+  {
+   "lang": "vi",
+   "text": "ngh nh ng gh ph th kh tr ch qu",
+   "level": "Moderate",
+   "dialect": "south",
+   "expected": "ngh nh ng gh                  "
+  },
+  {
+   "lang": "vi",
+   "text": "ngh nh ng gh ph th kh tr ch qu",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": "                              "
+  },
+  {
+   "lang": "vi",
+   "text": "ngh nh ng gh ph th kh tr ch qu",
+   "level": "Severe",
+   "dialect": "south",
+   "expected": "                              "
+  },
+  {
+   "lang": "vi",
+   "text": "Tiếng nước nhỏ giọt, chó sủa, máy hút bụi, pháo hoa!",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": "Tiếng nước nhỏ   ọt, chó  ủa, máy  út bụi,   áo  oa!"
+  },
+  {
+   "lang": "vi",
+   "text": "Tiếng nước nhỏ giọt, chó sủa, máy hút bụi, pháo hoa!",
+   "level": "Mild",
+   "dialect": "south",
+   "expected": "Tiếng nước nhỏ giọt, chó  ủa, máy  út bụi,   áo  oa!"
+  },
+  {
+   "lang": "vi",
+   "text": "Tiếng nước nhỏ giọt, chó sủa, máy hút bụi, pháo hoa!",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": " iếng nướ  nhỏ   ọ ,   ó  ủa, máy  ú  bụi,   áo  oa!"
+  },
+  {
+   "lang": "vi",
+   "text": "Tiếng nước nhỏ giọt, chó sủa, máy hút bụi, pháo hoa!",
+   "level": "Moderate",
+   "dialect": "south",
+   "expected": " iếng nướ  nhỏ giọ ,   ó  ủa, máy  ú  bụi,   áo  oa!"
+  },
+  {
+   "lang": "vi",
+   "text": "Tiếng nước nhỏ giọt, chó sủa, máy hút bụi, pháo hoa!",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": " iế    ướ    ỏ   ọ ,   ó  ủa,  áy  ú   ụi,   áo  oa!"
+  },
+  {
+   "lang": "vi",
+   "text": "Tiếng nước nhỏ giọt, chó sủa, máy hút bụi, pháo hoa!",
+   "level": "Severe",
+   "dialect": "south",
+   "expected": " iế    ướ    ỏ   ọ ,   ó  ủa,  áy  ú   ụi,   áo  oa!"
+  },
+  {
+   "lang": "vi",
+   "text": "Chim hót 4500 Hz; xe tải 98 dB.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": "Chim  ót 4500   ;  e tải 98  B."
+  },
+  {
+   "lang": "vi",
+   "text": "Chim hót 4500 Hz; xe tải 98 dB.",
+   "level": "Mild",
+   "dialect": "south",
+   "expected": "Chim  ót 4500   ;  e tải 98 dB."
+  },
+  {
+   "lang": "vi",
+   "text": "Chim hót 4500 Hz; xe tải 98 dB.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": "  im  ó  4500   ;  e  ải 98  B."
+  },
+  {
+   "lang": "vi",
+   "text": "Chim hót 4500 Hz; xe tải 98 dB.",
+   "level": "Moderate",
+   "dialect": "south",
+   "expected": "  im  ó  4500   ;  e  ải 98 dB."
+  },
+  {
+   "lang": "vi",
+   "text": "Chim hót 4500 Hz; xe tải 98 dB.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": "  i   ó  4500   ;  e  ải 98  B."
+  },
+  {
+   "lang": "vi",
+   "text": "Chim hót 4500 Hz; xe tải 98 dB.",
+   "level": "Severe",
+   "dialect": "south",
+   "expected": "  i   ó  4500   ;  e  ải 98  B."
+  },
+  {
+   "lang": "vi",
+   "text": "dơ ra đi về dòng sông",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": " ơ  a đi  ề  òng  ông"
+  },
+  {
+   "lang": "vi",
+   "text": "dơ ra đi về dòng sông",
+   "level": "Mild",
+   "dialect": "south",
+   "expected": "dơ ra đi  ề dòng  ông"
+  },
+  {
+   "lang": "vi",
+   "text": "dơ ra đi về dòng sông",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": " ơ  a đi  ề  òng  ông"
+  },
+  {
+   "lang": "vi",
+   "text": "dơ ra đi về dòng sông",
+   "level": "Moderate",
+   "dialect": "south",
+   "expected": "dơ ra đi  ề dòng  ông"
+  },
+  {
+   "lang": "vi",
+   "text": "dơ ra đi về dòng sông",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": " ơ  a  i  ề  ò    ô  "
+  },
+  {
+   "lang": "vi",
+   "text": "dơ ra đi về dòng sông",
+   "level": "Severe",
+   "dialect": "south",
+   "expected": " ơ  a  i  ề  ò    ô  "
+  },
+  {
+   "lang": "vi",
+   "text": "Vâng, của bác xong hết rồi ạ. Tổng cộng hóa đơn là 276 nghìn.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": " âng, của bác  ong  ết  ồi ạ. Tổng cộng  óa đơn là 276 nghìn."
+  },
+  {
+   "lang": "vi",
+   "text": "Vâng, của bác xong hết rồi ạ. Tổng cộng hóa đơn là 276 nghìn.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": " âng,  ủa bá   ong  ế   ồi ạ.  ổng  ộng  óa đơn là 276 nghìn."
+  },
+  {
+   "lang": "vi",
+   "text": "Vâng, của bác xong hết rồi ạ. Tổng cộng hóa đơn là 276 nghìn.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": " â  ,  ủa  á   o    ế   ồi ạ.  ổ    ộ    óa  ơ   à 276    ì ."
+  },
+  {
+   "lang": "vi",
+   "text": "Bố ơi, cuối tuần này vợ chồng con đưa hai cháu về quê thăm bố mẹ nhé.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": "Bố ơi, cuối tuần này  ợ chồng con đưa  ai cháu  ề quê   ăm bố mẹ nhé."
+  },
+  {
+   "lang": "vi",
+   "text": "Bố ơi, cuối tuần này vợ chồng con đưa hai cháu về quê thăm bố mẹ nhé.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": "Bố ơi,  uối  uần này  ợ   ồng  on đưa  ai   áu  ề   ê   ăm bố mẹ nhé."
+  },
+  {
+   "lang": "vi",
+   "text": "Bố ơi, cuối tuần này vợ chồng con đưa hai cháu về quê thăm bố mẹ nhé.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": " ố ơi,  uối  uầ   ày  ợ   ồ    o   ưa  ai   áu  ề   ê   ă   ố  ẹ   é."
+  },
+  {
+   "lang": "vi",
+   "text": "Chúng ta rà soát lại tiến độ dự án trước khi chốt ngân sách quý ba.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": "Chúng ta  à  oát lại tiến độ  ự án trước   i chốt ngân  ách quý ba."
+  },
+  {
+   "lang": "vi",
+   "text": "Chúng ta rà soát lại tiến độ dự án trước khi chốt ngân sách quý ba.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": "  úng  a  à  oá  lại  iến độ  ự án   ướ    i   ố  ngân  á     ý ba."
+  },
+  {
+   "lang": "vi",
+   "text": "Chúng ta rà soát lại tiến độ dự án trước khi chốt ngân sách quý ba.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": "  ú    a  à  oá   ại  iế   ộ  ự á    ướ    i   ố    â   á     ý  a."
+  },
+  {
+   "lang": "en",
+   "text": "Thanks, the night shift caught the whole street.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": "  ank ,   e night   i t caught   e whole  treet."
+  },
+  {
+   "lang": "en",
+   "text": "Thanks, the night shift caught the whole street.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": "  an  ,   e ni      i    au      e w ole    ee ."
+  },
+  {
+   "lang": "en",
+   "text": "Thanks, the night shift caught the whole street.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": "  a   ,   e  i      i    au      e   o e    ee ."
+  },
+  {
+   "lang": "en",
+   "text": "She thought the physics graph looked rough through the fog.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": "  e   ought   e   y ic  gra   looked rough   rough   e  og."
+  },
+  {
+   "lang": "en",
+   "text": "She thought the physics graph looked rough through the fog.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": "  e   ou      e   y i    ra   loo e  rou     rou     e  o ."
+  },
+  {
+   "lang": "en",
+   "text": "She thought the physics graph looked rough through the fog.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": "  e   ou      e     i     a    oo e   ou      ou     e  o ."
+  },
+  {
+   "lang": "en",
+   "text": "Khaki shorts, a shiny watch and a bright phone.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": "  aki   ort , a   iny watch and a bright   one."
+  },
+  {
+   "lang": "en",
+   "text": "Khaki shorts, a shiny watch and a bright phone.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": "  a i   or  , a   iny wa    an  a  ri      one."
+  },
+  {
+   "lang": "en",
+   "text": "Khaki shorts, a shiny watch and a bright phone.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": "  a i   o   , a   i    a    a   a   i      o e."
+  },
+  {
+   "lang": "en",
+   "text": "Let's review the Q3 forecast before we finalize the budget.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": "Let'  re iew   e Q3  oreca t be ore we  inali e   e budget."
+  },
+  {
+   "lang": "en",
+   "text": "Let's review the Q3 forecast before we finalize the budget.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": "Le '  re iew   e  3  ore a    e ore we  inali e   e  u  e ."
+  },
+  {
+   "lang": "en",
+   "text": "Let's review the Q3 forecast before we finalize the budget.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": " e '   e ie    e     o e a    e o e  e  i a i e   e  u  e ."
+  },
+  {
+   "lang": "en",
+   "text": "THE NIGHT SHIFT CAUGHT THE WHOLE STREET.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": "  E NIGHT   I T CAUGHT   E WHOLE  TREET."
+  },
+  {
+   "lang": "en",
+   "text": "THE NIGHT SHIFT CAUGHT THE WHOLE STREET.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": "  E NI      I    AU      E W OLE    EE ."
+  },
+  {
+   "lang": "en",
+   "text": "THE NIGHT SHIFT CAUGHT THE WHOLE STREET.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": "  E  I      I    AU      E   O E    EE ."
+  },
+  {
+   "lang": "en",
+   "text": "Your total is $27.60; the bus costs 12 dollars.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": "Your total i  $27.60;   e bu  co t  12 dollar ."
+  },
+  {
+   "lang": "en",
+   "text": "Your total is $27.60; the bus costs 12 dollars.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": "Your  o al i  $27.60;   e  u   o    12  ollar ."
+  },
+  {
+   "lang": "en",
+   "text": "Your total is $27.60; the bus costs 12 dollars.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": " ou   o a  i  $  .  ;   e  u   o        o  a  ."
+  },
+  {
+   "lang": "en",
+   "text": "Listen to the high violin notes blending with the soft flute.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": "Li ten to   e high  iolin note  blending wi     e  o t  lute."
+  },
+  {
+   "lang": "en",
+   "text": "Listen to the high violin notes blending with the soft flute.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": "Li  en  o   e  i    iolin no e   len in  wi     e  o    lu e."
+  },
+  {
+   "lang": "en",
+   "text": "Listen to the high violin notes blending with the soft flute.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": " i  e   o   e  i    io i   o e    e  i    i     e  o     u e."
+  },
+  {
+   "lang": "en",
+   "text": "ghost ghth thr tch chth sth",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": "gho t gh     r tch ch      "
+  },
+  {
+   "lang": "en",
+   "text": "ghost ghth thr tch chth sth",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": "  o          r             "
+  },
+  {
+   "lang": "en",
+   "text": "ghost ghth thr tch chth sth",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": "  o                        "
+  }
+ ],
+ "constants": {
+  "freqs": [
+   250,
+   500,
+   1000,
+   2000,
+   4000,
+   8000
+  ],
+  "level_presets": {
+   "Normal": [
+    10,
+    10,
+    10,
+    15,
+    15,
+    15
+   ],
+   "Mild": [
+    15,
+    20,
+    25,
+    35,
+    40,
+    45
+   ],
+   "Moderate": [
+    25,
+    35,
+    45,
+    55,
+    65,
+    70
+   ],
+   "Severe": [
+    55,
+    65,
+    75,
+    85,
+    95,
+    100
+   ]
+  },
+  "level_cutoff": {
+   "Normal": 8000,
+   "Mild": 2600,
+   "Moderate": 1100,
+   "Severe": 420
+  },
+  "level_noise_gain": {
+   "Normal": 0.03,
+   "Mild": 0.12,
+   "Moderate": 0.28,
+   "Severe": 0.45
+  },
+  "scenarios": {
+   "shopping": {
+    "noise_freq": 1800,
+    "noise_q": 1.2
+   },
+   "conversation": {
+    "noise_freq": 600,
+    "noise_q": 0.7
+   },
+   "meeting": {
+    "noise_freq": 1000,
+    "noise_q": 1.0
+   },
+   "restaurant": {
+    "noise_freq": 1400,
+    "noise_q": 0.6
+   },
+   "crowd": {
+    "noise_freq": 900,
+    "noise_q": 0.5
+   },
+   "car": {
+    "noise_freq": 220,
+    "noise_q": 2.0
+   },
+   "music": {
+    "noise_freq": 3200,
+    "noise_q": 1.5
+   }
+  },
+  "sound_items": [
+   {
+    "id": "water",
+    "label": "Vòi nước",
+    "freq": 250,
+    "db": 20
+   },
+   {
+    "id": "ph_low",
+    "label": "Nguyên âm & âm trầm",
+    "freq": 380,
+    "db": 42
+   },
+   {
+    "id": "ph_mid",
+    "label": "Phụ âm trung-cao",
+    "freq": 1800,
+    "db": 28
+   },
+   {
+    "id": "ph_high",
+    "label": "Phụ âm xát cao",
+    "freq": 5500,
+    "db": 22
+   },
+   {
+    "id": "talk",
+    "label": "Trò chuyện",
+    "freq": 1000,
+    "db": 45
+   },
+   {
+    "id": "birds",
+    "label": "Chim hót",
+    "freq": 4500,
+    "db": 15
+   },
+   {
+    "id": "dog",
+    "label": "Chó sủa",
+    "freq": 320,
+    "db": 70
+   },
+   {
+    "id": "vacuum",
+    "label": "Máy hút bụi",
+    "freq": 2600,
+    "db": 60
+   },
+   {
+    "id": "piano",
+    "label": "Đàn piano",
+    "freq": 1000,
+    "db": 80
+   },
+   {
+    "id": "truck",
+    "label": "Xe tải",
+    "freq": 250,
+    "db": 98
+   },
+   {
+    "id": "firework",
+    "label": "Pháo hoa",
+    "freq": 550,
+    "db": 105
+   },
+   {
+    "id": "plane",
+    "label": "Máy bay",
+    "freq": 3600,
+    "db": 105
+   },
+   {
+    "id": "moto",
+    "label": "Mô tô",
+    "freq": 7200,
+    "db": 98
+   }
+  ]
+ },
+ "graphrag": [
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "Ở siêu thị tôi nghe tiếng nhưng không rõ chữ, tại sao?",
+   "ids": [
+    "NOISY_ENVIRONMENT",
+    "HIGH_FREQ_LOSS"
+   ],
+   "scores": [
+    7.5,
+    4.0
+   ],
+   "hits": [
+    [
+     "sieu thi",
+     "nghe tieng",
+     "khong ro chu"
+    ],
+    [
+     "chu",
+     "khong ro"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Ở nơi ồn (siêu thị, nhà hàng, cuộc họp), tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe được nguyên âm nên biết có người nói, nhưng não phải tự đoán phụ âm → nghe nhầm và mệt mỏi thính giác. 👉 Chọn chỗ ngồi xa nguồn ồn, quay mặt về phía người nói, giảm tiếng TV/nhạc nền khi trò chuyện. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "Ở siêu thị tôi nghe tiếng nhưng không rõ chữ, tại sao?",
+   "ids": [
+    "NOISY_ENVIRONMENT",
+    "HIGH_FREQ_LOSS",
+    "LOW_MID_FREQ_LOSS"
+   ],
+   "scores": [
+    8.5,
+    5.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "sieu thi",
+     "nghe tieng",
+     "khong ro chu"
+    ],
+    [
+     "chu",
+     "khong ro"
+    ],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Ở nơi ồn (siêu thị, nhà hàng, cuộc họp), tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe được nguyên âm nên biết có người nói, nhưng não phải tự đoán phụ âm → nghe nhầm và mệt mỏi thính giác. 👉 Chọn chỗ ngồi xa nguồn ồn, quay mặt về phía người nói, giảm tiếng TV/nhạc nền khi trò chuyện. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "Ở siêu thị tôi nghe tiếng nhưng không rõ chữ, tại sao?",
+   "ids": [
+    "NOISY_ENVIRONMENT",
+    "HIGH_FREQ_LOSS",
+    "FAMILY_COMMUNICATION"
+   ],
+   "scores": [
+    8.5,
+    5.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "sieu thi",
+     "nghe tieng",
+     "khong ro chu"
+    ],
+    [
+     "chu",
+     "khong ro"
+    ],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Ở nơi ồn (siêu thị, nhà hàng, cuộc họp), tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe được nguyên âm nên biết có người nói, nhưng não phải tự đoán phụ âm → nghe nhầm và mệt mỏi thính giác. 👉 Chọn chỗ ngồi xa nguồn ồn, quay mặt về phía người nói, giảm tiếng TV/nhạc nền khi trò chuyện. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "Người nhà nên nói thế nào để tôi nghe dễ hơn?",
+   "ids": [
+    "FAMILY_COMMUNICATION"
+   ],
+   "scores": [
+    5.0
+   ],
+   "hits": [
+    [
+     "nguoi nha",
+     "noi the nao"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Người thân thường nói to hơn khi thấy ông bà nghe kém, nhưng nói to chủ yếu tăng âm trầm, không giúp phụ âm cao rõ hơn. 👉 3 nguyên tắc: nói chậm & rõ (không hét), nhìn thẳng mặt khi nói, giảm tiếng ồn nền trước khi trò chuyện. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "Người nhà nên nói thế nào để tôi nghe dễ hơn?",
+   "ids": [
+    "FAMILY_COMMUNICATION",
+    "HIGH_FREQ_LOSS",
+    "LOW_MID_FREQ_LOSS"
+   ],
+   "scores": [
+    6.0,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "nguoi nha",
+     "noi the nao"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Người thân thường nói to hơn khi thấy ông bà nghe kém, nhưng nói to chủ yếu tăng âm trầm, không giúp phụ âm cao rõ hơn. 👉 3 nguyên tắc: nói chậm & rõ (không hét), nhìn thẳng mặt khi nói, giảm tiếng ồn nền trước khi trò chuyện. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "Người nhà nên nói thế nào để tôi nghe dễ hơn?",
+   "ids": [
+    "FAMILY_COMMUNICATION",
+    "HIGH_FREQ_LOSS",
+    "NOISY_ENVIRONMENT"
+   ],
+   "scores": [
+    6.0,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "nguoi nha",
+     "noi the nao"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Người thân thường nói to hơn khi thấy ông bà nghe kém, nhưng nói to chủ yếu tăng âm trầm, không giúp phụ âm cao rõ hơn. 👉 3 nguyên tắc: nói chậm & rõ (không hét), nhìn thẳng mặt khi nói, giảm tiếng ồn nền trước khi trò chuyện. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "Tiếng chim hót sao tôi không nghe thấy?",
+   "ids": [
+    "HIGH_FREQ_LOSS"
+   ],
+   "scores": [
+    1.5
+   ],
+   "hits": [
+    [
+     "chim"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "Tiếng chim hót sao tôi không nghe thấy?",
+   "ids": [
+    "HIGH_FREQ_LOSS",
+    "LOW_MID_FREQ_LOSS",
+    "NOISY_ENVIRONMENT"
+   ],
+   "scores": [
+    2.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "chim"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. Dải trầm-trung (250–1000 Hz) cũng giảm nên âm thanh nói chung nhỏ đi rõ rệt, kể cả trong phòng yên tĩnh. 👉 Nên đo thính lực lâm sàng tại chuyên khoa Tai-Mũi-Họng để kiểm tra cả dẫn truyền khí và xương. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "Tiếng chim hót sao tôi không nghe thấy?",
+   "ids": [
+    "HIGH_FREQ_LOSS",
+    "NOISY_ENVIRONMENT",
+    "FAMILY_COMMUNICATION"
+   ],
+   "scores": [
+    2.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "chim"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. Ở nơi ồn (siêu thị, nhà hàng, cuộc họp), tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe được nguyên âm nên biết có người nói, nhưng não phải tự đoán phụ âm → nghe nhầm và mệt mỏi thính giác. 👉 Chọn chỗ ngồi xa nguồn ồn, quay mặt về phía người nói, giảm tiếng TV/nhạc nền khi trò chuyện. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "Nói to quá tôi thấy đau tai, sao vậy?",
+   "ids": [
+    "LOUDNESS_RECRUITMENT",
+    "FAMILY_COMMUNICATION"
+   ],
+   "scores": [
+    5.0,
+    2.5
+   ],
+   "hits": [
+    [
+     "to qua",
+     "dau tai"
+    ],
+    [
+     "noi to"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Với suy giảm tiếp nhận, khoảng cách giữa 'vừa nghe thấy' và 'quá to, khó chịu' bị thu hẹp (loudness recruitment): nói nhỏ thì không nghe, hét lên lại thấy chói. 👉 Giữ âm lượng vừa phải và ổn định, ưu tiên nói rõ thay vì nói to. Người thân thường nói to hơn khi thấy ông bà nghe kém, nhưng nói to chủ yếu tăng âm trầm, không giúp phụ âm cao rõ hơn. 👉 3 nguyên tắc: nói chậm & rõ (không hét), nhìn thẳng mặt khi nói, giảm tiếng ồn nền trước khi trò chuyện. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "Nói to quá tôi thấy đau tai, sao vậy?",
+   "ids": [
+    "LOUDNESS_RECRUITMENT",
+    "FAMILY_COMMUNICATION",
+    "HIGH_FREQ_LOSS"
+   ],
+   "scores": [
+    6.0,
+    3.5,
+    1.0
+   ],
+   "hits": [
+    [
+     "to qua",
+     "dau tai"
+    ],
+    [
+     "noi to"
+    ],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Với suy giảm tiếp nhận, khoảng cách giữa 'vừa nghe thấy' và 'quá to, khó chịu' bị thu hẹp (loudness recruitment): nói nhỏ thì không nghe, hét lên lại thấy chói. 👉 Giữ âm lượng vừa phải và ổn định, ưu tiên nói rõ thay vì nói to. Người thân thường nói to hơn khi thấy ông bà nghe kém, nhưng nói to chủ yếu tăng âm trầm, không giúp phụ âm cao rõ hơn. 👉 3 nguyên tắc: nói chậm & rõ (không hét), nhìn thẳng mặt khi nói, giảm tiếng ồn nền trước khi trò chuyện. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "Nói to quá tôi thấy đau tai, sao vậy?",
+   "ids": [
+    "LOUDNESS_RECRUITMENT",
+    "FAMILY_COMMUNICATION",
+    "HIGH_FREQ_LOSS"
+   ],
+   "scores": [
+    6.0,
+    3.5,
+    1.0
+   ],
+   "hits": [
+    [
+     "to qua",
+     "dau tai"
+    ],
+    [
+     "noi to"
+    ],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Với suy giảm tiếp nhận, khoảng cách giữa 'vừa nghe thấy' và 'quá to, khó chịu' bị thu hẹp (loudness recruitment): nói nhỏ thì không nghe, hét lên lại thấy chói. 👉 Giữ âm lượng vừa phải và ổn định, ưu tiên nói rõ thay vì nói to. Người thân thường nói to hơn khi thấy ông bà nghe kém, nhưng nói to chủ yếu tăng âm trầm, không giúp phụ âm cao rõ hơn. 👉 3 nguyên tắc: nói chậm & rõ (không hét), nhìn thẳng mặt khi nói, giảm tiếng ồn nền trước khi trò chuyện. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "Tôi có nên đi khám bác sĩ không?",
+   "ids": [
+    "SEEK_CARE"
+   ],
+   "scores": [
+    5.0
+   ],
+   "hits": [
+    [
+     "di kham",
+     "bac si"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Mức ngưỡng bạn đang mô phỏng nằm trong vùng nên được đo thính lực chuẩn để biết chính xác. 👉 Đặt lịch khám Tai-Mũi-Họng / trung tâm thính học; chỉ chuyên gia mới tư vấn máy trợ thính phù hợp. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "Tôi có nên đi khám bác sĩ không?",
+   "ids": [
+    "SEEK_CARE",
+    "HIGH_FREQ_LOSS",
+    "LOW_MID_FREQ_LOSS"
+   ],
+   "scores": [
+    6.0,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "di kham",
+     "bac si"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Mức ngưỡng bạn đang mô phỏng nằm trong vùng nên được đo thính lực chuẩn để biết chính xác. 👉 Đặt lịch khám Tai-Mũi-Họng / trung tâm thính học; chỉ chuyên gia mới tư vấn máy trợ thính phù hợp. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "Tôi có nên đi khám bác sĩ không?",
+   "ids": [
+    "SEEK_CARE",
+    "HIGH_FREQ_LOSS",
+    "NOISY_ENVIRONMENT"
+   ],
+   "scores": [
+    6.0,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "di kham",
+     "bac si"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Mức ngưỡng bạn đang mô phỏng nằm trong vùng nên được đo thính lực chuẩn để biết chính xác. 👉 Đặt lịch khám Tai-Mũi-Họng / trung tâm thính học; chỉ chuyên gia mới tư vấn máy trợ thính phù hợp. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "Tiếng nước nhỏ giọt sao nghe nhỏ thế?",
+   "ids": [
+    "LOW_MID_FREQ_LOSS"
+   ],
+   "scores": [
+    4.5
+   ],
+   "hits": [
+    [
+     "nho",
+     "giot",
+     "nuoc"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Dải trầm-trung (250–1000 Hz) cũng giảm nên âm thanh nói chung nhỏ đi rõ rệt, kể cả trong phòng yên tĩnh. 👉 Nên đo thính lực lâm sàng tại chuyên khoa Tai-Mũi-Họng để kiểm tra cả dẫn truyền khí và xương. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "Tiếng nước nhỏ giọt sao nghe nhỏ thế?",
+   "ids": [
+    "LOW_MID_FREQ_LOSS",
+    "HIGH_FREQ_LOSS",
+    "NOISY_ENVIRONMENT"
+   ],
+   "scores": [
+    5.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "nho",
+     "giot",
+     "nuoc"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Dải trầm-trung (250–1000 Hz) cũng giảm nên âm thanh nói chung nhỏ đi rõ rệt, kể cả trong phòng yên tĩnh. 👉 Nên đo thính lực lâm sàng tại chuyên khoa Tai-Mũi-Họng để kiểm tra cả dẫn truyền khí và xương. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "Tiếng nước nhỏ giọt sao nghe nhỏ thế?",
+   "ids": [
+    "LOW_MID_FREQ_LOSS",
+    "HIGH_FREQ_LOSS",
+    "NOISY_ENVIRONMENT"
+   ],
+   "scores": [
+    4.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "nho",
+     "giot",
+     "nuoc"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Dải trầm-trung (250–1000 Hz) cũng giảm nên âm thanh nói chung nhỏ đi rõ rệt, kể cả trong phòng yên tĩnh. 👉 Nên đo thính lực lâm sàng tại chuyên khoa Tai-Mũi-Họng để kiểm tra cả dẫn truyền khí và xương. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "Phụ âm s, t, k có bị mất không?",
+   "ids": [
+    "HIGH_FREQ_LOSS"
+   ],
+   "scores": [
+    4.0
+   ],
+   "hits": [
+    [
+     "phu am",
+     "s"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "Phụ âm s, t, k có bị mất không?",
+   "ids": [
+    "HIGH_FREQ_LOSS",
+    "LOW_MID_FREQ_LOSS",
+    "NOISY_ENVIRONMENT"
+   ],
+   "scores": [
+    5.0,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "phu am",
+     "s"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. Dải trầm-trung (250–1000 Hz) cũng giảm nên âm thanh nói chung nhỏ đi rõ rệt, kể cả trong phòng yên tĩnh. 👉 Nên đo thính lực lâm sàng tại chuyên khoa Tai-Mũi-Họng để kiểm tra cả dẫn truyền khí và xương. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "Phụ âm s, t, k có bị mất không?",
+   "ids": [
+    "HIGH_FREQ_LOSS",
+    "NOISY_ENVIRONMENT",
+    "FAMILY_COMMUNICATION"
+   ],
+   "scores": [
+    5.0,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "phu am",
+     "s"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. Ở nơi ồn (siêu thị, nhà hàng, cuộc họp), tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe được nguyên âm nên biết có người nói, nhưng não phải tự đoán phụ âm → nghe nhầm và mệt mỏi thính giác. 👉 Chọn chỗ ngồi xa nguồn ồn, quay mặt về phía người nói, giảm tiếng TV/nhạc nền khi trò chuyện. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "Quán cà phê đông người thì làm sao?",
+   "ids": [
+    "NOISY_ENVIRONMENT"
+   ],
+   "scores": [
+    5.0
+   ],
+   "hits": [
+    [
+     "dong nguoi",
+     "quan ca phe"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Ở nơi ồn (siêu thị, nhà hàng, cuộc họp), tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe được nguyên âm nên biết có người nói, nhưng não phải tự đoán phụ âm → nghe nhầm và mệt mỏi thính giác. 👉 Chọn chỗ ngồi xa nguồn ồn, quay mặt về phía người nói, giảm tiếng TV/nhạc nền khi trò chuyện. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "Quán cà phê đông người thì làm sao?",
+   "ids": [
+    "NOISY_ENVIRONMENT",
+    "HIGH_FREQ_LOSS",
+    "LOW_MID_FREQ_LOSS"
+   ],
+   "scores": [
+    6.0,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "dong nguoi",
+     "quan ca phe"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Ở nơi ồn (siêu thị, nhà hàng, cuộc họp), tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe được nguyên âm nên biết có người nói, nhưng não phải tự đoán phụ âm → nghe nhầm và mệt mỏi thính giác. 👉 Chọn chỗ ngồi xa nguồn ồn, quay mặt về phía người nói, giảm tiếng TV/nhạc nền khi trò chuyện. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "Quán cà phê đông người thì làm sao?",
+   "ids": [
+    "NOISY_ENVIRONMENT",
+    "HIGH_FREQ_LOSS",
+    "FAMILY_COMMUNICATION"
+   ],
+   "scores": [
+    6.0,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "dong nguoi",
+     "quan ca phe"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Ở nơi ồn (siêu thị, nhà hàng, cuộc họp), tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe được nguyên âm nên biết có người nói, nhưng não phải tự đoán phụ âm → nghe nhầm và mệt mỏi thính giác. 👉 Chọn chỗ ngồi xa nguồn ồn, quay mặt về phía người nói, giảm tiếng TV/nhạc nền khi trò chuyện. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "Bố mẹ tôi hay hét lên khi nói chuyện",
+   "ids": [
+    "FAMILY_COMMUNICATION",
+    "LOUDNESS_RECRUITMENT"
+   ],
+   "scores": [
+    5.0,
+    1.5
+   ],
+   "hits": [
+    [
+     "bo me",
+     "het len"
+    ],
+    [
+     "het"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Người thân thường nói to hơn khi thấy ông bà nghe kém, nhưng nói to chủ yếu tăng âm trầm, không giúp phụ âm cao rõ hơn. 👉 3 nguyên tắc: nói chậm & rõ (không hét), nhìn thẳng mặt khi nói, giảm tiếng ồn nền trước khi trò chuyện. Với suy giảm tiếp nhận, khoảng cách giữa 'vừa nghe thấy' và 'quá to, khó chịu' bị thu hẹp (loudness recruitment): nói nhỏ thì không nghe, hét lên lại thấy chói. 👉 Giữ âm lượng vừa phải và ổn định, ưu tiên nói rõ thay vì nói to. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "Bố mẹ tôi hay hét lên khi nói chuyện",
+   "ids": [
+    "FAMILY_COMMUNICATION",
+    "LOUDNESS_RECRUITMENT",
+    "HIGH_FREQ_LOSS"
+   ],
+   "scores": [
+    6.0,
+    2.5,
+    1.0
+   ],
+   "hits": [
+    [
+     "bo me",
+     "het len"
+    ],
+    [
+     "het"
+    ],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Người thân thường nói to hơn khi thấy ông bà nghe kém, nhưng nói to chủ yếu tăng âm trầm, không giúp phụ âm cao rõ hơn. 👉 3 nguyên tắc: nói chậm & rõ (không hét), nhìn thẳng mặt khi nói, giảm tiếng ồn nền trước khi trò chuyện. Với suy giảm tiếp nhận, khoảng cách giữa 'vừa nghe thấy' và 'quá to, khó chịu' bị thu hẹp (loudness recruitment): nói nhỏ thì không nghe, hét lên lại thấy chói. 👉 Giữ âm lượng vừa phải và ổn định, ưu tiên nói rõ thay vì nói to. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "Bố mẹ tôi hay hét lên khi nói chuyện",
+   "ids": [
+    "FAMILY_COMMUNICATION",
+    "LOUDNESS_RECRUITMENT",
+    "HIGH_FREQ_LOSS"
+   ],
+   "scores": [
+    6.0,
+    2.5,
+    1.0
+   ],
+   "hits": [
+    [
+     "bo me",
+     "het len"
+    ],
+    [
+     "het"
+    ],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Người thân thường nói to hơn khi thấy ông bà nghe kém, nhưng nói to chủ yếu tăng âm trầm, không giúp phụ âm cao rõ hơn. 👉 3 nguyên tắc: nói chậm & rõ (không hét), nhìn thẳng mặt khi nói, giảm tiếng ồn nền trước khi trò chuyện. Với suy giảm tiếp nhận, khoảng cách giữa 'vừa nghe thấy' và 'quá to, khó chịu' bị thu hẹp (loudness recruitment): nói nhỏ thì không nghe, hét lên lại thấy chói. 👉 Giữ âm lượng vừa phải và ổn định, ưu tiên nói rõ thay vì nói to. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "Tôi bị ù tai, có nghiêm trọng không?",
+   "ids": [
+    "SEEK_CARE"
+   ],
+   "scores": [
+    5.0
+   ],
+   "hits": [
+    [
+     "nghiem trong",
+     "u tai"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Mức ngưỡng bạn đang mô phỏng nằm trong vùng nên được đo thính lực chuẩn để biết chính xác. 👉 Đặt lịch khám Tai-Mũi-Họng / trung tâm thính học; chỉ chuyên gia mới tư vấn máy trợ thính phù hợp. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "Tôi bị ù tai, có nghiêm trọng không?",
+   "ids": [
+    "SEEK_CARE",
+    "HIGH_FREQ_LOSS",
+    "LOW_MID_FREQ_LOSS"
+   ],
+   "scores": [
+    6.0,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "nghiem trong",
+     "u tai"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Mức ngưỡng bạn đang mô phỏng nằm trong vùng nên được đo thính lực chuẩn để biết chính xác. 👉 Đặt lịch khám Tai-Mũi-Họng / trung tâm thính học; chỉ chuyên gia mới tư vấn máy trợ thính phù hợp. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "Tôi bị ù tai, có nghiêm trọng không?",
+   "ids": [
+    "SEEK_CARE",
+    "HIGH_FREQ_LOSS",
+    "NOISY_ENVIRONMENT"
+   ],
+   "scores": [
+    6.0,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "nghiem trong",
+     "u tai"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Mức ngưỡng bạn đang mô phỏng nằm trong vùng nên được đo thính lực chuẩn để biết chính xác. 👉 Đặt lịch khám Tai-Mũi-Họng / trung tâm thính học; chỉ chuyên gia mới tư vấn máy trợ thính phù hợp. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "Khi nào tôi cần máy trợ thính?",
+   "ids": [
+    "SEEK_CARE"
+   ],
+   "scores": [
+    2.5
+   ],
+   "hits": [
+    [
+     "may tro thinh"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Mức ngưỡng bạn đang mô phỏng nằm trong vùng nên được đo thính lực chuẩn để biết chính xác. 👉 Đặt lịch khám Tai-Mũi-Họng / trung tâm thính học; chỉ chuyên gia mới tư vấn máy trợ thính phù hợp. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "Khi nào tôi cần máy trợ thính?",
+   "ids": [
+    "SEEK_CARE",
+    "HIGH_FREQ_LOSS",
+    "LOW_MID_FREQ_LOSS"
+   ],
+   "scores": [
+    3.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "may tro thinh"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Mức ngưỡng bạn đang mô phỏng nằm trong vùng nên được đo thính lực chuẩn để biết chính xác. 👉 Đặt lịch khám Tai-Mũi-Họng / trung tâm thính học; chỉ chuyên gia mới tư vấn máy trợ thính phù hợp. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "Khi nào tôi cần máy trợ thính?",
+   "ids": [
+    "SEEK_CARE",
+    "HIGH_FREQ_LOSS",
+    "NOISY_ENVIRONMENT"
+   ],
+   "scores": [
+    3.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "may tro thinh"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Mức ngưỡng bạn đang mô phỏng nằm trong vùng nên được đo thính lực chuẩn để biết chính xác. 👉 Đặt lịch khám Tai-Mũi-Họng / trung tâm thính học; chỉ chuyên gia mới tư vấn máy trợ thính phù hợp. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "Vì sao tôi nghe được tiếng xe nhưng không rõ người nói?",
+   "ids": [
+    "NOISY_ENVIRONMENT",
+    "HIGH_FREQ_LOSS"
+   ],
+   "scores": [
+    4.0,
+    2.5
+   ],
+   "hits": [
+    [
+     "xe",
+     "tieng xe"
+    ],
+    [
+     "khong ro"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Ở nơi ồn (siêu thị, nhà hàng, cuộc họp), tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe được nguyên âm nên biết có người nói, nhưng não phải tự đoán phụ âm → nghe nhầm và mệt mỏi thính giác. 👉 Chọn chỗ ngồi xa nguồn ồn, quay mặt về phía người nói, giảm tiếng TV/nhạc nền khi trò chuyện. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "Vì sao tôi nghe được tiếng xe nhưng không rõ người nói?",
+   "ids": [
+    "NOISY_ENVIRONMENT",
+    "HIGH_FREQ_LOSS",
+    "LOW_MID_FREQ_LOSS"
+   ],
+   "scores": [
+    5.0,
+    3.5,
+    1.0
+   ],
+   "hits": [
+    [
+     "xe",
+     "tieng xe"
+    ],
+    [
+     "khong ro"
+    ],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Ở nơi ồn (siêu thị, nhà hàng, cuộc họp), tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe được nguyên âm nên biết có người nói, nhưng não phải tự đoán phụ âm → nghe nhầm và mệt mỏi thính giác. 👉 Chọn chỗ ngồi xa nguồn ồn, quay mặt về phía người nói, giảm tiếng TV/nhạc nền khi trò chuyện. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "Vì sao tôi nghe được tiếng xe nhưng không rõ người nói?",
+   "ids": [
+    "NOISY_ENVIRONMENT",
+    "HIGH_FREQ_LOSS",
+    "FAMILY_COMMUNICATION"
+   ],
+   "scores": [
+    5.0,
+    3.5,
+    1.0
+   ],
+   "hits": [
+    [
+     "xe",
+     "tieng xe"
+    ],
+    [
+     "khong ro"
+    ],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Ở nơi ồn (siêu thị, nhà hàng, cuộc họp), tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe được nguyên âm nên biết có người nói, nhưng não phải tự đoán phụ âm → nghe nhầm và mệt mỏi thính giác. 👉 Chọn chỗ ngồi xa nguồn ồn, quay mặt về phía người nói, giảm tiếng TV/nhạc nền khi trò chuyện. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "Ở nhà hàng đông khách tôi không hiểu người phục vụ",
+   "ids": [
+    "NOISY_ENVIRONMENT"
+   ],
+   "scores": [
+    2.5
+   ],
+   "hits": [
+    [
+     "nha hang"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Ở nơi ồn (siêu thị, nhà hàng, cuộc họp), tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe được nguyên âm nên biết có người nói, nhưng não phải tự đoán phụ âm → nghe nhầm và mệt mỏi thính giác. 👉 Chọn chỗ ngồi xa nguồn ồn, quay mặt về phía người nói, giảm tiếng TV/nhạc nền khi trò chuyện. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "Ở nhà hàng đông khách tôi không hiểu người phục vụ",
+   "ids": [
+    "NOISY_ENVIRONMENT",
+    "HIGH_FREQ_LOSS",
+    "LOW_MID_FREQ_LOSS"
+   ],
+   "scores": [
+    3.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "nha hang"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Ở nơi ồn (siêu thị, nhà hàng, cuộc họp), tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe được nguyên âm nên biết có người nói, nhưng não phải tự đoán phụ âm → nghe nhầm và mệt mỏi thính giác. 👉 Chọn chỗ ngồi xa nguồn ồn, quay mặt về phía người nói, giảm tiếng TV/nhạc nền khi trò chuyện. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "Ở nhà hàng đông khách tôi không hiểu người phục vụ",
+   "ids": [
+    "NOISY_ENVIRONMENT",
+    "HIGH_FREQ_LOSS",
+    "FAMILY_COMMUNICATION"
+   ],
+   "scores": [
+    3.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "nha hang"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Ở nơi ồn (siêu thị, nhà hàng, cuộc họp), tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe được nguyên âm nên biết có người nói, nhưng não phải tự đoán phụ âm → nghe nhầm và mệt mỏi thính giác. 👉 Chọn chỗ ngồi xa nguồn ồn, quay mặt về phía người nói, giảm tiếng TV/nhạc nền khi trò chuyện. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "Tôi nên đi khám ở đâu?",
+   "ids": [
+    "SEEK_CARE"
+   ],
+   "scores": [
+    2.5
+   ],
+   "hits": [
+    [
+     "di kham"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Mức ngưỡng bạn đang mô phỏng nằm trong vùng nên được đo thính lực chuẩn để biết chính xác. 👉 Đặt lịch khám Tai-Mũi-Họng / trung tâm thính học; chỉ chuyên gia mới tư vấn máy trợ thính phù hợp. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "Tôi nên đi khám ở đâu?",
+   "ids": [
+    "SEEK_CARE",
+    "HIGH_FREQ_LOSS",
+    "LOW_MID_FREQ_LOSS"
+   ],
+   "scores": [
+    3.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "di kham"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Mức ngưỡng bạn đang mô phỏng nằm trong vùng nên được đo thính lực chuẩn để biết chính xác. 👉 Đặt lịch khám Tai-Mũi-Họng / trung tâm thính học; chỉ chuyên gia mới tư vấn máy trợ thính phù hợp. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "Tôi nên đi khám ở đâu?",
+   "ids": [
+    "SEEK_CARE",
+    "HIGH_FREQ_LOSS",
+    "NOISY_ENVIRONMENT"
+   ],
+   "scores": [
+    3.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "di kham"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Mức ngưỡng bạn đang mô phỏng nằm trong vùng nên được đo thính lực chuẩn để biết chính xác. 👉 Đặt lịch khám Tai-Mũi-Họng / trung tâm thính học; chỉ chuyên gia mới tư vấn máy trợ thính phù hợp. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "Giọng trẻ em sao tôi khó nghe?",
+   "ids": [
+    "HIGH_FREQ_LOSS"
+   ],
+   "scores": [
+    2.5
+   ],
+   "hits": [
+    [
+     "tre em"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "Giọng trẻ em sao tôi khó nghe?",
+   "ids": [
+    "HIGH_FREQ_LOSS",
+    "LOW_MID_FREQ_LOSS",
+    "NOISY_ENVIRONMENT"
+   ],
+   "scores": [
+    3.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "tre em"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. Dải trầm-trung (250–1000 Hz) cũng giảm nên âm thanh nói chung nhỏ đi rõ rệt, kể cả trong phòng yên tĩnh. 👉 Nên đo thính lực lâm sàng tại chuyên khoa Tai-Mũi-Họng để kiểm tra cả dẫn truyền khí và xương. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "Giọng trẻ em sao tôi khó nghe?",
+   "ids": [
+    "HIGH_FREQ_LOSS",
+    "NOISY_ENVIRONMENT",
+    "FAMILY_COMMUNICATION"
+   ],
+   "scores": [
+    3.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "tre em"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. Ở nơi ồn (siêu thị, nhà hàng, cuộc họp), tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe được nguyên âm nên biết có người nói, nhưng não phải tự đoán phụ âm → nghe nhầm và mệt mỏi thính giác. 👉 Chọn chỗ ngồi xa nguồn ồn, quay mặt về phía người nói, giảm tiếng TV/nhạc nền khi trò chuyện. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "Người thân nói to quá làm tôi khó chịu",
+   "ids": [
+    "LOUDNESS_RECRUITMENT",
+    "FAMILY_COMMUNICATION"
+   ],
+   "scores": [
+    5.0,
+    2.5
+   ],
+   "hits": [
+    [
+     "to qua",
+     "kho chiu"
+    ],
+    [
+     "noi to"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Với suy giảm tiếp nhận, khoảng cách giữa 'vừa nghe thấy' và 'quá to, khó chịu' bị thu hẹp (loudness recruitment): nói nhỏ thì không nghe, hét lên lại thấy chói. 👉 Giữ âm lượng vừa phải và ổn định, ưu tiên nói rõ thay vì nói to. Người thân thường nói to hơn khi thấy ông bà nghe kém, nhưng nói to chủ yếu tăng âm trầm, không giúp phụ âm cao rõ hơn. 👉 3 nguyên tắc: nói chậm & rõ (không hét), nhìn thẳng mặt khi nói, giảm tiếng ồn nền trước khi trò chuyện. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "Người thân nói to quá làm tôi khó chịu",
+   "ids": [
+    "LOUDNESS_RECRUITMENT",
+    "FAMILY_COMMUNICATION",
+    "HIGH_FREQ_LOSS"
+   ],
+   "scores": [
+    6.0,
+    3.5,
+    1.0
+   ],
+   "hits": [
+    [
+     "to qua",
+     "kho chiu"
+    ],
+    [
+     "noi to"
+    ],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Với suy giảm tiếp nhận, khoảng cách giữa 'vừa nghe thấy' và 'quá to, khó chịu' bị thu hẹp (loudness recruitment): nói nhỏ thì không nghe, hét lên lại thấy chói. 👉 Giữ âm lượng vừa phải và ổn định, ưu tiên nói rõ thay vì nói to. Người thân thường nói to hơn khi thấy ông bà nghe kém, nhưng nói to chủ yếu tăng âm trầm, không giúp phụ âm cao rõ hơn. 👉 3 nguyên tắc: nói chậm & rõ (không hét), nhìn thẳng mặt khi nói, giảm tiếng ồn nền trước khi trò chuyện. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "Người thân nói to quá làm tôi khó chịu",
+   "ids": [
+    "LOUDNESS_RECRUITMENT",
+    "FAMILY_COMMUNICATION",
+    "HIGH_FREQ_LOSS"
+   ],
+   "scores": [
+    6.0,
+    3.5,
+    1.0
+   ],
+   "hits": [
+    [
+     "to qua",
+     "kho chiu"
+    ],
+    [
+     "noi to"
+    ],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Với suy giảm tiếp nhận, khoảng cách giữa 'vừa nghe thấy' và 'quá to, khó chịu' bị thu hẹp (loudness recruitment): nói nhỏ thì không nghe, hét lên lại thấy chói. 👉 Giữ âm lượng vừa phải và ổn định, ưu tiên nói rõ thay vì nói to. Người thân thường nói to hơn khi thấy ông bà nghe kém, nhưng nói to chủ yếu tăng âm trầm, không giúp phụ âm cao rõ hơn. 👉 3 nguyên tắc: nói chậm & rõ (không hét), nhìn thẳng mặt khi nói, giảm tiếng ồn nền trước khi trò chuyện. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "Tiếng xe máy ngoài đường làm tôi không nghe rõ",
+   "ids": [
+    "NOISY_ENVIRONMENT"
+   ],
+   "scores": [
+    4.0
+   ],
+   "hits": [
+    [
+     "xe",
+     "tieng xe"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Ở nơi ồn (siêu thị, nhà hàng, cuộc họp), tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe được nguyên âm nên biết có người nói, nhưng não phải tự đoán phụ âm → nghe nhầm và mệt mỏi thính giác. 👉 Chọn chỗ ngồi xa nguồn ồn, quay mặt về phía người nói, giảm tiếng TV/nhạc nền khi trò chuyện. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "Tiếng xe máy ngoài đường làm tôi không nghe rõ",
+   "ids": [
+    "NOISY_ENVIRONMENT",
+    "HIGH_FREQ_LOSS",
+    "LOW_MID_FREQ_LOSS"
+   ],
+   "scores": [
+    5.0,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "xe",
+     "tieng xe"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Ở nơi ồn (siêu thị, nhà hàng, cuộc họp), tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe được nguyên âm nên biết có người nói, nhưng não phải tự đoán phụ âm → nghe nhầm và mệt mỏi thính giác. 👉 Chọn chỗ ngồi xa nguồn ồn, quay mặt về phía người nói, giảm tiếng TV/nhạc nền khi trò chuyện. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "Tiếng xe máy ngoài đường làm tôi không nghe rõ",
+   "ids": [
+    "NOISY_ENVIRONMENT",
+    "HIGH_FREQ_LOSS",
+    "FAMILY_COMMUNICATION"
+   ],
+   "scores": [
+    5.0,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "xe",
+     "tieng xe"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Ở nơi ồn (siêu thị, nhà hàng, cuộc họp), tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe được nguyên âm nên biết có người nói, nhưng não phải tự đoán phụ âm → nghe nhầm và mệt mỏi thính giác. 👉 Chọn chỗ ngồi xa nguồn ồn, quay mặt về phía người nói, giảm tiếng TV/nhạc nền khi trò chuyện. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "Tôi thấy khó nghe trong cuộc họp có nhiều người nói",
+   "ids": [
+    "NOISY_ENVIRONMENT"
+   ],
+   "scores": [
+    1.5
+   ],
+   "hits": [
+    [
+     "hop"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Ở nơi ồn (siêu thị, nhà hàng, cuộc họp), tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe được nguyên âm nên biết có người nói, nhưng não phải tự đoán phụ âm → nghe nhầm và mệt mỏi thính giác. 👉 Chọn chỗ ngồi xa nguồn ồn, quay mặt về phía người nói, giảm tiếng TV/nhạc nền khi trò chuyện. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "Tôi thấy khó nghe trong cuộc họp có nhiều người nói",
+   "ids": [
+    "NOISY_ENVIRONMENT",
+    "HIGH_FREQ_LOSS",
+    "LOW_MID_FREQ_LOSS"
+   ],
+   "scores": [
+    2.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "hop"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Ở nơi ồn (siêu thị, nhà hàng, cuộc họp), tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe được nguyên âm nên biết có người nói, nhưng não phải tự đoán phụ âm → nghe nhầm và mệt mỏi thính giác. 👉 Chọn chỗ ngồi xa nguồn ồn, quay mặt về phía người nói, giảm tiếng TV/nhạc nền khi trò chuyện. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "Tôi thấy khó nghe trong cuộc họp có nhiều người nói",
+   "ids": [
+    "NOISY_ENVIRONMENT",
+    "HIGH_FREQ_LOSS",
+    "FAMILY_COMMUNICATION"
+   ],
+   "scores": [
+    2.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "hop"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Ở nơi ồn (siêu thị, nhà hàng, cuộc họp), tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe được nguyên âm nên biết có người nói, nhưng não phải tự đoán phụ âm → nghe nhầm và mệt mỏi thính giác. 👉 Chọn chỗ ngồi xa nguồn ồn, quay mặt về phía người nói, giảm tiếng TV/nhạc nền khi trò chuyện. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "Tôi bị ù tai về đêm, có bình thường không?",
+   "ids": [
+    "SEEK_CARE"
+   ],
+   "scores": [
+    2.5
+   ],
+   "hits": [
+    [
+     "u tai"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Mức ngưỡng bạn đang mô phỏng nằm trong vùng nên được đo thính lực chuẩn để biết chính xác. 👉 Đặt lịch khám Tai-Mũi-Họng / trung tâm thính học; chỉ chuyên gia mới tư vấn máy trợ thính phù hợp. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "Tôi bị ù tai về đêm, có bình thường không?",
+   "ids": [
+    "SEEK_CARE",
+    "HIGH_FREQ_LOSS",
+    "LOW_MID_FREQ_LOSS"
+   ],
+   "scores": [
+    3.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "u tai"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Mức ngưỡng bạn đang mô phỏng nằm trong vùng nên được đo thính lực chuẩn để biết chính xác. 👉 Đặt lịch khám Tai-Mũi-Họng / trung tâm thính học; chỉ chuyên gia mới tư vấn máy trợ thính phù hợp. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "Tôi bị ù tai về đêm, có bình thường không?",
+   "ids": [
+    "SEEK_CARE",
+    "HIGH_FREQ_LOSS",
+    "NOISY_ENVIRONMENT"
+   ],
+   "scores": [
+    3.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "u tai"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Mức ngưỡng bạn đang mô phỏng nằm trong vùng nên được đo thính lực chuẩn để biết chính xác. 👉 Đặt lịch khám Tai-Mũi-Họng / trung tâm thính học; chỉ chuyên gia mới tư vấn máy trợ thính phù hợp. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "Phụ âm f và v khó nghe quá",
+   "ids": [
+    "HIGH_FREQ_LOSS"
+   ],
+   "scores": [
+    2.5
+   ],
+   "hits": [
+    [
+     "phu am"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "Phụ âm f và v khó nghe quá",
+   "ids": [
+    "HIGH_FREQ_LOSS",
+    "LOW_MID_FREQ_LOSS",
+    "NOISY_ENVIRONMENT"
+   ],
+   "scores": [
+    3.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "phu am"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. Dải trầm-trung (250–1000 Hz) cũng giảm nên âm thanh nói chung nhỏ đi rõ rệt, kể cả trong phòng yên tĩnh. 👉 Nên đo thính lực lâm sàng tại chuyên khoa Tai-Mũi-Họng để kiểm tra cả dẫn truyền khí và xương. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "Phụ âm f và v khó nghe quá",
+   "ids": [
+    "HIGH_FREQ_LOSS",
+    "NOISY_ENVIRONMENT",
+    "FAMILY_COMMUNICATION"
+   ],
+   "scores": [
+    3.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "phu am"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. Ở nơi ồn (siêu thị, nhà hàng, cuộc họp), tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe được nguyên âm nên biết có người nói, nhưng não phải tự đoán phụ âm → nghe nhầm và mệt mỏi thính giác. 👉 Chọn chỗ ngồi xa nguồn ồn, quay mặt về phía người nói, giảm tiếng TV/nhạc nền khi trò chuyện. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "",
+   "ids": [],
+   "scores": [],
+   "hits": [],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Với mức này bạn nghe rõ hầu hết âm thanh và phụ âm. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "",
+   "ids": [
+    "HIGH_FREQ_LOSS",
+    "LOW_MID_FREQ_LOSS",
+    "NOISY_ENVIRONMENT"
+   ],
+   "scores": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. Dải trầm-trung (250–1000 Hz) cũng giảm nên âm thanh nói chung nhỏ đi rõ rệt, kể cả trong phòng yên tĩnh. 👉 Nên đo thính lực lâm sàng tại chuyên khoa Tai-Mũi-Họng để kiểm tra cả dẫn truyền khí và xương. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "",
+   "ids": [
+    "HIGH_FREQ_LOSS",
+    "NOISY_ENVIRONMENT",
+    "FAMILY_COMMUNICATION"
+   ],
+   "scores": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. Ở nơi ồn (siêu thị, nhà hàng, cuộc họp), tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe được nguyên âm nên biết có người nói, nhưng não phải tự đoán phụ âm → nghe nhầm và mệt mỏi thính giác. 👉 Chọn chỗ ngồi xa nguồn ồn, quay mặt về phía người nói, giảm tiếng TV/nhạc nền khi trò chuyện. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "ù tai",
+   "ids": [
+    "SEEK_CARE"
+   ],
+   "scores": [
+    2.5
+   ],
+   "hits": [
+    [
+     "u tai"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Mức ngưỡng bạn đang mô phỏng nằm trong vùng nên được đo thính lực chuẩn để biết chính xác. 👉 Đặt lịch khám Tai-Mũi-Họng / trung tâm thính học; chỉ chuyên gia mới tư vấn máy trợ thính phù hợp. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "ù tai",
+   "ids": [
+    "SEEK_CARE",
+    "HIGH_FREQ_LOSS",
+    "LOW_MID_FREQ_LOSS"
+   ],
+   "scores": [
+    3.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "u tai"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Mức ngưỡng bạn đang mô phỏng nằm trong vùng nên được đo thính lực chuẩn để biết chính xác. 👉 Đặt lịch khám Tai-Mũi-Họng / trung tâm thính học; chỉ chuyên gia mới tư vấn máy trợ thính phù hợp. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "ù tai",
+   "ids": [
+    "SEEK_CARE",
+    "HIGH_FREQ_LOSS",
+    "NOISY_ENVIRONMENT"
+   ],
+   "scores": [
+    3.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "u tai"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Mức ngưỡng bạn đang mô phỏng nằm trong vùng nên được đo thính lực chuẩn để biết chính xác. 👉 Đặt lịch khám Tai-Mũi-Họng / trung tâm thính học; chỉ chuyên gia mới tư vấn máy trợ thính phù hợp. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "u tai",
+   "ids": [
+    "SEEK_CARE"
+   ],
+   "scores": [
+    2.5
+   ],
+   "hits": [
+    [
+     "u tai"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Mức ngưỡng bạn đang mô phỏng nằm trong vùng nên được đo thính lực chuẩn để biết chính xác. 👉 Đặt lịch khám Tai-Mũi-Họng / trung tâm thính học; chỉ chuyên gia mới tư vấn máy trợ thính phù hợp. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "u tai",
+   "ids": [
+    "SEEK_CARE",
+    "HIGH_FREQ_LOSS",
+    "LOW_MID_FREQ_LOSS"
+   ],
+   "scores": [
+    3.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "u tai"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Mức ngưỡng bạn đang mô phỏng nằm trong vùng nên được đo thính lực chuẩn để biết chính xác. 👉 Đặt lịch khám Tai-Mũi-Họng / trung tâm thính học; chỉ chuyên gia mới tư vấn máy trợ thính phù hợp. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "u tai",
+   "ids": [
+    "SEEK_CARE",
+    "HIGH_FREQ_LOSS",
+    "NOISY_ENVIRONMENT"
+   ],
+   "scores": [
+    3.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "u tai"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Mức ngưỡng bạn đang mô phỏng nằm trong vùng nên được đo thính lực chuẩn để biết chính xác. 👉 Đặt lịch khám Tai-Mũi-Họng / trung tâm thính học; chỉ chuyên gia mới tư vấn máy trợ thính phù hợp. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "Thuốc hết rồi nhưng tôi vẫn nghe rõ",
+   "ids": [
+    "LOUDNESS_RECRUITMENT"
+   ],
+   "scores": [
+    1.5
+   ],
+   "hits": [
+    [
+     "het"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Với suy giảm tiếp nhận, khoảng cách giữa 'vừa nghe thấy' và 'quá to, khó chịu' bị thu hẹp (loudness recruitment): nói nhỏ thì không nghe, hét lên lại thấy chói. 👉 Giữ âm lượng vừa phải và ổn định, ưu tiên nói rõ thay vì nói to. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "Thuốc hết rồi nhưng tôi vẫn nghe rõ",
+   "ids": [
+    "LOUDNESS_RECRUITMENT",
+    "HIGH_FREQ_LOSS",
+    "LOW_MID_FREQ_LOSS"
+   ],
+   "scores": [
+    2.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "het"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Với suy giảm tiếp nhận, khoảng cách giữa 'vừa nghe thấy' và 'quá to, khó chịu' bị thu hẹp (loudness recruitment): nói nhỏ thì không nghe, hét lên lại thấy chói. 👉 Giữ âm lượng vừa phải và ổn định, ưu tiên nói rõ thay vì nói to. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "Thuốc hết rồi nhưng tôi vẫn nghe rõ",
+   "ids": [
+    "LOUDNESS_RECRUITMENT",
+    "HIGH_FREQ_LOSS",
+    "NOISY_ENVIRONMENT"
+   ],
+   "scores": [
+    2.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "het"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Với suy giảm tiếp nhận, khoảng cách giữa 'vừa nghe thấy' và 'quá to, khó chịu' bị thu hẹp (loudness recruitment): nói nhỏ thì không nghe, hét lên lại thấy chói. 👉 Giữ âm lượng vừa phải và ổn định, ưu tiên nói rõ thay vì nói to. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "Tôi có nên đi khám bác sĩ không?",
+   "ids": [
+    "SEEK_CARE"
+   ],
+   "scores": [
+    5.0
+   ],
+   "hits": [
+    [
+     "di kham",
+     "bac si"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Mức ngưỡng bạn đang mô phỏng nằm trong vùng nên được đo thính lực chuẩn để biết chính xác. 👉 Đặt lịch khám Tai-Mũi-Họng / trung tâm thính học; chỉ chuyên gia mới tư vấn máy trợ thính phù hợp. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "Tôi có nên đi khám bác sĩ không?",
+   "ids": [
+    "SEEK_CARE",
+    "HIGH_FREQ_LOSS",
+    "LOW_MID_FREQ_LOSS"
+   ],
+   "scores": [
+    6.0,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "di kham",
+     "bac si"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Mức ngưỡng bạn đang mô phỏng nằm trong vùng nên được đo thính lực chuẩn để biết chính xác. 👉 Đặt lịch khám Tai-Mũi-Họng / trung tâm thính học; chỉ chuyên gia mới tư vấn máy trợ thính phù hợp. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "Tôi có nên đi khám bác sĩ không?",
+   "ids": [
+    "SEEK_CARE",
+    "HIGH_FREQ_LOSS",
+    "NOISY_ENVIRONMENT"
+   ],
+   "scores": [
+    6.0,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "di kham",
+     "bac si"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Mức ngưỡng bạn đang mô phỏng nằm trong vùng nên được đo thính lực chuẩn để biết chính xác. 👉 Đặt lịch khám Tai-Mũi-Họng / trung tâm thính học; chỉ chuyên gia mới tư vấn máy trợ thính phù hợp. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "tại sao tôi không nghe rõ chữ s",
+   "ids": [
+    "HIGH_FREQ_LOSS"
+   ],
+   "scores": [
+    3.0
+   ],
+   "hits": [
+    [
+     "chu",
+     "s"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "tại sao tôi không nghe rõ chữ s",
+   "ids": [
+    "HIGH_FREQ_LOSS",
+    "LOW_MID_FREQ_LOSS",
+    "NOISY_ENVIRONMENT"
+   ],
+   "scores": [
+    4.0,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "chu",
+     "s"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. Dải trầm-trung (250–1000 Hz) cũng giảm nên âm thanh nói chung nhỏ đi rõ rệt, kể cả trong phòng yên tĩnh. 👉 Nên đo thính lực lâm sàng tại chuyên khoa Tai-Mũi-Họng để kiểm tra cả dẫn truyền khí và xương. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "tại sao tôi không nghe rõ chữ s",
+   "ids": [
+    "HIGH_FREQ_LOSS",
+    "NOISY_ENVIRONMENT",
+    "FAMILY_COMMUNICATION"
+   ],
+   "scores": [
+    4.0,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "chu",
+     "s"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. Ở nơi ồn (siêu thị, nhà hàng, cuộc họp), tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe được nguyên âm nên biết có người nói, nhưng não phải tự đoán phụ âm → nghe nhầm và mệt mỏi thính giác. 👉 Chọn chỗ ngồi xa nguồn ồn, quay mặt về phía người nói, giảm tiếng TV/nhạc nền khi trò chuyện. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "Hôm nay bố hét to quá làm con khó chịu",
+   "ids": [
+    "LOUDNESS_RECRUITMENT"
+   ],
+   "scores": [
+    6.5
+   ],
+   "hits": [
+    [
+     "to qua",
+     "het",
+     "kho chiu"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Với suy giảm tiếp nhận, khoảng cách giữa 'vừa nghe thấy' và 'quá to, khó chịu' bị thu hẹp (loudness recruitment): nói nhỏ thì không nghe, hét lên lại thấy chói. 👉 Giữ âm lượng vừa phải và ổn định, ưu tiên nói rõ thay vì nói to. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "Hôm nay bố hét to quá làm con khó chịu",
+   "ids": [
+    "LOUDNESS_RECRUITMENT",
+    "HIGH_FREQ_LOSS",
+    "LOW_MID_FREQ_LOSS"
+   ],
+   "scores": [
+    7.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "to qua",
+     "het",
+     "kho chiu"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Với suy giảm tiếp nhận, khoảng cách giữa 'vừa nghe thấy' và 'quá to, khó chịu' bị thu hẹp (loudness recruitment): nói nhỏ thì không nghe, hét lên lại thấy chói. 👉 Giữ âm lượng vừa phải và ổn định, ưu tiên nói rõ thay vì nói to. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "Hôm nay bố hét to quá làm con khó chịu",
+   "ids": [
+    "LOUDNESS_RECRUITMENT",
+    "HIGH_FREQ_LOSS",
+    "NOISY_ENVIRONMENT"
+   ],
+   "scores": [
+    7.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "to qua",
+     "het",
+     "kho chiu"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Với suy giảm tiếp nhận, khoảng cách giữa 'vừa nghe thấy' và 'quá to, khó chịu' bị thu hẹp (loudness recruitment): nói nhỏ thì không nghe, hét lên lại thấy chói. 👉 Giữ âm lượng vừa phải và ổn định, ưu tiên nói rõ thay vì nói to. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "NGHE KHÔNG RÕ Ở NƠI ỒN ÀO",
+   "ids": [
+    "HIGH_FREQ_LOSS",
+    "NOISY_ENVIRONMENT"
+   ],
+   "scores": [
+    2.5,
+    1.5
+   ],
+   "hits": [
+    [
+     "khong ro"
+    ],
+    [
+     "on"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. Ở nơi ồn (siêu thị, nhà hàng, cuộc họp), tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe được nguyên âm nên biết có người nói, nhưng não phải tự đoán phụ âm → nghe nhầm và mệt mỏi thính giác. 👉 Chọn chỗ ngồi xa nguồn ồn, quay mặt về phía người nói, giảm tiếng TV/nhạc nền khi trò chuyện. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "NGHE KHÔNG RÕ Ở NƠI ỒN ÀO",
+   "ids": [
+    "HIGH_FREQ_LOSS",
+    "NOISY_ENVIRONMENT",
+    "LOW_MID_FREQ_LOSS"
+   ],
+   "scores": [
+    3.5,
+    2.5,
+    1.0
+   ],
+   "hits": [
+    [
+     "khong ro"
+    ],
+    [
+     "on"
+    ],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. Ở nơi ồn (siêu thị, nhà hàng, cuộc họp), tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe được nguyên âm nên biết có người nói, nhưng não phải tự đoán phụ âm → nghe nhầm và mệt mỏi thính giác. 👉 Chọn chỗ ngồi xa nguồn ồn, quay mặt về phía người nói, giảm tiếng TV/nhạc nền khi trò chuyện. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "NGHE KHÔNG RÕ Ở NƠI ỒN ÀO",
+   "ids": [
+    "HIGH_FREQ_LOSS",
+    "NOISY_ENVIRONMENT",
+    "FAMILY_COMMUNICATION"
+   ],
+   "scores": [
+    3.5,
+    2.5,
+    1.0
+   ],
+   "hits": [
+    [
+     "khong ro"
+    ],
+    [
+     "on"
+    ],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. Ở nơi ồn (siêu thị, nhà hàng, cuộc họp), tiếng ồn nền che lấp các phụ âm yếu tần số cao. Bạn vẫn nghe được nguyên âm nên biết có người nói, nhưng não phải tự đoán phụ âm → nghe nhầm và mệt mỏi thính giác. 👉 Chọn chỗ ngồi xa nguồn ồn, quay mặt về phía người nói, giảm tiếng TV/nhạc nền khi trò chuyện. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 10,
+    "500": 10,
+    "1000": 10,
+    "2000": 15,
+    "4000": 15,
+    "8000": 15
+   },
+   "question": "can toi may tro thinh khong",
+   "ids": [
+    "SEEK_CARE"
+   ],
+   "scores": [
+    2.5
+   ],
+   "hits": [
+    [
+     "may tro thinh"
+    ]
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 10 dB HL, cao: 15 dB HL. Mức ngưỡng bạn đang mô phỏng nằm trong vùng nên được đo thính lực chuẩn để biết chính xác. 👉 Đặt lịch khám Tai-Mũi-Họng / trung tâm thính học; chỉ chuyên gia mới tư vấn máy trợ thính phù hợp. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 25,
+    "500": 35,
+    "1000": 45,
+    "2000": 55,
+    "4000": 65,
+    "8000": 70
+   },
+   "question": "can toi may tro thinh khong",
+   "ids": [
+    "SEEK_CARE",
+    "HIGH_FREQ_LOSS",
+    "LOW_MID_FREQ_LOSS"
+   ],
+   "scores": [
+    3.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "may tro thinh"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 35 dB HL, cao: 63 dB HL. Mức ngưỡng bạn đang mô phỏng nằm trong vùng nên được đo thính lực chuẩn để biết chính xác. 👉 Đặt lịch khám Tai-Mũi-Họng / trung tâm thính học; chỉ chuyên gia mới tư vấn máy trợ thính phù hợp. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  },
+  {
+   "audiogram": {
+    "250": 20,
+    "500": 25,
+    "1000": 30,
+    "2000": 55,
+    "4000": 60,
+    "8000": 65
+   },
+   "question": "can toi may tro thinh khong",
+   "ids": [
+    "SEEK_CARE",
+    "HIGH_FREQ_LOSS",
+    "NOISY_ENVIRONMENT"
+   ],
+   "scores": [
+    3.5,
+    1.0,
+    1.0
+   ],
+   "hits": [
+    [
+     "may tro thinh"
+    ],
+    [],
+    []
+   ],
+   "fallback": "🐰 Ngưỡng bạn đang mô phỏng — trầm-trung: 25 dB HL, cao: 60 dB HL. Mức ngưỡng bạn đang mô phỏng nằm trong vùng nên được đo thính lực chuẩn để biết chính xác. 👉 Đặt lịch khám Tai-Mũi-Họng / trung tâm thính học; chỉ chuyên gia mới tư vấn máy trợ thính phù hợp. Tần số cao (2000–8000 Hz) bị giảm nên các phụ âm s, x, ph, th, kh, t, ch, k, p dễ 'rụng' khỏi câu nói; tiếng chim, tiếng thì thầm, giọng trẻ em và phụ nữ khó nghe hơn. 👉 Nhờ người nói nhìn thẳng mặt để đọc khẩu hình, nói chậm và tách rõ từng chữ. (Đây là mô phỏng & sàng lọc tham khảo, không thay chẩn đoán của bác sĩ.)"
+  }
+ ]
+}

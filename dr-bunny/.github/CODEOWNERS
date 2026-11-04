@@ -1,0 +1,6 @@
+# Thay @OWNER bằng tài khoản hoặc nhóm GitHub của bạn
+*                @OWNER
+/backend/        @OWNER
+/frontend/src/   @OWNER
+/mobile/         @OWNER
+/docs/           @OWNER

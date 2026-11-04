@@ -1,0 +1,39 @@
+name: Mobile builds (Android / iOS)
+# Chạy tay (Actions -> Run workflow) hoặc khi gắn tag v*. Bản debug không ký, dùng để kiểm tra biên dịch.
+# Phát hành lên Google Play / App Store cần khoá ký: xem mobile/README.md (mục "Phát hành").
+on:
+  workflow_dispatch:
+  push: { tags: ["v*"] }
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: frontend } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: frontend/package-lock.json }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 21 }
+      - uses: gradle/actions/setup-gradle@v4
+      - run: npm ci
+      - run: npm run build && npx cap sync android
+      - run: ./gradlew assembleDebug
+        working-directory: frontend/android
+      - uses: actions/upload-artifact@v4
+        with: { name: drbunny-android-debug, path: frontend/android/app/build/outputs/apk/debug/app-debug.apk }
+
+  ios:
+    runs-on: macos-15
+    defaults: { run: { working-directory: frontend } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: frontend/package-lock.json }
+      - run: npm ci
+      - run: npm run build && npx cap sync ios
+      - name: Build cho iOS Simulator (không ký)
+        run: >
+          xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug
+          -sdk iphonesimulator -destination 'generic/platform=iOS Simulator'
+          CODE_SIGNING_ALLOWED=NO build

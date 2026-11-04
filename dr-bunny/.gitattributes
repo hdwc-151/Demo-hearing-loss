@@ -1,0 +1,10 @@
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.docx binary
+*.jar binary
+frontend/package-lock.json -diff
+tests/fixtures/*.json linguist-generated=true
+frontend/src/data/graphrag_nodes.js linguist-generated=true
+*.bat text eol=crlf
+*.sh text eol=lf

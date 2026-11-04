@@ -1,0 +1,22 @@
+name: Báo lỗi
+description: Có gì đó chạy sai
+labels: [bug]
+body:
+  - type: dropdown
+    id: platform
+    attributes: { label: Nền tảng, options: [Web trình duyệt, PWA đã cài, iOS app, Android app, Backend API, Bản demo một file], multiple: false }
+    validations: { required: true }
+  - type: textarea
+    id: steps
+    attributes: { label: Các bước tái hiện, placeholder: "1. Mở tab Audiogram\n2. Kéo điểm 4k lên 80 dB\n3. ..." }
+    validations: { required: true }
+  - type: textarea
+    id: expected
+    attributes: { label: Kết quả mong đợi và kết quả thực tế }
+    validations: { required: true }
+  - type: input
+    id: env
+    attributes: { label: Thiết bị / hệ điều hành / trình duyệt, placeholder: "iPhone 14, iOS 18.2, Safari" }
+  - type: textarea
+    id: logs
+    attributes: { label: Log hoặc ảnh chụp (nếu có), render: shell }

@@ -1,0 +1,17 @@
+{
+  "name": "Dr. Bunny — mô phỏng nghe kém",
+  "short_name": "Dr. Bunny",
+  "description": "Mô phỏng trải nghiệm nghe kém: audiogram tương tác, chữ rụng theo tần số, nhiễu nền và Bác sĩ Thỏ. Chạy offline.",
+  "lang": "vi",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#EFF5EC",
+  "theme_color": "#EFF5EC",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

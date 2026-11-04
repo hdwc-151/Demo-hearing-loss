@@ -1,0 +1,527 @@
+{
+ "version": 1,
+ "cases": [
+  {
+   "text": "Vâng, của bác xong hết rồi ạ. Tổng cộng hóa đơn là 276 nghìn.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": " âng, của bác  ong  ết  ồi ạ. Tổng cộng  óa đơn là 276 nghìn."
+  },
+  {
+   "text": "Vâng, của bác xong hết rồi ạ. Tổng cộng hóa đơn là 276 nghìn.",
+   "level": "Mild",
+   "dialect": "south",
+   "expected": " âng, của bác  ong  ết rồi ạ. Tổng cộng  óa đơn là 276 nghìn."
+  },
+  {
+   "text": "Vâng, của bác xong hết rồi ạ. Tổng cộng hóa đơn là 276 nghìn.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": " âng,  ủa bá   ong  ế   ồi ạ.  ổng  ộng  óa đơn là 276 nghìn."
+  },
+  {
+   "text": "Vâng, của bác xong hết rồi ạ. Tổng cộng hóa đơn là 276 nghìn.",
+   "level": "Moderate",
+   "dialect": "south",
+   "expected": " âng,  ủa bá   ong  ế  rồi ạ.  ổng  ộng  óa đơn là 276 nghìn."
+  },
+  {
+   "text": "Vâng, của bác xong hết rồi ạ. Tổng cộng hóa đơn là 276 nghìn.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": " â  ,  ủa  á   o    ế   ồi ạ.  ổ    ộ    óa  ơ   à 276    ì ."
+  },
+  {
+   "text": "Vâng, của bác xong hết rồi ạ. Tổng cộng hóa đơn là 276 nghìn.",
+   "level": "Severe",
+   "dialect": "south",
+   "expected": " â  ,  ủa  á   o    ế   ồi ạ.  ổ    ộ    óa  ơ   à 276    ì ."
+  },
+  {
+   "text": "Bố ơi, cuối tuần này vợ chồng con đưa hai cháu về quê thăm bố mẹ nhé.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": "Bố ơi, cuối tuần này  ợ chồng con đưa  ai cháu  ề quê   ăm bố mẹ nhé."
+  },
+  {
+   "text": "Bố ơi, cuối tuần này vợ chồng con đưa hai cháu về quê thăm bố mẹ nhé.",
+   "level": "Mild",
+   "dialect": "south",
+   "expected": "Bố ơi, cuối tuần này  ợ chồng con đưa  ai cháu  ề quê   ăm bố mẹ nhé."
+  },
+  {
+   "text": "Bố ơi, cuối tuần này vợ chồng con đưa hai cháu về quê thăm bố mẹ nhé.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": "Bố ơi,  uối  uần này  ợ   ồng  on đưa  ai   áu  ề   ê   ăm bố mẹ nhé."
+  },
+  {
+   "text": "Bố ơi, cuối tuần này vợ chồng con đưa hai cháu về quê thăm bố mẹ nhé.",
+   "level": "Moderate",
+   "dialect": "south",
+   "expected": "Bố ơi,  uối  uần này  ợ   ồng  on đưa  ai   áu  ề   ê   ăm bố mẹ nhé."
+  },
+  {
+   "text": "Bố ơi, cuối tuần này vợ chồng con đưa hai cháu về quê thăm bố mẹ nhé.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": " ố ơi,  uối  uầ   ày  ợ   ồ    o   ưa  ai   áu  ề   ê   ă   ố  ẹ   é."
+  },
+  {
+   "text": "Bố ơi, cuối tuần này vợ chồng con đưa hai cháu về quê thăm bố mẹ nhé.",
+   "level": "Severe",
+   "dialect": "south",
+   "expected": " ố ơi,  uối  uầ   ày  ợ   ồ    o   ưa  ai   áu  ề   ê   ă   ố  ẹ   é."
+  },
+  {
+   "text": "Chúng ta rà soát lại tiến độ dự án trước khi chốt ngân sách quý ba.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": "Chúng ta  à  oát lại tiến độ  ự án trước   i chốt ngân  ách quý ba."
+  },
+  {
+   "text": "Chúng ta rà soát lại tiến độ dự án trước khi chốt ngân sách quý ba.",
+   "level": "Mild",
+   "dialect": "south",
+   "expected": "Chúng ta rà  oát lại tiến độ dự án trước   i chốt ngân  ách quý ba."
+  },
+  {
+   "text": "Chúng ta rà soát lại tiến độ dự án trước khi chốt ngân sách quý ba.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": "  úng  a  à  oá  lại  iến độ  ự án   ướ    i   ố  ngân  á     ý ba."
+  },
+  {
+   "text": "Chúng ta rà soát lại tiến độ dự án trước khi chốt ngân sách quý ba.",
+   "level": "Moderate",
+   "dialect": "south",
+   "expected": "  úng  a rà  oá  lại  iến độ dự án   ướ    i   ố  ngân  á     ý ba."
+  },
+  {
+   "text": "Chúng ta rà soát lại tiến độ dự án trước khi chốt ngân sách quý ba.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": "  ú    a  à  oá   ại  iế   ộ  ự á    ướ    i   ố    â   á     ý  a."
+  },
+  {
+   "text": "Chúng ta rà soát lại tiến độ dự án trước khi chốt ngân sách quý ba.",
+   "level": "Severe",
+   "dialect": "south",
+   "expected": "  ú    a  à  oá   ại  iế   ộ  ự á    ướ    i   ố    â   á     ý  a."
+  },
+  {
+   "text": "Em ơi, cho bàn anh xin thêm ít khăn giấy và thanh toán luôn nhé!",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": "Em ơi, cho bàn anh  in   êm ít   ăn   ấy  à   anh toán luôn nhé!"
+  },
+  {
+   "text": "Em ơi, cho bàn anh xin thêm ít khăn giấy và thanh toán luôn nhé!",
+   "level": "Mild",
+   "dialect": "south",
+   "expected": "Em ơi, cho bàn anh  in   êm ít   ăn giấy  à   anh toán luôn nhé!"
+  },
+  {
+   "text": "Em ơi, cho bàn anh xin thêm ít khăn giấy và thanh toán luôn nhé!",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": "Em ơi,   o bàn anh  in   êm í    ăn   ấy  à   anh  oán luôn nhé!"
+  },
+  {
+   "text": "Em ơi, cho bàn anh xin thêm ít khăn giấy và thanh toán luôn nhé!",
+   "level": "Moderate",
+   "dialect": "south",
+   "expected": "Em ơi,   o bàn anh  in   êm í    ăn giấy  à   anh  oán luôn nhé!"
+  },
+  {
+   "text": "Em ơi, cho bàn anh xin thêm ít khăn giấy và thanh toán luôn nhé!",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": "E  ơi,   o  à  a    i    ê  í    ă    ấy  à   a    oá   uô    é!"
+  },
+  {
+   "text": "Em ơi, cho bàn anh xin thêm ít khăn giấy và thanh toán luôn nhé!",
+   "level": "Severe",
+   "dialect": "south",
+   "expected": "E  ơi,   o  à  a    i    ê  í    ă    ấy  à   a    oá   uô    é!"
+  },
+  {
+   "text": "Đứng gần cổng chính thôi nhé! Bên kia đang đông lắm.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": "Đứng gần cổng chính   ôi nhé! Bên kia đang đông lắm."
+  },
+  {
+   "text": "Đứng gần cổng chính thôi nhé! Bên kia đang đông lắm.",
+   "level": "Mild",
+   "dialect": "south",
+   "expected": "Đứng gần cổng chính   ôi nhé! Bên kia đang đông lắm."
+  },
+  {
+   "text": "Đứng gần cổng chính thôi nhé! Bên kia đang đông lắm.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": "Đứng gần  ổng   ính   ôi nhé! Bên  ia đang đông lắm."
+  },
+  {
+   "text": "Đứng gần cổng chính thôi nhé! Bên kia đang đông lắm.",
+   "level": "Moderate",
+   "dialect": "south",
+   "expected": "Đứng gần  ổng   ính   ôi nhé! Bên  ia đang đông lắm."
+  },
+  {
+   "text": "Đứng gần cổng chính thôi nhé! Bên kia đang đông lắm.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": " ứ    ầ   ổ     í     ôi   é!  ê   ia  a    ô    ắ ."
+  },
+  {
+   "text": "Đứng gần cổng chính thôi nhé! Bên kia đang đông lắm.",
+   "level": "Severe",
+   "dialect": "south",
+   "expected": " ứ    ầ   ổ     í     ôi   é!  ê   ia  a    ô    ắ ."
+  },
+  {
+   "text": "Rẽ phải ở lối ra tiếp theo, rồi rẽ trái ngay ngã tư đèn đỏ nhé.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": " ẽ   ải ở lối  a tiếp   eo,  ồi  ẽ trái ngay ngã tư đèn đỏ nhé."
+  },
+  {
+   "text": "Rẽ phải ở lối ra tiếp theo, rồi rẽ trái ngay ngã tư đèn đỏ nhé.",
+   "level": "Mild",
+   "dialect": "south",
+   "expected": "Rẽ   ải ở lối ra tiếp   eo, rồi rẽ trái ngay ngã tư đèn đỏ nhé."
+  },
+  {
+   "text": "Rẽ phải ở lối ra tiếp theo, rồi rẽ trái ngay ngã tư đèn đỏ nhé.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": " ẽ   ải ở lối  a  iế    eo,  ồi  ẽ   ái ngay ngã  ư đèn đỏ nhé."
+  },
+  {
+   "text": "Rẽ phải ở lối ra tiếp theo, rồi rẽ trái ngay ngã tư đèn đỏ nhé.",
+   "level": "Moderate",
+   "dialect": "south",
+   "expected": "Rẽ   ải ở lối ra  iế    eo, rồi rẽ   ái ngay ngã  ư đèn đỏ nhé."
+  },
+  {
+   "text": "Rẽ phải ở lối ra tiếp theo, rồi rẽ trái ngay ngã tư đèn đỏ nhé.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": " ẽ   ải ở  ối  a  iế    eo,  ồi  ẽ   ái   ay   ã  ư  è   ỏ   é."
+  },
+  {
+   "text": "Rẽ phải ở lối ra tiếp theo, rồi rẽ trái ngay ngã tư đèn đỏ nhé.",
+   "level": "Severe",
+   "dialect": "south",
+   "expected": " ẽ   ải ở  ối  a  iế    eo,  ồi  ẽ   ái   ay   ã  ư  è   ỏ   é."
+  },
+  {
+   "text": "Hãy lắng nghe tiếng violin vút cao hòa cùng tiếng sáo trúc.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": " ãy lắng nghe tiếng  iolin  út cao  òa cùng tiếng  áo trúc."
+  },
+  {
+   "text": "Hãy lắng nghe tiếng violin vút cao hòa cùng tiếng sáo trúc.",
+   "level": "Mild",
+   "dialect": "south",
+   "expected": " ãy lắng nghe tiếng  iolin  út cao  òa cùng tiếng  áo trúc."
+  },
+  {
+   "text": "Hãy lắng nghe tiếng violin vút cao hòa cùng tiếng sáo trúc.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": " ãy lắng nghe  iếng  iolin  ú   ao  òa  ùng  iếng  áo   ú ."
+  },
+  {
+   "text": "Hãy lắng nghe tiếng violin vút cao hòa cùng tiếng sáo trúc.",
+   "level": "Moderate",
+   "dialect": "south",
+   "expected": " ãy lắng nghe  iếng  iolin  ú   ao  òa  ùng  iếng  áo   ú ."
+  },
+  {
+   "text": "Hãy lắng nghe tiếng violin vút cao hòa cùng tiếng sáo trúc.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": " ãy  ắ      e  iế    ioli   ú   ao  òa  ù    iế    áo   ú ."
+  },
+  {
+   "text": "Hãy lắng nghe tiếng violin vút cao hòa cùng tiếng sáo trúc.",
+   "level": "Severe",
+   "dialect": "south",
+   "expected": " ãy  ắ      e  iế    ioli   ú   ao  òa  ù    iế    áo   ú ."
+  },
+  {
+   "text": "Dạ sáng thứ Bảy tụi con đi sớm cho kịp ăn trưa ạ.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": " ạ  áng   ứ Bảy tụi con đi  ớm cho kịp ăn trưa ạ."
+  },
+  {
+   "text": "Dạ sáng thứ Bảy tụi con đi sớm cho kịp ăn trưa ạ.",
+   "level": "Mild",
+   "dialect": "south",
+   "expected": "Dạ  áng   ứ Bảy tụi con đi  ớm cho kịp ăn trưa ạ."
+  },
+  {
+   "text": "Dạ sáng thứ Bảy tụi con đi sớm cho kịp ăn trưa ạ.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": " ạ  áng   ứ Bảy  ụi  on đi  ớm   o  ị  ăn   ưa ạ."
+  },
+  {
+   "text": "Dạ sáng thứ Bảy tụi con đi sớm cho kịp ăn trưa ạ.",
+   "level": "Moderate",
+   "dialect": "south",
+   "expected": "Dạ  áng   ứ Bảy  ụi  on đi  ớm   o  ị  ăn   ưa ạ."
+  },
+  {
+   "text": "Dạ sáng thứ Bảy tụi con đi sớm cho kịp ăn trưa ạ.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": " ạ  á     ứ  ảy  ụi  o   i  ớ    o  ị  ă    ưa ạ."
+  },
+  {
+   "text": "Dạ sáng thứ Bảy tụi con đi sớm cho kịp ăn trưa ạ.",
+   "level": "Severe",
+   "dialect": "south",
+   "expected": " ạ  á     ứ  ảy  ụi  o   i  ớ    o  ị  ă    ưa ạ."
+  },
+  {
+   "text": "gì gia giêng gà nghe nhanh sáng kịp con mắt măng ông quà xin chào",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": " ì   a   êng gà nghe nhanh  áng kịp con mắt măng ông quà  in chào"
+  },
+  {
+   "text": "gì gia giêng gà nghe nhanh sáng kịp con mắt măng ông quà xin chào",
+   "level": "Mild",
+   "dialect": "south",
+   "expected": "gì gia giêng gà nghe nhanh  áng kịp con mắt măng ông quà  in chào"
+  },
+  {
+   "text": "gì gia giêng gà nghe nhanh sáng kịp con mắt măng ông quà xin chào",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": " ì   a   êng gà nghe nhanh  áng  ị   on mắ  măng ông   à  in   ào"
+  },
+  {
+   "text": "gì gia giêng gà nghe nhanh sáng kịp con mắt măng ông quà xin chào",
+   "level": "Moderate",
+   "dialect": "south",
+   "expected": "gì gia giêng gà nghe nhanh  áng  ị   on mắ  măng ông   à  in   ào"
+  },
+  {
+   "text": "gì gia giêng gà nghe nhanh sáng kịp con mắt măng ông quà xin chào",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": " ì   a   ê    à    e   a    á    ị   o   ắ   ă   ô     à  i    ào"
+  },
+  {
+   "text": "gì gia giêng gà nghe nhanh sáng kịp con mắt măng ông quà xin chào",
+   "level": "Severe",
+   "dialect": "south",
+   "expected": " ì   a   ê    à    e   a    á    ị   o   ắ   ă   ô     à  i    ào"
+  },
+  {
+   "text": "ngh nh ng gh ph th kh tr ch qu",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": "ngh nh ng gh          tr ch qu"
+  },
+  {
+   "text": "ngh nh ng gh ph th kh tr ch qu",
+   "level": "Mild",
+   "dialect": "south",
+   "expected": "ngh nh ng gh          tr ch qu"
+  },
+  {
+   "text": "ngh nh ng gh ph th kh tr ch qu",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": "ngh nh ng gh                  "
+  },
+  {
+   "text": "ngh nh ng gh ph th kh tr ch qu",
+   "level": "Moderate",
+   "dialect": "south",
+   "expected": "ngh nh ng gh                  "
+  },
+  {
+   "text": "ngh nh ng gh ph th kh tr ch qu",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": "                              "
+  },
+  {
+   "text": "ngh nh ng gh ph th kh tr ch qu",
+   "level": "Severe",
+   "dialect": "south",
+   "expected": "                              "
+  },
+  {
+   "text": "Tiếng nước nhỏ giọt, chó sủa, máy hút bụi, pháo hoa!",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": "Tiếng nước nhỏ   ọt, chó  ủa, máy  út bụi,   áo  oa!"
+  },
+  {
+   "text": "Tiếng nước nhỏ giọt, chó sủa, máy hút bụi, pháo hoa!",
+   "level": "Mild",
+   "dialect": "south",
+   "expected": "Tiếng nước nhỏ giọt, chó  ủa, máy  út bụi,   áo  oa!"
+  },
+  {
+   "text": "Tiếng nước nhỏ giọt, chó sủa, máy hút bụi, pháo hoa!",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": " iếng nướ  nhỏ   ọ ,   ó  ủa, máy  ú  bụi,   áo  oa!"
+  },
+  {
+   "text": "Tiếng nước nhỏ giọt, chó sủa, máy hút bụi, pháo hoa!",
+   "level": "Moderate",
+   "dialect": "south",
+   "expected": " iếng nướ  nhỏ giọ ,   ó  ủa, máy  ú  bụi,   áo  oa!"
+  },
+  {
+   "text": "Tiếng nước nhỏ giọt, chó sủa, máy hút bụi, pháo hoa!",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": " iế    ướ    ỏ   ọ ,   ó  ủa,  áy  ú   ụi,   áo  oa!"
+  },
+  {
+   "text": "Tiếng nước nhỏ giọt, chó sủa, máy hút bụi, pháo hoa!",
+   "level": "Severe",
+   "dialect": "south",
+   "expected": " iế    ướ    ỏ   ọ ,   ó  ủa,  áy  ú   ụi,   áo  oa!"
+  },
+  {
+   "text": "Chim hót 4500 Hz; xe tải 98 dB.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": "Chim  ót 4500   ;  e tải 98  B."
+  },
+  {
+   "text": "Chim hót 4500 Hz; xe tải 98 dB.",
+   "level": "Mild",
+   "dialect": "south",
+   "expected": "Chim  ót 4500   ;  e tải 98 dB."
+  },
+  {
+   "text": "Chim hót 4500 Hz; xe tải 98 dB.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": "  im  ó  4500   ;  e  ải 98  B."
+  },
+  {
+   "text": "Chim hót 4500 Hz; xe tải 98 dB.",
+   "level": "Moderate",
+   "dialect": "south",
+   "expected": "  im  ó  4500   ;  e  ải 98 dB."
+  },
+  {
+   "text": "Chim hót 4500 Hz; xe tải 98 dB.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": "  i   ó  4500   ;  e  ải 98  B."
+  },
+  {
+   "text": "Chim hót 4500 Hz; xe tải 98 dB.",
+   "level": "Severe",
+   "dialect": "south",
+   "expected": "  i   ó  4500   ;  e  ải 98  B."
+  },
+  {
+   "text": "dơ ra đi về dòng sông",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": " ơ  a đi  ề  òng  ông"
+  },
+  {
+   "text": "dơ ra đi về dòng sông",
+   "level": "Mild",
+   "dialect": "south",
+   "expected": "dơ ra đi  ề dòng  ông"
+  },
+  {
+   "text": "dơ ra đi về dòng sông",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": " ơ  a đi  ề  òng  ông"
+  },
+  {
+   "text": "dơ ra đi về dòng sông",
+   "level": "Moderate",
+   "dialect": "south",
+   "expected": "dơ ra đi  ề dòng  ông"
+  },
+  {
+   "text": "dơ ra đi về dòng sông",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": " ơ  a  i  ề  ò    ô  "
+  },
+  {
+   "text": "dơ ra đi về dòng sông",
+   "level": "Severe",
+   "dialect": "south",
+   "expected": " ơ  a  i  ề  ò    ô  "
+  },
+  {
+   "text": "Vâng, của bác xong hết rồi ạ. Tổng cộng hóa đơn là 276 nghìn.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": " âng, của bác  ong  ết  ồi ạ. Tổng cộng  óa đơn là 276 nghìn."
+  },
+  {
+   "text": "Vâng, của bác xong hết rồi ạ. Tổng cộng hóa đơn là 276 nghìn.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": " âng,  ủa bá   ong  ế   ồi ạ.  ổng  ộng  óa đơn là 276 nghìn."
+  },
+  {
+   "text": "Vâng, của bác xong hết rồi ạ. Tổng cộng hóa đơn là 276 nghìn.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": " â  ,  ủa  á   o    ế   ồi ạ.  ổ    ộ    óa  ơ   à 276    ì ."
+  },
+  {
+   "text": "Bố ơi, cuối tuần này vợ chồng con đưa hai cháu về quê thăm bố mẹ nhé.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": "Bố ơi, cuối tuần này  ợ chồng con đưa  ai cháu  ề quê   ăm bố mẹ nhé."
+  },
+  {
+   "text": "Bố ơi, cuối tuần này vợ chồng con đưa hai cháu về quê thăm bố mẹ nhé.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": "Bố ơi,  uối  uần này  ợ   ồng  on đưa  ai   áu  ề   ê   ăm bố mẹ nhé."
+  },
+  {
+   "text": "Bố ơi, cuối tuần này vợ chồng con đưa hai cháu về quê thăm bố mẹ nhé.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": " ố ơi,  uối  uầ   ày  ợ   ồ    o   ưa  ai   áu  ề   ê   ă   ố  ẹ   é."
+  },
+  {
+   "text": "Chúng ta rà soát lại tiến độ dự án trước khi chốt ngân sách quý ba.",
+   "level": "Mild",
+   "dialect": "north",
+   "expected": "Chúng ta  à  oát lại tiến độ  ự án trước   i chốt ngân  ách quý ba."
+  },
+  {
+   "text": "Chúng ta rà soát lại tiến độ dự án trước khi chốt ngân sách quý ba.",
+   "level": "Moderate",
+   "dialect": "north",
+   "expected": "  úng  a  à  oá  lại  iến độ  ự án   ướ    i   ố  ngân  á     ý ba."
+  },
+  {
+   "text": "Chúng ta rà soát lại tiến độ dự án trước khi chốt ngân sách quý ba.",
+   "level": "Severe",
+   "dialect": "north",
+   "expected": "  ú    a  à  oá   ại  iế   ộ  ự á    ướ    i   ố    â   á     ý  a."
+  }
+ ]
+}
