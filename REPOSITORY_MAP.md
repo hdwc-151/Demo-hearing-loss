@@ -18,7 +18,7 @@ This repository's root now contains the canonical Dr. Bunny app (previously insi
 ## Preserved old work
 
 - `archive/previous-root/`: former root README, standalone experiments, source scripts, media, and workshop assets.
-- `archive/versioned-implementations/`: original `Hearing/`, `Master/`, `final/`, `old version/` directories.
+- `archive/demos/`: immutable historical single-file demo snapshots and provenance.\n- `archive/versioned-implementations/`: original `Hearing/`, `Master/`, `final/`, `old version/` directories.
 
 Archive material is for historical reference, **not another supported application entry point**. Git commit history is preserved. No files from the prior main tree were dropped; top-level entries were moved to the canonical root or archive.
 
