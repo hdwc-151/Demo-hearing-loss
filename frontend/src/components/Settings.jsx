@@ -4,7 +4,7 @@ import { testConnection, OFFLINE } from "../api";
 
 const VERSION = typeof __APP_VERSION__ !== "undefined" ? __APP_VERSION__ : "dev";
 
-// Cài đặt dạng "bottom sheet": chế độ dữ liệu (trong máy hoặc máy chủ Dr. Bunny), rung phản hồi, xem lại hướng dẫn.
+// Cài đặt dạng "bottom sheet": chế độ dữ liệu (trong máy hoặc máy chủ HearAtlas), rung phản hồi, xem lại hướng dẫn.
 export default function Settings() {
   const { settings, settingsOpen, closeSettings, saveSettings, refreshBackend, openOnboarding } = useStore();
   const [url, setUrl] = useState(settings.apiBase === OFFLINE ? "" : settings.apiBase);
@@ -38,7 +38,7 @@ export default function Settings() {
           </label>
           <label className="flex items-start gap-2 text-sm">
             <input type="radio" name="mode" checked={serverMode} onChange={() => apply({ apiBase: url.trim() || "/api" })} />
-            <span><b>Máy chủ Dr. Bunny.</b> Nhiễu do backend sinh; có thể bật LLM trên máy chủ.</span>
+            <span><b>Máy chủ HearAtlas.</b> Nhiễu do backend sinh; có thể bật LLM trên máy chủ.</span>
           </label>
           <input className="border border-line rounded-xl px-3 py-2 text-sm bg-white" value={url} onChange={(e) => setUrl(e.target.value)}
                  placeholder="https://api.ten-mien-cua-ban.com  (hoặc /api khi chạy dev)" aria-label="Địa chỉ máy chủ" inputMode="url" autoCapitalize="off" autoCorrect="off" />
@@ -57,7 +57,7 @@ export default function Settings() {
         </label>
 
         <button className="btn-ghost self-start" onClick={openOnboarding}>Xem lại hướng dẫn an toàn</button>
-        <p className="text-xs text-muted">Dr. Bunny v{VERSION} · Mô phỏng giáo dục, không phải thiết bị y tế.</p>
+        <p className="text-xs text-muted">HearAtlas v{VERSION} · Mô phỏng giáo dục, không phải thiết bị y tế.</p>
       </section>
     </div>
   );
