@@ -13,3 +13,5 @@
 | [design/](design/) | Storyboard và ảnh chụp màn hình thật |
 | [reports/](reports/) | Báo cáo rà soát + giải thích từng dòng code (docx) |
 | [history/](history/) | Nhật ký xây dựng và tổng quan dự án gốc |
+
+| [audio-foundation.md](audio-foundation.md) | Waveform DSP, Audio Lab và giới hạn của mô hình giáo dục |
