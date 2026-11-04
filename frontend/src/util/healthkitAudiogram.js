@@ -13,17 +13,21 @@ export function validateHealthAudiogram(payload) {
     return { found: false, message: payload?.message || "Không có dữ liệu audiogram được phép đọc." };
   }
   if (payload.source !== "apple_healthkit" || payload.unit !== "dB HL" ||
-      !Array.isArray(payload.points) || payload.points.length > 30) {
+      !Array.isArray(payload.points) || payload.points.length === 0 || payload.points.length > 30) {
     throw new Error("HealthKit trả về audiogram không hợp lệ.");
   }
+  const frequencies = new Set();
   const points = payload.points.map(p => {
-    const f = Number(p.frequencyHz);
+    if (!p || typeof p !== "object") throw new Error("Invalid audiogram point.");
+    const f = p.frequencyHz;
+    if (typeof f !== "number" || frequencies.has(f)) throw new Error("Invalid or duplicate frequency.");
+    frequencies.add(f);
     if (!Number.isFinite(f) || f < 125 || f > 16000) throw new Error("Tần số nằm ngoài giới hạn.");
     const normalized = { frequencyHz: f };
     for (const side of ["leftDbHL", "rightDbHL"]) {
       if (p[side] == null) continue;
-      const value = Number(p[side]);
-      if (!Number.isFinite(value) || value < -20 || value > 130)
+      const value = p[side];
+      if (typeof value !== "number" || !Number.isFinite(value) || value < -20 || value > 130)
         throw new Error("Dữ liệu ngưỡng nghe nằm ngoài giới hạn.");
       normalized[side] = value;
     }
@@ -32,6 +36,7 @@ export function validateHealthAudiogram(payload) {
     return normalized;
   });
   if (!Number.isFinite(Date.parse(payload.measuredAt || ""))) throw new Error("Thiếu ngày đo.");
+  if (Date.parse(payload.measuredAt) > Date.now()) throw new Error("Measurement date is in the future.");
   return {
     found: true,
     profileSource: "healthkit_measured",

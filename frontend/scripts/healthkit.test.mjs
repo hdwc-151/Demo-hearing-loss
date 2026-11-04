@@ -25,6 +25,12 @@ test("Reject invalid units, frequency, missing side, nonfinite values, dates and
  {...good,points:[{frequencyHz:500}]},
  {...good,points:[{frequencyHz:500,leftDbHL:NaN}]},
  {...good,points:new Array(31).fill({frequencyHz:250,leftDbHL:10})},
- {...good,measuredAt:"invalid"}
+ {...good,measuredAt:"invalid"},
+ {...good,measuredAt:"2999-01-01T00:00:00Z"},
+ {...good,points:[]},
+ {...good,points:[null]},
+ {...good,points:[{frequencyHz:500,leftDbHL:""}]},
+ {...good,points:[{frequencyHz:"500",leftDbHL:10}]},
+ {...good,points:[{frequencyHz:500,leftDbHL:10},{frequencyHz:500,rightDbHL:20}]}
  ]) assert.throws(()=>validateHealthAudiogram(value));
 });

@@ -1,0 +1,35 @@
+name: Backend container
+on:
+  pull_request:
+    paths: ['backend/**', 'scripts/check_backend.py', '.github/workflows/backend-container.yml']
+  push:
+    branches: [main]
+    paths: ['backend/**', 'scripts/check_backend.py', '.github/workflows/backend-container.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  container-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t hearatlas-api:test backend
+      - name: Start container
+        run: docker run -d --name api -p 127.0.0.1:8000:8000 hearatlas-api:test
+      - name: Verify packaged API
+        shell: bash
+        run: |
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:8000/health; then break; fi
+            sleep 2
+          done
+          python scripts/check_backend.py http://127.0.0.1:8000
+      - name: Container diagnostics
+        if: failure()
+        run: docker logs api
+      - name: Stop container
+        if: always()
+        run: docker rm -f api

@@ -2,11 +2,24 @@ name: Mobile builds (Android / iOS)
 # Chạy tay (Actions -> Run workflow) hoặc khi gắn tag v*. Bản debug không ký, dùng để kiểm tra biên dịch.
 # Phát hành lên Google Play / App Store cần khoá ký: xem mobile/README.md (mục "Phát hành").
 on:
+  pull_request:
+    paths: ['frontend/**', '.github/workflows/mobile.yml']
   workflow_dispatch:
-  push: { tags: ["v*"] }
+  push:
+    branches: [main]
+    tags: ["v*"]
+    paths: ['frontend/**', '.github/workflows/mobile.yml']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mobile-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   android:
+    timeout-minutes: 30
     runs-on: ubuntu-latest
     defaults: { run: { working-directory: frontend } }
     steps:
@@ -18,12 +31,13 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
       - run: npm ci
       - run: npm run build && npx cap sync android
-      - run: ./gradlew assembleDebug
+      - run: bash ./gradlew assembleDebug
         working-directory: frontend/android
       - uses: actions/upload-artifact@v4
-        with: { name: drbunny-android-debug, path: frontend/android/app/build/outputs/apk/debug/app-debug.apk }
+        with: { name: hearatlas-android-debug, path: frontend/android/app/build/outputs/apk/debug/app-debug.apk, if-no-files-found: error }
 
   ios:
+    timeout-minutes: 30
     runs-on: macos-15
     defaults: { run: { working-directory: frontend } }
     steps:
