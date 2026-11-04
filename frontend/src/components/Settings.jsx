@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useStore } from "../store";
 import { testConnection, OFFLINE } from "../api";
+import HealthImport from "./HealthImport";
 
 const VERSION = typeof __APP_VERSION__ !== "undefined" ? __APP_VERSION__ : "dev";
 
@@ -56,6 +57,7 @@ export default function Settings() {
           <span>Rung nhẹ khi kéo audiogram</span>
         </label>
 
+        <HealthImport />
         <button className="btn-ghost self-start" onClick={openOnboarding}>Xem lại hướng dẫn an toàn</button>
         <p className="text-xs text-muted">HearAtlas v{VERSION} · Mô phỏng giáo dục, không phải thiết bị y tế.</p>
       </section>
