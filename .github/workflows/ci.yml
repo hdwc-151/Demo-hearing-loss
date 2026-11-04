@@ -17,6 +17,17 @@ jobs:
       - name: Đo GraphRAG (dev + holdout)
         run: python tests/eval_retrieval.py
 
+  auditory-reference:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Install isolated research reference dependencies
+        run: python -m pip install -r backend/requirements-research.txt
+      - name: Compare Gammachirp c=0 with SciPy gammatone and test ERB level behaviour
+        run: python -m pytest tests/research/test_gammachirp_reference.py -q
+
   frontend:
     runs-on: ubuntu-latest
     defaults: { run: { working-directory: frontend } }

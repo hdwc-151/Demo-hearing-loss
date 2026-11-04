@@ -1,0 +1,3 @@
+# Research validation dependencies only; not required for Dr. Bunny runtime.
+-r requirements.txt
+scipy>=1.15,<2.0
