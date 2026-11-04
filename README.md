@@ -53,7 +53,7 @@ Ngoài phát A/B/C, ứng dụng hiển thị RMS số, trọng tâm phổ và t
 | --- | --- | --- |
 | **Simulator** | Thử 4 mức **Normal / Mild / Moderate / Severe**, các tình huống âm thanh; quan sát văn bản bị ẩn theo dải âm vị, phát giọng đọc và nhiễu minh hoạ. | Tiếng Việt, tiếng Anh; phân biệt quy tắc giọng Bắc/Nam đối với một số âm vị. |
 | **Audiogram** | Kéo các điểm ngưỡng tại **6 tần số**, dùng bàn phím để điều chỉnh và xem các biểu tượng âm thanh đổi trạng thái. | Mô phỏng một tai bằng dẫn truyền khí; thay đổi đường ngưỡng có tác động trở lại Simulator. |
-| **Bác sĩ Thỏ** | Hỏi đáp về đường ngưỡng đang chọn, dùng các câu hỏi nhanh hoặc nhập câu riêng. | Bộ truy xuất tri thức có quy tắc (**GraphRAG tầng 1**, 6 nút); LLM phía máy chủ là tuỳ chọn, không phải điều kiện sử dụng. |
+| **HearAtlas Guide** | Trợ lý kiến thức thính giác, giải thích biểu đồ giả định và tình huống giao tiếp; chưa có chức năng chẩn đoán. | Bộ truy xuất tri thức có quy tắc (**GraphRAG tầng 1**, 6 nút); LLM phía máy chủ là tuỳ chọn, không phải điều kiện sử dụng. |
 | **Offline-first** | Dùng các engine văn bản, GraphRAG và nhiễu thủ tục ngay trên thiết bị; lưu cài đặt. | Web/PWA không cần backend ở chế độ **Trong máy**; backend FastAPI bổ sung API, nhiễu WAV và tuỳ chọn LLM. |
 | **Đa nền tảng** | Chạy web, cài PWA, mở dự án Android/iOS bằng Capacitor. | Dự án native đã được tạo; **chưa xác nhận build native hoặc thử trên điện thoại thật**. |
 
@@ -242,7 +242,7 @@ Mô tả phương pháp và hạn chế kỹ thuật: [docs/architecture.md](doc
 
 ## English overview
 
-**Dr. Bunny v0.3.0** is an **educational, interactive hearing-loss simulation**, not a medical diagnostic or assistive-hearing device. It combines a six-frequency audiogram, rule-based phoneme/text degradation, illustrative background noise, and an audiogram-aware question-answering assistant.
+**HearAtlas product alpha** is an **educational hearing-experience platform**, not a medical diagnostic or assistive-hearing device. It combines a six-frequency audiogram, rule-based phoneme/text degradation, illustrative background noise, and an audiogram-aware question-answering assistant.
 
 The maintained codebase uses **React/Vite/Zustand**, **FastAPI/Python**, and **Capacitor 8**. Core functions run **offline** on the client; the server is optional. GitHub CI has passed backend, frontend build, JavaScript–Python parity, Chromium E2E, standalone HTML demo, and offline-PWA tests. **Native Android/iOS builds, clinical validation, real GAN checkpoints, and production LLM integration remain unverified.**
 

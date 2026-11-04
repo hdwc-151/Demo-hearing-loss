@@ -42,7 +42,7 @@ async def lifespan(_app: FastAPI):
     graphrag.close_client()   # đóng connection pool tới LLM, tránh rò rỉ socket
 
 
-app = FastAPI(title="Dr. Bunny API", version="0.3.0", lifespan=lifespan)
+app = FastAPI(title="HearAtlas API", version="0.3.0", lifespan=lifespan)
 
 _origins = [o.strip() for o in os.getenv(
     "ALLOWED_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173").split(",") if o.strip()]
