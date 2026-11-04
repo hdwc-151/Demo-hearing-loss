@@ -13,7 +13,13 @@ const outDir = resolve(root, "dist-demo");
 const target = resolve(process.argv[2] || resolve(root, "../demo/index.html"));
 
 rmSync(outDir, { recursive: true, force: true });
-execFileSync("npx", ["vite", "build", "--mode", "demo", "--outDir", "dist-demo", "--emptyOutDir"], { cwd: root, stdio: "inherit" });
+// Demo HTML nhúng CSS/JS nội tuyến, vì vậy phải dùng asset base "/" riêng.
+// GitHub Pages xây PWA với VITE_BASE="/<repo>/"; không để base đó rò sang bước đóng gói demo.
+execFileSync("npx", ["vite", "build", "--mode", "demo", "--outDir", "dist-demo", "--emptyOutDir"], {
+  cwd: root,
+  stdio: "inherit",
+  env: { ...process.env, VITE_BASE: "/" },
+});
 
 let html = readFileSync(resolve(outDir, "index.html"), "utf8");
 const read = (url) => readFileSync(resolve(outDir, url.replace(/^\.?\//, "")), "utf8");
