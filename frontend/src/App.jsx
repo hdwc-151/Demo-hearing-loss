@@ -4,6 +4,7 @@ import { initNative } from "./native";
 import { IS_DEMO } from "./api";
 import Simulator from "./components/Simulator";
 import Chat from "./components/Chat";
+import BunnyAvatar from "./components/BunnyAvatar";
 import Audiogram from "./components/Audiogram";
 import AudioLab from "./components/AudioLab";
 import Settings from "./components/Settings";
@@ -57,7 +58,7 @@ export default function App() {
         <Active />
       </main>
 
-      <button onClick={() => setTab("chat")} className="mascot" title="Hỏi trợ lý HearAtlas" aria-label="Mở trợ lý HearAtlas">🎧</button>
+      <button onClick={() => setTab("chat")} className="mascot" title="Trò chuyện với Dr. Bunny" aria-label="Mở Dr. Bunny"><BunnyAvatar size={44}/></button>
 
       <nav className="bottom-nav" aria-label="Điều hướng">
         <div className="nav-inner">

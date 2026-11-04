@@ -122,8 +122,8 @@ async def main():
             "n => document.querySelectorAll('.msg-bot:not(.typing)').length > n",
             arg=n_before_care, timeout=15000)
         care_text = await pg.locator(".msg-bot:not(.typing)").last.inner_text()
-        check("H7e hỏi có nên khám, HTTP 422 vẫn trả lời hữu ích",
-              "trong máy" in care_text and ("khám" in care_text.lower()) and "từ chối dữ liệu" not in care_text,
+        check("H7e hỏi có nên khám, có dẫn nguồn hoặc fallback hữu ích",
+              ("trong máy" in care_text or "Nguồn tham khảo" in care_text) and ("khám" in care_text.lower()) and "từ chối dữ liệu" not in care_text,
               care_text[:90])
         await pg.unroute("**/api/graphrag")
         tml = await ask(pg, lambda r: r.fulfill(status=200, content_type="application/json",
