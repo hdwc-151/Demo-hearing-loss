@@ -6,7 +6,7 @@ import BunnyAvatar from "./BunnyAvatar";
 import { selectBunnyEmotion, stripDecorativeEmoji } from "../util/bunnyPersona.js";
 
 const PILLS = [
-  { key: "analyze", label: "Phân tích audiogram", q: "Phân tích biểu đồ thính lực hiện tại của tôi" },
+  { key: "analyze", label: "Phân tích biểu đồ", q: "Phân tích biểu đồ thính lực hiện tại của tôi" },
   { key: "letters", label: "Hiểu lời nói", q: "Tại sao chữ cái và phụ âm biến mất khi nghe kém?" },
   { key: "noisy", label: "Nghe trong tiếng ồn", q: "Tại sao ở siêu thị tôi nghe tiếng nhưng không rõ chữ?" },
   { key: "family", label: "Giao tiếp gia đình", q: "Người nhà nên giao tiếp thế nào cho dễ nghe?" },
