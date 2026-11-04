@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@capacitor/app": "^8.1.2",
-    "@capacitor/core": "^8.5.3",
+    "@capacitor/core": "^8.6.0",
     "@capacitor/haptics": "^8.0.2",
     "@capacitor/preferences": "^8.0.1",
     "@capacitor/splash-screen": "^8.0.2",
@@ -26,10 +26,10 @@
     "zustand": "5.0.16"
   },
   "devDependencies": {
-    "@capacitor/android": "^8.5.3",
-    "@capacitor/assets": "^3.0.5",
-    "@capacitor/cli": "^8.5.3",
-    "@capacitor/ios": "^8.5.3",
+    "@capacitor/android": "^8.6.0",
+    "@capacitor/assets": "^4.0.0",
+    "@capacitor/cli": "^8.6.0",
+    "@capacitor/ios": "^8.6.0",
     "@vitejs/plugin-react": "4.3.4",
     "autoprefixer": "10.4.20",
     "postcss": "8.5.31",
