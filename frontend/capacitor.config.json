@@ -1,6 +1,6 @@
 {
   "appId": "app.drbunny.simulator",
-  "appName": "Dr. Bunny",
+  "appName": "HearAtlas",
   "webDir": "dist",
   "backgroundColor": "#EFF5EC",
   "ios": {

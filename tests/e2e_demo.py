@@ -33,7 +33,7 @@ async def main():
         await pg.locator("[role=dialog]").wait_for(timeout=8000)
         check("D1 mở bằng file://, hiện hướng dẫn an toàn", "mô phỏng giáo dục" in await pg.locator("[role=dialog]").inner_text())
         await pg.click("button:has-text('Tôi hiểu')")
-        check("D2 banner DEMO và huy hiệu local", "DEMO" in await pg.locator(".demo-banner").inner_text() and (await pg.locator(".status-dot").inner_text()).strip().lower() == "local")
+        check("D2 banner DEMO và huy hiệu local", "NGOẠI TUYẾN" in await pg.locator(".demo-banner").inner_text() and (await pg.locator(".status-dot").inner_text()).strip().lower() == "local")
         await pg.click("button[title='Moderate']"); await pg.wait_for_timeout(200)
         counter = await pg.locator("span[aria-live='polite']").first.inner_text()
         check("D3 Simulator làm rụng chữ theo mức", counter.startswith("Mất"), counter)

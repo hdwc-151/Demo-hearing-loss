@@ -1,4 +1,4 @@
-"""GraphRAG cho Dr. Bunny — truy xuất theo CÂU HỎI + HỒ SƠ AUDIOGRAM.
+"""GraphRAG cho HearAtlas — truy xuất theo CÂU HỎI + HỒ SƠ AUDIOGRAM.
 
 Bản 3 (sửa truy xuất):
   - Chuẩn hoá cả từ khoá lẫn câu hỏi (bỏ dấu, bỏ dấu câu) bằng cùng một hàm _norm().
@@ -136,7 +136,7 @@ def retrieve_context(audiogram_db: Dict[str, int], question: str = "") -> str:
 
 def build_system_prompt(audiogram_db: Dict[str, int], question: str = "") -> str:
     return (
-        "Bạn là Bác sĩ Thỏ (Dr. Bunny), trợ lý giáo dục thính học ấm áp.\n"
+        "Bạn là HearAtlas Guide, trợ lý giáo dục thính giác, không phải bác sĩ.\n"
         f"Dữ liệu GraphRAG của người dùng:\n{retrieve_context(audiogram_db, question)}\n\n"
         "QUY TẮC BẮT BUỘC:\n"
         "1. CHỈ dựa vào dữ liệu GraphRAG ở trên; không bịa thêm số liệu hay bệnh danh.\n"
