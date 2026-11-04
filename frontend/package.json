@@ -1,5 +1,5 @@
 {
-  "name": "dr-bunny-frontend",
+  "name": "hearatlas-frontend",
   "private": true,
   "version": "0.3.0",
   "type": "module",
@@ -39,6 +39,6 @@
   "engines": {
     "node": ">=22"
   },
-  "description": "Dr. Bunny — mô phỏng trải nghiệm nghe kém (web, PWA, iOS, Android)",
+  "description": "HearAtlas — nền tảng giáo dục và nghiên cứu thính giác, web/PWA/mobile (product alpha)",
   "license": "MIT"
 }
