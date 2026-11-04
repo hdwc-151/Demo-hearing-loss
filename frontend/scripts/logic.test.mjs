@@ -124,7 +124,7 @@ test("api.askDrBunny: phân biệt offline / 4xx / 5xx / timeout và không rò 
     globalThis.fetch = async () => { throw new TypeError("fetch failed"); };
     const off = await askDrBunny(AUD, "tôi không nghe rõ chữ s");   // mất mạng -> trả lời bằng bộ tri thức trong máy
     assert.equal(off.mode, "local");
-    assert.match(off.answer, /offline/);
+    assert.match(off.answer, /trong máy/);
     assert.ok(off.answer.includes(DISCLAIMER), "câu trả lời trong máy cũng phải có câu miễn trừ");
     assert.ok(off.nodes.length > 0);
 
