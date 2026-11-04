@@ -22,7 +22,7 @@
     "@capacitor/splash-screen": "^8.0.2",
     "@capacitor/status-bar": "^8.0.4",
     "react": "18.3.1",
-    "react-dom": "18.3.1",
+    "react-dom": "19.3.1",
     "zustand": "4.5.5"
   },
   "devDependencies": {
