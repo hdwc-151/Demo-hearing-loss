@@ -3,7 +3,7 @@
 # HearAtlas
 ### Hiểu âm thanh. Kết nối trải nghiệm.
 
-**Product Alpha · Audiogram Studio · Audio Lab · Everyday Listening · HearAtlas Guide**
+**Product Alpha · Audiogram Studio · Audio Lab · Everyday Listening · Dr. Bunny**
 
 Một mã nguồn React cho **Web, PWA và dự án ứng dụng Android/iOS**; các chức năng cốt lõi có thể chạy **không cần máy chủ**.
 
@@ -25,11 +25,13 @@ Một mã nguồn React cho **Web, PWA và dự án ứng dụng Android/iOS**; 
 
 > **Chuyển đổi thương hiệu:** `HearAtlas` là tên làm việc trong giai đoạn alpha, chưa xác nhận nhãn hiệu/miền/App Store. Repo GitHub, URL Pages, storage keys, native application ID, các tệp archive và một số API legacy tiếp tục giữ tên cũ để bảo vệ tương thích. Các tài liệu lịch sử có thể vẫn dùng tên `Dr. Bunny`. Đây không phải tuyên bố ứng dụng đã được thẩm định lâm sàng. [Kế hoạch sản phẩm](docs/product/HEARATLAS_PRODUCT_ALPHA.md) · [Kiểm kê archive](docs/research/ARCHIVE_DISTILLATION.md) · [Lộ trình trợ lý](docs/research/ASSISTANT_TRAINING_AND_SCENARIOS.md).
 
+**Tên thương hiệu:** HearAtlas là nền tảng; **Dr. Bunny** là nhân vật trợ lý giải thích có trích dẫn trong ứng dụng. Trạng thái cảm xúc là biểu cảm UI, không phải cảm xúc người dùng được AI suy luận. Tham khảo [nguồn y khoa](docs/clinical/HEARING_EVIDENCE.md) và [HealthKit iOS](docs/product/APPLE_HEALTHKIT_IOS.md).
+
 ## HearAtlas giải quyết vấn đề gì?
 
 Một con số trên biểu đồ thính lực khó diễn tả được người nghe có thể bỏ lỡ **âm tiết nào, dấu hiệu âm thanh nào, hoặc câu nói nào** trong môi trường ồn. HearAtlas giúp giải thích các đường ngưỡng nghe giả định qua trải nghiệm có thể tương tác để phục vụ học tập và truyền thông nhận thức.
 
-Bạn có thể đổi một đường audiogram, xem phần văn bản bị suy giảm theo quy tắc âm vị, bật thử nhiễu nền và đặt câu hỏi cho “HearAtlas Guide”. Mục tiêu là **giải thích một mô hình**, không tái tạo chính xác cảm nhận âm thanh của một cá nhân.
+Bạn có thể đổi một đường audiogram, xem phần văn bản bị suy giảm theo quy tắc âm vị, bật thử nhiễu nền và đặt câu hỏi cho “Dr. Bunny”. Mục tiêu là **giải thích một mô hình**, không tái tạo chính xác cảm nhận âm thanh của một cá nhân.
 
 ## Audio Lab — STFT, ERB, dcGC thử nghiệm và EQ/WDRC
 
@@ -53,7 +55,7 @@ Ngoài phát A/B/C, ứng dụng hiển thị RMS số, trọng tâm phổ và t
 | --- | --- | --- |
 | **Simulator** | Thử 4 mức **Normal / Mild / Moderate / Severe**, các tình huống âm thanh; quan sát văn bản bị ẩn theo dải âm vị, phát giọng đọc và nhiễu minh hoạ. | Tiếng Việt, tiếng Anh; phân biệt quy tắc giọng Bắc/Nam đối với một số âm vị. |
 | **Audiogram** | Kéo các điểm ngưỡng tại **6 tần số**, dùng bàn phím để điều chỉnh và xem các biểu tượng âm thanh đổi trạng thái. | Mô phỏng một tai bằng dẫn truyền khí; thay đổi đường ngưỡng có tác động trở lại Simulator. |
-| **HearAtlas Guide** | Trợ lý kiến thức thính giác, giải thích biểu đồ giả định và tình huống giao tiếp; chưa có chức năng chẩn đoán. | Bộ truy xuất tri thức có quy tắc (**GraphRAG tầng 1**, 6 nút); LLM phía máy chủ là tuỳ chọn, không phải điều kiện sử dụng. |
+| **Dr. Bunny** | Trợ lý kiến thức thính giác, giải thích biểu đồ giả định và tình huống giao tiếp; chưa có chức năng chẩn đoán. | Bộ truy xuất tri thức có quy tắc (**GraphRAG tầng 1**, 6 nút); LLM phía máy chủ là tuỳ chọn, không phải điều kiện sử dụng. |
 | **Offline-first** | Dùng các engine văn bản, GraphRAG và nhiễu thủ tục ngay trên thiết bị; lưu cài đặt. | Web/PWA không cần backend ở chế độ **Trong máy**; backend FastAPI bổ sung API, nhiễu WAV và tuỳ chọn LLM. |
 | **Đa nền tảng** | Chạy web, cài PWA, mở dự án Android/iOS bằng Capacitor. | Dự án native đã được tạo; **chưa xác nhận build native hoặc thử trên điện thoại thật**. |
 

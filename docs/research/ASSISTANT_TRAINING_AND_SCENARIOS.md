@@ -1,4 +1,4 @@
-# HearAtlas Guide: kịch bản, phân luồng rủi ro và đánh giá
+# Dr. Bunny: kịch bản, phân luồng rủi ro và đánh giá
 
 **Current state:** legacy six-node Python/JS GraphRAG with optional server LLM. **Target state:** evidence-backed assistant that differentiates hypothetical simulations from measured hearing data.
 

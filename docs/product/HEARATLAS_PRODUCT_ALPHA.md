@@ -1,6 +1,6 @@
 # HearAtlas — product naming & release transition
 
-**Temporary product identity:** HearAtlas; **assistant:** HearAtlas Guide; **tagline:** *Hiểu âm thanh. Kết nối trải nghiệm.*; **phase:** product-alpha, not clinically validated.
+**Temporary product identity:** HearAtlas; **assistant:** Dr. Bunny — nhân vật trò chuyện trong HearAtlas, không phải bác sĩ; **tagline:** *Hiểu âm thanh. Kết nối trải nghiệm.*; **phase:** product-alpha, not clinically validated.
 
 ## Keywords
 `audiogram` = biểu đồ thính lực; `hearing_threshold_db_hl` = ngưỡng nghe (dB HL); `spl_db` = mức áp suất âm; `digital_level_dbfs` = mức tín hiệu số; `ear_left/right` = tai trái/phải; `simulation_profile` = hồ sơ giả định; `measured_audiogram` = dữ liệu có nguồn đo; `speech_in_noise` = hiểu lời nói trong môi trường ồn; `cochlear_model` = mô hình ốc tai; `educational_wdrc` = WDRC minh hoạ; `evidence_assistant` = trợ lý có nguồn; `care_referral` = định hướng tìm chuyên gia.
