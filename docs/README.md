@@ -15,3 +15,4 @@
 | [history/](history/) | Nhật ký xây dựng và tổng quan dự án gốc |
 
 | [audio-foundation.md](audio-foundation.md) | Waveform DSP, Audio Lab và giới hạn của mô hình giáo dục |
+| [research/HEARING_TEST_ORIGIN_REVIEW.md](research/HEARING_TEST_ORIGIN_REVIEW.md) | Đối chiếu repo Hearing_Test từ giai đoạn đầu, phần chung dữ liệu, audit licensing, lộ trình tách mô-đun sàng lọc nghiên cứu |
