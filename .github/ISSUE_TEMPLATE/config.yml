@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Báo lỗ hổng bảo mật riêng tư
+    url: https://github.com/hdwc-151/Demo-hearing-loss/security/advisories/new
+    about: Không đăng lỗ hổng bảo mật thành issue công khai.

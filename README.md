@@ -1,389 +1,231 @@
-# Healthy Hearing — Master Project README
+<div align="center">
 
-> **Healthy Hearing (Dr. Bunny)** là hệ thống mô phỏng trải nghiệm suy giảm thính lực và giáo dục thấu cảm. Thư mục `Master/` lưu prototype, backend, frontend, thuật toán lõi, tài liệu ngữ âm và bộ kiểm thử cho phiên bản full-stack.
+# 🐰 Dr. Bunny
+### Hiểu trải nghiệm nghe kém qua mô phỏng tương tác
+
+**Audiogram · Hội thoại suy giảm khả năng nghe · Nhiễu môi trường · Trợ lý giải thích**
+
+Một mã nguồn React cho **Web, PWA và dự án ứng dụng Android/iOS**; các chức năng cốt lõi có thể chạy **không cần máy chủ**.
+
+[![CI](https://github.com/hdwc-151/Demo-hearing-loss/actions/workflows/ci.yml/badge.svg)](https://github.com/hdwc-151/Demo-hearing-loss/actions/workflows/ci.yml)
+[![Deploy Pages](https://github.com/hdwc-151/Demo-hearing-loss/actions/workflows/pages.yml/badge.svg)](https://github.com/hdwc-151/Demo-hearing-loss/actions/workflows/pages.yml)
+![Version](https://img.shields.io/badge/version-0.3.0-informational)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+**[Dùng ứng dụng web](https://hdwc-151.github.io/Demo-hearing-loss/)** · **[Bản demo một file](https://hdwc-151.github.io/Demo-hearing-loss/demo.html)** · [Hướng dẫn cài đặt](#-chạy-trên-máy-tính) · [Tài liệu kỹ thuật](docs/README.md)
+
+<img src="docs/design/storyboard.png" alt="Storyboard thiết kế giao diện Dr. Bunny" width="850">
+
+</div>
+
+> [!IMPORTANT]
+> **Dr. Bunny là công cụ giáo dục, không phải thiết bị y tế.** Các hiệu ứng chữ, âm thanh và ngưỡng nghe là mô hình minh hoạ, **không phải phép đo hay chẩn đoán mất thính lực**. Không dùng ứng dụng để tự kết luận tình trạng sức khoẻ, thay thế khám thính học hoặc hiệu chỉnh máy trợ thính. Hãy giữ âm lượng phát ở mức an toàn.
 >
-> **Ranh giới y tế:** Đây là công cụ mô phỏng/giáo dục, không phải công cụ chẩn đoán thính lực lâm sàng và không thay thế bác sĩ hoặc chuyên gia thính học.
+> Các liên kết GitHub Pages hoạt động sau khi workflow triển khai thành công và Pages được cấu hình dùng **GitHub Actions**. Không cần chờ Pages để dùng bản `demo/index.html` có sẵn trong repo.
 
-## 1. Đọc gì trước?
+## Dr. Bunny giải quyết vấn đề gì?
 
-Nếu mới tiếp quản dự án, nên đọc theo thứ tự:
+Một con số trên biểu đồ thính lực khó diễn tả được người nghe có thể bỏ lỡ **âm tiết nào, dấu hiệu âm thanh nào, hoặc câu nói nào** trong môi trường ồn. Dr. Bunny biến các mức ngưỡng nghe giả định thành trải nghiệm có thể tương tác để phục vụ học tập và truyền thông nhận thức.
 
-1. `Master/README.md` — bản đồ tổng quan toàn bộ thư mục Master.
-2. `Master/fullstack/README.md` — hướng dẫn cài đặt, chạy backend/frontend và kiểm thử.
-3. `Master/PROJECT_OVERVIEW.md` — kiến trúc, mục tiêu sản phẩm và luồng dữ liệu.
-4. `Master/BUILD_LOG.md` — lịch sử phát triển, quyết định, lỗi và kết quả kiểm thử được ghi nhận.
-5. `Master/fullstack/PHONEME_MAP_VI.md` — mô hình tokenizer/âm vị tiếng Việt và giới hạn ngữ âm.
-6. Đọc mã nguồn tương ứng trong `backend/`, `frontend/` và `tests/`.
+Bạn có thể đổi một đường audiogram, xem phần văn bản bị suy giảm theo quy tắc âm vị, bật thử nhiễu nền và đặt câu hỏi cho “Bác sĩ Thỏ”. Mục tiêu là **giải thích một mô hình**, không tái tạo chính xác cảm nhận âm thanh của một cá nhân.
 
-> Build log là **lịch sử được ghi nhận**, không phải bằng chứng rằng code hiện tại vẫn chạy như vậy. Trước khi pitch hoặc phát hành, chạy lại build/test trên commit phát hành và xác nhận hành vi thực tế.
+## ✨ Tính năng ở phiên bản 0.3.0
 
-## 2. Cây thư mục
+| Thành phần | Bạn có thể làm gì? | Phạm vi hiện tại |
+| --- | --- | --- |
+| **Simulator** | Thử 4 mức **Normal / Mild / Moderate / Severe**, các tình huống âm thanh; quan sát văn bản bị ẩn theo dải âm vị, phát giọng đọc và nhiễu minh hoạ. | Tiếng Việt, tiếng Anh; phân biệt quy tắc giọng Bắc/Nam đối với một số âm vị. |
+| **Audiogram** | Kéo các điểm ngưỡng tại **6 tần số**, dùng bàn phím để điều chỉnh và xem các biểu tượng âm thanh đổi trạng thái. | Mô phỏng một tai bằng dẫn truyền khí; thay đổi đường ngưỡng có tác động trở lại Simulator. |
+| **Bác sĩ Thỏ** | Hỏi đáp về đường ngưỡng đang chọn, dùng các câu hỏi nhanh hoặc nhập câu riêng. | Bộ truy xuất tri thức có quy tắc (**GraphRAG tầng 1**, 6 nút); LLM phía máy chủ là tuỳ chọn, không phải điều kiện sử dụng. |
+| **Offline-first** | Dùng các engine văn bản, GraphRAG và nhiễu thủ tục ngay trên thiết bị; lưu cài đặt. | Web/PWA không cần backend ở chế độ **Trong máy**; backend FastAPI bổ sung API, nhiễu WAV và tuỳ chọn LLM. |
+| **Đa nền tảng** | Chạy web, cài PWA, mở dự án Android/iOS bằng Capacitor. | Dự án native đã được tạo; **chưa xác nhận build native hoặc thử trên điện thoại thật**. |
+
+**Lưu ý:** “Chữ rụng” chỉ là quy tắc minh hoạ theo nhóm âm vị và ngưỡng giả định; không có nghĩa người nghe kém thực tế chỉ mất đúng các ký tự đó. Giọng đọc từ Web Speech API hiện **không đi qua bộ lọc thính lực**. Nhiễu thủ tục không phải GAN đã huấn luyện.
+
+## 🧱 Kiến trúc đang sử dụng
+
+```mermaid
+flowchart LR
+  U["Web / PWA / Android / iOS"] --> F["React 18 + Zustand"]
+  F --> O["Engine trong máy<br/>Âm vị · Nhiễu FFT · GraphRAG tầng 1"]
+  F -. "Tuỳ chọn: chế độ máy chủ" .-> A["FastAPI"]
+  A --> P["Python reference<br/>phoneme · noise · graphrag"]
+  A -. "Khi được cấu hình" .-> L["LLM"]
+  T["Parity fixtures + tests"] --> O
+  T --> P
+```
+
+Frontend sử dụng **React 18, Vite 5, Tailwind CSS 3 và Zustand 4**. Backend sử dụng **Python 3.12, FastAPI** và các mô-đun xử lý tín hiệu. **Capacitor 8** chia sẻ mã nguồn web với dự án Android/iOS.
+
+Thiết kế có hai nguyên tắc:
+
+1. **Offline-first, server-optional:** hoạt động cốt lõi không phụ thuộc kết nối mạng; khi bật chế độ máy chủ mà API lỗi, ứng dụng chuyển sang logic trong máy.
+2. **Python–JavaScript parity:** `backend/core/` là bản tham chiếu; `frontend/src/util/` được đối chiếu với fixture để phát hiện sai khác khi sửa thuật toán. Kiểm thử parity không chứng minh độ chính xác lâm sàng.
+
+Xem [kiến trúc chi tiết](docs/architecture.md), [engine offline](docs/offline-engines.md) và [các quyết định thiết kế](docs/adr/).
+
+## 📁 Cấu trúc repository
 
 ```text
-Master/
-├── README.md
-├── BUILD_LOG.md
-├── PROJECT_OVERVIEW.md
-├── backend_core.py                 # Core logic của prototype ban đầu
-├── index.html                      # Prototype HTML/JavaScript độc lập
-│
-└── fullstack/
-    ├── README.md                   # Hướng dẫn setup/run/test cho full-stack
-    ├── PHONEME_MAP_VI.md           # Tài liệu tokenizer/âm vị tiếng Việt
-    │
-    ├── backend/                    # FastAPI, mặc định cổng 8000
-    │   ├── main.py                 # Khai báo API và kết nối các module lõi
-    │   ├── requirements.txt        # Python dependencies
-    │   └── core/
-    │       ├── __init__.py
-    │       ├── constants.py        # Dữ liệu chuẩn: tần số, preset, kịch bản, âm thanh
-    │       ├── phoneme.py          # Tokenizer tiếng Việt và suy giảm hiển thị chữ
-    │       ├── audiometry_eq.py    # EQ trợ thính 3-band, PTA-4, hồ sơ mẫu [v0.4]
-    │       ├── graphrag.py         # Knowledge nodes, retrieval/ranking và LLM hook
-    │       ├── noise.py            # Sinh noise WAV, DSP/FFT, điều biên và trộn SNR
-    │       └── gan.py              # Conditional 1D-GAN/WaveGAN; cần xác minh inference
-    │
-    ├── frontend/                   # React 18 + Vite + TailwindCSS, mặc định cổng 5173
-    │   ├── package.json            # Scripts và JavaScript dependencies
-    │   ├── package-lock.json       # Khóa phiên bản dependencies npm
-    │   ├── vite.config.js          # Dev server và proxy API
-    │   ├── index.html              # HTML entry point của Vite
-    │   └── src/
-    │       ├── main.jsx            # Mount React app
-    │       ├── App.jsx              # Khung UI, navigation, trạng thái kết nối
-    │       ├── store.js             # State dùng chung bằng Zustand
-    │       ├── api.js               # API client và offline fallback
-    │       ├── index.css            # Style, hiệu ứng và responsive layout
-    │       ├── data/constants.js    # Nội dung hiển thị, kịch bản, icon, fallback
-    │       ├── util/
-    │       │   ├── phoneme.js       # Bản JavaScript của tokenizer tiếng Việt
-    │       │   └── audio.js         # Web Audio DSP, EQ/compression và tiện ích 2AFC
-    │       └── components/
-    │           ├── Simulator.jsx    # Tab 1: mô phỏng audio và văn bản
-    │           ├── Chat.jsx         # Tab 2: hỏi đáp Dr. Bunny
-    │           └── Audiogram.jsx    # Tab 3: audiogram, masking và 2AFC
-    │
-    └── tests/
-        ├── test_backend.py          # API và logic backend bằng pytest
-        ├── eval_retrieval.py        # Đánh giá retrieval
-        ├── make_fixtures.py         # Sinh fixture tokenizer
-        ├── fixtures/
-        │   └── phoneme_vi.json      # Bộ test tiếng Việt đối chiếu Python/JS
-        └── e2e_browser.py           # Browser E2E bằng Playwright
+Demo-hearing-loss/
+├── frontend/               React, Vite, PWA, Capacitor
+│   ├── src/                UI, store, API, engine chạy trong máy
+│   ├── public/             manifest, service worker, biểu tượng
+│   ├── android/            Dự án Android (native)
+│   ├── ios/                Dự án iOS (native)
+│   └── scripts/            parity, logic tests, build demo
+├── backend/                FastAPI và Python reference engines
+├── tests/                  pytest, fixture, Chromium E2E, PWA
+├── demo/index.html         Bản HTML độc lập dùng được bằng file://
+├── mobile/                 Tài nguyên, hướng dẫn build và store listing
+├── docs/                   API, kiến trúc, triển khai, kiểm thử, thiết kế
+├── scripts/                Công cụ hỗ trợ dự án
+├── legacy/                 Prototype của bản ứng dụng hiện tại
+├── archive/                Code, tài liệu và các phiên bản cũ được bảo toàn
+├── .github/workflows/      CI, GitHub Pages, workflow mobile
+├── docker-compose.yml      Backend + web qua Docker
+├── Makefile                Lệnh tắt cho người phát triển
+└── REPOSITORY_MAP.md       Bản đồ repo sau khi tái cấu trúc
 ```
 
-**Lưu ý cấu trúc:** cây trên phản ánh mô tả của phiên bản được cung cấp. Nếu `audiometry_eq.py` hoặc file khác không tồn tại trong repository hiện tại, hãy đối chiếu `git ls-files`, câu lệnh import và nội dung `main.py`. Không tạo file rỗng để che lỗi thiếu module.
+**Phát triển phiên bản đang được duy trì tại thư mục gốc.** Không lấy `Master/`, `final/`, `Hearing/` hoặc code trong `archive/` làm entry point hiện hành. Chi tiết nguồn gốc nằm trong [REPOSITORY_MAP.md](REPOSITORY_MAP.md).
 
-## 3. Healthy Hearing làm gì?
+## 🚀 Chạy trên máy tính
 
-### 3.1 Simulator — mô phỏng trải nghiệm nghe
+### Cách nhanh nhất — không cần Python hay cài thư viện
 
-Người dùng chọn kịch bản đời thường và mức mô phỏng. Hệ thống kết hợp xử lý âm thanh với thay đổi hiển thị văn bản để người dùng đối chiếu âm thanh và lời nói.
+Tải repository về và mở **`demo/index.html`** trong Chrome/Edge hoặc một trình duyệt hiện đại. Đây là bản một file chạy bằng `file://`, không yêu cầu backend. Để cập nhật bản demo sau khi sửa mã React, dùng `npm run build:demo` trong `frontend/`.
 
-Các mức Normal, Mild, Moderate và Severe là **mức mô phỏng của sản phẩm**, không tự động tương đương với phân loại hay phép đo lâm sàng. Chất lượng mô phỏng cần được đánh giá riêng bằng kiểm thử kỹ thuật và nghe thử phù hợp.
+### Cách dành cho người phát triển — Windows / macOS / Linux
 
-### 3.2 Interactive Audiogram — đồ thị thính lực tương tác
+**Yêu cầu:** Python **3.12**, Node.js **22 trở lên** (kèm npm), Git. Nên dùng terminal trong VS Code. Lệnh phía dưới chạy từ **thư mục gốc repository**, trừ khi có chú thích.
 
-Người dùng điều chỉnh các điểm ngưỡng trên audiogram. Frontend cập nhật đường cong và trạng thái sound items theo logic masking trong code.
+**Bước 1 — lấy mã nguồn**
 
-Đồ thị của ứng dụng là công cụ trực quan hóa. Không coi giá trị người dùng tự nhập hoặc kết quả mô phỏng là phép đo thính lực đã hiệu chuẩn.
-
-### 3.3 Dr. Bunny Q&A — hỏi đáp/giải thích
-
-Frontend gửi câu hỏi tới backend để lấy phản hồi từ logic retrieval hoặc fallback. `graphrag.py` chứa phần tri thức/xếp hạng được mô tả trong codebase.
-
-Không gọi đây là GraphRAG hoàn chỉnh nếu chưa xác minh có truy xuất đồ thị thực sự. Không trình bày câu trả lời mẫu/hardcoded như thể do LLM sinh ra.
-
-## 4. Kiến trúc và luồng dữ liệu
-
-```text
-Người dùng
-   │
-   ▼
-React UI (App.jsx + 3 tabs)
-   │
-   ├── Zustand store (store.js)
-   │      └── trạng thái dùng chung giữa Simulator / Chat / Audiogram
-   │
-   ▼
-API client (api.js)
-   │
-   ▼
-Vite proxy (frontend :5173)
-   │
-   ▼
-FastAPI (backend/main.py, mặc định :8000)
-   │
-   ├── constants.py       cấu hình và dữ liệu chuẩn
-   ├── phoneme.py         tokenizer và suy giảm hiển thị chữ
-   ├── noise.py           sinh/trộn noise
-   ├── audiometry_eq.py   EQ/PTA-4 nếu module có trong bản hiện tại
-   └── graphrag.py        retrieval/Q&A và LLM hook
-          │
-          ▼
-   JSON / WAV / thông tin mô phỏng
-          │
-          ▼
-Frontend cập nhật UI và/hoặc phát audio
+```bash
+git clone https://github.com/hdwc-151/Demo-hearing-loss.git
+cd Demo-hearing-loss
 ```
 
-| Lớp | Trách nhiệm | Không nên làm |
-|---|---|---|
-| `frontend/src/components/` | Nhận tương tác và hiển thị | Tự tạo logic y khoa không có trong core |
-| `store.js` | State dùng chung | Trở thành nguồn chuẩn thứ hai cho dữ liệu backend |
-| `api.js` | HTTP, lỗi và fallback | Che lỗi backend bằng cách giả vờ request thành công |
-| `backend/main.py` | API, validation, gọi core | Nhồi toàn bộ thuật toán vào endpoint |
-| `backend/core/` | Thuật toán và cấu hình lõi | Phụ thuộc trực tiếp vào giao diện React |
-| `tests/` | Xác minh logic/API/parity/E2E | Chỉ kiểm tra request trả HTTP 200 |
+**Bước 2 — cài frontend và khởi chạy giao diện**
 
-Frontend và backend phải thống nhất URL API. Nếu frontend gọi `/api/...` còn FastAPI khai báo route `/...`, cần xác minh `vite.config.js`, proxy/rewrite và `api.js` có xử lý prefix phù hợp hay không.
-
-## 5. Vai trò từng file quan trọng
-
-### Tài liệu và prototype ở cấp `Master/`
-
-| File | Mục đích |
-|---|---|
-| `README.md` | Điểm bắt đầu; bản đồ file và kiến trúc toàn Master |
-| `PROJECT_OVERVIEW.md` | Mục tiêu, kiến trúc, module và trạng thái dự án |
-| `BUILD_LOG.md` | Nhật ký phát triển, quyết định, lỗi và kết quả test được ghi lại |
-| `backend_core.py` | Logic backend của prototype ban đầu; không mặc định full-stack đang dùng file này |
-| `index.html` | Prototype HTML/JavaScript độc lập để tham khảo/đối chiếu |
-
-Prototype cấp `Master/` và ứng dụng ở `Master/fullstack/` là hai cách triển khai khác nhau. Xác định người dùng đang chạy phiên bản nào trước khi sửa.
-
-### Backend
-
-| File | Giải thích |
-|---|---|
-| `main.py` | Khai báo endpoint, request/response, validation và gọi core |
-| `constants.py` | Cấu hình chuẩn: tần số, preset, kịch bản và sound items |
-| `phoneme.py` | Phân tích âm tiết/đơn vị tiếng Việt và làm mờ/loại bỏ phần văn bản theo mức mô phỏng |
-| `audiometry_eq.py` | Module được mô tả cho EQ trợ thính 3-band, PTA-4 và hồ sơ mẫu. Công thức và ý nghĩa lâm sàng cần review trước khi công bố |
-| `graphrag.py` | Knowledge nodes, chuẩn hóa/truy vấn, ranking và hook LLM theo phiên bản thực tế |
-| `noise.py` | Sinh noise WAV, xử lý DSP/FFT, điều biên và trộn theo SNR |
-| `gan.py` | Module conditional 1D-GAN. Chỉ xác nhận GAN hoạt động khi có dependency, checkpoint hợp lệ và inference được kiểm tra |
-| `requirements.txt` | Python dependencies; xem file thật để biết phiên bản chính xác |
-
-### Frontend
-
-| File | Giải thích |
-|---|---|
-| `package.json` | Scripts chạy dev/build và danh sách package |
-| `package-lock.json` | Khóa cây dependency để cài đặt tái lập |
-| `vite.config.js` | Vite và proxy trong môi trường phát triển |
-| `src/main.jsx` | Khởi tạo React |
-| `src/App.jsx` | Khung UI, điều hướng 3 tab và trạng thái kết nối |
-| `src/store.js` | State dùng chung giữa các tab |
-| `src/api.js` | Giao tiếp HTTP và offline fallback |
-| `src/index.css` | Style, hiệu ứng chữ mờ và responsive |
-| `src/data/constants.js` | Nội dung trình bày/fallback; ghép dữ liệu theo ID với backend |
-| `src/util/phoneme.js` | Bản JS tokenizer; cần kiểm tra parity với Python |
-| `src/util/audio.js` | Web Audio API/DSP, EQ/compression và tiện ích 2AFC theo phiên bản |
-| `src/components/Simulator.jsx` | UI mô phỏng audio, văn bản và playback |
-| `src/components/Chat.jsx` | UI hỏi đáp, câu hỏi nhanh và phản hồi |
-| `src/components/Audiogram.jsx` | Đồ thị, drag interaction, masking và 2AFC |
-
-### Tests
-
-| File | Mục đích |
-|---|---|
-| `test_backend.py` | API, validation và logic backend |
-| `eval_retrieval.py` | Đánh giá retrieval; kiểm tra cách tách dev/holdout |
-| `make_fixtures.py` | Tạo dữ liệu test tokenizer |
-| `fixtures/phoneme_vi.json` | Các ca chuẩn để so sánh Python/JavaScript |
-| `e2e_browser.py` | Tự động hóa hành vi trình duyệt bằng Playwright |
-
-## 6. API được mô tả
-
-Các endpoint được nêu trong cấu trúc dự án:
-
-| Endpoint | Mục đích dự kiến |
-|---|---|
-| `/health` | Kiểm tra backend |
-| `/presets` | Lấy preset mức mô phỏng |
-| `/degrade` | Biến đổi văn bản/đầu vào theo cấu hình suy giảm |
-| `/graphrag` | Truy vấn hỏi đáp/retrieval |
-| `/noise` | Sinh hoặc trả audio noise WAV |
-| `/hearing-aid-eq` | EQ trợ thính 3-band theo module mới |
-
-**Phải xác minh với code:** bảng trên dựa trên mô tả dự án. Đối chiếu decorators trong `backend/main.py` để biết route, HTTP method, request/response schema và lỗi thực tế. Không giả định `/hearing-aid-eq` đã hoạt động chỉ vì được nêu trong tài liệu.
-
-Khi hoàn thiện API reference, mỗi route cần có method/path, schema, validation, status code, ví dụ request/response và test liên quan.
-
-## 7. Cài đặt và chạy trên Windows
-
-> Chạy lệnh từ các thư mục tương ứng. Đối chiếu `fullstack/README.md`, `requirements.txt` và `package.json` nếu script thực tế khác ví dụ dưới đây.
-
-### 7.1 Kiểm tra công cụ
-
-```powershell
-python --version
-python -m pip --version
-node --version
-npm --version
-git --version
-```
-
-### 7.2 Backend
-
-Mở terminal thứ nhất:
-
-```powershell
-cd "C:\0nlyCodingSource\Demo IEC\Master\fullstack\backend"
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-uvicorn main:app --reload --host 127.0.0.1 --port 8000
-```
-
-Nếu PowerShell chặn activate script, có thể gọi trực tiếp:
-
-```powershell
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv\Scripts\python.exe -m uvicorn main:app --reload --host 127.0.0.1 --port 8000
-```
-
-Kiểm tra `http://127.0.0.1:8000/health` và `http://127.0.0.1:8000/docs`. Chỉ coi endpoint hoạt động khi phản hồi đúng schema, không chỉ vì trang mở được.
-
-### 7.3 Frontend
-
-Mở terminal thứ hai:
-
-```powershell
-cd "C:\0nlyCodingSource\Demo IEC\Master\fullstack\frontend"
+```bash
+cd frontend
 npm ci
 npm run dev
 ```
 
-Mở URL được Vite in ra, thường là `http://localhost:5173`.
+Mở **http://localhost:5173**. Chọn **Cài đặt → Trong máy** để dùng ứng dụng không cần backend. Nếu chỉ cần thử giao diện và engine offline, có thể dừng ở đây.
 
-Nếu `npm ci` thất bại do lockfile không đồng bộ, kiểm tra `package.json` và `package-lock.json` trước khi cân nhắc `npm install`; không tự xóa lockfile.
+**Bước 3 — chạy backend (tuỳ chọn; mở terminal thứ hai)**
 
-### 7.4 Test backend
-
-```powershell
-cd "C:\0nlyCodingSource\Demo IEC\Master\fullstack\backend"
-python -m pytest -q
-```
-
-### 7.5 Python–JavaScript parity
-
-Tại thư mục frontend, xem scripts thực tế:
+Windows (PowerShell):
 
 ```powershell
-npm run
+py -3.12 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r backend/requirements.txt
+cd backend
+python -m uvicorn main:app --reload --port 8000
 ```
 
-Nếu có script `check-parity`, chạy:
+macOS / Linux:
 
-```powershell
-npm run check-parity
+```bash
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r backend/requirements.txt
+cd backend
+python -m uvicorn main:app --reload --port 8000
 ```
 
-Không giả định script tồn tại nếu chưa kiểm tra `package.json`.
+API tại **http://localhost:8000**, tài liệu Swagger tại **http://localhost:8000/docs**. Frontend ở `localhost:5173` có proxy **`/api` → `localhost:8000`** trong môi trường Vite dev.
 
-### 7.6 Browser E2E
+> Với người dùng `make` (macOS/Linux, hoặc Windows đã cài Make), có thể dùng `make install`, `make dev-api`, `make dev-web`. Mỗi server chạy ở một terminal. Lệnh `make install` sử dụng `backend/requirements-tested.txt`.
 
-Cài Playwright theo hướng dẫn trong README/tests và kiểm tra các biến môi trường mà `e2e_browser.py` yêu cầu. Backend và frontend phải chạy đúng URL trước khi thực hiện E2E.
+**Dùng Docker (backend + web):**
 
-## 8. Nguyên tắc kỹ thuật cần giữ
-
-### Single source of truth
-- Backend là nguồn chuẩn cho giá trị thuật toán nếu API đã cung cấp.
-- Frontend có thể giữ emoji, nhãn và nội dung hiển thị theo ID.
-- Khi ghép dữ liệu, kiểm tra ID thiếu/trùng và fallback rõ ràng.
-- Không để hai nơi có cùng một tham số thuật toán nhưng cập nhật độc lập.
-
-### Tokenizer tiếng Việt
-- Kiểm tra âm đầu, nguyên âm, âm cuối và cụm chữ.
-- Xem xét chuẩn hóa Unicode NFC.
-- Dùng fixture chung để so sánh Python và JavaScript.
-- Parity chỉ chứng minh hai bản code cho kết quả giống nhau; **không tự chứng minh thuật toán đúng về ngữ âm học**.
-
-### Audio DSP
-- Kiểm tra sample rate, số kênh, độ dài, dtype và NaN/Inf.
-- Kiểm tra clipping, RMS và khả năng tái lập nếu có seed.
-- Phân biệt noise procedural với noise sinh từ GAN.
-- SNR nội bộ không tương đương dB SPL đã hiệu chuẩn trên tai nghe/loa thật.
-
-### Audiogram và masking
-- Kiểm tra dấu bất đẳng thức và ánh xạ tần số log.
-- Drag interaction không được làm lệch overlay hoặc phá state.
-- Không gọi giá trị tự nhập là kết quả đo thính lực lâm sàng.
-- Chỉ hiển thị SII nếu có thuật toán tính phù hợp và tài liệu giải thích.
-
-### Retrieval/Q&A
-- Chuẩn hóa truy vấn và từ khóa nhất quán.
-- Kiểm tra ranh giới từ, dấu tiếng Việt và ranking.
-- Dùng dev/holdout độc lập; nếu đã dùng holdout để tinh chỉnh thì điểm số không còn độc lập.
-- Phân biệt keyword ranking, graph retrieval và GraphRAG.
-- Nội dung sức khỏe cần nguồn, giới hạn và fallback rõ ràng.
-
-## 9. Trạng thái và giới hạn phải công bố trung thực
-
-Dùng nhãn:
-- **Verified:** đã kiểm tra trên phiên bản hiện tại và có bằng chứng.
-- **Historical:** chỉ được ghi trong log trước đây, chưa chạy lại.
-- **Partially verified:** mới kiểm tra được một phần.
-- **Planned:** mới là kế hoạch.
-- **Blocked:** thiếu công cụ, dữ liệu, checkpoint hoặc môi trường.
-
-Các điểm cần xác minh trước khi phát hành:
-- `audiometry_eq.py` và `/hearing-aid-eq` có thực sự hiện diện/được gọi trong code hiện tại không.
-- GAN có checkpoint, dependency và inference chạy được không.
-- Chất lượng audio đã được nghe thử và đánh giá phù hợp chưa.
-- Retrieval có graph retrieval thực sự hay chủ yếu keyword/ranking/fallback.
-- SII hoặc các chỉ số khác có được tính bằng công thức phù hợp không.
-- README, screenshot, link demo và code có đồng nhất không.
-- Các tuyên bố y tế/ngữ âm có nguồn đúng và ngữ cảnh rõ ràng không.
-
-## 10. GitHub và bảo mật
-
-Trước khi commit:
-- Không commit `.env`, API keys, access tokens, credentials hoặc dữ liệu cá nhân.
-- Kiểm tra `.gitignore`.
-- Xem `git status` và `git diff --cached` trước commit.
-- Chỉ thêm audio/ảnh khi có quyền sử dụng và chúng có giá trị với repo.
-- Không commit `node_modules`, `.venv`, cache hoặc build artifacts nếu không có lý do.
-- Giữ `package-lock.json` nếu cần cài đặt npm tái lập.
-- Không xóa file gốc chỉ để repo trông gọn hơn khi chưa hiểu dependency.
-
-Lệnh kiểm tra phổ biến:
-
-```powershell
-git status
-git diff --check
-git diff --cached --stat
-git diff --cached --name-status
+```bash
+docker compose up --build
 ```
 
-## 11. Lộ trình tiếp quản khuyến nghị
+Sau khi khởi động, mở **http://localhost:8080**. Chi tiết cấu hình môi trường, CORS và triển khai: [docs/deployment.md](docs/deployment.md).
 
-1. **Inventory:** kiểm tra file thật, imports và route đang tồn tại.
-2. **Reproduce:** cài đặt theo README, chạy backend/frontend.
-3. **Baseline:** chạy pytest, parity, build và E2E mà môi trường hỗ trợ.
-4. **Correctness:** sửa lỗi tái hiện được và bổ sung regression test.
-5. **Audio audit:** xác minh audio contract, DSP và playback.
-6. **Retrieval audit:** đánh giá ranking với bộ câu hỏi độc lập.
-7. **UX/responsive:** thử các viewport mục tiêu và tương tác.
-8. **Documentation:** cập nhật README, architecture, test report và limitations.
-9. **Release:** kiểm tra link, secrets và assets trước khi public.
+## ✅ Kiểm thử và mức độ xác nhận
 
-Không tối ưu chỉ vì code có thể viết ngắn hơn. Mỗi thay đổi cần vấn đề cụ thể, bằng chứng, nguyên nhân, bản vá và test sau sửa.
+CI chạy tự động khi tạo PR hoặc push lên `main`: **backend → frontend → Chromium E2E**. Bản tái cấu trúc đã vượt qua [workflow CI ngày 04/11/2026](https://github.com/hdwc-151/Demo-hearing-loss/actions/runs/41795499375).
 
-## 12. Tóm tắt nhanh
+| Lớp | Lệnh hoặc quy trình | Kết quả CI đã ghi nhận |
+| --- | --- | --- |
+| Backend & API | `python -m pytest tests -q` | **49 passed**, 1 warning |
+| Đánh giá GraphRAG | `python tests/eval_retrieval.py` | Dev **12/12**, holdout **8/8** |
+| Parity & logic frontend | `cd frontend && npm test` | **111** ca chữ, **8** nhóm hằng số, **87** ca GraphRAG, **20** test logic |
+| Frontend production | `cd frontend && npm run build` | **Passed** |
+| Kiểm tra dependency runtime | `cd frontend && npm audit --omit=dev --audit-level=high` | **Passed** |
+| Browser E2E (Chromium) | `tests/e2e_browser.py`, `e2e_review.py`, `e2e_mobile.py` | **16 + 17 + 13 = 46/46** |
+| Demo HTML độc lập | `tests/e2e_demo.py` | **8/8** |
+| PWA offline | `tests/e2e_pwa.py` | **5/5** |
 
-| Thành phần | Công nghệ chính | Vai trò |
-|---|---|---|
-| Prototype | HTML / JavaScript | Bản thử nghiệm ban đầu |
-| Frontend | React 18, Vite, TailwindCSS, Zustand | UI, state, mô phỏng và tương tác |
-| Backend | Python, FastAPI | API và kết nối thuật toán |
-| Phoneme | Python + JavaScript | Tokenizer và suy giảm hiển thị chữ |
-| Audio | Web Audio API, NumPy/FFT, WAV | DSP, noise, EQ theo phiên bản |
-| Retrieval | Python, knowledge nodes/ranking, LLM hook | Q&A và truy xuất thông tin |
-| GAN | PyTorch nếu được cấu hình | Nhánh sinh nhiễu học sâu; cần xác minh inference |
-| Testing | pytest, fixtures, Playwright | Backend, parity và E2E |
+Để chạy lại các bài kiểm tra nhanh sau khi cài phụ thuộc:
 
-**Thông điệp cốt lõi:** Healthy Hearing là công cụ mô phỏng và giáo dục thấu cảm. Mọi tuyên bố về độ chính xác thính giác, sàng lọc, chỉ số nghe hoặc hiệu quả y tế phải dựa trên phương pháp và bằng chứng phù hợp. Build thành công, API trả 200 và hai bản tokenizer cho kết quả giống nhau là những kiểm tra hữu ích, nhưng không tự chứng minh mô hình chính xác về mặt lâm sàng.
+```bash
+python -m pytest tests -q
+python tests/eval_retrieval.py
+cd frontend
+npm test
+npm run build
+```
+
+E2E cần Python Playwright + Chromium, backend và frontend dev đang chạy; xem **[hướng dẫn kiểm thử](docs/testing.md)** và workflow [`ci.yml`](.github/workflows/ci.yml) để lặp lại đúng điều kiện CI.
+
+**Giới hạn của kết quả trên:** holdout GraphRAG đã từng được dùng trong quá trình tinh chỉnh, vì vậy **không phải kiểm chứng độc lập về khả năng tổng quát hoá**. E2E mobile hiện mô phỏng viewport và hành vi trình duyệt; **không phải bài test trên điện thoại Android/iOS thật**.
+
+## 🌐 Deploy web, PWA và mobile
+
+| Đích | Cách triển khai | Tình trạng |
+| --- | --- | --- |
+| **GitHub Pages** | Workflow [`pages.yml`](.github/workflows/pages.yml) build ứng dụng với `VITE_API_BASE=offline` và base theo tên repo. | Cần workflow deploy thành công và Pages được cấu hình đúng. |
+| **Demo HTML độc lập** | `cd frontend && npm run build:demo`, file đầu ra mặc định là `demo/index.html`. | Đã vượt Chromium E2E với `file://`. |
+| **Docker** | `docker compose up --build` | Đã có cấu hình; theo dõi [hướng dẫn triển khai](docs/deployment.md) trước khi mở công khai. |
+| **Android/iOS** | `cd frontend && npm run android` hoặc `npm run ios` (iOS cần macOS/Xcode). | Dự án native có sẵn; chưa xác nhận biên dịch, signing, TestFlight hay Play Store. |
+
+Nếu GitHub Pages chưa được kích hoạt, vào **Settings → Pages → Build and deployment → Source: GitHub Actions**. Trang chính dự kiến tại `https://hdwc-151.github.io/Demo-hearing-loss/`; bản một file sau deploy tại `/demo.html`.
+
+## 🔌 API (khi bật backend)
+
+| Endpoint | Phương thức | Mục đích |
+| --- | --- | --- |
+| `/health` | GET | Trạng thái API |
+| `/scenarios` | GET | Danh sách tình huống |
+| `/sound-items` | GET | Mốc âm thanh cho audiogram |
+| `/presets` | GET | Ngưỡng và hằng số tham chiếu |
+| `/degrade` | POST | Minh hoạ suy giảm văn bản |
+| `/graphrag` | POST | Truy xuất và diễn giải theo audiogram |
+| `/noise` | GET | Tạo WAV nhiễu minh hoạ |
+
+Chi tiết tham số, giới hạn đầu vào và ví dụ: [docs/api.md](docs/api.md).
+
+## ⚠️ Những gì dự án **chưa** khẳng định
+
+- **Chưa có hiệu chuẩn lâm sàng:** ngưỡng, độ suy giảm âm vị, nhiễu, speech banana và biểu tượng âm thanh là xấp xỉ để minh hoạ. Cần chuyên gia thính học, dữ liệu và thí nghiệm người nghe để đánh giá tính thực.
+- **Chưa lọc giọng nói TTS theo audiogram:** `speechSynthesis` không cung cấp luồng PCM cho pipeline DSP hiện tại.
+- **Không coi GAN/LLM là đã xác nhận production:** có tầng dự phòng và test bằng mock, nhưng chưa kiểm chứng checkpoint GAN hay nhà cung cấp LLM thật trong CI.
+- **Chưa xác nhận native release:** bài kiểm thử viewport mobile không thay thế build và kiểm thử Android/iOS thật.
+- **Bảo mật vận hành cần bổ sung trước khi public API:** HTTPS, quản lý secret và rate limiting cho endpoint LLM; xem [deployment checklist](docs/deployment.md).
+
+Mô tả phương pháp và hạn chế kỹ thuật: [docs/architecture.md](docs/architecture.md), [docs/testing.md](docs/testing.md).
+
+## 📚 Tài liệu và đóng góp
+
+**Bắt đầu từ:** [Mục lục tài liệu](docs/README.md) · [Kiến trúc](docs/architecture.md) · [Thiết kế mobile](docs/mobile-app-design.md) · [Mobile build](mobile/README.md) · [Triển khai](docs/deployment.md) · [Bản đồ repo](REPOSITORY_MAP.md).
+
+Đóng góp và đề xuất cải tiến theo [CONTRIBUTING.md](CONTRIBUTING.md). Báo vấn đề bảo mật theo [SECURITY.md](SECURITY.md), không công khai secret hoặc dữ liệu nhạy cảm trong issue. Dự án phát hành theo [MIT License](LICENSE).
+
+---
+
+## English overview
+
+**Dr. Bunny v0.3.0** is an **educational, interactive hearing-loss simulation**, not a medical diagnostic or assistive-hearing device. It combines a six-frequency audiogram, rule-based phoneme/text degradation, illustrative background noise, and an audiogram-aware question-answering assistant.
+
+The maintained codebase uses **React/Vite/Zustand**, **FastAPI/Python**, and **Capacitor 8**. Core functions run **offline** on the client; the server is optional. GitHub CI has passed backend, frontend build, JavaScript–Python parity, Chromium E2E, standalone HTML demo, and offline-PWA tests. **Native Android/iOS builds, clinical validation, real GAN checkpoints, and production LLM integration remain unverified.**
+
+**Get started:** open [`demo/index.html`](demo/index.html) directly, or install the frontend with `cd frontend && npm ci && npm run dev`. See [technical documentation](docs/README.md) for architecture, testing and deployment.
