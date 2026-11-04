@@ -126,7 +126,7 @@ async def main():
               "trong máy" in care_text and ("khám" in care_text.lower()) and "từ chối dữ liệu" not in care_text,
               care_text[:90])
         await pg.unroute("**/api/graphrag")
-                tml = await ask(pg, lambda r: r.fulfill(status=200, content_type="application/json",
+        tml = await ask(pg, lambda r: r.fulfill(status=200, content_type="application/json",
                         body=json.dumps({"answer": "dòng 1\ndòng 2", "mode": "hardcoded", "nodes": []})))
         ws = await pg.locator(".msg-bot:not(.typing)").last.evaluate("e => getComputedStyle(e).whiteSpace")
         check("H7d tin nhắn nhiều dòng giữ xuống dòng (pre-wrap)", ws == "pre-wrap" and "\n" in tml, f"white-space={ws}")
