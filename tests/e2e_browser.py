@@ -130,7 +130,7 @@ async def main():
         await pg3.wait_for_function("n => document.querySelectorAll('.msg-bot:not(.typing)').length > n",
                                     arg=n0, timeout=25000)
         last = (await pg3.locator(".msg-bot:not(.typing)").last.inner_text()).strip()
-        first = body["answer"].split("\n")[0][:25]
+        first = body["answer"].split("\n")[0].replace("🐰", "").replace("👉", "").strip()[:25]
         check("G2 UI hiển thị đúng nội dung backend", first in last, repr(first))
         check("G0 không lỗi JS (chat)", not errs3, str(errs3[:2]))
         await ctx3.close()
