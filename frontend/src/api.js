@@ -42,7 +42,7 @@ function chatFailure(kind, detail) {
 // Không kết nối được máy chủ: thay vì báo lỗi, trả lời bằng bộ tri thức trong máy (cùng nội dung tầng 1 của backend).
 function chatLocal(audiogramDb, question, detail) {
   const r = answerLocal(audiogramDb, question);
-  return { ...r, answer: "📴 Máy chủ không khả dụng; HearAtlas Guide trả lời bằng tri thức lưu trên thiết bị. " + r.answer, error: String(detail), fallback: true };
+  return { ...r, answer: "📴 Máy chủ không khả dụng; HearAtlas Guide trả lời bằng bộ tri thức trong máy. " + r.answer, error: String(detail), fallback: true };
 }
 
 export async function askDrBunny(audiogramDb, question, timeoutMs = CHAT_TIMEOUT_MS) {
