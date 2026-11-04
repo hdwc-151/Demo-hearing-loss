@@ -46,6 +46,7 @@ async def main():
         assert await page.evaluate("window.__audioStarts") == 1
         await page.get_by_role("button", name="Phát mô phỏng theo audiogram").click()
         await page.get_by_text("Đang phát: mô phỏng suy giảm theo audiogram").wait_for()
+        await page.get_by_role("region", name="Đặc trưng tín hiệu").wait_for()
         await page.get_by_role("button", name="Dừng Audio Lab").click()
         assert await page.evaluate("window.__audioStarts") == 2
         await page.locator("#lab-file").set_input_files({

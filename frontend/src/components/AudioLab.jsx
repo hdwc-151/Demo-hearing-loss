@@ -3,6 +3,7 @@ import { useStore } from "../store";
 import { onBackground } from "../native";
 import { getAudioCtx } from "../util/audio";
 import { attenuationDbAt, processHearingLoss } from "../util/hearingLoss";
+import { analyzeAudio } from "../util/audioFeatures";
 
 const LIMIT_BYTES = 12 * 1024 * 1024;
 const PLAYBACK_GAIN = 0.5; // digital attenuation; NOT a physical SPL limit
@@ -32,12 +33,15 @@ export default function AudioLab() {
   const [status, setStatus] = useState("Sẵn sàng");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const [metrics, setMetrics] = useState(null);
   const current = useRef(null), token = useRef(0), cache = useRef(null);
 
   const curve = useMemo(() => Array.from({ length: 61 }, (_, i) => {
     const hz = 250 * (8000 / 250) ** (i / 60);
     return String(i * 5) + "," + String(attenuationDbAt(hz, freqs, thresholds) * 70 / 32);
   }).join(" "), [freqs, thresholds]);
+
+  useEffect(() => setMetrics(null), [thresholds, freqs, input]);
 
   function stop() {
     ++token.current;
@@ -113,6 +117,8 @@ export default function AudioLab() {
         }
       }
       if (request !== token.current) return;
+      if (filtered) setMetrics({ original: analyzeAudio(original.getChannelData(0), original.sampleRate),
+        output: analyzeAudio(buffer.getChannelData(0), buffer.sampleRate) });
       const src = ctx.createBufferSource(), gain = ctx.createGain();
       src.buffer = buffer;
       gain.gain.value = PLAYBACK_GAIN;
@@ -165,6 +171,21 @@ export default function AudioLab() {
         </svg>
         <p className="text-xs text-muted">Đổi ngưỡng ở tab Audiogram rồi quay lại Audio Lab. Chọn Moderate/Severe để quan sát sự khác biệt. Đây là mô hình tuyến tính, không phải Gammachirp.</p>
       </div>
+      {metrics && (
+        <div className="rounded-2xl bg-bgcard border border-sage-light p-4" role="region" aria-label="Đặc trưng tín hiệu">
+          <h2 className="h2">Phân tích tín hiệu A/B</h2>
+          <p className="text-xs text-muted">Đo trên kênh audio thứ nhất sau lần phát B gần nhất; không phải phép đo thính lực.</p>
+          <table className="w-full text-xs sm:text-sm mt-2">
+            <thead><tr><th scope="col" className="text-left">Đặc trưng</th><th scope="col">Gốc</th><th scope="col">Mô phỏng</th></tr></thead>
+            <tbody>
+              <tr><th scope="row" className="text-left">RMS số</th><td className="text-center">{metrics.original.rms.toFixed(3)}</td><td className="text-center">{metrics.output.rms.toFixed(3)}</td></tr>
+              <tr><th scope="row" className="text-left">Trọng tâm phổ</th><td className="text-center">{Math.round(metrics.original.centroidHz)} Hz</td><td className="text-center">{Math.round(metrics.output.centroidHz)} Hz</td></tr>
+              <tr><th scope="row" className="text-left">Năng lượng ≥4 kHz</th><td className="text-center">{metrics.original.highPercent.toFixed(1)}%</td><td className="text-center">{metrics.output.highPercent.toFixed(1)}%</td></tr>
+            </tbody>
+          </table>
+          <p className="text-xs text-muted">RMS: biên độ hiệu dụng trong miền số. Trọng tâm phổ: trung bình tần số có trọng số năng lượng. Không suy diễn thành mức nghe dB HL hoặc dB SPL.</p>
+        </div>
+      )}
       <p className="text-xs text-muted">Công cụ giáo dục, chưa hiệu chuẩn tai nghe và không dùng để đo thính lực. Gain phát số là 0,5; vẫn phải đặt âm lượng loa/tai nghe ở mức thấp để nghe an toàn.</p>
     </section>
   );
