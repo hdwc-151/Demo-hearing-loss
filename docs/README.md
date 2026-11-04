@@ -21,3 +21,6 @@
 | [research/ASSISTANT_DATA_GOVERNANCE.md](research/ASSISTANT_DATA_GOVERNANCE.md) | NHANES, Clarity, Apple Health, bản quyền và kiểm chứng dataset |
 | [research/ASSISTANT_TRAINING_AND_SCENARIOS.md](research/ASSISTANT_TRAINING_AND_SCENARIOS.md) | RAG, kịch bản hội thoại và release gates |
 | [product/HEARATLAS_PRODUCT_ALPHA.md](product/HEARATLAS_PRODUCT_ALPHA.md) | Tên dự án, keyword taxonomy và lộ trình đóng gói sản phẩm |
+
+| [clinical/HEARING_EVIDENCE.md](clinical/HEARING_EVIDENCE.md) | Fact cards nguồn WHO, NIH, SII, MSBG; giới hạn y khoa và persona |
+| [product/APPLE_HEALTHKIT_IOS.md](product/APPLE_HEALTHKIT_IOS.md) | Cầu nối HealthKit native iOS, consent và Xcode sign-off |
