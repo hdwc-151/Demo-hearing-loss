@@ -33,6 +33,10 @@ jobs:
         run: |
           python tests/research/generate_auditory_fixtures.py
           node frontend/scripts/check-auditory-parity.mjs
+      - name: Advanced dcGC-shaped and WDRC Python-JS waveform parity
+        run: |
+          python tests/research/generate_advanced_fixtures.py
+          node frontend/scripts/check-advanced-parity.mjs
 
   frontend:
     runs-on: ubuntu-latest

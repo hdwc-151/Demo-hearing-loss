@@ -74,9 +74,19 @@ async def main():
         await page.get_by_role("region", name="Đặc trưng tín hiệu").wait_for()
         await page.get_by_role("button", name="Dừng Audio Lab").click()
         assert await page.evaluate("window.__audioStarts") == 4
+        await page.get_by_role("combobox", name="Kiểu mô phỏng thính giác").select_option("dcgc")
+        await page.get_by_role("button", name="Phát mô phỏng theo audiogram").click()
+        await page.get_by_text("Đang phát: mô phỏng suy giảm theo audiogram").wait_for()
+        await page.get_by_role("button", name="Dừng Audio Lab").click()
+        assert await page.evaluate("window.__audioStarts") == 5
+        await page.get_by_role("button", name="Phát EQ WDRC bù nghe minh họa").click()
+        await page.get_by_text("Đang phát: EQ/WDRC bù nghe minh hoạ").wait_for()
+        await page.get_by_role("button", name="Dừng Audio Lab").click()
+        assert await page.evaluate("window.__audioStarts") == 6
+
         assert not errors, errors
         await context.close()
         await browser.close()
-        print("Audio Lab E2E: 8 smoke checks passed")
+        print("Audio Lab E2E: 10 smoke checks passed")
 
 asyncio.run(main())

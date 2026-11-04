@@ -29,14 +29,21 @@ Một con số trên biểu đồ thính lực khó diễn tả được ngườ
 
 Bạn có thể đổi một đường audiogram, xem phần văn bản bị suy giảm theo quy tắc âm vị, bật thử nhiễu nền và đặt câu hỏi cho “Bác sĩ Thỏ”. Mục tiêu là **giải thích một mô hình**, không tái tạo chính xác cảm nhận âm thanh của một cá nhân.
 
-## Nền tảng audio (đang phát triển v0.4)
+## Audio Lab — STFT, ERB, dcGC thử nghiệm và EQ/WDRC
 
-**Mới:** có thể chọn bộ lọc STFT tuyến tính hoặc mô hình **ERB thực nghiệm**, gồm 12 dải tần ERB và suy giảm phụ thuộc biên độ. Đây là mô hình thử nghiệm độc lập để minh hoạ nguyên lý nén ốc tai, **không phải bộ lọc Compressive Gammachirp đã được kiểm chứng**. Xem tài liệu [Audio Foundation](docs/audio-foundation.md) để biết giả định và kiểm thử.
+Audio Lab chạy offline, xử lý trực tiếp file âm thanh trên thiết bị. Chọn một trong ba đường nghe:
 
-**Lưu giữ demo:** hai bản HTML trước được đóng băng trong [archive/demos/](archive/demos/README.md); mọi bản demo cũ cần được lưu dưới SHA-256 trước khi ghi đè. Dữ liệu và code cũ khác vẫn nằm trong `archive/`.
+- **A — Gốc:** nghe audio chưa qua xử lý.
+- **B — Suy giảm thính giác minh hoạ:** chọn STFT tuyến tính, ERB 12 dải hoặc **dcGC-shaped** (Gammachirp bất đối xứng có tham số điều khiển theo mức). Bộ dcGC hiện mới xử lý **biên độ phổ** và sử dụng HP bất đối xứng kiểu xấp xỉ, **chưa phải bộ lọc Gammachirp nhân quả/được thẩm định lâm sàng**.
+- **C — Bù nghe EQ/WDRC giáo dục:** bộ nén dải động nhiều dải độc lập trên **tín hiệu gốc**; tối đa +6 dB gain số và limiter số ±0,8. Không được hiểu là thông số kê đơn hoặc máy trợ thính thật.
 
+Ngoài phát A/B/C, ứng dụng hiển thị RMS số, trọng tâm phổ và tỷ lệ năng lượng từ 4 kHz trở lên để quan sát sự khác biệt. File nạp tối đa 8 giây và 12 MB; các bộ lọc thực nghiệm ERB/dcGC/WDRC giới hạn 4 giây và 48 kHz vì còn tính toán trên UI thread.
 
-Tab **Audio Lab** thử so sánh A/B trên file audio tối đa 8 giây, xử lý bằng FFT theo ngưỡng của audiogram. Mọi tính toán được thực hiện ngay trong trình duyệt, không gửi file tới backend. Sau lần phát B, Audio Lab còn hiển thị RMS số, trọng tâm phổ và tỷ lệ năng lượng từ 4 kHz trở lên để đối chiếu trước/sau. Phần lọc phổ tuyến tính hiện tại là **minh hoạ giáo dục**, chưa mô phỏng nén ốc tai, không phải Gammachirp, không hiệu chuẩn dB HL → dB SPL và không được dùng để đo/chẩn đoán thính lực. Xem [mô hình DSP và kiểm thử](docs/audio-foundation.md).
+**Cảnh báo:** dB HL trong audiogram không được chuyển trực tiếp thành dB SPL hay dBFS. Limiter và nút âm lượng phần mềm **không** bảo đảm mức áp suất âm an toàn qua loa/tai nghe. Hạ âm lượng thực tế trước khi nghe, không sử dụng ứng dụng để chẩn đoán hoặc thay thiết bị trợ thính chuyên dụng.
+
+**Kiểm thử:** Python/JavaScript unit tests, 12 bộ dữ liệu waveform dcGC/WDRC đối chiếu chéo, Chromium E2E và giới hạn thuật toán; tài liệu khoa học tại [Audio Foundation](docs/audio-foundation.md), [Numerical Reference Validation](docs/science/NUMERICAL_REFERENCE_VALIDATION.md) và [Research gate](https://github.com/hdwc-151/Demo-hearing-loss/issues/25). Các kiểm chứng số học **không đồng nghĩa** với mô hình cảm nhận nghe kém được kiểm nghiệm trên người.
+
+**Lưu trữ:** hai bản HTML lịch sử có SHA bất biến trong [archive/demos/](archive/demos/README.md); mỗi lần ghi đè bản demo cũ cần tạo snapshot SHA-256 trước. Các triển khai và dữ liệu cũ khác tiếp tục được giữ trong `archive/`.
 
 ## ✨ Tính năng ở phiên bản 0.3.0
 

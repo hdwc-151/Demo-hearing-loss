@@ -62,3 +62,15 @@ The expansion stage introduces a simple nonlinear dependence on digital RMS enve
 Validation suite: `tests/test_auditory_erb.py` and `frontend/scripts/erb.test.mjs`. Checks ERB formula, ascending centers, identity, selective attenuation, lower-input extra expansion, output bounds and deterministic processing. These are engineering checks, **not clinical validation**.
 
 **Browser performance gate:** the experimental ERB mode currently runs synchronously and is restricted to ≤4 seconds and ≤48 kHz to avoid long blocking periods on phones. The original STFT baseline remains available for up to 8 seconds. Future versions may migrate computation to an AudioWorklet/worker; no real-time latency guarantee is made.
+
+## Advanced experimental models and independent A/B/C listening
+
+A=raw, B=hearing-loss demonstration (STFT / ERB / **dcGC-shaped**), C=**separate EQ/WDRC demonstration applied to the RAW input**. All audio is processed locally. The label "dcGC" describes an engineering prototype, not a physiological/clinical reproduction of Irino & Patterson's level-dependent filter.
+
+- **dcGC-shaped:** an analytic passive GC *magnitude proxy* (frequency-asymmetric, chirp=-1), normalized band weights, a bounded asymmetric HP transfer whose corner changes with the *digital* band envelope, and separate loss attenuation. The digital level control uses 15ms attack and 125ms release exponential coefficients. Phase/delay of a true causal Gammachirp filter are **not modeled**; no independent DCGC psychophysical validation is claimed.
+- **WDRC:** 12-band, up to +6 digital dB gain, an illustrative 2:1 above -35 dBFS, 15ms attack and 125ms release, -9 dB minimum gain. A digital peak limiter caps final offline waveform at ±0.8 full-scale, followed by playback gain 0.5. This is **NOT safe SPL calibration**, a hearing aid, WDRC prescription, gain fitting, or inversion of the simulated hearing loss.
+- 4 seconds/48 kHz maximum for these experimental UI-thread DSP modes. Do not run on long clips until worker/AudioWorklet migration.
+- These two algorithms are implemented independently in `backend/core/auditory_advanced.py` and `frontend/src/util/auditoryAdvanced.js`. Tests: `tests/test_auditory_advanced.py` and `frontend/scripts/advanced.test.mjs`, plus `tests/e2e_audio_lab.py`.
+- Existing `archive/demos/` snapshots remain immutable. Passing unit tests is NOT an endorsement of physiological or clinical accuracy.
+
+**Next validation gate:** quantitative reference against dynamic compressive GC output at multiple calibrated stimulus levels, compression slopes and transfer functions. **Compensation mode is explicitly educational** and not clinically fitted.
