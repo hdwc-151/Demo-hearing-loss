@@ -4,6 +4,7 @@ import { initNative } from "./native";
 import { IS_DEMO } from "./api";
 import Simulator from "./components/Simulator";
 import Chat from "./components/Chat";
+import BunnyAvatar from "./components/BunnyAvatar";
 import Audiogram from "./components/Audiogram";
 import AudioLab from "./components/AudioLab";
 import Settings from "./components/Settings";
@@ -11,7 +12,7 @@ import Onboarding from "./components/Onboarding";
 
 const TABS = [
   { id: "simulator", icon: "🎧", label: "Simulator", El: Simulator },
-  { id: "chat", icon: "💬", label: "Chat", El: Chat },
+  { id: "chat", icon: "💬", label: "Dr. Bunny", El: Chat },
   { id: "audiogram", icon: "📈", label: "Audiogram", El: Audiogram },
   { id: "audio-lab", icon: "🎚️", label: "Audio Lab", El: AudioLab },
 ];
@@ -57,7 +58,7 @@ export default function App() {
         <Active />
       </main>
 
-      <button onClick={() => setTab("chat")} className="mascot" title="Hỏi trợ lý HearAtlas" aria-label="Mở trợ lý HearAtlas">🎧</button>
+      <button onClick={() => setTab("chat")} className="mascot" title="Trò chuyện với Dr. Bunny" aria-label="Mở Dr. Bunny"><BunnyAvatar size={44}/></button>
 
       <nav className="bottom-nav" aria-label="Điều hướng">
         <div className="nav-inner">

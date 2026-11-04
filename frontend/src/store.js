@@ -22,7 +22,7 @@ const defaultSettings = () => ({ apiBase: IS_DEMO || isNative() ? OFFLINE : getA
 // không bị xoá mỗi lần đổi tab, vì App dùng <main key={tab}> nên component bị tạo lại (AUDIT-09).
 export const GREETING = {
   role: "bot",
-  text: "🎧 Xin chào! Mình là HearAtlas Guide, trợ lý kiến thức thính giác. Biểu đồ bạn đang chọn là mô phỏng, không phải kết quả khám. Bạn muốn tìm hiểu điều gì?",
+  text: "Chào bạn, mình là Dr. Bunny — trợ lý kiến thức thính giác của HearAtlas. Biểu đồ hiện tại là mô phỏng, không phải kết quả khám. Bạn muốn tìm hiểu điều gì?",
 };
 
 export const useStore = create((set, get) => ({
