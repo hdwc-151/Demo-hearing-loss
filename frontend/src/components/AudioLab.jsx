@@ -3,6 +3,7 @@ import { useStore } from "../store";
 import { onBackground } from "../native";
 import { getAudioCtx } from "../util/audio";
 import { attenuationDbAt, processHearingLoss } from "../util/hearingLoss";
+import { processAuditoryErb } from "../util/auditoryErb";
 import { analyzeAudio } from "../util/audioFeatures";
 
 const LIMIT_BYTES = 12 * 1024 * 1024;
@@ -34,6 +35,7 @@ export default function AudioLab() {
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const [metrics, setMetrics] = useState(null);
+  const [auditoryModel, setAuditoryModel] = useState("stft");
   const current = useRef(null), token = useRef(0), cache = useRef(null);
 
   const curve = useMemo(() => Array.from({ length: 61 }, (_, i) => {
@@ -103,15 +105,22 @@ export default function AudioLab() {
       if (ctx.state === "suspended") await ctx.resume();
       const original = input || sampleAudio(ctx);
       validateAudio(original);
+      // The experimental ERB model executes on the UI thread; cap large inputs
+      // until an AudioWorklet/worker implementation is available.
+      if (filtered && auditoryModel === "erb" && (original.duration > 4 || original.sampleRate > 48000)) {
+        throw new Error("ERB thử nghiệm chỉ hỗ trợ tối đa 4 giây, sample rate không quá 48 kHz. Hãy dùng STFT cho file lớn hơn.");
+      }
       let buffer = original;
       if (filtered) {
-        const key = String(original.sampleRate) + "|" + freqs.join(",") + "|" + thresholds.join(",");
+        const key = auditoryModel + "|" + String(original.sampleRate) + "|" + freqs.join(",") + "|" + thresholds.join(",");
         if (cache.current?.input === original && cache.current?.key === key) {
           buffer = cache.current.output;
         } else {
           buffer = ctx.createBuffer(original.numberOfChannels, original.length, original.sampleRate);
           for (let c = 0; c < original.numberOfChannels; c++) {
-            buffer.copyToChannel(processHearingLoss(original.getChannelData(c), original.sampleRate, freqs, thresholds), c);
+            buffer.copyToChannel(auditoryModel === "erb"
+              ? processAuditoryErb(original.getChannelData(c), original.sampleRate, freqs, thresholds)
+              : processHearingLoss(original.getChannelData(c), original.sampleRate, freqs, thresholds), c);
           }
           cache.current = { input: original, key, output: buffer };
         }
@@ -149,6 +158,14 @@ export default function AudioLab() {
         <label htmlFor="lab-file" className="block text-sm font-semibold">Tải audio lên từ thiết bị (tối đa 8 giây, 12 MB)</label>
         <input id="lab-file" aria-label="Nạp file âm thanh" type="file" accept="audio/*,.wav,.mp3,.ogg,.m4a" onChange={loadFile} className="w-full text-xs" />
         <button type="button" className="btn-ghost" onClick={resetSample}>Dùng tín hiệu kiểm thử 3 tần số</button>
+        <label className="block text-sm font-semibold" htmlFor="auditory-model">Kiểu xử lý âm thanh</label>
+        <select id="auditory-model" aria-label="Kiểu mô phỏng thính giác" value={auditoryModel}
+          onChange={(e) => { stop(); cache.current = null; setMetrics(null); setAuditoryModel(e.target.value); }}
+          className="w-full rounded-xl border border-sage-light bg-white p-2 text-sm">
+          <option value="stft">STFT — lọc tần số tuyến tính (ổn định)</option>
+          <option value="erb">ERB — mô hình dải thính giác thử nghiệm</option>
+        </select>
+        <p className="text-xs text-muted">ERB thử nghiệm thêm suy giảm phụ thuộc cường độ, không phải thuật toán Gammachirp hoặc kết quả thính học đã được xác nhận.</p>
         <div className="grid grid-cols-2 gap-2">
           <button className="btn-primary" disabled={busy} onClick={() => play(false)} aria-label="Phát âm thanh gốc">A · Nghe gốc</button>
           <button className="btn-primary" disabled={busy} onClick={() => play(true)} aria-label="Phát mô phỏng theo audiogram">B · Nghe mô phỏng</button>
@@ -169,7 +186,7 @@ export default function AudioLab() {
           <text x="300" y="87" fontSize="10" fill="#59685B" textAnchor="end">8 kHz</text>
           <text x="150" y="102" fontSize="10" fill="#59685B" textAnchor="middle">Suy giảm số (dB), không phải dB HL</text>
         </svg>
-        <p className="text-xs text-muted">Đổi ngưỡng ở tab Audiogram rồi quay lại Audio Lab. Chọn Moderate/Severe để quan sát sự khác biệt. Đây là mô hình tuyến tính, không phải Gammachirp.</p>
+        <p className="text-xs text-muted">Đổi ngưỡng ở tab Audiogram rồi quay lại Audio Lab. Chọn Moderate/Severe để quan sát sự khác biệt. STFT là tuyến tính; ERB có điều biến theo mức tín hiệu. Cả hai chưa phải Gammachirp đã thẩm định.</p>
       </div>
       {metrics && (
         <div className="rounded-2xl bg-bgcard border border-sage-light p-4" role="region" aria-label="Đặc trưng tín hiệu">

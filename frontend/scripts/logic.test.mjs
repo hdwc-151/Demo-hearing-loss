@@ -124,18 +124,27 @@ test("api.askDrBunny: phân biệt offline / 4xx / 5xx / timeout và không rò 
     globalThis.fetch = async () => { throw new TypeError("fetch failed"); };
     const off = await askDrBunny(AUD, "tôi không nghe rõ chữ s");   // mất mạng -> trả lời bằng bộ tri thức trong máy
     assert.equal(off.mode, "local");
-    assert.match(off.answer, /offline/);
+    assert.match(off.answer, /trong máy/);
     assert.ok(off.answer.includes(DISCLAIMER), "câu trả lời trong máy cũng phải có câu miễn trừ");
     assert.ok(off.nodes.length > 0);
 
     globalThis.fetch = async () => jsonResponse(422, {});
-    assert.equal((await askDrBunny({}, "q")).mode, "invalid");
+    const invalid = await askDrBunny(AUD, "Tôi có nên đi khám bác sĩ không?");
+    assert.equal(invalid.mode, "local");
+    assert.equal(invalid.error, "HTTP 422");
+    assert.ok(invalid.answer.includes(DISCLAIMER));
+    assert.ok(invalid.nodes.includes("SEEK_CARE"));
+
+    globalThis.fetch = async () => jsonResponse(404, {});
+    assert.equal((await askDrBunny(AUD, "Tôi có nên đi khám bác sĩ không?")).mode, "local");
 
     globalThis.fetch = async () => jsonResponse(503, {});
-    assert.equal((await askDrBunny({}, "q")).mode, "error");
+    assert.equal((await askDrBunny(AUD, "q")).mode, "local");
 
     globalThis.fetch = hangingFetch;
-    assert.equal((await askDrBunny({}, "q", 30)).mode, "timeout");
+    const timeout = await askDrBunny(AUD, "q", 30);
+    assert.equal(timeout.mode, "local");
+    assert.equal(timeout.error, "timeout");
 
     globalThis.fetch = async () => jsonResponse(200, { answer: "ok", mode: "hardcoded", nodes: [] });
     assert.equal((await askDrBunny({}, "q")).answer, "ok");

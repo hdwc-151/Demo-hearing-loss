@@ -42,7 +42,7 @@ function chatFailure(kind, detail) {
 // Không kết nối được máy chủ: thay vì báo lỗi, trả lời bằng bộ tri thức trong máy (cùng nội dung tầng 1 của backend).
 function chatLocal(audiogramDb, question, detail) {
   const r = answerLocal(audiogramDb, question);
-  return { ...r, answer: "📴 Đang offline (không kết nối được máy chủ) — trả lời bằng bộ tri thức trong máy. " + r.answer, error: String(detail) };
+  return { ...r, answer: "📴 Máy chủ không khả dụng; Bác sĩ Thỏ trả lời bằng bộ tri thức trong máy. " + r.answer, error: String(detail), fallback: true };
 }
 
 export async function askDrBunny(audiogramDb, question, timeoutMs = CHAT_TIMEOUT_MS) {
@@ -56,10 +56,13 @@ export async function askDrBunny(audiogramDb, question, timeoutMs = CHAT_TIMEOUT
       body: JSON.stringify({ audiogram_db: audiogramDb, question }),
       signal: ctrl.signal,
     });
-    if (!r.ok) return chatFailure(r.status >= 500 ? "error" : "invalid", `HTTP ${r.status}`);
+    // Static Pages / stale backend may answer /graphrag with 404/405/422 or 5xx.
+    // NEVER show an opaque HTTP diagnostic as the chatbot's only reply:
+    // locally cached knowledge is intentionally available without the server.
+    if (!r.ok) return chatLocal(audiogramDb, question, `HTTP ${r.status}`);
     return await r.json(); // vẫn nằm trong try -> timeout cũng phủ cả việc đọc body
   } catch (e) {
-    return e?.name === "AbortError" ? chatFailure("timeout", e) : chatLocal(audiogramDb, question, e);
+    return chatLocal(audiogramDb, question, e?.name === "AbortError" ? "timeout" : e);
   } finally {
     clearTimeout(timer);
   }

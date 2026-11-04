@@ -108,11 +108,24 @@ async def main():
         ctx, pg, errs7 = await open_page(b)
         await pg.click(TAB["chat"]); await pg.wait_for_timeout(200)
         t422 = await ask(pg, lambda r: r.fulfill(status=422, content_type="application/json", body='{"detail":"x"}'))
-        check("H7a HTTP 422 -> báo 'từ chối dữ liệu' (không gọi là offline)", "từ chối" in t422 and "offline" not in t422, t422[:50])
+        check("H7a HTTP 422 -> tự trả lời từ tri thức trong máy", "trong máy" in t422 and "từ chối" not in t422, t422[:70])
         t503 = await ask(pg, lambda r: r.fulfill(status=503, content_type="application/json", body="{}"))
-        check("H7b HTTP 503 -> báo 'lỗi nội bộ'", "lỗi nội bộ" in t503, t503[:50])
+        check("H7b HTTP 503 -> trả lời dự phòng trong máy", "trong máy" in t503, t503[:70])
         toff = await ask(pg, lambda r: r.abort())
-        check("H7c mất mạng -> báo offline", "offline" in toff, toff[:50])
+        check("H7c mất mạng -> trả lời bằng bộ tri thức trong máy", "trong máy" in toff, toff[:70])
+        # Regression for the exact user-reported 4xx error on a care-seeking question.
+        await pg.route("**/api/graphrag", lambda r: r.fulfill(status=422, content_type="application/json", body='{"detail":"x"}'))
+        n_before_care = await pg.locator(".msg-bot:not(.typing)").count()
+        await pg.get_by_role("textbox", name="Câu hỏi").fill("Tôi có nên đi khám bác sĩ không?")
+        await pg.get_by_role("button", name="Gửi").click()
+        await pg.wait_for_function(
+            "n => document.querySelectorAll('.msg-bot:not(.typing)').length > n",
+            arg=n_before_care, timeout=15000)
+        care_text = await pg.locator(".msg-bot:not(.typing)").last.inner_text()
+        check("H7e hỏi có nên khám, HTTP 422 vẫn trả lời hữu ích",
+              "trong máy" in care_text and ("khám" in care_text.lower()) and "từ chối dữ liệu" not in care_text,
+              care_text[:90])
+        await pg.unroute("**/api/graphrag")
         tml = await ask(pg, lambda r: r.fulfill(status=200, content_type="application/json",
                         body=json.dumps({"answer": "dòng 1\ndòng 2", "mode": "hardcoded", "nodes": []})))
         ws = await pg.locator(".msg-bot:not(.typing)").last.evaluate("e => getComputedStyle(e).whiteSpace")

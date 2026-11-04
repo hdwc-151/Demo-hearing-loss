@@ -46,3 +46,19 @@ No uncalibrated hearing tests or medical diagnosis features should be published.
 The Audio Lab displays **digital RMS**, **power-weighted spectral centroid** and **fraction of energy ≥4 kHz** for channel 1, before/after filtering. Each is derived by the same periodic square-root Hann STFT in Python and JavaScript. These values characterise the waveform, **not the listener**, and are not dB HL, dB SPL, SNR, speech intelligibility, or clinical thresholds. Both engines have independent unit tests; no medical accuracy is asserted.
 
 Files: `backend/core/audio_features.py`, `frontend/src/util/audioFeatures.js`, `tests/test_audio_features.py`, `frontend/scripts/features.test.mjs`.
+
+## ERB auditory bands (experimental, v0.4 phase 2)
+
+An alternative to the original static STFT attenuation is available as an explicit opt-in in Audio Lab. Python `backend/core/auditory_erb.py` and JavaScript `frontend/src/util/auditoryErb.js` independently implement:
+
+1. ERB(f) = 24.7(1 + 4.37 f/1000) Hz; ERB-rate E(f) = 21.4 log10(1+0.00437 f).
+2. Twelve ERB-rate-spaced analysis centers from 250 Hz to min(8000 Hz, 0.43×sample_rate).
+3. **Symmetric fourth-order spectral weighting** with normalization across bands; these are *ERB-shaped STFT bands*, not true causal gammatone impulse responses, and not asymmetric compressive Gammachirp filters.
+4. Severity derived heuristically from the user-selected audiogram (static attenuation capped at 18 digital dB), followed by a bounded, envelope-dependent expander to illustrate loss of compression. Threshold dB HL is never converted into calibrated audio level.
+5. Windowed overlap-add reconstruction, deterministic output and ±0.98 peak clamp. The original static STFT option remains available as baseline.
+
+The expansion stage introduces a simple nonlinear dependence on digital RMS envelope. It is **not a predictive OHC/IHC model**; no asymmetric chirp, active cochlear tuning, middle-ear transfer or psychophysical loudness validation is included. Treat this as an algorithm exploration with unit tests, not a medically accurate simulator. Scientific validation of an actual Compressive Gammachirp model requires a separately sourced model specification, parameter fit, published reference vectors and sound-level calibration. Do not call this feature `Gammachirp` in the UI.
+
+Validation suite: `tests/test_auditory_erb.py` and `frontend/scripts/erb.test.mjs`. Checks ERB formula, ascending centers, identity, selective attenuation, lower-input extra expansion, output bounds and deterministic processing. These are engineering checks, **not clinical validation**.
+
+**Browser performance gate:** the experimental ERB mode currently runs synchronously and is restricted to ≤4 seconds and ≤48 kHz to avoid long blocking periods on phones. The original STFT baseline remains available for up to 8 seconds. Future versions may migrate computation to an AudioWorklet/worker; no real-time latency guarantee is made.

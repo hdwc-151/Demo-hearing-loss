@@ -3,7 +3,8 @@
 // trong máy (util/graphrag.js, util/noise.js).
 // Dùng: npm run build:demo [đường-dẫn-ra]   (mặc định ../demo/index.html)
 import { execFileSync } from "node:child_process";
-import { readFileSync, writeFileSync, mkdirSync, rmSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -39,6 +40,19 @@ html = html.replace(/<title>.*?<\/title>/, "<title>Dr. Bunny — Demo (chạy tr
 html = html.replace("<head>", '<head>\n    <meta name="description" content="Dr. Bunny: mô phỏng trải nghiệm nghe kém. Bản demo chạy hoàn toàn trong trình duyệt." />');
 
 mkdirSync(dirname(target), { recursive: true });
+// Historical demo snapshots are immutable. Never silently overwrite tracked demo/index.html.
+// Generated dist/demo.html is an ephemeral Pages artifact, NOT a historical demo.
+if (existsSync(target)) {
+  const previous = readFileSync(target);
+  if (!previous.equals(Buffer.from(html))) {
+    const archiveDir = resolve(root, "../archive/demos");
+    mkdirSync(archiveDir, { recursive: true });
+    const digest = createHash("sha256").update(previous).digest("hex").slice(0, 16);
+    const archivePath = resolve(archiveDir, `demo-${digest}.html`);
+    if (!existsSync(archivePath)) writeFileSync(archivePath, previous);
+    console.log(`ĐÃ LƯU DEMO CŨ → ${archivePath}`);
+  }
+}
 writeFileSync(target, html);
 rmSync(outDir, { recursive: true, force: true });
 console.log(`ĐÃ GHI ${target} (${(html.length / 1024).toFixed(0)} KB, một file duy nhất)`);
