@@ -12,7 +12,7 @@ import Onboarding from "./components/Onboarding";
 
 const TABS = [
   { id: "simulator", icon: "🎧", label: "Simulator", El: Simulator },
-  { id: "chat", icon: "💬", label: "Dr. Bunny", El: Chat },
+  { id: "chat", icon: "💬", label: "Chat", El: Chat },
   { id: "audiogram", icon: "📈", label: "Audiogram", El: Audiogram },
   { id: "audio-lab", icon: "🎚️", label: "Audio Lab", El: AudioLab },
 ];
