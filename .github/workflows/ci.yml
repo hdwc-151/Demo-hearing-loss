@@ -25,7 +25,7 @@ jobs:
         with: { python-version: "3.12" }
       - name: Install isolated research reference dependencies
         run: python -m pip install -r backend/requirements-research.txt
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with: { node-version: 22 }
       - name: Compare Gammachirp c=0 with SciPy gammatone and test ERB level behaviour
         run: python -m pytest tests/research/test_gammachirp_reference.py -q
@@ -43,7 +43,7 @@ jobs:
     defaults: { run: { working-directory: frontend } }
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with: { node-version: 22, cache: npm, cache-dependency-path: frontend/package-lock.json }
       - run: npm ci
       - name: Parity JS-Python + test logic
@@ -59,7 +59,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with: { node-version: 22, cache: npm, cache-dependency-path: frontend/package-lock.json }
       - run: pip install -r backend/requirements.txt playwright pillow && playwright install --with-deps chromium
       - run: npm ci
