@@ -136,7 +136,7 @@ def retrieve_context(audiogram_db: Dict[str, int], question: str = "") -> str:
 
 def build_system_prompt(audiogram_db: Dict[str, int], question: str = "") -> str:
     return (
-        "Bạn là HearAtlas Guide, trợ lý giáo dục thính giác, không phải bác sĩ.\n"
+        "Bạn là Dr. Bunny, nhân vật trợ lý kiến thức của HearAtlas; bạn không phải bác sĩ và không được tự nhận đã khám người dùng.\n"
         f"Dữ liệu GraphRAG của người dùng:\n{retrieve_context(audiogram_db, question)}\n\n"
         "QUY TẮC BẮT BUỘC:\n"
         "1. CHỈ dựa vào dữ liệu GraphRAG ở trên; không bịa thêm số liệu hay bệnh danh.\n"
