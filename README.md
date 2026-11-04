@@ -29,6 +29,10 @@ Một con số trên biểu đồ thính lực khó diễn tả được ngườ
 
 Bạn có thể đổi một đường audiogram, xem phần văn bản bị suy giảm theo quy tắc âm vị, bật thử nhiễu nền và đặt câu hỏi cho “Bác sĩ Thỏ”. Mục tiêu là **giải thích một mô hình**, không tái tạo chính xác cảm nhận âm thanh của một cá nhân.
 
+## Nền tảng audio (đang phát triển v0.4)
+
+Tab **Audio Lab** thử so sánh A/B trên file audio tối đa 8 giây, xử lý bằng FFT theo ngưỡng của audiogram. Mọi tính toán được thực hiện ngay trong trình duyệt, không gửi file tới backend. Phần lọc phổ tuyến tính hiện tại là **minh hoạ giáo dục**, chưa mô phỏng nén ốc tai, không phải Gammachirp, không hiệu chuẩn dB HL → dB SPL và không được dùng để đo/chẩn đoán thính lực. Xem [mô hình DSP và kiểm thử](docs/audio-foundation.md).
+
 ## ✨ Tính năng ở phiên bản 0.3.0
 
 | Thành phần | Bạn có thể làm gì? | Phạm vi hiện tại |

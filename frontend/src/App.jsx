@@ -5,6 +5,7 @@ import { IS_DEMO } from "./api";
 import Simulator from "./components/Simulator";
 import Chat from "./components/Chat";
 import Audiogram from "./components/Audiogram";
+import AudioLab from "./components/AudioLab";
 import Settings from "./components/Settings";
 import Onboarding from "./components/Onboarding";
 
@@ -12,6 +13,7 @@ const TABS = [
   { id: "simulator", icon: "🎧", label: "Simulator", El: Simulator },
   { id: "chat", icon: "💬", label: "Chat", El: Chat },
   { id: "audiogram", icon: "📈", label: "Audiogram", El: Audiogram },
+  { id: "audio-lab", icon: "🎚️", label: "Audio Lab", El: AudioLab },
 ];
 
 export default function App() {
@@ -27,7 +29,7 @@ export default function App() {
     })();
   }, [loadSettings, refreshBackend]);
 
-  // phím tắt 1/2/3 chuyển tab (bỏ qua khi đang gõ hoặc khi giữ Ctrl/Cmd/Alt)
+  // phím tắt 1/2/3/4 chuyển tab (bỏ qua khi đang gõ hoặc khi giữ Ctrl/Cmd/Alt)
   useEffect(() => {
     const onKey = (e) => {
       if (e.ctrlKey || e.metaKey || e.altKey) return; // AUDIT-16: không cướp Ctrl/Cmd+1.. (chuyển tab trình duyệt)
@@ -60,7 +62,7 @@ export default function App() {
       <nav className="bottom-nav" aria-label="Điều hướng">
         <div className="nav-inner">
           {TABS.map((t) => (
-            <button key={t.id} onClick={() => setTab(t.id)} aria-current={tab === t.id ? "page" : undefined}
+            <button key={t.id} aria-label={t.label} onClick={() => setTab(t.id)} aria-current={tab === t.id ? "page" : undefined}
               className={`nav-tab ${tab === t.id ? "active" : ""}`}>
               <span aria-hidden="true">{t.icon}</span><span className="nav-label">{t.label}</span>
             </button>

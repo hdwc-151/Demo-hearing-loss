@@ -127,3 +127,9 @@ button { -webkit-tap-highlight-color: transparent; }
   /* icon âm thanh: mở rộng vùng chạm bằng phần tử giả, không đổi kích thước hiển thị */
   .sound-item::after { content: ""; position: absolute; inset: -16px -10px; }
 }
+
+/* Four navigation tabs: keep touch targets and prevent overflow on narrow devices. */
+@media (max-width: 479px) {
+  .nav-label { display: none; }
+  .nav-tab { font-size: 1.25rem; min-width: 52px; justify-content: center; }
+}
