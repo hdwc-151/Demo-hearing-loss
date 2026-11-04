@@ -40,3 +40,9 @@ Verify basic frequency selectivity, unity behaviour for unaffected profiles, inv
 4. Conversation script authoring, and then evidence-based chatbot/GraphRAG.
 
 No uncalibrated hearing tests or medical diagnosis features should be published.
+
+## Signal descriptors (phase 1 extension)
+
+The Audio Lab displays **digital RMS**, **power-weighted spectral centroid** and **fraction of energy ≥4 kHz** for channel 1, before/after filtering. Each is derived by the same periodic square-root Hann STFT in Python and JavaScript. These values characterise the waveform, **not the listener**, and are not dB HL, dB SPL, SNR, speech intelligibility, or clinical thresholds. Both engines have independent unit tests; no medical accuracy is asserted.
+
+Files: `backend/core/audio_features.py`, `frontend/src/util/audioFeatures.js`, `tests/test_audio_features.py`, `frontend/scripts/features.test.mjs`.

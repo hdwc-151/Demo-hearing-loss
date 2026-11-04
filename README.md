@@ -31,7 +31,7 @@ Bạn có thể đổi một đường audiogram, xem phần văn bản bị suy
 
 ## Nền tảng audio (đang phát triển v0.4)
 
-Tab **Audio Lab** thử so sánh A/B trên file audio tối đa 8 giây, xử lý bằng FFT theo ngưỡng của audiogram. Mọi tính toán được thực hiện ngay trong trình duyệt, không gửi file tới backend. Phần lọc phổ tuyến tính hiện tại là **minh hoạ giáo dục**, chưa mô phỏng nén ốc tai, không phải Gammachirp, không hiệu chuẩn dB HL → dB SPL và không được dùng để đo/chẩn đoán thính lực. Xem [mô hình DSP và kiểm thử](docs/audio-foundation.md).
+Tab **Audio Lab** thử so sánh A/B trên file audio tối đa 8 giây, xử lý bằng FFT theo ngưỡng của audiogram. Mọi tính toán được thực hiện ngay trong trình duyệt, không gửi file tới backend. Sau lần phát B, Audio Lab còn hiển thị RMS số, trọng tâm phổ và tỷ lệ năng lượng từ 4 kHz trở lên để đối chiếu trước/sau. Phần lọc phổ tuyến tính hiện tại là **minh hoạ giáo dục**, chưa mô phỏng nén ốc tai, không phải Gammachirp, không hiệu chuẩn dB HL → dB SPL và không được dùng để đo/chẩn đoán thính lực. Xem [mô hình DSP và kiểm thử](docs/audio-foundation.md).
 
 ## ✨ Tính năng ở phiên bản 0.3.0
 
