@@ -31,6 +31,11 @@ Bạn có thể đổi một đường audiogram, xem phần văn bản bị suy
 
 ## Nền tảng audio (đang phát triển v0.4)
 
+**Mới:** có thể chọn bộ lọc STFT tuyến tính hoặc mô hình **ERB thực nghiệm**, gồm 12 dải tần ERB và suy giảm phụ thuộc biên độ. Đây là mô hình thử nghiệm độc lập để minh hoạ nguyên lý nén ốc tai, **không phải bộ lọc Compressive Gammachirp đã được kiểm chứng**. Xem tài liệu [Audio Foundation](docs/audio-foundation.md) để biết giả định và kiểm thử.
+
+**Lưu giữ demo:** hai bản HTML trước được đóng băng trong [archive/demos/](archive/demos/README.md); mọi bản demo cũ cần được lưu dưới SHA-256 trước khi ghi đè. Dữ liệu và code cũ khác vẫn nằm trong `archive/`.
+
+
 Tab **Audio Lab** thử so sánh A/B trên file audio tối đa 8 giây, xử lý bằng FFT theo ngưỡng của audiogram. Mọi tính toán được thực hiện ngay trong trình duyệt, không gửi file tới backend. Sau lần phát B, Audio Lab còn hiển thị RMS số, trọng tâm phổ và tỷ lệ năng lượng từ 4 kHz trở lên để đối chiếu trước/sau. Phần lọc phổ tuyến tính hiện tại là **minh hoạ giáo dục**, chưa mô phỏng nén ốc tai, không phải Gammachirp, không hiệu chuẩn dB HL → dB SPL và không được dùng để đo/chẩn đoán thính lực. Xem [mô hình DSP và kiểm thử](docs/audio-foundation.md).
 
 ## ✨ Tính năng ở phiên bản 0.3.0

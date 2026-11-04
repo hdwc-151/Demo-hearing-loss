@@ -69,9 +69,14 @@ async def main():
         await page.keyboard.press("ArrowDown")
         await page.locator("button.nav-tab[aria-label='Audio Lab']").click()
         await page.get_by_role("heading", name="Audio Lab").wait_for()
+        await page.get_by_role("combobox", name="Kiểu mô phỏng thính giác").select_option("erb")
+        await page.get_by_role("button", name="Phát mô phỏng theo audiogram").click()
+        await page.get_by_role("region", name="Đặc trưng tín hiệu").wait_for()
+        await page.get_by_role("button", name="Dừng Audio Lab").click()
+        assert await page.evaluate("window.__audioStarts") == 4
         assert not errors, errors
         await context.close()
         await browser.close()
-        print("Audio Lab E2E: 7 smoke checks passed")
+        print("Audio Lab E2E: 8 smoke checks passed")
 
 asyncio.run(main())

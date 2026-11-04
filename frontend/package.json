@@ -8,7 +8,7 @@
     "build": "vite build",
     "build:demo": "node scripts/build-demo.mjs",
     "preview": "vite preview",
-    "test": "node scripts/check-parity.mjs && node --test scripts/logic.test.mjs scripts/audio.test.mjs scripts/features.test.mjs",
+    "test": "node scripts/check-parity.mjs && node --test scripts/logic.test.mjs scripts/audio.test.mjs scripts/features.test.mjs scripts/erb.test.mjs",
     "assets": "capacitor-assets generate --ios --android --assetPath ../mobile/resources --iconBackgroundColor '#6E826B' --iconBackgroundColorDark '#4B5E48' --splashBackgroundColor '#EFF5EC' --splashBackgroundColorDark '#232B22'",
     "cap:sync": "npm run build && cap sync",
     "android": "npm run cap:sync && cap open android",
