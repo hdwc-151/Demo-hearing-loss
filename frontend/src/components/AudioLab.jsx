@@ -105,6 +105,11 @@ export default function AudioLab() {
       if (ctx.state === "suspended") await ctx.resume();
       const original = input || sampleAudio(ctx);
       validateAudio(original);
+      // The experimental ERB model executes on the UI thread; cap large inputs
+      // until an AudioWorklet/worker implementation is available.
+      if (filtered && auditoryModel === "erb" && (original.duration > 4 || original.sampleRate > 48000)) {
+        throw new Error("ERB thử nghiệm chỉ hỗ trợ tối đa 4 giây, sample rate không quá 48 kHz. Hãy dùng STFT cho file lớn hơn.");
+      }
       let buffer = original;
       if (filtered) {
         const key = auditoryModel + "|" + String(original.sampleRate) + "|" + freqs.join(",") + "|" + thresholds.join(",");

@@ -113,7 +113,20 @@ async def main():
         check("H7b HTTP 503 -> trả lời dự phòng trong máy", "trong máy" in t503, t503[:70])
         toff = await ask(pg, lambda r: r.abort())
         check("H7c mất mạng -> trả lời bằng bộ tri thức trong máy", "trong máy" in toff, toff[:70])
-        tml = await ask(pg, lambda r: r.fulfill(status=200, content_type="application/json",
+        # Regression for the exact user-reported 4xx error on a care-seeking question.
+        await pg.route("**/api/graphrag", lambda r: r.fulfill(status=422, content_type="application/json", body='{"detail":"x"}'))
+        n_before_care = await pg.locator(".msg-bot:not(.typing)").count()
+        await pg.get_by_role("textbox", name="Câu hỏi").fill("Tôi có nên đi khám bác sĩ không?")
+        await pg.get_by_role("button", name="Gửi").click()
+        await pg.wait_for_function(
+            "n => document.querySelectorAll('.msg-bot:not(.typing)').length > n",
+            arg=n_before_care, timeout=15000)
+        care_text = await pg.locator(".msg-bot:not(.typing)").last.inner_text()
+        check("H7e hỏi có nên khám, HTTP 422 vẫn trả lời hữu ích",
+              "trong máy" in care_text and ("khám" in care_text.lower()) and "từ chối dữ liệu" not in care_text,
+              care_text[:90])
+        await pg.unroute("**/api/graphrag")
+                tml = await ask(pg, lambda r: r.fulfill(status=200, content_type="application/json",
                         body=json.dumps({"answer": "dòng 1\ndòng 2", "mode": "hardcoded", "nodes": []})))
         ws = await pg.locator(".msg-bot:not(.typing)").last.evaluate("e => getComputedStyle(e).whiteSpace")
         check("H7d tin nhắn nhiều dòng giữ xuống dòng (pre-wrap)", ws == "pre-wrap" and "\n" in tml, f"white-space={ws}")
