@@ -41,7 +41,7 @@ async def main():
         dlg = pg.locator("[role=dialog]")
         await dlg.wait_for(timeout=8000)
         txt = await dlg.inner_text()
-        check("M1 lần đầu hiện hướng dẫn an toàn (mô phỏng giáo dục, hạ âm lượng, dữ liệu trong máy)", all(k in txt for k in ("mô phỏng giáo dục", "Hạ âm lượng", "trong máy")))
+        check("M1 lần đầu hiện hướng dẫn an toàn (giáo dục thính giác, hạ âm lượng, dữ liệu trong máy)", all(k in txt for k in ("nền tảng giáo dục và nghiên cứu", "Hạ âm lượng", "trong máy")))
         await pg.click("button:has-text('Tôi hiểu')")
         await dlg.wait_for(state="detached", timeout=3000)
         await pg.reload(wait_until="networkidle"); await pg.wait_for_timeout(500)
