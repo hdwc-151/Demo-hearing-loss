@@ -1,6 +1,6 @@
 fastapi>=0.110
 uvicorn[standard]>=0.27
-numpy>=1.24
+numpy>=2.5.4
 httpx>=0.27
 # Tùy chọn (chỉ cần cho đường GAN thật):
 # torch>=2.0
