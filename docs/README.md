@@ -16,3 +16,8 @@
 
 | [audio-foundation.md](audio-foundation.md) | Waveform DSP, Audio Lab và giới hạn của mô hình giáo dục |
 | [research/HEARING_TEST_ORIGIN_REVIEW.md](research/HEARING_TEST_ORIGIN_REVIEW.md) | Đối chiếu repo Hearing_Test từ giai đoạn đầu, phần chung dữ liệu, audit licensing, lộ trình tách mô-đun sàng lọc nghiên cứu |
+
+| [research/ARCHIVE_DISTILLATION.md](research/ARCHIVE_DISTILLATION.md) | Kiểm kê gốc, đối chiếu và phục hồi ý tưởng qua các thế hệ |
+| [research/ASSISTANT_DATA_GOVERNANCE.md](research/ASSISTANT_DATA_GOVERNANCE.md) | NHANES, Clarity, Apple Health, bản quyền và kiểm chứng dataset |
+| [research/ASSISTANT_TRAINING_AND_SCENARIOS.md](research/ASSISTANT_TRAINING_AND_SCENARIOS.md) | RAG, kịch bản hội thoại và release gates |
+| [product/HEARATLAS_PRODUCT_ALPHA.md](product/HEARATLAS_PRODUCT_ALPHA.md) | Tên dự án, keyword taxonomy và lộ trình đóng gói sản phẩm |

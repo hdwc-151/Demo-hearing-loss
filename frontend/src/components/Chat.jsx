@@ -42,7 +42,7 @@ export default function Chat() {
 
   return (
     <section aria-labelledby="chat-title" className="flex flex-col">
-      <h1 id="chat-title" className="h1">Dr. Bunny AI Audiologist</h1>
+      <h1 id="chat-title" className="h1">HearAtlas Guide · Trợ lý kiến thức thính giác</h1>
 
       <div ref={boxRef} className="chat-box" role="log" aria-live="polite">
         {chat.map((m, i) => (
@@ -67,7 +67,7 @@ export default function Chat() {
 
       <form className="flex gap-2 mt-2" onSubmit={(e) => { e.preventDefault(); send(input); }}>
         <input value={input} onChange={(e) => setInput(e.target.value)} aria-label="Câu hỏi"
-          placeholder="Hỏi Bác sĩ Thỏ…" maxLength={500}
+          placeholder="Hỏi HearAtlas Guide…" maxLength={500}
           className="flex-1 min-w-0 px-3.5 py-2.5 rounded-full border border-sage-light bg-white outline-none focus:border-sage-mid" />
         <button type="submit" disabled={busy || !input.trim()}
           className="bg-sage-dark text-white px-4 rounded-full font-bold disabled:opacity-40 transition-opacity">Gửi</button>

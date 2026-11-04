@@ -36,8 +36,8 @@ js = js.replace(/<\/script/gi, "<\\/script").replace(/<!--/g, "<\\!--");
 html = html.replace("</body>", () => `<script type="module">\n${js}\n</script>\n</body>`);
 // Bản demo là một file duy nhất: bỏ liên kết tới manifest và biểu tượng (không có file đi kèm, tránh yêu cầu thừa)
 html = html.replace(/<link rel="(?:manifest|apple-touch-icon)"[^>]*>\s*/g, "");
-html = html.replace(/<title>.*?<\/title>/, "<title>Dr. Bunny — Demo (chạy trong trình duyệt)</title>");
-html = html.replace("<head>", '<head>\n    <meta name="description" content="Dr. Bunny: mô phỏng trải nghiệm nghe kém. Bản demo chạy hoàn toàn trong trình duyệt." />');
+html = html.replace(/<title>.*?<\/title>/, "<title>HearAtlas — Ứng dụng ngoại tuyến</title>");
+html = html.replace("<head>", '<head>\n    <meta name="description" content="HearAtlas: nền tảng giáo dục thính giác, hoạt động ngoại tuyến và không thay thế tư vấn y tế." />');
 
 mkdirSync(dirname(target), { recursive: true });
 // Historical demo snapshots are immutable. Never silently overwrite tracked demo/index.html.

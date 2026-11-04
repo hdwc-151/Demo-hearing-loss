@@ -45,7 +45,7 @@ export default function App() {
 
   return (
     <div className="app-shell">
-      {IS_DEMO && <p className="demo-banner" role="note">DEMO · chạy hoàn toàn trong trình duyệt, không cần máy chủ</p>}
+      {IS_DEMO && <p className="demo-banner" role="note">NGOẠI TUYẾN · xử lý trực tiếp trên thiết bị</p>}
       <header className="flex items-center justify-end gap-2 pt-3">
         <span className={`status-dot ${backend}`} title={{ online: "Đã kết nối máy chủ", offline: "Không kết nối được máy chủ (dùng dữ liệu trong máy)", local: "Chạy hoàn toàn trong máy" }[backend] || "Đang kết nối…"}>
           {{ online: "online", offline: "offline", local: "local" }[backend] || "…"}
@@ -57,7 +57,7 @@ export default function App() {
         <Active />
       </main>
 
-      <button onClick={() => setTab("chat")} className="mascot" title="Hỏi Bác sĩ Thỏ" aria-label="Mở chat Bác sĩ Thỏ">🐰🩺</button>
+      <button onClick={() => setTab("chat")} className="mascot" title="Hỏi trợ lý HearAtlas" aria-label="Mở trợ lý HearAtlas">🎧</button>
 
       <nav className="bottom-nav" aria-label="Điều hướng">
         <div className="nav-inner">

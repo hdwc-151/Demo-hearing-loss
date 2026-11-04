@@ -1,33 +1,35 @@
 <div align="center">
 
-# 🐰 Dr. Bunny
-### Hiểu trải nghiệm nghe kém qua mô phỏng tương tác
+# HearAtlas
+### Hiểu âm thanh. Kết nối trải nghiệm.
 
-**Audiogram · Hội thoại suy giảm khả năng nghe · Nhiễu môi trường · Trợ lý giải thích**
+**Product Alpha · Audiogram Studio · Audio Lab · Everyday Listening · HearAtlas Guide**
 
 Một mã nguồn React cho **Web, PWA và dự án ứng dụng Android/iOS**; các chức năng cốt lõi có thể chạy **không cần máy chủ**.
 
 [![CI](https://github.com/hdwc-151/Demo-hearing-loss/actions/workflows/ci.yml/badge.svg)](https://github.com/hdwc-151/Demo-hearing-loss/actions/workflows/ci.yml)
 [![Deploy Pages](https://github.com/hdwc-151/Demo-hearing-loss/actions/workflows/pages.yml/badge.svg)](https://github.com/hdwc-151/Demo-hearing-loss/actions/workflows/pages.yml)
-![Version](https://img.shields.io/badge/version-0.3.0-informational)
+![Stage](https://img.shields.io/badge/stage-product--alpha-informational)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-**[Dùng ứng dụng web](https://hdwc-151.github.io/Demo-hearing-loss/)** · **[Bản demo một file](https://hdwc-151.github.io/Demo-hearing-loss/demo.html)** · [Hướng dẫn cài đặt](#-chạy-trên-máy-tính) · [Tài liệu kỹ thuật](docs/README.md)
+**[Mở HearAtlas trên web](https://hdwc-151.github.io/Demo-hearing-loss/)** · **[Bản offline một file](https://hdwc-151.github.io/Demo-hearing-loss/demo.html)** · [Hướng dẫn cài đặt](#-chạy-trên-máy-tính) · [Tài liệu kỹ thuật](docs/README.md)
 
-<img src="docs/design/storyboard.png" alt="Storyboard thiết kế giao diện Dr. Bunny" width="850">
+<img src="docs/design/storyboard.png" alt="Storyboard lịch sử giao diện của sản phẩm" width="850">
 
 </div>
 
 > [!IMPORTANT]
-> **Dr. Bunny là công cụ giáo dục, không phải thiết bị y tế.** Các hiệu ứng chữ, âm thanh và ngưỡng nghe là mô hình minh hoạ, **không phải phép đo hay chẩn đoán mất thính lực**. Không dùng ứng dụng để tự kết luận tình trạng sức khoẻ, thay thế khám thính học hoặc hiệu chỉnh máy trợ thính. Hãy giữ âm lượng phát ở mức an toàn.
+> **HearAtlas đang ở giai đoạn sản phẩm alpha về giáo dục thính giác, không phải thiết bị y tế được kiểm định.** Các hiệu ứng chữ, âm thanh và ngưỡng nghe là mô hình minh hoạ, **không phải phép đo hay chẩn đoán mất thính lực**. Không dùng ứng dụng để tự kết luận tình trạng sức khoẻ, thay thế khám thính học hoặc hiệu chỉnh máy trợ thính. Hãy giữ âm lượng phát ở mức an toàn.
 >
 > Các liên kết GitHub Pages hoạt động sau khi workflow triển khai thành công và Pages được cấu hình dùng **GitHub Actions**. Không cần chờ Pages để dùng bản `demo/index.html` có sẵn trong repo.
 
-## Dr. Bunny giải quyết vấn đề gì?
+> **Chuyển đổi thương hiệu:** `HearAtlas` là tên làm việc trong giai đoạn alpha, chưa xác nhận nhãn hiệu/miền/App Store. Repo GitHub, URL Pages, storage keys, native application ID, các tệp archive và một số API legacy tiếp tục giữ tên cũ để bảo vệ tương thích. Các tài liệu lịch sử có thể vẫn dùng tên `Dr. Bunny`. Đây không phải tuyên bố ứng dụng đã được thẩm định lâm sàng. [Kế hoạch sản phẩm](docs/product/HEARATLAS_PRODUCT_ALPHA.md) · [Kiểm kê archive](docs/research/ARCHIVE_DISTILLATION.md) · [Lộ trình trợ lý](docs/research/ASSISTANT_TRAINING_AND_SCENARIOS.md).
 
-Một con số trên biểu đồ thính lực khó diễn tả được người nghe có thể bỏ lỡ **âm tiết nào, dấu hiệu âm thanh nào, hoặc câu nói nào** trong môi trường ồn. Dr. Bunny biến các mức ngưỡng nghe giả định thành trải nghiệm có thể tương tác để phục vụ học tập và truyền thông nhận thức.
+## HearAtlas giải quyết vấn đề gì?
 
-Bạn có thể đổi một đường audiogram, xem phần văn bản bị suy giảm theo quy tắc âm vị, bật thử nhiễu nền và đặt câu hỏi cho “Bác sĩ Thỏ”. Mục tiêu là **giải thích một mô hình**, không tái tạo chính xác cảm nhận âm thanh của một cá nhân.
+Một con số trên biểu đồ thính lực khó diễn tả được người nghe có thể bỏ lỡ **âm tiết nào, dấu hiệu âm thanh nào, hoặc câu nói nào** trong môi trường ồn. HearAtlas giúp giải thích các đường ngưỡng nghe giả định qua trải nghiệm có thể tương tác để phục vụ học tập và truyền thông nhận thức.
+
+Bạn có thể đổi một đường audiogram, xem phần văn bản bị suy giảm theo quy tắc âm vị, bật thử nhiễu nền và đặt câu hỏi cho “HearAtlas Guide”. Mục tiêu là **giải thích một mô hình**, không tái tạo chính xác cảm nhận âm thanh của một cá nhân.
 
 ## Audio Lab — STFT, ERB, dcGC thử nghiệm và EQ/WDRC
 
@@ -45,13 +47,13 @@ Ngoài phát A/B/C, ứng dụng hiển thị RMS số, trọng tâm phổ và t
 
 **Lưu trữ:** hai bản HTML lịch sử có SHA bất biến trong [archive/demos/](archive/demos/README.md); mỗi lần ghi đè bản demo cũ cần tạo snapshot SHA-256 trước. Các triển khai và dữ liệu cũ khác tiếp tục được giữ trong `archive/`.
 
-## ✨ Tính năng ở phiên bản 0.3.0
+## Tính năng đang có trong Product Alpha
 
 | Thành phần | Bạn có thể làm gì? | Phạm vi hiện tại |
 | --- | --- | --- |
 | **Simulator** | Thử 4 mức **Normal / Mild / Moderate / Severe**, các tình huống âm thanh; quan sát văn bản bị ẩn theo dải âm vị, phát giọng đọc và nhiễu minh hoạ. | Tiếng Việt, tiếng Anh; phân biệt quy tắc giọng Bắc/Nam đối với một số âm vị. |
 | **Audiogram** | Kéo các điểm ngưỡng tại **6 tần số**, dùng bàn phím để điều chỉnh và xem các biểu tượng âm thanh đổi trạng thái. | Mô phỏng một tai bằng dẫn truyền khí; thay đổi đường ngưỡng có tác động trở lại Simulator. |
-| **Bác sĩ Thỏ** | Hỏi đáp về đường ngưỡng đang chọn, dùng các câu hỏi nhanh hoặc nhập câu riêng. | Bộ truy xuất tri thức có quy tắc (**GraphRAG tầng 1**, 6 nút); LLM phía máy chủ là tuỳ chọn, không phải điều kiện sử dụng. |
+| **HearAtlas Guide** | Trợ lý kiến thức thính giác, giải thích biểu đồ giả định và tình huống giao tiếp; chưa có chức năng chẩn đoán. | Bộ truy xuất tri thức có quy tắc (**GraphRAG tầng 1**, 6 nút); LLM phía máy chủ là tuỳ chọn, không phải điều kiện sử dụng. |
 | **Offline-first** | Dùng các engine văn bản, GraphRAG và nhiễu thủ tục ngay trên thiết bị; lưu cài đặt. | Web/PWA không cần backend ở chế độ **Trong máy**; backend FastAPI bổ sung API, nhiễu WAV và tuỳ chọn LLM. |
 | **Đa nền tảng** | Chạy web, cài PWA, mở dự án Android/iOS bằng Capacitor. | Dự án native đã được tạo; **chưa xác nhận build native hoặc thử trên điện thoại thật**. |
 
@@ -240,7 +242,7 @@ Mô tả phương pháp và hạn chế kỹ thuật: [docs/architecture.md](doc
 
 ## English overview
 
-**Dr. Bunny v0.3.0** is an **educational, interactive hearing-loss simulation**, not a medical diagnostic or assistive-hearing device. It combines a six-frequency audiogram, rule-based phoneme/text degradation, illustrative background noise, and an audiogram-aware question-answering assistant.
+**HearAtlas product alpha** is an **educational hearing-experience platform**, not a medical diagnostic or assistive-hearing device. It combines a six-frequency audiogram, rule-based phoneme/text degradation, illustrative background noise, and an audiogram-aware question-answering assistant.
 
 The maintained codebase uses **React/Vite/Zustand**, **FastAPI/Python**, and **Capacitor 8**. Core functions run **offline** on the client; the server is optional. GitHub CI has passed backend, frontend build, JavaScript–Python parity, Chromium E2E, standalone HTML demo, and offline-PWA tests. **Native Android/iOS builds, clinical validation, real GAN checkpoints, and production LLM integration remain unverified.**
 
