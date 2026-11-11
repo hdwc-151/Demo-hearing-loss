@@ -24,7 +24,7 @@ jobs:
           npm run build:demo -- dist/demo.html
       # Tự bật Pages khi repo chưa có site. Nếu token không có quyền admin,
       # cần bật Settings → Pages → Source: GitHub Actions một lần.
-      - uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v6
         with:
           enablement: true
       - uses: actions/upload-pages-artifact@v3
