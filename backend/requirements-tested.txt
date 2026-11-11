@@ -3,7 +3,7 @@
 # dùng file này khi cần tái lập đúng môi trường đã kiểm chứng:
 #   pip install -r backend/requirements-tested.txt
 fastapi==0.162.0
-starlette==1.9.0
+starlette==1.10.0
 pydantic==2.14.1
 uvicorn[standard]==0.54.0
 numpy==2.4.4
