@@ -32,7 +32,7 @@ Trong đợt rà soát, từng bản vá được hoàn nguyên trong bản sao 
 
 ## Chưa được kiểm chứng (cần làm trên môi trường phù hợp)
 
-- **Build native**: dự án Android (Gradle) và iOS (SwiftPM) được sinh bằng `cap add` và `cap sync` chạy được, nhưng **chưa biên dịch** (không có Android SDK, Xcode). Workflow `.github/workflows/mobile.yml` dành cho việc này.
+- **Thiết bị native**: CI đã biên dịch Android APK và iOS Simulator; chưa có nghiệm thu trên điện thoại thật, signed release hoặc cửa hàng. Workflow `.github/workflows/mobile.yml` dùng `android:debug`/`ios:debug`, kiểm Android unit/lint và privacy manifest trong app. Xem [bằng chứng theo commit](maintenance/mobile-dependency-review.md).
 - **Âm thanh thật**: e2e kiểm việc gọi Web Audio (số nguồn, bao hình biên độ, số AudioContext), không nghe được chất lượng. Cần nghe thử trên tai nghe/loa thật, kể cả khi bật công tắc im lặng iOS và khi có cuộc gọi đến.
 - **Rung (Haptics)** trên thiết bị thật; trình duyệt desktop chỉ kiểm lời gọi `navigator.vibrate`.
 - **GAN và LLM thật**: không có checkpoint/torch/khoá API; kiểm bằng hàm giả.

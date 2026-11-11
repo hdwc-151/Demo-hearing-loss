@@ -16,7 +16,7 @@ const target = resolve(process.argv[2] || resolve(root, "../demo/index.html"));
 rmSync(outDir, { recursive: true, force: true });
 // Demo HTML nhúng CSS/JS nội tuyến, vì vậy phải dùng asset base "/" riêng.
 // GitHub Pages xây PWA với VITE_BASE="/<repo>/"; không để base đó rò sang bước đóng gói demo.
-execFileSync("npx", ["vite", "build", "--mode", "demo", "--outDir", "dist-demo", "--emptyOutDir"], {
+execFileSync(process.execPath, [resolve(root, "node_modules/vite/bin/vite.js"), "build", "--mode", "demo", "--outDir", "dist-demo", "--emptyOutDir"], {
   cwd: root,
   stdio: "inherit",
   env: { ...process.env, VITE_BASE: "/" },

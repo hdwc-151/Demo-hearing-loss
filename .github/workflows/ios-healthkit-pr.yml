@@ -5,12 +5,16 @@ on:
     paths:
       - 'frontend/ios/**'
       - 'frontend/package*.json'
+      - 'frontend/scripts/mobile.mjs'
+      - 'frontend/capacitor.config.json'
       - 'frontend/src/util/healthkitAudiogram.js'
       - 'frontend/src/components/HealthImport.jsx'
       - '.github/workflows/ios-healthkit-pr.yml'
   pull_request:
     paths:
       - 'frontend/package*.json'
+      - 'frontend/scripts/mobile.mjs'
+      - 'frontend/capacitor.config.json'
       - 'frontend/ios/**'
       - 'frontend/src/util/healthkitAudiogram.js'
       - 'frontend/src/components/HealthImport.jsx'
@@ -37,7 +41,7 @@ jobs:
       - name: Install pinned dependencies
         run: npm ci
       - name: Sync Capacitor native project
-        run: npm run build && npx cap sync ios
+        run: npm run cap:sync:ios
       - name: Compile iOS Simulator (without signing or HealthKit permissions)
         run: |
           xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug \

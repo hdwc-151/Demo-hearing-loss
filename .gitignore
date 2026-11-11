@@ -41,3 +41,5 @@ frontend/ios/App/App/public/
 frontend/ios/App/App/capacitor.config.json
 frontend/ios/App/build/
 frontend/ios/DerivedData/
+frontend/ios/hearatlas-simulator.zip
+.env.*.local
