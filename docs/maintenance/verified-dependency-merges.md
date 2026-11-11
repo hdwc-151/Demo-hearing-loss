@@ -25,6 +25,15 @@ tất cả phiên bản đích trong bảng. CI backend và E2E cài đồng th�
 requirements-tested.txt; do đó resolver phải chấp nhận chính tổ hợp pin này. Bộ test
 research có môi trường SciPy riêng như trước.
 
+Sau merge #35, lần chạy main `43036899656` thất bại **trước khi chạy E2E**:
+runner ubuntu-latest (26.04) không phân giải được DNS các kho Ubuntu khi
+`playwright install --with-deps` tải font hệ thống. Nhánh này ghim job E2E vào
+Ubuntu 24.04 có sẵn thư viện runtime trình duyệt và chỉ cài Chromium đúng phiên bản
+Playwright đã pin. Tách bước pip/browser để chẩn đoán rõ hơn, đặt giới hạn 20 phút.
+Không bỏ qua ca test hoặc cho phép lỗi; bộ browser/demo/PWA vẫn chạy đầy đủ.
+Tham chiếu [manifest runner 24.04](https://github.com/actions/runner-images/blob/main/images/ubuntu/Ubuntu2404-Readme.md)
+và [cài browser Playwright](https://playwright.dev/python/docs/browsers).
+
 ## Các PR giữ ngoài tổ hợp
 
 - **#11 Capacitor**: năm cập nhật đã có trong PR #35 và đã qua build Android/iOS, kiểm thử
