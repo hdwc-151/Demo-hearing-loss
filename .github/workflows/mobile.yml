@@ -1,5 +1,5 @@
 name: Mobile builds (Android / iOS)
-# Chạy tay (Actions -> Run workflow) hoặc khi gắn tag v*. Bản debug không ký, dùng để kiểm tra biên dịch.
+# PR, main, chạy tay và tag v*: Android debug (test key), iOS Simulator không ký.
 # Phát hành lên Google Play / App Store cần khoá ký: xem mobile/README.md (mục "Phát hành").
 on:
   pull_request:
@@ -30,11 +30,18 @@ jobs:
         with: { distribution: temurin, java-version: 21 }
       - uses: gradle/actions/setup-gradle@v4
       - run: npm ci
-      - run: npm run build && npx cap sync android
-      - run: bash ./gradlew assembleDebug
+      - run: npm run android:debug
+      - name: Android unit tests and lint
+        run: bash ./gradlew testDebugUnitTest lintDebug
         working-directory: frontend/android
       - uses: actions/upload-artifact@v4
         with: { name: hearatlas-android-debug, path: frontend/android/app/build/outputs/apk/debug/app-debug.apk, if-no-files-found: error }
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hearatlas-android-reports
+          path: frontend/android/app/build/reports/
+          if-no-files-found: warn
 
   ios:
     timeout-minutes: 30
@@ -45,9 +52,16 @@ jobs:
       - uses: actions/setup-node@v7
         with: { node-version: 22, cache: npm, cache-dependency-path: frontend/package-lock.json }
       - run: npm ci
-      - run: npm run build && npx cap sync ios
+      - name: Toolchain versions
+        run: xcodebuild -version && swift --version
       - name: Build cho iOS Simulator (không ký)
-        run: >
-          xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug
-          -sdk iphonesimulator -destination 'generic/platform=iOS Simulator'
-          CODE_SIGNING_ALLOWED=NO build
+        run: npm run ios:debug
+      - name: Check bundled privacy manifest and package Simulator app
+        run: |
+          plutil -lint ios/DerivedData/Build/Products/Debug-iphonesimulator/App.app/PrivacyInfo.xcprivacy
+          ditto -c -k --sequesterRsrc --keepParent ios/DerivedData/Build/Products/Debug-iphonesimulator/App.app ios/hearatlas-simulator.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hearatlas-ios-simulator
+          path: frontend/ios/hearatlas-simulator.zip
+          if-no-files-found: error

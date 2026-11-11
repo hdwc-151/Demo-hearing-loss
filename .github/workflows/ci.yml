@@ -3,6 +3,8 @@ on:
   push: { branches: [main] }
   pull_request:
 concurrency: { group: "ci-${{ github.ref }}", cancel-in-progress: true }
+permissions:
+  contents: read
 
 jobs:
   backend:
@@ -48,9 +50,13 @@ jobs:
       - run: npm ci
       - name: Parity JS-Python + test logic
         run: npm test
+      - name: Mobile commands and native lifecycle regressions
+        run: npm run test:mobile
       - run: npm run build
       - name: Lỗ hổng dependency chạy thật (react, zustand, capacitor)
         run: npm audit --omit=dev --audit-level=high
+      - name: Build tools security (including Capacitor assets and Vite)
+        run: npm audit --audit-level=high
 
   e2e:
     runs-on: ubuntu-latest

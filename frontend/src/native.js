@@ -31,10 +31,17 @@ export async function initNative() {
 
 // Gọi `cb` khi app bị đưa xuống nền: trên app là sự kiện appStateChange của Capacitor, trên web là tab bị ẩn.
 // Dùng để dừng âm thanh khi người dùng chuyển app hay khoá màn hình. Trả về hàm huỷ đăng ký.
-export function onBackground(cb) {
-  const onVisibility = () => { if (document.hidden) cb(); };
-  document.addEventListener("visibilitychange", onVisibility);
+export function onBackground(cb, { doc = document, native = isNative(), app = App } = {}) {
+  const onVisibility = () => { if (doc.hidden) cb(); };
+  doc.addEventListener("visibilitychange", onVisibility);
   let handle = null;
-  if (isNative()) App.addListener("appStateChange", ({ isActive }) => { if (!isActive) cb(); }).then((h) => { handle = h; }).catch(() => {});
-  return () => { document.removeEventListener("visibilitychange", onVisibility); handle?.remove?.(); };
+  let disposed = false;
+  if (native) app.addListener("appStateChange", ({ isActive }) => { if (!disposed && !isActive) cb(); })
+    .then((h) => { if (disposed) h.remove(); else handle = h; }).catch(() => {});
+  return () => {
+    disposed = true;
+    doc.removeEventListener("visibilitychange", onVisibility);
+    handle?.remove?.();
+    handle = null;
+  };
 }

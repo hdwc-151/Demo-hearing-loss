@@ -10,13 +10,22 @@
     "preview": "vite preview",
     "test": "node scripts/check-parity.mjs && node --test scripts/logic.test.mjs scripts/audio.test.mjs scripts/features.test.mjs scripts/erb.test.mjs scripts/archive.test.mjs scripts/advanced.test.mjs scripts/healthkit.test.mjs scripts/medical.test.mjs",
     "assets": "capacitor-assets generate --ios --android --assetPath ../mobile/resources --iconBackgroundColor '#6E826B' --iconBackgroundColorDark '#4B5E48' --splashBackgroundColor '#EFF5EC' --splashBackgroundColorDark '#232B22'",
-    "cap:sync": "npm run build && cap sync",
-    "android": "npm run cap:sync && cap open android",
-    "ios": "npm run cap:sync && cap open ios"
+    "build:mobile": "node scripts/mobile.mjs build",
+    "cap:sync": "node scripts/mobile.mjs sync",
+    "cap:sync:android": "node scripts/mobile.mjs sync android",
+    "cap:sync:ios": "node scripts/mobile.mjs sync ios",
+    "android": "node scripts/mobile.mjs open android",
+    "ios": "node scripts/mobile.mjs open ios",
+    "android:run": "node scripts/mobile.mjs run android",
+    "ios:run": "node scripts/mobile.mjs run ios",
+    "android:debug": "node scripts/mobile.mjs debug android",
+    "ios:debug": "node scripts/mobile.mjs debug ios",
+    "android:test": "node scripts/mobile.mjs test android",
+    "test:mobile": "node --test scripts/mobile.test.mjs scripts/native.test.mjs"
   },
   "dependencies": {
     "@capacitor/app": "^8.1.2",
-    "@capacitor/core": "^8.5.3",
+    "@capacitor/core": "^8.6.0",
     "@capacitor/haptics": "^8.0.2",
     "@capacitor/preferences": "^8.0.1",
     "@capacitor/splash-screen": "^8.0.2",
@@ -26,15 +35,15 @@
     "zustand": "5.0.16"
   },
   "devDependencies": {
-    "@capacitor/android": "^8.5.3",
-    "@capacitor/assets": "^3.0.5",
-    "@capacitor/cli": "^8.5.3",
-    "@capacitor/ios": "^8.5.3",
+    "@capacitor/android": "^8.6.0",
+    "@capacitor/assets": "^4.0.0",
+    "@capacitor/cli": "^8.6.0",
+    "@capacitor/ios": "^8.6.0",
     "@vitejs/plugin-react": "4.3.4",
     "autoprefixer": "10.4.20",
     "postcss": "8.5.31",
     "tailwindcss": "3.4.17",
-    "vite": "5.4.21"
+    "vite": "6.4.6"
   },
   "engines": {
     "node": ">=22"
