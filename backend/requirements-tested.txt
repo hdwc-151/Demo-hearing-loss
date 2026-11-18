@@ -2,7 +2,7 @@
 # CI kiểm thử chính xác bộ pin này trên Python 3.12; xem workflow CI và commit.
 # requirements.txt ghi cận dưới (>=); dùng cùng file này để tái lập:
 #   pip install -r backend/requirements-tested.txt
-fastapi==0.162.0
+fastapi==0.163.0
 starlette==1.10.0
 pydantic==2.14.2
 uvicorn[standard]==0.54.0
